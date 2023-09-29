@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/29 16:00:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/29 16:05:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHEL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "../src/libft/libft.h"
+# include "../src/libft/libft.h"
 
 #endif
