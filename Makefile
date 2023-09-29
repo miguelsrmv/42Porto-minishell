@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/09/29 16:26:50 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/09/29 16:33:16 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 RM      = 	rm -rf
 
 
-
 all: libft $(NAME)
 
 $(NAME): $(OBJS) 
@@ -46,11 +45,11 @@ libft:
 	@ cd $(LIBFTDIR) && make -s && make -s clean
 
 clean:
-	@ $(MAKE) -s -C $(LIBFTDIR) clean
+	@ $(MAKE) -sC $(LIBFTDIR) clean
 	@ $(RM) $(OBJS)
 
 fclean: clean
-	@ $(MAKE) -s -C $(LIBFTDIR) fclean
+	@ $(MAKE) -sC $(LIBFTDIR) fclean
 	@ $(RM) $(NAME)
 
 re: fclean all
