@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/10/09 10:38:24 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/10/09 10:51:08 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=   minishell
 
 CC      = 	cc
 
-CFLAGS   =  -g -Wall -Wextra -Werror
+CFLAGS   =  -g #-Wall -Wextra -Werror
 
 SRCDIR	=	src
 

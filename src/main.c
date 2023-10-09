@@ -6,14 +6,14 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 10:31:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:03:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
-{
+int	main(int argc, char **argv, char **envp)
+{	
 	// Get string from readline (include readline)
 	char *buffer;
 	buffer = readline("minishell$: ");
@@ -46,5 +46,4 @@ int	main(void)
 		ft_printf("%s\n", *path_list);
 		path_list++;
 	}
-	
 }
