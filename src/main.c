@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 10:31:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:01:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 int	main(void)
 {
-	// Get string from readline (include readline)
 	char *buffer;
+	char *expanded_buffer;
+	
 	buffer = readline("minishell$: ");
+    expanded_buffer = expand_vars(buffer);
+    ft_printf("%s", expanded_buffer);
+
+	/*
+	// Get string from readline (include readline)
+
 	ft_printf("\nYou typed in \"%s\".\n\n", buffer);
 
 	// Splits buffer, ignoring quotes
@@ -46,5 +53,6 @@ int	main(void)
 		ft_printf("%s\n", *path_list);
 		path_list++;
 	}
+	*/
 	
 }

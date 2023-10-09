@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/10/09 10:38:24 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/10/09 13:53:09 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
-SRC		=	main.c ft_command_split.c
+SRC		=	main.c ft_command_split.c expand_vars.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 10:39:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:52:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ typedef struct s_split_numbers {
 // Function definitions
 /// ft_command_split.c
 char	**ft_command_split(const char *s);
+
+/// expand_vars.c
+char 	*expand_vars(char *string);
 
 #endif
