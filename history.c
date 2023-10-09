@@ -11,4 +11,5 @@ int main (void)
     add_history ("Mais qualquer coisa");
     HIST_ENTRY** historia = history_list();
     HIST_ENTRY *coiso = history_get(1);
+    return(0);
 }
