@@ -4,11 +4,11 @@
 #include<readline/readline.h>
 #include<readline/history.h>
 
-int main (void)
+int ft_history (char *var)
 {
     using_history ();
-    add_history ("Qualquer coisa");
-    add_history ("Mais qualquer coisa");
+    add_history (var);
+    //add_history ("Mais qualquer coisa");
     HIST_ENTRY** historia = history_list();
     HIST_ENTRY *coiso = history_get(1);
     return(0);
