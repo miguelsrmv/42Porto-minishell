@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 10:36:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:31:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(void)
 {
-	char	*buffer;
-
+	// Get string from readline (include readline)
+	char *buffer;
 	buffer = readline("minishell$: ");
 	ft_printf("\nYou typed in \"%s\".\n\n", buffer);
 
