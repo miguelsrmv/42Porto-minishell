@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/10/09 10:31:47 by mde-sa--         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/29 16:53:23 by mde-sa--         ###   ########.fr       */
->>>>>>> 89d7bb5d16303f25fca900a2c273fc19aa0f4c1b
+/*   Updated: 2023/10/09 10:36:00 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +14,8 @@
 
 int	main(void)
 {
-<<<<<<< HEAD
-	// Get string from readline (include readline)
-	char *buffer;
-=======
 	char	*buffer;
 
->>>>>>> 89d7bb5d16303f25fca900a2c273fc19aa0f4c1b
 	buffer = readline("minishell$: ");
 	ft_printf("\nYou typed in \"%s\".\n\n", buffer);
 
