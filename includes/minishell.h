@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 10:23:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:39:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ typedef struct s_split_numbers {
 
 // Function definitions
 /// ft_command_split.c
-static char	*ft_substr_quotes(char const *s, unsigned int start, size_t len);
-static char	*get_word(const char *s, size_t *len);
-static int	get_word_count(const char *s);
-static char	*get_next_word(const char **s, size_t *len);
 char	**ft_command_split(const char *s);
 
 #endif
