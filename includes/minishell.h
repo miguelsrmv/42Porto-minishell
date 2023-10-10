@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 13:52:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:26:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# define NOT_IN_QUOTE 0
+# define QUOTE_START 1
+# define QUOTE_END 2
 
 // Structs
 typedef struct s_split_numbers {
@@ -31,11 +34,15 @@ typedef struct s_split_numbers {
 	size_t	i;
 }	t_split_numbers;
 
-// Function definitions
-/// ft_command_split.c
-char	**ft_command_split(const char *s);
+typedef struct s_env {
+	char	*env_var;
+	char	*expanded_var;
+	int		env_var_len;
+	int		expanded_var_len;
+}	t_env;
 
-/// expand_vars.c
-char 	*expand_vars(char *string);
+// Function definitions
+/// lexer.c
+char	**readline_split(const char *s);
 
 #endif

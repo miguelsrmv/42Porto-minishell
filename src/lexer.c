@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_command_split.c                                 :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:31:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 10:21:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:23:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ static char	*ft_substr_quotes(char const *s, unsigned int start, size_t len)
 	substring = malloc(len * sizeof(char) + 1);
 	if (!substring)
 		return (NULL);
-	if (ft_isquote(s[start]))
-	{
-		start++;
-		len -= 2;
-	}
 	ft_memcpy(substring, &s[start], len);
 	substring[len] = '\0';
 	return (substring);
@@ -100,7 +95,7 @@ static char	*get_next_word(const char **s, size_t *len)
 	return (get_word(*s, len));
 }
 
-char	**ft_command_split(const char *s)
+char	**readline_split(const char *s)
 {
 	char	**words;
 	int		word_count;
