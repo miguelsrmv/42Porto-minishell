@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 17:46:43 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:25:08 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_minishell {
 	char *init_str;
 	char *expanded_str;
 	char *command;
-	char *args;
+	char **args;
 	char *joined_path;
 	int fd_input;
 	int fd_output;
@@ -47,6 +47,7 @@ typedef struct s_split_numbers {
 // Function definitions
 /// ft_command_split.c
 char	**ft_command_split(const char *s);
-void 	ft_init_struct(t_minishell *shell);
+void	ft_init_struct(t_minishell *shell);
+char    *ft_strtok(char *str);
 
 #endif

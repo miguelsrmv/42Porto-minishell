@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/09 17:37:15 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:02:49 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int argc, char **argv, char **envp)
             break;
         }
 		
-		if (buffer[0] != '\0'){
+		if (buffer[0] != '\0')
+		{
             add_history(buffer);
 
             // Splits buffer, ignorando aspas
@@ -77,7 +78,7 @@ int	main(int argc, char **argv, char **envp)
                     // Se chegarmos aqui, a execução falhou
                     //fprintf(stderr, "Comando não encontrado: %s\n", splitted_buffer[0]);
                     exit(EXIT_FAILURE);
-                } 
+                }
 				else 
 				{
                     // Este é o processo pai, espera pelo filho
