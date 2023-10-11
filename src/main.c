@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/10 19:19:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 08:59:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 	
 	buffer = readline("minishell$: ");
     lexer = readline_split(buffer);
-    for (int i; lexer[i]; i++)
+    for (int i = 0; lexer[i]; i++)
 		printf("%s\n", lexer[i]);
 
 	/*

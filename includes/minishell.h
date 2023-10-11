@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/10 19:26:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 09:21:57 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,13 @@
 # define QUOTE_END 2
 
 // Structs
-typedef struct s_split_numbers {
-	int		word_count;
-	int		in_word;
+typedef struct s_token {
+	int		token_count;
+	int		in_token;
 	int		in_quote;
 	char	quote_char;
 	size_t	i;
-}	t_split_numbers;
-
-typedef struct s_env {
-	char	*env_var;
-	char	*expanded_var;
-	int		env_var_len;
-	int		expanded_var_len;
-}	t_env;
+}	t_token;
 
 // Function definitions
 /// lexer.c
