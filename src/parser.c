@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 09:32:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/11 17:51:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:56:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    separate_pipes(char **lexer, int i, int tab_len)
+void separate_pipes(char **lexer, int i, int tab_len)
 {
     char **newdivision;
     char **new_lexer;
@@ -35,12 +35,13 @@ void    separate_pipes(char **lexer, int i, int tab_len)
         new_lexer[main_index + secondary_index] = ft_strdup(newdivision[secondary_index]);
         secondary_index++;
     }
-    while (main_index < tab_len)
+    while (main_index < tab_len - 1)
     {
-        new_lexer[main_index + secondary_index] = ft_strdup(lexer[main_index]);
+        new_lexer[main_index + secondary_index] = ft_strdup(lexer[main_index + 1]);
         main_index++;
     }
     new_lexer[main_index + secondary_index] = NULL;
+    ft_free_tabs((void **)lexer);
 }
 
 
