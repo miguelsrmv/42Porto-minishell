@@ -6,11 +6,27 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/11 08:59:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:34:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void exit_error(char *error_message)
+{
+	ft_printf(error_message);
+	exit(0);
+}
+
+int ft_tab_len(char **tab)
+{
+    int i;
+
+    i = 0;
+    while (tab[i])
+        i++;
+    return (i);
+}
 
 int	main(void)
 {
@@ -19,9 +35,22 @@ int	main(void)
 	
 	buffer = readline("minishell$: ");
     lexer = readline_split(buffer);
+
+	ft_printf("\n *** BEFORE PARSING *** \n");
     for (int i = 0; lexer[i]; i++)
 		printf("%s\n", lexer[i]);
+	ft_printf("\n");
 
+	if (!parser(lexer, (int)ft_tab_len(lexer)))
+	{
+		ft_printf("ERROR!");
+		return (0);
+	}
+
+	ft_printf("\n *** AFTER PARSING *** \n");
+    for (int i = 0; lexer[i]; i++)
+		printf("%s\n", lexer[i]);
+	ft_printf("\n");
 	/*
 	// Get string from readline (include readline)
 
