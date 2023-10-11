@@ -12,6 +12,8 @@ char    *ft_strtok(char *str)
     while(x < count)
     {
         j = 0;
+        /* if(str[i] == '\0')
+            exit(0); */
         if(str[i] == ':')
             i++;
         while(str[i] != ':')
@@ -66,6 +68,7 @@ int	main(int argc, char **argv, char **envp)
 
                 // Obtém o caminho completo para o comando usando execução no ambiente atual
                 shell.command = getenv("PATH");
+                //FT_strtok copia o Path ate aos ":" para o shell.command
                 shell.command = ft_strtok(shell.command);
 
                 while (shell.command != NULL) 
@@ -73,11 +76,16 @@ int	main(int argc, char **argv, char **envp)
                     char *full_command = malloc(strlen(shell.command) + strlen(shell.args[0]) + 2);
                     sprintf(full_command, "%s/%s", shell.command, shell.init_str);
 
-                    execve(full_command, shell.args, envp);
-                    perror("execve");
+                    if(strcmp(shell.args[0], "pwd") == 0)
+                    {
+                        execute_pwd(shell.args[0]);
+                    }
+                    else
+                        execve(full_command, shell.args, NULL);
+                    //perror("execve");
 
                     free(full_command);
-                    shell.command = ft_strtok(shell.command);
+                    shell.command = ft_strtok(getenv("PATH"));
                 }
                 // Se chegarmos aqui, a execução falhou
                 //fprintf(stderr, "Comando não encontrado: %s\n", splitted_buffer[0]);

@@ -1,0 +1,6 @@
+set follow-fork-mode child
+print full_command
+
+"/nfs/homes/bmota-si/bin:/nfs/homes/bmota-si/bin:/usr/local/sbin:/usr/local/bin:/usr/
+sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
