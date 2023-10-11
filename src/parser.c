@@ -6,16 +6,18 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 09:32:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/11 12:35:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:35:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    separate_pipes(char **lexer, int i, int tab_len)
+void    separate_pipes(char **lexer, int i)
 {
-    if (ft_strchr(lexer[i], '|'))
-        lexer = ft_split_tab(lexer, i, tab_len, '|');
+    char **newdivision;
+    if (!ft_strchr(lexer[i], '|'))
+        return ;
+    newdivision = ft_divide(lexer[i], '|');
 }
 
 
@@ -38,7 +40,7 @@ int parser(char **lexer, int tab_len)
     i = 0;
     while (lexer[i])
     {
-        separate_pipes(lexer, i, tab_len);
+        separate_pipes(lexer, i);
         i++;
     }
     return (1);

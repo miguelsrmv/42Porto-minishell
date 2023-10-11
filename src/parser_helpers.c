@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:23:06 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/11 14:02:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:32:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ void        ft_jointabs(char **lexer, int i, int tab_len)
 }
 
 
-char    **byte_by_byte_tab(char **tabs, int tab_len, char c)
-{
-    
-}
 
 
 /*
