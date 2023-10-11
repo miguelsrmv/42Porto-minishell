@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:04:08 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/11 14:07:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:12:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,22 @@ char		**ft_divide(char *str, char divider)
     divider_string[0] = divider;
     divider_string[1] = '\0';
 	i = 0;
+        if (ft_strchr(str, divider) == str)
+        {
+            result[i] = ft_strdup(divider_string);
+            i++;
+        }
 	while (i < words_count)
 	{
+
 		result[i] = get_next_word(&str, divider);
 		if (!result[i])
 			return (NULL);
 		i++;
+        if ()
+            
 	}
 	result[i] = NULL;
+    free(divider_string);
 	return (result);
 }
