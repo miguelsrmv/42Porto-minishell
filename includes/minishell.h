@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/11 12:52:54 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:06:14 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_split_numbers {
 char	**ft_command_split(const char *s);
 void	ft_init_struct(t_minishell *shell);
 char    *ft_strtok(char *str);
-void    execute_pwd(char *str);
+//void    execute_pwd(char *str);
 
 
 #endif

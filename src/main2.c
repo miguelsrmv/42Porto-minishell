@@ -74,14 +74,14 @@ int	main(int argc, char **argv, char **envp)
                 while (shell.command != NULL) 
                 {
                     char *full_command = malloc(strlen(shell.command) + strlen(shell.args[0]) + 2);
-                    sprintf(full_command, "%s/%s", shell.command, shell.init_str);
+                    sprintf(full_command, "%s/%s", shell.command, shell.args[0]);
 
-                    if(strcmp(shell.args[0], "pwd") == 0)
+                    /* if(strcmp(shell.args[0], "pwd") == 0)
                     {
                         execute_pwd(shell.args[0]);
-                    }
-                    else
-                        execve(full_command, shell.args, NULL);
+                    } */
+                    
+                    execve(full_command, shell.args, NULL);
                     //perror("execve");
 
                     free(full_command);
