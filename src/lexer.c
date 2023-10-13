@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:31:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/10 19:23:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 09:23:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,95 +30,95 @@ static char	*ft_substr_quotes(char const *s, unsigned int start, size_t len)
 	return (substring);
 }
 
-static char	*get_word(const char *s, size_t *len)
+static char	*get_token(const char *s, size_t *len)
 {
-	t_split_numbers	num;
-	char			*word;
+	t_token			toks;
+	char			*token;
 
-	ft_memset(&num, 0, sizeof(t_split_numbers));
-	num.i = 0;
-	while (s[num.i] && (num.in_quote || !ft_isspace(s[num.i])))
+	ft_memset(&toks, 0, sizeof(t_token));
+	toks.i = 0;
+	while (s[toks.i] && (toks.in_quote || !ft_isspace(s[toks.i])))
 	{
-		if (s[num.i] == '\\' && (num.quote_char != '\'' || !num.in_quote))
+		if (s[toks.i] == '\\' && (toks.quote_char != '\'' || !toks.in_quote))
 		{
-			num.i += 2;
-			if (!s[num.i])
+			toks.i += 2;
+			if (!s[toks.i])
 				break ;
 		}
-		else if (ft_isquote(s[num.i])
-			&& (ft_isspace(s[num.i - 1]) || ft_isspace(s[num.i + 1]))
-			&& (!num.in_quote || s[num.i] == num.quote_char))
+		else if (ft_isquote(s[toks.i])
+			&& (ft_isspace(s[toks.i - 1]) || ft_isspace(s[toks.i + 1]))
+			&& (!toks.in_quote || s[toks.i] == toks.quote_char))
 		{
-			num.in_quote = !num.in_quote;
-			num.quote_char = s[num.i];
+			toks.in_quote = !toks.in_quote;
+			toks.quote_char = s[toks.i];
 		}
-		num.i++;
+		toks.i++;
 	}
-	*len = num.i;
-	word = ft_substr_quotes(s, 0, num.i);
-	return (word);
+	*len = toks.i;
+	token = ft_substr_quotes(s, 0, toks.i);
+	return (token);
 }
 
-static int	get_word_count(const char *s)
+static int	get_token_count(const char *s)
 {
-	t_split_numbers	num;
+	t_token	toks;
 
-	ft_memset(&num, 0, sizeof(t_split_numbers));
-	num.i = 0;
-	while (s[num.i])
+	ft_memset(&toks, 0, sizeof(t_token));
+	toks.i = 0;
+	while (s[toks.i])
 	{
-		if (s[num.i] == '\\' && (num.quote_char != '\'' || !num.in_quote))
-			num.i += 2;
-		else if (ft_isquote(s[num.i])
-			&& (ft_isspace(s[num.i - 1]) || ft_isspace(s[num.i + 1]))
-			&& (!num.in_quote || s[num.i] == num.quote_char))
+		if (s[toks.i] == '\\' && (toks.quote_char != '\'' || !toks.in_quote))
+			toks.i += 2;
+		else if (ft_isquote(s[toks.i])
+			&& (ft_isspace(s[toks.i - 1]) || ft_isspace(s[toks.i + 1]))
+			&& (!toks.in_quote || s[toks.i] == toks.quote_char))
 		{
-			num.in_quote = !num.in_quote;
-			num.quote_char = s[num.i];
+			toks.in_quote = !toks.in_quote;
+			toks.quote_char = s[toks.i];
 		}
-		else if (!num.in_quote && ft_isspace(s[num.i]))
-			num.in_word = 0;
-		else if (!num.in_word)
+		else if (!toks.in_quote && ft_isspace(s[toks.i]))
+			toks.in_token = 0;
+		else if (!toks.in_token)
 		{
-			num.in_word = 1;
-			num.word_count++;
+			toks.in_token = 1;
+			toks.token_count++;
 		}
-		num.i++;
+		toks.i++;
 	}
-	return (num.word_count);
+	return (toks.token_count);
 }
 
-static char	*get_next_word(const char **s, size_t *len)
+static char	*get_next_token(const char **s, size_t *len)
 {
 	while (ft_isspace(**s))
 		(*s)++;
-	return (get_word(*s, len));
+	return (get_token(*s, len));
 }
 
 char	**readline_split(const char *s)
 {
-	char	**words;
-	int		word_count;
+	char	**tokens;
+	int		token_count;
 	int		i;
 	size_t	len;
 
-	word_count = get_word_count(s);
-	words = malloc((word_count + 1) * sizeof(char *));
-	if (!words)
+	token_count = get_token_count(s);
+	tokens = malloc((token_count + 1) * sizeof(char *));
+	if (!tokens)
 		return (NULL);
 	i = -1;
-	while (++i < word_count)
+	while (++i < token_count)
 	{
-		words[i] = get_next_word(&s, &len);
-		if (!words[i])
+		tokens[i] = get_next_token(&s, &len);
+		if (!tokens[i])
 		{
 			while (i >= 0)
-				free(words[i--]);
-			free(words);
+				free(tokens[i--]);
+			free(tokens);
 			return (NULL);
 		}
 		s += len;
 	}
-	words[word_count] = NULL;
-	return (words);
+	tokens[token_count] = NULL;
+	return (tokens);
 }
