@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/10 19:26:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:55:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,22 @@ typedef struct s_env {
 	int		expanded_var_len;
 }	t_env;
 
+typedef struct s_token {
+	char			*token;
+	struct s_token	*next;
+}	t_token;
+
 // Function definitions
+/// Linked List Functions
+t_token *create_token(char *string);
+t_token *last_token(t_token *list);
+void	add_token_end(t_token **list, t_token *new);
+
+
 /// lexer.c
 char	**readline_split(const char *s);
+
+/// lexer_new.c
+t_token	*read_readline(char *input);
 
 #endif

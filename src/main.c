@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/10 19:19:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:57:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,13 @@
 
 int	main(void)
 {
-	char *buffer;
-	char **lexer;
+	char	*buffer;
+	t_token *lexer_list;
 	
 	buffer = readline("minishell$: ");
-    lexer = readline_split(buffer);
-    for (int i; lexer[i]; i++)
-		printf("%s\n", lexer[i]);
-
+    lexer_list = read_readline(buffer);
+	
 	/*
-	// Get string from readline (include readline)
-
-	ft_printf("\nYou typed in \"%s\".\n\n", buffer);
-
-	// Splits buffer, ignoring quotes
-	char **splitted_buffer;
-	splitted_buffer = ft_command_split(buffer);
-	ft_printf("List of words:\n");
-	while (*splitted_buffer)
-	{
-		ft_printf("%s\n", *splitted_buffer);
-		splitted_buffer++;
-	}
 
 	// Get current directory (include unistd & limits.h)
 	char *current_dir;
