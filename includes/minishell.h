@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 19:55:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/13 21:36:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# define NOT_IN_QUOTE 0
-# define QUOTE_START 1
-# define QUOTE_END 2
+# define OUT_QUOTE 0
+# define IN_QUOTE 1
 
 // Structs
 typedef struct s_split_numbers {
