@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 22:09:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:41:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,21 @@ int ft_tab_len(char **tab)
 int	main(void)
 {
 	char	*buffer;
+	int		i;
 	t_token *lexer_list;
+	t_token *current;
 	
 	buffer = readline("minishell$: ");
-<<<<<<< HEAD
     lexer_list = read_readline(buffer);
-	
-=======
-    lexer = readline_split(buffer);
-
-	ft_printf("\n *** BEFORE PARSING *** \n");
-    for (int i = 0; lexer[i]; i++)
-		ft_printf("%s\n", lexer[i]);
-	ft_printf("\n");
-
-	if (!parser(lexer, (int)ft_tab_len(lexer)))
+	current = lexer_list;
+	i = 1;
+	while (current)
 	{
-		ft_printf("ERROR!");
-		return (0);
+		if (current->token)
+			ft_printf("Node %i: %s\n", i++, current->token);
+		current = current->next;
 	}
-
-	ft_printf("\n *** AFTER PARSING *** \n");
-    for (int i = 0; lexer[i]; i++)
-		printf("%s\n", lexer[i]);
-	ft_printf("\n");
->>>>>>> eb98c3690bb6cbebd7ea253ae5df8c25a40c2114
+	
 	/*
 
 	// Get current directory (include unistd & limits.h)

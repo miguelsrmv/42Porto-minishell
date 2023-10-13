@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:52:58 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 22:06:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:35:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*get_pipe_token(char *input, int *start, int *end)
 {
 	*end = *start;
-	*end++;
-	return (ft_strndup(input[*start]), end - start);
+	(*end)++;
+	return (ft_strndup(&input[*start], (*end - *start)));
 }
 
 char	*get_string_token(char *input, int *start, int *end)
@@ -24,7 +24,7 @@ char	*get_string_token(char *input, int *start, int *end)
 	*end = *start;
 	while (input[*end] && ft_isalnum(input[*end]))
 		(*end)++;
-	return (ft_strndup(input[*start]), end - start);
+	return (ft_strndup(&input[*start], (*end - *start)));
 }
 
 char	*get_redirect_token(char *input, int *start, int *end)
@@ -40,7 +40,7 @@ char	*get_redirect_token(char *input, int *start, int *end)
 		(*end)++;
 	while (ft_isalnum(input[*end]))
 		(*end)++;
-	temp_result = ft_strndup(input[*start], end - start);
+	temp_result = ft_strndup(&input[*start], (*end - *start));
 	splitted_array = ft_split(temp_result, ' ');
 	result = ft_strjoin(splitted_array[0], splitted_array[1]);
 	free(temp_result);
@@ -75,7 +75,6 @@ t_token	*read_readline(char *input)
 	int		start;
 	int		end;
 
-	head = create_token(input);
 	start = 0;
 	end = 0;
 	fill_in_list(input, &head, start, end);
