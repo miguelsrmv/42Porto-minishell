@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 22:44:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:49:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ t_token	*create_token(char *string);
 t_token	*last_token(t_token *list);
 void	add_token_end(t_token **list, t_token *new);
 
-
-/// lexer.c
-char	**readline_split(const char *s);
-
-/// lexer_new.c
+/// lexer_get_tokens.c
+int		is_valid_bash_char(char c);
 char	*get_pipe_token(char *input, int *start, int *end);
 char	*get_string_token(char *input, int *start, int *end);
 char	*get_redirect_token(char *input, int *start, int *end);
+char	*get_quote_token(char *input, int *start, int *end);
+
+/// lexer.c
 void	fill_in_list(char *input, t_token **head, int start, int end);
 t_token	*read_readline(char *input);
 
