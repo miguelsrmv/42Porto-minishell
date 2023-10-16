@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/16 16:02:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:42:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_pipe_token(char *input, int *start, int *end)
 char	*get_string_token(char *input, int *start, int *end)
 {
 	*end = *start;
-	while (input[*end] && is_valid_bash_char(input[*end]))
+	while (is_valid_bash_char(input[*end]) && input[*end])
 		(*end)++;
 	return (ft_strndup(&input[*start], (*end - *start)));
 }
@@ -52,11 +52,11 @@ char	*get_quote_token(char *input, int *start, int *end)
 	char	*result;
 	char	quote;
 
-	*start = *start + 1;
-	*end = *start;
+	*end = *start + 1;
 	quote = input[*start];
-	while (!(input[(*end)] == ' ' && input[(*end - 1)] == quote))
+	while (input[(*end)] != quote && input[(*end)])
 		(*end)++;
+	(*end)++;
 	result = ft_strndup(&input[*start], (*end - *start));
 	return (result);
 }
