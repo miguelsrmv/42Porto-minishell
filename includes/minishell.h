@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/16 16:47:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:34:26 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@
 
 # define OUT_QUOTE 0
 # define IN_QUOTE 1
+# define IN_DQUOTE 2
 
 # define NOT_REDIRECT 0
 # define IS_REDIRECT 1
+
+# define VALID 0
+# define INVALID 1
 
 // Structs
 
@@ -56,6 +60,10 @@ typedef struct s_token {
 }	t_token;
 
 // Function definitions
+
+/// Main.c
+void	exit_error(char *error_message);
+
 /// Linked List Functions
 t_token	*create_token(char *string);
 t_token	*last_token(t_token *list);
@@ -70,6 +78,7 @@ char	*get_quote_token(char *input, int *start, int *end);
 
 /// lexer.c
 void	fill_in_list(char *input, t_token **head, int start, int end);
-t_token	*read_readline(char *input);
+t_token	*read_readline(void);
+char	*get_readline(char *prompt, int quote_status);
 
 #endif

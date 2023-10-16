@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 22:41:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:24:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,13 @@ void exit_error(char *error_message)
 	exit(0);
 }
 
-int ft_tab_len(char **tab)
-{
-    int i;
-
-    i = 0;
-    while (tab[i])
-        i++;
-    return (i);
-}
-
 int	main(void)
 {
-	char	*buffer;
 	int		i;
-	t_token *lexer_list;
-	t_token *current;
-	
-	buffer = readline("minishell$: ");
-    lexer_list = read_readline(buffer);
+	t_token	*lexer_list;
+	t_token	*current;
+
+    lexer_list = read_readline();
 	current = lexer_list;
 	i = 1;
 	while (current)
@@ -45,7 +33,7 @@ int	main(void)
 			ft_printf("Node %i: %s\n", i++, current->token);
 		current = current->next;
 	}
-	
+
 	/*
 
 	// Get current directory (include unistd & limits.h)
