@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
+#    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/10/09 10:51:08 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/10/17 09:57:07 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
-SRC		=	main.c ft_command_split.c
+SRC		=	main.c get_input.c lexer.c lexer_linked_list.c lexer_get_tokens.c 
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

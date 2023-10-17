@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:34:28 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/04/18 08:46:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/11 09:51:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* DESCRIPTION:
-**  Allocates (with malloc(3)) and returns a “fresh” string ending with ’\0’, 
+**  Allocates (with malloc(3)) and returns a “fresh” string ending with ’\0’,
 **  result of the concatenation of s1 and s2. If
 **  the allocation fails the function returns NULL.
 */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char *ft_strjoin(char const *s1, char const *s2)
 {
-	char	*newstr;
-	int		i;
-	int		j;
+	char *newstr;
+	int i;
+	int j;
 
 	if (!s1 || !s2)
 		return (NULL);

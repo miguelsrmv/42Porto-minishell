@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
 /*   Updated: 2023/10/09 12:03:34 by mde-sa--         ###   ########.fr       */
@@ -12,22 +12,34 @@
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
-{	
-	// Get string from readline (include readline)
-	char *buffer;
-	buffer = readline("minishell$: ");
-	ft_printf("\nYou typed in \"%s\".\n\n", buffer);
+void	exit_error(char *error_message)
+{
+	ft_printf(error_message);
+	exit(0);
+}
 
-	// Splits buffer, ignoring quotes
-	char **splitted_buffer;
-	splitted_buffer = ft_command_split(buffer);
-	ft_printf("List of words:\n");
-	while (*splitted_buffer)
+void	print_linked_list(t_token *lexer_list)
+{
+	int		i;
+	t_token	*current;
+
+	current = lexer_list;
+	i = 1;
+	while (current)
 	{
-		ft_printf("%s\n", *splitted_buffer);
-		splitted_buffer++;
+		if (current->token)
+			ft_printf("Node %i: %s\n", i++, current->token);
+		current = current->next;
 	}
+}
+
+int	main(void)
+{
+	t_token	*lexer_list;
+
+	lexer_list = read_readline();
+	print_linked_list(lexer_list);
+	/*
 
 	// Get current directory (include unistd & limits.h)
 	char *current_dir;
@@ -46,4 +58,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_printf("%s\n", *path_list);
 		path_list++;
 	}
+	*/
+	
 }
