@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/10/17 09:57:07 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/10/17 10:40:09 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,4 +54,24 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+
+# Estes aqui servem para avaliar leaks ignorando os leaks do readline!
+
+leaks: readline.supp
+	@ valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=output.log ./minishell
+
+readline.supp:
+	@ echo "{" > readline.supp
+	@ echo "    leak readline" >> readline.supp
+	@ echo "    Memcheck:Leak" >> readline.supp
+	@ echo "    ..." >> readline.supp
+	@ echo "    fun:readline" >> readline.supp
+	@ echo "}" >> readline.supp
+	@ echo "{" >> readline.supp
+	@ echo "    leak add_history" >> readline.supp
+	@ echo "    Memcheck:Leak" >> readline.supp
+	@ echo "    ..." >> readline.supp
+	@ echo "    fun:add_history" >> readline.supp
+	@ echo "}" >> readline.supp
+
+.PHONY: all clean fclean re libft leaks readline.supp
