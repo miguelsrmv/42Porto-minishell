@@ -6,25 +6,23 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/16 17:24:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:56:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void exit_error(char *error_message)
+void	exit_error(char *error_message)
 {
 	ft_printf(error_message);
 	exit(0);
 }
 
-int	main(void)
+void	print_linked_list(t_token *lexer_list)
 {
 	int		i;
-	t_token	*lexer_list;
 	t_token	*current;
 
-    lexer_list = read_readline();
 	current = lexer_list;
 	i = 1;
 	while (current)
@@ -33,7 +31,14 @@ int	main(void)
 			ft_printf("Node %i: %s\n", i++, current->token);
 		current = current->next;
 	}
+}
 
+int	main(void)
+{
+	t_token	*lexer_list;
+
+	lexer_list = read_readline();
+	print_linked_list(lexer_list);
 	/*
 
 	// Get current directory (include unistd & limits.h)
