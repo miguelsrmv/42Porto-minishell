@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/16 18:34:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:44:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ char	*get_quote_token(char *input, int *start, int *end);
 /// lexer.c
 void	fill_in_list(char *input, t_token **head, int start, int end);
 t_token	*read_readline(void);
-char	*get_readline(char *prompt, int quote_status);
+
+/// readline.c
+int		check_in_quote(char *input);
+char	*get_input(char *prompt);
+char	*check_valid_input(char *input);
 
 #endif
