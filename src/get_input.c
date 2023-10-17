@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 09:44:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:28:07 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@ char	*check_valid_input(char *input)
 char	*get_input(char *prompt)
 {
 	char	*input;
+	char	*added_input;
 	char	*temp;
 
 	input = readline(prompt);
 	while (check_in_quote(input) != OUT_QUOTE)
 	{
+		added_input = readline(">");
 		temp = input;
-		input = ft_strjoin(input, readline(">"));
+		input = ft_strjoin(input, added_input);
 		free(temp);
+		free(added_input);
 	}
 	input = check_valid_input(input);
 	return (input);

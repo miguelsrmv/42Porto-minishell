@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 09:56:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:23:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,28 @@ void	exit_error(char *error_message)
 	exit(0);
 }
 
-void	print_linked_list(t_token *lexer_list)
+void	free_list(t_token *head)
 {
+	t_token	*current;
+	t_token	*next;
+
+	current = head;
+	while (current)
+	{
+		next = current->next;
+		free(current->token);
+		free(current);
+		current = next;
+	}
+}
+
+int	main(void)
+{
+	t_token	*lexer_list;
 	int		i;
 	t_token	*current;
 
+	lexer_list = read_readline();
 	current = lexer_list;
 	i = 1;
 	while (current)
@@ -31,14 +48,7 @@ void	print_linked_list(t_token *lexer_list)
 			ft_printf("Node %i: %s\n", i++, current->token);
 		current = current->next;
 	}
-}
-
-int	main(void)
-{
-	t_token	*lexer_list;
-
-	lexer_list = read_readline();
-	print_linked_list(lexer_list);
+	free_list(lexer_list);
 	/*
 
 	// Get current directory (include unistd & limits.h)

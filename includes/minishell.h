@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 09:57:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:23:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_token {
 
 /// Main.c
 void	exit_error(char *error_message);
+void	free_list(t_token *head);
 
 /// get_input.c
 int		check_in_quote(char *input);

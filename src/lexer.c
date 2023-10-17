@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:52:58 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 09:49:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:20:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_token	*read_readline(void)
 	input = get_input("minishell: ");
 	if (!input)
 		exit_error("Error: input is NULL\n");
+	head = NULL;
 	fill_in_list(input, &head);
+	free(input);
 	return (head);
 }
