@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 12:21:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:19:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 # define IN_QUOTE 1
 # define IN_DQUOTE 2
 
-# define NOT_REDIRECT 0
-# define IS_REDIRECT 1
+# define PIPE 1
+# define REDIRECT 2
+# define STRING 3
 
 # define VALID 0
 # define INVALID 1
@@ -55,36 +56,37 @@ typedef struct s_command_table {
 
 typedef struct s_token {
 	char			*token;
+	int				type;
 	struct s_token	*next;
 }	t_token;
 
 // Function definitions
 
 /// Main.c
-void	exit_error(char *error_message);
-void	print_tokens(t_token *head);
-void	free_list(t_token *head);
+void			exit_error(char *error_message);
+void			print_tokens(t_token *head);
+void			free_list(t_token *head);
 
 /// get_input.c
-int		check_in_quote(char *input);
-char	*get_input(char *prompt);
-char	*check_valid_input(char *input);
+int				check_in_quote(char *input);
+char			*get_input(char *prompt);
+char			*check_valid_input(char *input);
 
 /// lexer.c
-void	fill_in_list(char *input, t_token **head);
-t_token	*read_readline(void);
+void			fill_in_list(char *input, t_token **head);
+t_token			*read_readline(void);
 
 /// Linked List Functions
-t_token	*create_token(char *string);
-t_token	*last_token(t_token *list);
-void	add_token_end(t_token **list, t_token *new);
+t_token			*create_token(char *string, int type);
+t_token			*last_token(t_token *list);
+void			add_token_end(t_token **list, t_token *new);
 
 /// lexer_get_tokens.c
-int		is_valid_bash_char(char c);
-char	*get_pipe_token(char *input, int *start, int *end);
-char	*get_string_token(char *input, int *start, int *end);
-char	*get_redirect_token(char *input, int *start, int *end);
-char	*get_quote_token(char *input, int *start, int *end);
+int				is_valid_bash_char(char c);
+char			*get_pipe_token(char *input, int *start, int *end);
+char			*get_string_token(char *input, int *start, int *end);
+char			*get_redirect_token(char *input, int *start, int *end);
+char			*get_quote_token(char *input, int *start, int *end);
 
 /// parser.c
 int				check_syntax(t_token *lexer_list);

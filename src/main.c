@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 12:16:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:22:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	print_tokens(t_token *head)
 	while (current)
 	{
 		if (current->token)
-			ft_printf("Node %i: %s\n", i++, current->token);
+			ft_printf("Node %i: %s\t\ttype: %i\n", i++, current->token, current->type);
 		current = current->next;
 	}
 }

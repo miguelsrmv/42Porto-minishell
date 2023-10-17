@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:31:44 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 19:57:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:18:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*create_token(char *string)
+t_token	*create_token(char *string, int type)
 {
 	t_token	*node;
 
@@ -20,6 +20,7 @@ t_token	*create_token(char *string)
 	if (!node)
 		return (NULL);
 	node->token = string;
+	node->type = type;
 	node->next = NULL;
 	return (node);
 }
