@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 10:28:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:28:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	check_in_quote(char *input)
 	{
 		if (input[i] == '\'' || input[i] == '\"')
 		{
-			quote_status = input[i++];
+			quote_status = input[i];
+			i++;
 			while (input[i] != quote_status && input[i])
 				i++;
 			if (input[i] == quote_status)
@@ -32,7 +33,8 @@ int	check_in_quote(char *input)
 				i++;
 			}
 		}
-		i++;
+		else
+			i++;
 	}
 	return (quote_status);
 }
