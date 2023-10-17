@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 09:44:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:49:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*get_redirect_token(char *input, int *start, int *end);
 char	*get_quote_token(char *input, int *start, int *end);
 
 /// lexer.c
-void	fill_in_list(char *input, t_token **head, int start, int end);
+void	fill_in_list(char *input, t_token **head);
 t_token	*read_readline(void);
 
 /// readline.c
