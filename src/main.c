@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 11:37:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:16:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ void	free_list(t_token *head)
 	}
 }
 
-int	main(void)
+void	print_tokens(t_token *head)
 {
-	t_token	*lexer_list;
 	int		i;
 	t_token	*current;
 
-	lexer_list = read_readline();
-	current = lexer_list;
+	current = head;
 	i = 1;
 	while (current)
 	{
@@ -48,6 +46,16 @@ int	main(void)
 			ft_printf("Node %i: %s\n", i++, current->token);
 		current = current->next;
 	}
+}
+
+int	main(void)
+{
+	t_token			*lexer_list;
+	t_command_table	*command_table;
+
+	lexer_list = read_readline();
+	print_tokens(lexer_list);
+	command_table = parse_list(lexer_list);
 	free_list(lexer_list);
 	/*
 

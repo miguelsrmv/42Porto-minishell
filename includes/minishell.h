@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 11:32:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:21:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_token {
 
 /// Main.c
 void	exit_error(char *error_message);
+void	print_tokens(t_token *head);
 void	free_list(t_token *head);
 
 /// get_input.c
@@ -84,5 +85,9 @@ char	*get_pipe_token(char *input, int *start, int *end);
 char	*get_string_token(char *input, int *start, int *end);
 char	*get_redirect_token(char *input, int *start, int *end);
 char	*get_quote_token(char *input, int *start, int *end);
+
+/// parser.c
+int				check_syntax(t_token *lexer_list);
+t_command_table	*parse_list(t_token *lexer_list);
 
 #endif
