@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/12 15:53:12 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:21:57 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 #include <dirent.h>
 #include <stdbool.h>
 #include <fcntl.h>
-#include "error_utils.h"
 
 
 // Structs
@@ -57,6 +56,10 @@ typedef struct s_split_numbers {
 char	**ft_command_split(const char *s);
 void	ft_init_struct(t_minishell *shell);
 char    *ft_strtok(char *str);
+int 	minishell_pwd(char **args);
+int 	minishell_exit(char **args); 
+int     ft_builtins(t_minishell *shell);
+
 //void    execute_pwd(char *str);
 
 

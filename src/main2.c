@@ -1,5 +1,9 @@
 #include "minishell.h"
 
+/*  BUILTINS    */
+
+
+/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -*/
 char    *ft_strtok(char *str)
 {
     static int count = 1;
@@ -35,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
     t_minishell shell;
     char *buffer;
 
-    while(1)
+    while(true)
     {
         ft_init_struct(&shell);
         shell.init_str = readline("minishell$: ");
@@ -49,52 +53,57 @@ int	main(int argc, char **argv, char **envp)
             // Splits buffer, ignorando aspas
             shell.args = ft_command_split(shell.init_str);
 
-            // Verifica se o comando é "exit" para sair do shell
-            if (strcmp(shell.args[0], "exit") == 0) 
+            //testar os argumentos
+            int z = 0;
+            while(shell.args[z])
             {
-                free(shell.init_str);
-                break;
+                printf("%s\n", shell.args[z]);
+                z++;
             }
-            // Executa o comando
-            pid_t child_pid = fork();
 
-            if (child_pid == -1) 
+            if(ft_builtins(&shell) != 0)
             {
-                perror("fork");
-            }
-            else if (child_pid == 0) 
-            {
-                // Este é o processo filho
+                // Executa o comando
+                pid_t child_pid = fork();
 
-                // Obtém o caminho completo para o comando usando execução no ambiente atual
-                shell.command = getenv("PATH");
-                //FT_strtok copia o Path ate aos ":" para o shell.command
-                shell.command = ft_strtok(shell.command);
-
-                while (shell.command != NULL) 
+                if (child_pid == -1) 
                 {
-                    char *full_command = malloc(strlen(shell.command) + strlen(shell.args[0]) + 2);
-                    sprintf(full_command, "%s/%s", shell.command, shell.args[0]);
-
-                    /* if(strcmp(shell.args[0], "pwd") == 0)
-                    {
-                        execute_pwd(shell.args[0]);
-                    } */
-                    
-                    execve(full_command, shell.args, NULL);
-                    //perror("execve");
-
-                    free(full_command);
-                    shell.command = ft_strtok(getenv("PATH"));
+                    perror("fork");
                 }
-                // Se chegarmos aqui, a execução falhou
-                //fprintf(stderr, "Comando não encontrado: %s\n", splitted_buffer[0]);
-            }
-            else
-            {
-                // Este é o processo pai, espera pelo filho
-                int status;
-                waitpid(child_pid, &status, 0);
+                else if (child_pid == 0) 
+                {
+                    // Este é o processo filho
+
+                    // Obtém o caminho completo para o comando usando execução no ambiente atual
+                    shell.command = getenv("PATH");
+                    //FT_strtok copia o Path ate aos ":" para o shell.command
+                    shell.command = ft_strtok(shell.command);
+
+                    while (shell.command != NULL) 
+                    {
+                        char *full_command = malloc(strlen(shell.command) + strlen(shell.args[0]) + 2);
+                        sprintf(full_command, "%s/%s", shell.command, shell.args[0]);
+
+                        /* if(strcmp(shell.args[0], "pwd") == 0)
+                        {
+                            execute_pwd(shell.args[0]);
+                        } */
+                        
+                        execve(full_command, shell.args, NULL);
+                        //perror("execve");
+
+                        free(full_command);
+                        shell.command = ft_strtok(getenv("PATH"));
+                    }
+                    // Se chegarmos aqui, a execução falhou
+                    //fprintf(stderr, "Comando não encontrado: %s\n", splitted_buffer[0]);
+                }
+                else
+                {
+                    // Este é o processo pai, espera pelo filho
+                    int status;
+                    waitpid(child_pid, &status, 0);
+                }
             }
         }
     }
