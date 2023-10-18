@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/12 15:06:14 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:53:12 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <string.h>
+#include <errno.h>
+#include <dirent.h>
+#include <stdbool.h>
+#include <fcntl.h>
+#include "error_utils.h"
 
 
 // Structs

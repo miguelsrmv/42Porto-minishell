@@ -8,6 +8,6 @@
 
 void    execute_pwd(char *str)
 {
-	shell->pwd = getcwd(0, 0);
+	shell->pwd = getcwd(pwd, 0);
 	printf("%s\n", shell->pwd);
 }
