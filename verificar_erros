@@ -1,0 +1,10 @@
+Coisas a melhorar Minishell
+
+; junto de |
+exemplo hello ;|
+| sozinhos nao sao lidos
+verificar este exemplo 
+cat <<eof >file1 && cat file1 && abc || wc <file1 | cat >file2
+e este
+echo "\n \n \n"
+
