@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 13:19:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:55:51 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,33 @@
 # define PIPE 1
 # define REDIRECT 2
 # define STRING 3
+# define PLACEHOLDER 4
 
 # define VALID 0
 # define INVALID 1
 
 // Structs
-
-typedef struct s_command {
-	char	*cmd;
-	char	*path;
-	char	**args;
-}	t_command;
-
-/*Lidar com multiplos ??? */
-typedef struct s_IO_redirection {
-	int	in;
-	int	out;
-	int	err;
-}	t_io_redir;
-
-typedef struct s_command_table {
-	t_command			**cmd_array;
-	t_io_redir			**io_redir;
-	int					cmd_num;
-}	t_command_table;
-
 typedef struct s_token {
 	char			*token;
 	int				type;
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_command_table {
+	char					**cmd;
+	char					**input;
+	char					**output;
+	struct s_command_table	*next;
+}	t_command_table;
+
 // Function definitions
 
-/// Main.c
+/// Helper functions
 void			exit_error(char *error_message);
-void			print_tokens(t_token *head);
+void			print_lexer_tokens(t_token *head);
+void			print_command_table(t_command_table *command_table);
+
+/// Main.c
 void			free_list(t_token *head);
 
 /// get_input.c
@@ -90,6 +81,12 @@ char			*get_quote_token(char *input, int *start, int *end);
 
 /// parser.c
 int				check_syntax(t_token *lexer_list);
+void			set_redirections(t_token *lexer_sublist,
+					t_command_table **command_table);
+void			set_cmd(t_token *lexer_sublist,
+					t_command_table **command_table);	
+void			create_command_table(t_token *lexer_list,
+					t_command_table **command_table);
 t_command_table	*parse_list(t_token *lexer_list);
 
 #endif

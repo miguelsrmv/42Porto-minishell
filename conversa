@@ -1,0 +1,20 @@
+cmd **			[[wc], [-l]]
+next			proximo comando
+input **		array
+input			NULL
+output			NULL
+
+
+
+
+
+INPUT [<][input.txt]
+OUTPUT [>][output.txt]
+
+
+
+
+
+if !INPUT 
+	INPUT = STDIN
+	OUTPUT = STDOUT
