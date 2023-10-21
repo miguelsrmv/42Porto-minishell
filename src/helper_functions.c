@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:53:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/21 18:55:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:32:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_command_table(t_command_table *command_table)
 	i = 1;
 	while (current)
 	{
-		ft_printf("Command %i:\n", i++);
+		ft_printf("\nCOMMAND #%i:\n", i++);
 		ft_printf("Command: ");
 		j = 0;
 		while (current->cmd[j])

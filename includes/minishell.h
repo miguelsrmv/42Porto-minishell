@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/21 18:55:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:11:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define PIPE 1
 # define REDIRECT 2
 # define STRING 3
-# define PLACEHOLDER 4
+# define REDIRECT_TARGET 4
 
 # define VALID 0
 # define INVALID 1
