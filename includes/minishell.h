@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/22 13:13:45 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:22:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,18 @@
 # include <readline/history.h>
 # include <fcntl.h>
 
-# define OUT_QUOTE 0
-# define IN_QUOTE 1
-# define IN_DQUOTE 2
+enum e_QuoteType {
+	OUT_QUOTE,
+	IN_QUOTE,
+	IN_DQUOTE
+};
 
-# define PIPE 1
-# define REDIRECT 2
-# define STRING 3
-# define REDIRECT_TARGET 4
+enum e_TokenType {
+	PIPE,
+	REDIRECT,
+	STRING,
+	REDIRECT_TARGET
+};
 
 # define VALID 0
 # define INVALID 1

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/22 12:53:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:33:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	create_command_table(t_token *lexer_list,
 		set_cmd(current_token, current_table, error);
 		while (current_token && current_token->type != PIPE)
 			current_token = current_token->next;
+		(*current_table)->next = NULL;
 		if (current_token && current_token->type == PIPE)
 		{
 			(*current_table)->next
