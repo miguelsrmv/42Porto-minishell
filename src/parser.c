@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/21 20:11:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:53:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_syntax(t_token *lexer_list)
 }
 
 void	set_redirections(t_token *lexer_sublist,
-					t_command_table **command_table)
+			t_command_table **command_table, t_error error)
 {
 	t_token	*current;
 
@@ -44,7 +44,7 @@ void	set_redirections(t_token *lexer_sublist,
 	(*command_table)->input = (char **)malloc(sizeof(char *) * 3);
 	(*command_table)->output = (char **)malloc(sizeof(char *) * 3);
 	if (!(*command_table)->input || !(*command_table)->output)
-		exit_error("Malloc error\n");
+		exit_error("Malloc error\n", error);
 	(*command_table)->input[0] = NULL;
 	(*command_table)->output[0] = NULL;
 	while (current && current->type != PIPE)
@@ -71,7 +71,8 @@ void	set_redirections(t_token *lexer_sublist,
 	}
 }
 
-void	set_cmd(t_token *lexer_sublist, t_command_table **command_table)
+void	set_cmd(t_token *lexer_sublist, t_command_table **command_table,
+				t_error error)
 {
 	t_token	*current;
 	int		i;
@@ -86,7 +87,7 @@ void	set_cmd(t_token *lexer_sublist, t_command_table **command_table)
 	}
 	(*command_table)->cmd = (char **)malloc(sizeof(char *) * (i + 1));
 	if (!(*command_table)->cmd)
-		exit_error("Malloc error\n");
+		exit_error("Malloc error\n", error);
 	i = 0;
 	current = lexer_sublist;
 	while (current && current->type != PIPE)
@@ -99,7 +100,7 @@ void	set_cmd(t_token *lexer_sublist, t_command_table **command_table)
 }
 
 void	create_command_table(t_token *lexer_list,
-					t_command_table **command_table)
+					t_command_table **command_table, t_error error)
 {
 	t_token			*current_token;
 	t_command_table	**current_table;
@@ -108,8 +109,8 @@ void	create_command_table(t_token *lexer_list,
 	current_table = command_table;
 	while (current_token)
 	{
-		set_redirections(current_token, current_table);
-		set_cmd(current_token, current_table);
+		set_redirections(current_token, current_table, error);
+		set_cmd(current_token, current_table, error);
 		while (current_token && current_token->type != PIPE)
 			current_token = current_token->next;
 		if (current_token && current_token->type == PIPE)
@@ -117,23 +118,23 @@ void	create_command_table(t_token *lexer_list,
 			(*current_table)->next
 				= (t_command_table *)malloc(sizeof(t_command_table));
 			if (!(*current_table)->next)
-				exit_error("Malloc error\n");
+				exit_error("Malloc error\n", error);
 			current_table = &((*current_table)->next);
 			current_token = current_token->next;
 		}
 	}
 }
 
-t_command_table	*parse_list(t_token *lexer_list)
+t_command_table	*parse_list(t_token *lexer_list, t_error error)
 {
 	t_command_table	*command_table;
 
 	if (check_syntax(lexer_list) == INVALID)
-		exit_error("Syntax error\n");
+		exit_error("Syntax error\n", error);
 	command_table = (t_command_table *)malloc(sizeof(t_command_table));
 	if (!command_table)
-		exit_error("Malloc error\n");
+		exit_error("Malloc error\n", error);
 	command_table->next = NULL;
-	create_command_table(lexer_list, &command_table);
+	create_command_table(lexer_list, &command_table, error);
 	return (command_table);
 }

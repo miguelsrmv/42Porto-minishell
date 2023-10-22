@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/21 18:56:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:48:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ int	main(void)
 {
 	t_token			*lexer_list;
 	t_command_table	*command_table;
+	t_error			error;
 
-	lexer_list = read_readline();
-	//print_lexer_tokens(lexer_list);
-	command_table = parse_list(lexer_list);
+	error.lexer_list = lexer_list;
+	error.command_table = command_table;
+	lexer_list = read_readline(error);
+	command_table = parse_list(lexer_list, error);
 	print_command_table(command_table);
 	free_list(lexer_list);
 	/*
