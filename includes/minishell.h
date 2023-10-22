@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/22 13:22:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:01:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,16 @@ char			*get_quote_token(char *input, int *start, int *end);
 
 /// parser.c
 int				check_syntax(t_token *lexer_list);
-void			set_redirections(t_token *lexer_sublist,
-					t_command_table **command_table, t_error error);
 void			set_cmd(t_token *lexer_sublist,
 					t_command_table **command_table, t_error error);	
 void			create_command_table(t_token *lexer_list,
 					t_command_table **command_table, t_error error);
 t_command_table	*parse_list(t_token *lexer_list, t_error error);
+
+/// parser_redirs.c
+void			fill_input(t_token *current, t_command_table **command_table);
+void			fill_output(t_token *current, t_command_table **command_table);
+void			set_redirections(t_token *lexer_sublist,
+					t_command_table **command_table, t_error error);
 
 #endif
