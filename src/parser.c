@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 17:26:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:13:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	create_command_table(t_token *lexer_list,
 	current_table = command_table;
 	while (current_token)
 	{
-		set_redirections(current_token, current_table, error);
 		set_full_redirections(current_token, current_table, error);
+		set_final_redirection(current_table, error);
 		set_cmd(current_token, current_table, error);
 		while (current_token && current_token->type != PIPE)
 			current_token = current_token->next;
