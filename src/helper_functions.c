@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:53:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 17:56:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:16:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	print_command_table(t_command_table *command_table)
 			ft_printf("[%s]", current->output[j++]);
 		ft_printf("\nFull Input: ");
 		j = 0;
-		while (current->full_i[j])
-			ft_printf("[%s]", current->full_i[j++]);
+		while (current->full_input[j])
+			ft_printf("[%s]", current->full_input[j++]);
 		ft_printf("\nFull Output: ");
 		j = 0;
-		while (current->full_o[j])
-			ft_printf("[%s]", current->full_o[j++]);
+		while (current->full_output[j])
+			ft_printf("[%s]", current->full_output[j++]);
 		ft_printf("\n");
 		current = current->next;
 	}

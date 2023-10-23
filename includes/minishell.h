@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 21:13:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:14:51 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ typedef struct s_token {
 typedef struct s_command_table {
 	char					**cmd;
 	char					**input;
-	char					**full_i;
+	char					**full_input;
 	char					**output;
-	char					**full_o;
+	char					**full_output;
 	struct s_command_table	*next;
 }	t_command_table;
 
