@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 21:15:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:35:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,26 @@ void	set_final_redirection(t_command_table **command_table, t_error error)
 {
 	int	i;
 
-	(*command_table)->input = (char **)malloc(sizeof(char *) * 3);
-	(*command_table)->output = (char **)malloc(sizeof(char *) * 3);
-	if (!(*command_table)->input || !(*command_table)->output)
-		exit_error("Malloc error\n", error);
-	(*command_table)->input[0] = NULL;
-	(*command_table)->output[0] = NULL;
+	(*command_table)->input_type = NULL;
+	(*command_table)->output_type = NULL;
+	(*command_table)->input_file = NULL;
+	(*command_table)->output_file = NULL;
 	i = 0;
-	while ((*command_table)->full_input[i])
-		i++;
-	(*command_table)->input[0] = (*command_table)->full_input[i - 2];
-	(*command_table)->input[1] = (*command_table)->full_input[i - 1];
-	(*command_table)->input[2] = NULL;
+	if ((*command_table)->full_input)
+	{
+		while ((*command_table)->full_input[i])
+			i++;
+		(*command_table)->input_type = (*command_table)->full_input[i - 2];
+		(*command_table)->input_file = (*command_table)->full_input[i - 1];
+	}
 	i = 0;
-	while ((*command_table)->full_output[i])
-		i++;
-	(*command_table)->output[0] = (*command_table)->full_output[i - 2];
-	(*command_table)->output[1] = (*command_table)->full_output[i - 1];
-	(*command_table)->output[2] = NULL;
+	if ((*command_table)->full_output)
+	{
+		while ((*command_table)->full_output[i])
+			i++;
+		(*command_table)->output_type = (*command_table)->full_output[i - 2];
+		(*command_table)->output_file = (*command_table)->full_output[i - 1];
+	}
 }
 
 int	count_redirect_targets(t_token *lexer_sublist)

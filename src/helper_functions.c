@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:53:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 21:16:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:40:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,20 @@ void	print_command_table(t_command_table *command_table)
 		j = 0;
 		while (current->cmd[j])
 			ft_printf("[%s]", current->cmd[j++]);
-		ft_printf("\nInput: ");
-		j = 0;
-		while (current->input[j])
-			ft_printf("[%s]", current->input[j++]);
-		ft_printf("\nOutput: ");
-		j = 0;
-		while (current->output[j])
-			ft_printf("[%s]", current->output[j++]);
-		ft_printf("\nFull Input: ");
+		ft_printf("\n\nFull Input: ");
 		j = 0;
 		while (current->full_input[j])
 			ft_printf("[%s]", current->full_input[j++]);
-		ft_printf("\nFull Output: ");
+		ft_printf("\nInput Type: [%s]", current->input_type);
+		ft_printf("\nInput File: [%s]", current->input_file);
+		ft_printf("\n\nFull Output: ");
 		j = 0;
 		while (current->full_output[j])
 			ft_printf("[%s]", current->full_output[j++]);
-		ft_printf("\n");
+
+		ft_printf("\nOutput Type: [%s]", current->output_type);
+		ft_printf("\nOutput File: [%s]", current->output_file);
+		ft_printf("\n\n");
 		current = current->next;
 	}
 }
@@ -72,10 +69,10 @@ void	exit_error(char *error_message, t_error error)
 	{
 		if (error.command_table->cmd)
 			ft_free_tabs((void **)error.command_table->cmd);
-		if (error.command_table->input)
-			ft_free_tabs((void **)error.command_table->input);
-		if (error.command_table->output)
-			ft_free_tabs((void **)error.command_table->output);
+		if (error.command_table->full_input)
+			ft_free_tabs((void **)error.command_table->full_input);
+		if (error.command_table->full_output)
+			ft_free_tabs((void **)error.command_table->full_output);
 		clear_command_table(&(error.command_table));
 	}
 	ft_printf(error_message);
