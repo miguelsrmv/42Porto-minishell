@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 21:35:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:48:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_final_redirection(t_command_table **command_table, t_error error)
 	(*command_table)->input_file = NULL;
 	(*command_table)->output_file = NULL;
 	i = 0;
-	if ((*command_table)->full_input)
+	if ((*(*command_table)->full_input))
 	{
 		while ((*command_table)->full_input[i])
 			i++;
@@ -38,7 +38,7 @@ void	set_final_redirection(t_command_table **command_table, t_error error)
 		(*command_table)->input_file = (*command_table)->full_input[i - 1];
 	}
 	i = 0;
-	if ((*command_table)->full_output)
+	if ((*(*command_table)->full_output))
 	{
 		while ((*command_table)->full_output[i])
 			i++;

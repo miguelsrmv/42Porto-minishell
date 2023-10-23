@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 21:33:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:50:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ typedef struct s_command_table {
 	char					*output_type;
 	char					*input_file;
 	char					*output_file;
-/*	char					**input;
-	char					**output;*/
-
 	struct s_command_table	*next;
 }	t_command_table;
 
