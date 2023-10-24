@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 18:19:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:48:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ typedef struct s_command_table {
 	char					**cmd;
 	char					**full_input;
 	char					**full_output;
-	char					*input_type;
-	char					*output_type;
-	char					*input_file;
-	char					*output_file;
 	struct s_command_table	*next;
 }	t_command_table;
 
@@ -107,8 +103,6 @@ t_command_table	*parse_list(t_token *lexer_list, t_error error);
 /// parser_redirs.c
 void			fill_array(char **array, t_token *current,
 					t_command_table **command_table, int i);
-void			set_final_redirection(t_command_table **command_table,
-					t_error error);
 int				count_redirect_targets(t_token *lexer_sublist);
 void			set_full_redirections(t_token *lexer_sublist,
 					t_command_table **command_table, t_error error);
