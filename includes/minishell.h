@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/23 21:50:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:19:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,14 @@ void			set_final_redirection(t_command_table **command_table,
 int				count_redirect_targets(t_token *lexer_sublist);
 void			set_full_redirections(t_token *lexer_sublist,
 					t_command_table **command_table, t_error error);
+
+/// expander.c
+void			expand_command_table(t_command_table **command_table);
+void			expand_double_vector(t_command_table **command_table,
+					char **vector);
+char			*expand_env(char *string);
+char			*concatenate_env_substrings(char *left, char *env,
+					char *right, char *string);
+int				is_valid_env_char(char c);
 
 #endif

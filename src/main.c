@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/22 12:48:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:10:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ int	main(void)
 	error.command_table = command_table;
 	lexer_list = read_readline(error);
 	command_table = parse_list(lexer_list, error);
+	expand_command_table(&command_table);
 	print_command_table(command_table);
-	free_list(lexer_list);
+	//free_list(lexer_list);
 	/*
 
 	// Get current directory (include unistd & limits.h)
