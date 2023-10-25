@@ -1,16 +1,14 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 
+int main (void)
+{
+	char **path_list;
 
-
-lexer       ->	"Split por espaços, com nodes"
-parser	    ->  "O que é que este node é?"
-expander    ->  "Tira as aspas dos comandos; variáveis de ambiente -> transforma-as"
-executer
-
-
-
-To Do:
-# Avaliar se só foram usados caractéres válidos 
-# Ponderar acrescentar newlines quando houver strjoin de readlines
-# Avaliar sintaxe 
-# Terminar builtins
-# Máscara de sinais
+	path_list = (char **)malloc(sizeof(char *) * 3);
+	path_list[0] = "./hello";
+	path_list[1] = "Miguel";
+	path_list[2] = NULL;
+	execve(path_list[0], path_list, NULL);
+}
