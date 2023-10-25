@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 12:00:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:26:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,21 @@ typedef struct s_token {
 
 typedef struct s_command_table {
 	char					**cmd;
-	char					**full_input;
-	char					**full_output;
 	char					*cmd_target;
 	enum e_CommandType		command_type;
+
+	char					**full_input;
 	char					*input_target;
-	enum eRedirectType		*input_type;
+	enum e_RedirectType		input_type;
 	int						input_fd;
+
+	char					**full_output;
 	char					*output_target;
-	enum e_RedirectType		*output_type;
+	enum e_RedirectType		output_type;
 	int						output_fd;
+
 	enum e_ValidType		validity;
+
 	struct s_command_table	*next;
 }	t_command_table;
 
@@ -90,64 +94,72 @@ typedef struct s_error {
 // Function definitions
 
 /// Helper functions
-void			exit_error(char *error_message, t_error error);
-void			print_lexer_tokens(t_token *head);
-void			print_command_table(t_command_table *command_table);
+void				exit_error(char *error_message, t_error error);
+void				print_lexer_tokens(t_token *head);
+void				print_command_table(t_command_table *command_table);
 
-/// Main.c
-void			free_list(t_token *head);
+/// main.c
+void				free_list(t_token *head);
 
 /// get_input.c
-int				check_in_quote(char *input);
-char			*get_input(char *prompt);
-char			*check_valid_input(char *input);
+int					check_in_quote(char *input);
+char				*get_input(char *prompt);
+char				*check_valid_input(char *input);
 
 /// lexer.c
-void			fill_in_list(char *input, t_token **head);
-t_token			*read_readline(t_error error);
+void				fill_in_list(char *input, t_token **head);
+t_token				*read_readline(t_error error);
 
-/// Linked List Functions
-t_token			*create_token(char *string, int type);
-t_token			*last_token(t_token *list);
-void			add_token_end(t_token **list, t_token *new);
-void			clear_lexer_list(t_token **lst);
-void			clear_command_table(t_command_table **lst);
+/// lexer_linked_list.c
+t_token				*create_token(char *string, int type);
+t_token				*last_token(t_token *list);
+void				add_token_end(t_token **list, t_token *new);
+void				clear_lexer_list(t_token **lst);
+void				clear_command_table(t_command_table **lst);
 
 /// lexer_get_tokens.c
-int				is_valid_bash_char(char c);
-char			*get_pipe_token(char *input, int *start, int *end);
-char			*get_string_token(char *input, int *start, int *end);
-char			*get_redirect_token(char *input, int *start, int *end);
-char			*get_quote_token(char *input, int *start, int *end);
+int					is_valid_bash_char(char c);
+char				*get_pipe_token(char *input, int *start, int *end);
+char				*get_string_token(char *input, int *start, int *end);
+char				*get_redirect_token(char *input, int *start, int *end);
+char				*get_quote_token(char *input, int *start, int *end);
 
 /// parser.c
-int				check_syntax(t_token *lexer_list);
-void			set_cmd(t_token *lexer_sublist,
-					t_command_table **command_table, t_error error);	
-void			create_command_table(t_token *lexer_list,
-					t_command_table **command_table, t_error error);
-t_command_table	*parse_list(t_token *lexer_list, t_error error);
+int					check_syntax(t_token *lexer_list);
+void				set_cmd(t_token *lexer_sublist,
+						t_command_table **command_table, t_error error);	
+void				create_command_table(t_token *lexer_list,
+						t_command_table **command_table, t_error error);
+t_command_table		*parse_list(t_token *lexer_list, t_error error);
 
 /// parser_redirs.c
-void			fill_array(char **array, t_token *current,
-					t_command_table **command_table, int i);
-int				count_redirect_targets(t_token *lexer_sublist);
-void			set_full_redirections(t_token *lexer_sublist,
-					t_command_table **command_table, t_error error);
+void				fill_array(char **array, t_token *current,
+						t_command_table **command_table, int i);
+int					count_redirect_targets(t_token *lexer_sublist);
+void				set_full_redirections(t_token *lexer_sublist,
+						t_command_table **command_table, t_error error);
 
 /// expander.c
-void			expand_command_table(t_command_table **command_table);
-void			expand_double_vector(t_command_table **command_table,
-					char **vector);
-char			*expand_env(char *string);
-char			*concatenate_env_substrings(char *left, char *env,
-					char *right, char *string);
-int				is_valid_env_char(char c);
+void				expand_command_table(t_command_table **command_table);
+void				expand_double_vector(t_command_table **command_table,
+						char **vector);
+char				*expand_env(char *string);
+char				*concatenate_env_substrings(char *left, char *env,
+						char *right, char *string);
+int					is_valid_env_char(char c);
 
 /// executer.c
-void			execute_commands(t_command_table **command_table);
-int				count_pipes(t_command_table **command_table);
+int					count_pipes(t_command_table **command_table);
+void				execute_commands(t_command_table **command_table);
 
-/// executer_checker.c
-void			check_input(t_command_table **command_table);
+/// executer_input_checker.c
+enum e_RedirectType	redir_check(char *redir_str);
+void				check_input(t_command_table **command_table);
+void				check_output(t_command_table **command_table);
+
+/// executer_cmd_checker.c
+void				check_commands(t_command_table **command_table);
+char				**get_path_list(void);
+int					check_builtin(char *command);
+
 #endif

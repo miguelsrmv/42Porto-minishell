@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 12:27:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:40:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		count_pipes(t_command_table **command_table)
+int	count_pipes(t_command_table **command_table)
 {
 	t_command_table	*current;
 	int				pipe_count;
@@ -21,7 +21,7 @@ int		count_pipes(t_command_table **command_table)
 	pipe_count = 0;
 	while (current)
 	{
-		if (current->type == PIPE)
+		if (current->next)
 			pipe_count++;
 		current = current->next;
 	}
@@ -30,12 +30,15 @@ int		count_pipes(t_command_table **command_table)
 
 void	execute_commands(t_command_table **command_table)
 {
-	int	fork_no;
+	int				fork_no;
 	t_command_table	*current;
 
+
 	current = *command_table;
-	check_input(command_table);
-	check_output(command_table);
+	if ((*command_table)->full_input[0])
+		check_input(command_table);
+	if ((*command_table)->full_output[0])
+		check_output(command_table);
 	check_commands(command_table);
 	fork_no = count_pipes(command_table);
 }

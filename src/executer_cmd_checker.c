@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 14:06:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:45:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_builtin(char *command)
 	return (0);
 }
 
-char	**path_list(void)
+char	**get_path_list(void)
 {
 	char	**path_list;
 	int		i;
@@ -29,18 +29,18 @@ char	**path_list(void)
 	while (path_list[i])
 		i++;
 	result = (char **)malloc(sizeof(char *) * (i + 3));
+	result[0] = ft_strdup("./");
+	temp = getcwd(NULL, 0);
+	result[1] = ft_strjoin(temp, "/");
+	free(temp);
 	i = 0;
 	while (path_list[i])
 	{
 		temp = ft_strjoin(path_list[i], "/");
-		result[i] = ft_strdup(temp);
+		result[i + 2] = ft_strdup(temp);
 		free(temp);
 		i++;
 	}
-	result[i] = ft_strdup("./");
-	temp = getcwd(NULL, 0);
-	result[i + 1] = ft_strjoin(temp, "/");
-	free(temp);
 	result[i + 2] = NULL;
 	ft_free_tabs((void **)path_list);
 	return (result);
@@ -48,22 +48,23 @@ char	**path_list(void)
 
 void	check_commands(t_command_table **command_table)
 {
-	char **path_list;
-	char *test_command;
-	int	i;
+	char	**path_list;
+	char	*test_command;
+	int		i;
 
-	if (check_builtin((*command_table)->command))
+	if (check_builtin((*command_table)->cmd[0]))
 	{
 		return ;
 	}
-	path_list = path_list();
+	path_list = get_path_list();
 	i = 0;
 	while (path_list[i])
 	{
-		test_command = ft_strjoin(path_list[i], command);
+		test_command = ft_strjoin(path_list[i], (*command_table)->cmd[0]);
 		if (access(test_command, F_OK | X_OK) == 0)
 		{
-			(*command_table)->cmd_target = test_comamnd;
+			(*command_table)->cmd_target = test_command;
+			(*command_table)->command_type = EXECUTABLE;
 			return ;
 		}
 		free(test_command);
