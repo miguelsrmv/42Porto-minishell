@@ -111,14 +111,70 @@ int     minishell_cd(char **args)
     return 0;
 }
 
-extern char **environ;
-
-int minishell_env(char **args) {
-    char **env = environ;
+int minishell_env(char **env) 
+{
     while (*env != NULL) {
-        printf("%s\n", *env);
+        ft_printf("%s\n", *env);
         env++;
     }
+    return 0;
+}
+
+char **sort_env(char **env) 
+{
+    int i, j;
+    char *temp;
+
+    for (i = 0; env[i] != NULL; i++) {
+        for (j = i + 1; env[j] != NULL; j++) 
+        {
+            char *var_name_i = env[i];
+            char *var_name_j = env[j];
+            if (ft_strcmp(var_name_i, var_name_j) > 0) 
+            {
+                temp = env[i];
+                env[i] = env[j];
+                env[j] = temp;
+            }
+        }
+    }
+    env[j] = NULL;
+    return(env);
+}
+
+int minishell_export(char **args, char **env) 
+{
+    env = sort_env(env);
+    while (*env != NULL) 
+    {
+        ft_printf("%s\n", *env);
+        env++;
+    }
+    if (args[1] != NULL) {
+        char *var_name = args[1];
+        char *var_value = strchr(var_name, '=');
+        
+        if (var_value != NULL) {
+            *var_value = '\0';
+            var_value++;
+
+            if (setenv(var_name, var_value, 1) != 0) {
+                perror("setenv");
+            }
+        } else {
+            fprintf(stderr, "Invalid format. Use: export VAR_NAME=VAR_VALUE\n");
+        }
+    } 
+    else 
+    {
+        while (*env != NULL) 
+        {
+            ft_printf("%s\n", *env);
+            env++;
+        }
+
+    }
+
     return 0;
 }
 
@@ -154,9 +210,15 @@ int     ft_builtins(t_minishell *shell)
     }
     if(ft_strcmp(shell->args[0], "env") == 0)
     {
-        minishell_env(shell->args);
+        minishell_env(shell->env);
         free(shell->init_str);
         return (0);
+    }
+    if(ft_strcmp(shell->args[0], "export") == 0)
+    {
+        minishell_export(shell->args, shell->env);
+        free(shell->init_str);
+        return(0);
     }
     return (1);
 }

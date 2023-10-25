@@ -4,7 +4,7 @@
 
 
 /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -*/
-char    *ft_strtok(char *str)
+/* char    *ft_strtok(char *str)
 {
     static int count = 1;
     int i = 0;
@@ -16,8 +16,8 @@ char    *ft_strtok(char *str)
     while(x < count)
     {
         j = 0;
-        /* if(str[i] == '\0')
-            exit(0); */
+        if(str[i] == '\0')
+            exit(0);
         if(str[i] == ':')
             i++;
         while(str[i] != ':')
@@ -32,12 +32,13 @@ char    *ft_strtok(char *str)
     count++;
     return (str2);
 
-}
+} */
 
 int	main(int argc, char **argv, char **envp)
 {
     t_minishell shell;
     char *buffer;
+    shell.env = envp;
 
     while(true)
     {
@@ -77,7 +78,7 @@ int	main(int argc, char **argv, char **envp)
                     // Obtém o caminho completo para o comando usando execução no ambiente atual
                     shell.command = getenv("PATH");
                     //FT_strtok copia o Path ate aos ":" para o shell.command
-                    shell.command = ft_strtok(shell.command);
+                    shell.command = ft_strtok(shell.command, ":");
 
                     while (shell.command != NULL) 
                     {
@@ -93,7 +94,7 @@ int	main(int argc, char **argv, char **envp)
                         //perror("execve");
 
                         free(full_command);
-                        shell.command = ft_strtok(getenv("PATH"));
+                        shell.command = ft_strtok(getenv("PATH"), ":");
                     }
                     // Se chegarmos aqui, a execução falhou
                     //fprintf(stderr, "Comando não encontrado: %s\n", splitted_buffer[0]);
