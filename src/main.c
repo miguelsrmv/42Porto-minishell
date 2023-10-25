@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 19:34:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/25 21:38:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,4 @@ int	main(void)
 	expand_command_table(&command_table);
 	print_command_table(command_table);
 	execute_commands(&command_table);
-	//free_list(lexer_list);
-	/*
-
-	// Get current directory (include unistd & limits.h)
-	char *current_dir;
-	current_dir = NULL;	
-	current_dir = getcwd(current_dir, PATH_MAX + 1);
-	ft_printf("\nYou're on directory %s\n\n", current_dir);
-
-	// Get list of PATHs (include stdlib)
-	char *path;
-	char **path_list;
-	path = getenv("PATH");
-	path_list = ft_split(path, ':');
-	ft_printf("List of paths:\n");
-	while (*path_list)
-	{
-		ft_printf("%s\n", *path_list);
-		path_list++;
-	}
-	*/
 }
