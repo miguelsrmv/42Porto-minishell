@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 18:26:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:12:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		is_valid_env_char(char c)
+int	is_valid_env_char(char c)
 {
 	if (ft_isalnum(c) || c == '_')
 		return (1);
@@ -99,9 +99,9 @@ void	expand_command_table(t_command_table **command_table)
 	current = *command_table;
 	while (current)
 	{
-		expand_double_vector(command_table, (*command_table)->cmd);
-		expand_double_vector(command_table, (*command_table)->full_input);
-		expand_double_vector(command_table, (*command_table)->full_output);
+		expand_double_vector(command_table, current->cmd);
+		expand_double_vector(command_table, current->full_input);
+		expand_double_vector(command_table, current->full_output);
 		current = current->next;
 	}
 }
