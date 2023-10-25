@@ -111,6 +111,17 @@ int     minishell_cd(char **args)
     return 0;
 }
 
+extern char **environ;
+
+int minishell_env(char **args) {
+    char **env = environ;
+    while (*env != NULL) {
+        printf("%s\n", *env);
+        env++;
+    }
+    return 0;
+}
+
 int     ft_builtins(t_minishell *shell)
 {
     // Verifica se o comando é "exit" para sair do shell
@@ -138,6 +149,12 @@ int     ft_builtins(t_minishell *shell)
     if(ft_strcmp(shell->args[0], "cd") == 0)
     {
         minishell_cd(shell->args);
+        free(shell->init_str);
+        return (0);
+    }
+    if(ft_strcmp(shell->args[0], "env") == 0)
+    {
+        minishell_env(shell->args);
         free(shell->init_str);
         return (0);
     }

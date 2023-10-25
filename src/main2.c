@@ -54,12 +54,12 @@ int	main(int argc, char **argv, char **envp)
             shell.args = ft_command_split(shell.init_str);
 
             //testar os argumentos
-            int z = 0;
+            /* int z = 0;
             while(shell.args[z])
             {
                 printf("%s\n", shell.args[z]);
                 z++;
-            }
+            } */
 
             if(ft_builtins(&shell) != 0)
             {
