@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 18:48:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:00:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,27 @@ enum e_TokenType {
 	REDIRECT_TARGET
 };
 
+enum e_CommandType {
+	EXECUTABLE,
+	BUILTIN
+};
+
+enum e_RedirectType {
+	INPUT,
+	OUTPUT,
+	APPEND,
+	HERE_DOC,
+	INVALID
+};
+
+enum e_ValidType {
+	VALID,
+	INVALID_INPUT,
+	INVALID_INPUT_REDIR,
+	INVALID_OUTPUT_REDIR,
+	INVALID_CMD
+};
+
 # define VALID 0
 # define INVALID 1
 
@@ -49,6 +70,15 @@ typedef struct s_command_table {
 	char					**cmd;
 	char					**full_input;
 	char					**full_output;
+	char					*cmd_target;
+	enum e_CommandType		command_type;
+	char					*input_target;
+	enum eRedirectType		*input_type;
+	int						input_fd;
+	char					*output_target;
+	enum e_RedirectType		*output_type;
+	int						output_fd;
+	enum e_ValidType		validity;
 	struct s_command_table	*next;
 }	t_command_table;
 
@@ -83,8 +113,6 @@ void			add_token_end(t_token **list, t_token *new);
 void			clear_lexer_list(t_token **lst);
 void			clear_command_table(t_command_table **lst);
 
-
-
 /// lexer_get_tokens.c
 int				is_valid_bash_char(char c);
 char			*get_pipe_token(char *input, int *start, int *end);
@@ -116,4 +144,10 @@ char			*concatenate_env_substrings(char *left, char *env,
 					char *right, char *string);
 int				is_valid_env_char(char c);
 
+/// executer.c
+void			execute_commands(t_command_table **command_table);
+int				count_pipes(t_command_table **command_table);
+
+/// executer_checker.c
+void			check_input(t_command_table **command_table);
 #endif
