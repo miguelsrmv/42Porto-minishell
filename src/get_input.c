@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 11:28:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:04:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_in_quote(char *input)
 	return (quote_status);
 }
 
-/// Check if only valid characters are being used
+/// Check if only valid characters are being used. Add in error exit here.
 char	*check_valid_input(char *input)
 {
 	return (input);
