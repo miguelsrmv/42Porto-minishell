@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 21:05:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:04:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,26 @@ int	**create_pipes(int **pipe_fd, int pipe_no)
 	return (pipe_fd);
 }
 
-void	create_processes(t_command_table **command_table,
-			t_command_table *current, int command_no)
+t_command_table	*create_processes(t_command_table **command_table,
+		int command_no)
 {
 	int	i;
+	t_command_table *current;
 
+	current = *command_table;
 	i = 0;
 	while (i < command_no)
 	{
 		current->pid = fork();
-		current->command_no = i + 1;
 		if (current->pid == 0)
-			return ;
-		current = current->next;
+			return NULL;
+		current->command_no = i;
 		i++;
+		if (i == command_no)
+			break ;
+		current = current->next;
 	}
+	return (current);
 }
 
 void	close_pipes(int **pipe_fd, t_command_table *current)
@@ -87,8 +92,7 @@ void	prepare_processes(t_command_table **command_table)
 	pipe_no = count_pipes(command_table);
 	pipe_fd = create_pipes(pipe_fd, pipe_no + 1);
 	path_list = get_path_list();
-	current = *command_table;
-	create_processes(command_table, current, pipe_no + 1);
+	current = create_processes(command_table, pipe_no + 1);
 	close_pipes(pipe_fd, current);
 	check_redirections(pipe_fd, &current);
 	check_commands(&current, path_list);

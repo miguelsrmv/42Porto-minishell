@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 21:10:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:51:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,7 @@ int					is_valid_env_char(char c);
 /// executer.c
 int					count_pipes(t_command_table **command_table);
 int					**create_pipes(int **pipe_fd, int pipe_no);
-void				create_processes(t_command_table **command_table,
-						t_command_table *current, int pipe_no);
+t_command_table		*create_processes(t_command_table **current, int pipe_no);
 void				prepare_processes(t_command_table **command_table);
 
 /// executer_input_checker.c
