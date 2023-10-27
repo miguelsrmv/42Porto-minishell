@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 16:20:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:34:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,51 +26,49 @@ enum e_RedirectType	redir_check(char *redir_str)
 		return (INVALID);
 }
 
-void	check_input(t_command_table **cmd_table)
+void	check_input(t_command_table **command)
 {
 	int	i;
 	int	file_fd;
 
 	i = 0;
-	while ((*cmd_table)->full_input[i])
+	while ((*command)->full_input[i])
 	{
-		if (redir_check((*cmd_table)->full_input[i]) != INVALID)
+		if (redir_check((*command)->full_input[i]) != INVALID)
 			i++;
 		else
 		{
-			(*cmd_table)->validity = INVALID_INPUT_REDIR;
+			(*command)->validity = INVALID_INPUT_REDIR;
 			return ;
 		}
-		file_fd = open((*cmd_table)->full_input[i], O_RDONLY);
-		if (file_fd == -1)
+		file_fd = open((*command)->full_input[i], O_RDONLY);
+		if (redir_check((*command)->full_input[i - 1]) == INPUT
+			&& file_fd == -1)
 		{
-			(*cmd_table)->validity = INVALID_INPUT;
+			(*command)->validity = INVALID_INPUT;
 			return ;
 		}
 		close(file_fd);
 		i++;
 	}
-	(*cmd_table)->input_target = ft_strdup((*cmd_table)->full_input[i - 1]);
-	(*cmd_table)->input_type = redir_check((*cmd_table)->full_input[i - 2]);
-	(*cmd_table)->validity = VALID;
+	(*command)->validity = VALID;
 }
 
-void	check_output(t_command_table **cmd_table)
+void	check_output(t_command_table **command)
 {
 	int	i;
 
 	i = 0;
-	while ((*cmd_table)->full_output[i])
+	while ((*command)->full_output[i])
 	{
-		if (redir_check((*cmd_table)->full_output[i]) != INVALID)
+		if (redir_check((*command)->full_output[i]) != INVALID)
 			i++;
 		else
 		{
-			(*cmd_table)->validity = INVALID_OUTPUT_REDIR;
+			(*command)->validity = INVALID_OUTPUT_REDIR;
 			return ;
 		}
 		i++;
 	}
-	(*cmd_table)->output_target = ft_strdup((*cmd_table)->full_output[i - 1]);
-	(*cmd_table)->output_type = redir_check((*cmd_table)->full_output[i - 2]);
+	(*command)->validity = VALID;
 }

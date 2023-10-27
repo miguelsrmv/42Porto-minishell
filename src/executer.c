@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 19:40:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:40:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,78 @@ int	count_pipes(t_command_table **command_table)
 	return (pipe_count);
 }
 
-void	execute_commands(t_command_table **command_table)
+int	**create_pipes(int **pipe_fd, int pipe_no)
 {
-	int				fork_no;
+	pipe_fd = (int **)malloc(sizeof(int *) * (pipe_no + 1));
+	if (!pipe_fd)
+		return pipe_fd ; // Error
+	pipe_fd[pipe_no] = NULL;
+	while ((pipe_no)--)
+	{
+		pipe_fd[pipe_no] = (int *)malloc(sizeof(int) * 2);
+		if (!pipe_fd[pipe_no])
+			return pipe_fd ;	// Error
+		if (pipe(pipe_fd[pipe_no]) == -1)
+			return pipe_fd ;	// Error
+	}
+	return (pipe_fd);
+}
+
+void	create_processes(t_command_table **command_table,
+			t_command_table *current, int command_no)
+{
+	int	i;
+
+	i = 0;
+	while (i < command_no)
+	{
+		current->pid = fork();
+		current->command_no = i + 1;
+		if (current->pid == 0)
+			return ;
+		current = current->next;
+		i++;
+	}
+}
+void	close_pipes(int **pipe_fd, t_command_table *current)
+{
+	int	i;
+
+	i = 0;
+	while (pipe_fd[i])
+	{
+		if (i != current->command_no - 1)
+			close(pipe_fd[i][0]);
+		if (i != current->command_no)
+			close(pipe_fd[i][1]);
+		i++;
+	}
+}
+
+void	prepare_processes(t_command_table **command_table)
+{
+	int				pipe_no;
+	int				**pipe_fd;
+	char			**path_list;
 	t_command_table	*current;
 
-
+	pipe_no = count_pipes(command_table);
+	pipe_fd = create_pipes(pipe_fd, pipe_no + 1);
+	path_list = get_path_list();
+	current = *command_table;
+	create_processes(command_table, current, pipe_no + 1);
+	close_pipes(pipe_fd, current);
+	check_input(&current);
+	check_output(&current);
+	check_commands(&current, path_list);
+	define_redirections(&current);
+	/*
 	current = *command_table;
 	if ((*command_table)->full_input[0])
 		check_input(command_table);
 	if ((*command_table)->full_output[0])
 		check_output(command_table);
 	check_commands(command_table);
-	fork_no = count_pipes(command_table);
+	*/
+
 }

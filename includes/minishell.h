@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 16:26:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:37:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ enum e_RedirectType {
 	OUTPUT,
 	APPEND,
 	HERE_DOC,
+	PIPE,
 	INVALID
 };
 
@@ -83,6 +84,8 @@ typedef struct s_command_table {
 
 	enum e_ValidType		validity;
 
+	int						pid;
+	int						command_no;
 	struct s_command_table	*next;
 }	t_command_table;
 
@@ -150,15 +153,18 @@ int					is_valid_env_char(char c);
 
 /// executer.c
 int					count_pipes(t_command_table **command_table);
-void				execute_commands(t_command_table **command_table);
+int					**create_pipes(int **pipe_fd, int pipe_no);
+void				create_processes(t_command_table **command_table,
+						t_command_table *current, int pipe_no);
+void				prepare_processes(t_command_table **command_table);
 
 /// executer_input_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
-void				check_input(t_command_table **command_table);
-void				check_output(t_command_table **command_table);
+void				check_input(t_command_table **command);
+void				check_output(t_command_table **command);
 
 /// executer_cmd_checker.c
-void				check_commands(t_command_table **command_table);
+void				check_commands(t_command_table **command_table, char **path_list);
 char				**get_path_list(void);
 int					check_builtin(char *command);
 
