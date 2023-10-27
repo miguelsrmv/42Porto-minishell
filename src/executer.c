@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 18:40:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:25:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ void	prepare_processes(t_command_table **command_table)
 	current = *command_table;
 	create_processes(command_table, current, pipe_no + 1);
 	close_pipes(pipe_fd, current);
-	check_input(&current);
-	check_output(&current);
+	check_redirections(pipe_fd, &current);
 	check_commands(&current, path_list);
-	define_redirections(&current);
 	/*
 	current = *command_table;
 	if ((*command_table)->full_input[0])

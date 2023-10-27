@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 18:37:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:35:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ typedef struct s_command_table {
 	char					*output_target;
 	enum e_RedirectType		output_type;
 	int						output_fd;
-
-	enum e_ValidType		validity;
 
 	int						pid;
 	int						command_no;
@@ -159,12 +157,13 @@ void				create_processes(t_command_table **command_table,
 void				prepare_processes(t_command_table **command_table);
 
 /// executer_input_checker.c
-enum e_RedirectType	redir_check(char *redir_str);
-void				check_input(t_command_table **command);
-void				check_output(t_command_table **command);
+enum e_RedirectType				redir_check(char *redir_str);
+enum e_ValidType				check_input(t_command_table **command);
+enum e_ValidType				check_output(t_command_table **command);
 
 /// executer_cmd_checker.c
-void				check_commands(t_command_table **command_table, char **path_list);
+void				check_commands(t_command_table **command_table,
+						char **path_list);
 char				**get_path_list(void);
 int					check_builtin(char *command);
 
