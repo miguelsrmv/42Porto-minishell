@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 19:35:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:10:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ enum e_QuoteType {
 };
 
 enum e_TokenType {
-	PIPE,
+	SEPARATOR,
 	REDIRECT,
 	STRING,
 	REDIRECT_TARGET
@@ -46,6 +46,7 @@ enum e_RedirectType {
 	APPEND,
 	HERE_DOC,
 	PIPE,
+	NONE,
 	INVALID
 };
 
@@ -157,9 +158,11 @@ void				create_processes(t_command_table **command_table,
 void				prepare_processes(t_command_table **command_table);
 
 /// executer_input_checker.c
-enum e_RedirectType				redir_check(char *redir_str);
-enum e_ValidType				check_input(t_command_table **command);
-enum e_ValidType				check_output(t_command_table **command);
+enum e_RedirectType	redir_check(char *redir_str);
+enum e_ValidType	check_input(t_command_table **command);
+enum e_ValidType	check_output(t_command_table **command);
+void				set_redirections(int **pipe_fd, t_command_table **command);
+void				check_redirections(int **pipe_fd, t_command_table **command);
 
 /// executer_cmd_checker.c
 void				check_commands(t_command_table **command_table,

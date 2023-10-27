@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 20:30:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:15:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ enum e_ValidType	check_input(t_command_table **command)
 		(*command)->input_type = redir_check((*command)->full_input[i - 1]);
 		(*command)->input_target = (*command)->full_input[i];
 	}
-	else
+	else if ((*command)->command_no != 1)
 		(*command)->input_type = PIPE;
+	else
+		(*command)->input_type = NONE;
 	return (VALID);
 }
 
@@ -70,8 +72,10 @@ enum e_ValidType	check_output(t_command_table **command)
 		(*command)->output_type = redir_check((*command)->full_output[i - 1]);
 		(*command)->output_target = (*command)->full_output[i];
 	}
-	else
+	else if ((*command)->next)
 		(*command)->output_type = PIPE;
+	else
+		(*command)->output_type = NONE;
 	return (VALID);
 }
 

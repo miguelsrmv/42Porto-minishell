@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 18:37:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:34:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	check_commands(t_command_table **command_table, char **path_list)
 		free(test_command);
 		i++;
 	}
-	(*command_table)->validity = INVALID_CMD;
+	ft_printf("minishell: %s: command not found\n", (*command_table)->cmd[0]);
+	return ; // Error
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 18:48:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:31:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	check_syntax(t_token *lexer_list)
 	current = lexer_list;
 	while (current)
 	{
-		if (current->type == PIPE)
+		if (current->type == SEPARATOR)
 		{
-			if (!current->next || current->next->type == PIPE)
+			if (!current->next || current->next->type == SEPARATOR)
 				return (INVALID);
 		}
 		else if (current->type == REDIRECT)
 		{
-			if (!current->next || current->next->type == PIPE
+			if (!current->next || current->next->type == SEPARATOR
 				|| current->next->type == REDIRECT)
 				return (INVALID);
 		}
@@ -43,7 +43,7 @@ void	set_cmd(t_token *lexer_sublist, t_command_table **command_table,
 
 	i = 0;
 	current = lexer_sublist;
-	while (current && current->type != PIPE)
+	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == STRING)
 			i++;
@@ -54,7 +54,7 @@ void	set_cmd(t_token *lexer_sublist, t_command_table **command_table,
 		exit_error("Malloc error\n", error);
 	i = 0;
 	current = lexer_sublist;
-	while (current && current->type != PIPE)
+	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == STRING)
 			(*command_table)->cmd[i++] = current->token;
@@ -75,10 +75,10 @@ void	create_command_table(t_token *lexer_list,
 	{
 		set_full_redirections(current_token, current_table, error);
 		set_cmd(current_token, current_table, error);
-		while (current_token && current_token->type != PIPE)
+		while (current_token && current_token->type != SEPARATOR)
 			current_token = current_token->next;
 		(*current_table)->next = NULL;
-		if (current_token && current_token->type == PIPE)
+		if (current_token && current_token->type == SEPARATOR)
 		{
 			(*current_table)->next
 				= (t_command_table *)malloc(sizeof(t_command_table));
