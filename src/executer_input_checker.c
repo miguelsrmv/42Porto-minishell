@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 14:38:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:49:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ enum e_ValidType	check_input(t_command_table **command)
 	if ((*command)->command_no != 1 && (*command)->input_type != INPUT
 		&& (*command)->input_type != HERE_DOC)
 		(*command)->input_type = PIPE;
-	if (!*(*command)->full_input && (*command)->input_type != PIPE)
+	if (!(*command)->input_target && (*command)->input_type != PIPE)
 		(*command)->input_type = NONE;
 	return (VALID);
 }
@@ -65,7 +65,7 @@ enum e_ValidType	check_output(t_command_table **command)
 	if ((*command)->next && (*command)->output_type != OUTPUT
 		&& (*command)->output_type != APPEND)
 		(*command)->output_type = PIPE;
-	if (!*(*command)->full_output && (*command)->output_type != PIPE)
+	if (!(*command)->output_target && (*command)->output_type != PIPE)
 		(*command)->output_type = NONE;
 	return (VALID);
 }
