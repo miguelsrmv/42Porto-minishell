@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 14:31:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:14:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	count_redirect_targets(t_token *lexer_sublist)
 
 	i = 0;
 	current = lexer_sublist;
-	while (current && current->type != PIPE)
+	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == REDIRECT)
 			i++;
@@ -43,7 +43,7 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 
 	input_index = 0;
 	output_index = 0;
-	while (current && current->type != PIPE)
+	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == REDIRECT && !ft_strchr(current->token, '\''
 				&& !ft_strchr(current->token, '\"')))
