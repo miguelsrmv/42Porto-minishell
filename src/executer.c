@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 16:15:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:26:55 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,19 @@ void	close_pipes(int **pipe_fd, t_command_table *current)
 	}
 }
 
+void	close_full_pipes(int **pipe_fd)
+{
+	int i;
+
+	i = 0;
+	while (pipe_fd[i])
+	{
+		close(pipe_fd[i][0]);
+		close(pipe_fd[i][1]);
+		i++;
+	}
+}
+
 void	prepare_processes(t_command_table **command_table)
 {
 	int				process_num;
@@ -102,8 +115,9 @@ void	prepare_processes(t_command_table **command_table)
 	pipe_fd = create_pipes(pipe_fd, process_num);
 	path_list = get_path_list();
 	current = create_processes(command_table, process_num);
-	close_pipes(pipe_fd, current);
+//	close_pipes(pipe_fd, current);
 	check_redirections(pipe_fd, &current);
 	check_commands(&current, path_list);
+//	close_full_pipes(pipe_fd);
 	execve(current->cmd_target, current->cmd, NULL);
 }

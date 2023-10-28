@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 15:59:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:30:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,7 @@ void				check_commands(t_command_table **command_table,
 						char **path_list);
 char				**get_path_list(void);
 int					check_builtin(char *command);
+
+void				close_full_pipes(int **pipe_fd);
 
 #endif
