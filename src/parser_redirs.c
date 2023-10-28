@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 18:14:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:42:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,21 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 	}
 }
 
+void	initialize_command_table(t_command_table **command_table)
+{
+	(*command_table)->cmd = NULL;
+	(*command_table)->full_input[0] = NULL;
+	(*command_table)->full_output[0] = NULL;
+	(*command_table)->input_target = NULL;
+	(*command_table)->output_target = NULL;
+	(*command_table)->input_type = NONE;
+	(*command_table)->output_type = NONE;
+	(*command_table)->command_type = EXECUTABLE;
+	(*command_table)->command_no = 0;
+	(*command_table)->pid = 0;
+	(*command_table)->next = NULL;
+}
+
 void	set_full_redirections(t_token *lexer_sublist,
 			t_command_table **command_table, t_error error)
 {
@@ -79,8 +94,7 @@ void	set_full_redirections(t_token *lexer_sublist,
 			* (total_redirects * 2 + 1));
 	if (!(*command_table)->full_input || !(*command_table)->full_output)
 		exit_error("Malloc error\n", error);
-	(*command_table)->full_input[0] = NULL;
-	(*command_table)->full_output[0] = NULL;
+	initialize_command_table(command_table);
 	fill_full_redir(current, command_table);
 	i = 0;
 	while ((*command_table)->full_input[i])

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 18:30:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:40:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,9 @@ t_command_table		*parse_list(t_token *lexer_list, t_error error);
 /// parser_redirs.c
 void				fill_array(char **array, t_token *current, int i);
 int					count_redirect_targets(t_token *lexer_sublist);
+void				fill_full_redir(t_token *current,
+						t_command_table **command_table);
+void				initialize_command_table(t_command_table **command_table);
 void				set_full_redirections(t_token *lexer_sublist,
 						t_command_table **command_table, t_error error);
 
@@ -167,7 +170,5 @@ void				check_commands(t_command_table **command_table,
 						char **path_list);
 char				**get_path_list(void);
 int					check_builtin(char *command);
-
-void				close_full_pipes(int **pipe_fd);
 
 #endif

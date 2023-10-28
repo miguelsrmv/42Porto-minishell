@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 18:45:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:24:57 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,10 @@ void	set_redirections(int **pipe_fd, t_command_table **command)
 		(*command)->output_fd = pipe_fd[(*command)->command_no - 1][1];
 	if ((*command)->output_type != NONE)
 		dup2((*command)->output_fd, STDOUT_FILENO);
-/*	if ((*command)->command_no > 1)
+	if ((*command)->command_no > 1)
 		close(pipe_fd[(*command)->command_no - 2][0]);
 	if ((*command)->next)
-		close(pipe_fd[(*command)->command_no - 1][1]);*/
-	close_full_pipes(pipe_fd);
+		close(pipe_fd[(*command)->command_no - 1][1]);
 }
 
 void	check_redirections(int **pipe_fd, t_command_table **command)
