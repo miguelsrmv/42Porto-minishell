@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 21:15:22 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 10:21:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ enum e_ValidType	check_output(t_command_table **command)
 			return (INVALID_OUTPUT_REDIR);
 		i++;
 	}
+	i--;
 	if ((*command)->full_output[i])
 	{
 		(*command)->output_type = redir_check((*command)->full_output[i - 1]);
@@ -85,7 +86,7 @@ void	set_redirections(int **pipe_fd, t_command_table **command)
 		(*command)->input_fd = open((*command)->input_target, O_RDONLY);
 	else if ((*command)->input_type == PIPE)
 	{
-		(*command)->input_fd = pipe_fd[(*command)->command_no - 1][0];
+		(*command)->input_fd = pipe_fd[(*command)->command_no - 2][0];
 		dup2((*command)->input_fd, STDIN_FILENO);
 	}
 	if ((*command)->output_type == OUTPUT)
@@ -96,11 +97,13 @@ void	set_redirections(int **pipe_fd, t_command_table **command)
 				O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if ((*command)->output_type == PIPE)
 	{
-		(*command)->output_fd = pipe_fd[(*command)->command_no][1];
+		(*command)->output_fd = pipe_fd[(*command)->command_no - 1][1];
 		dup2((*command)->output_fd, STDOUT_FILENO);
 	}
-	close(pipe_fd[(*command)->command_no - 1][0]);
-	close(pipe_fd[(*command)->command_no][1]);
+	if ((*command)->command_no > 1)
+		close(pipe_fd[(*command)->command_no - 2][0]);
+	if ((*command)->next)
+		close(pipe_fd[(*command)->command_no - 1][1]);
 }
 
 void	check_redirections(int **pipe_fd, t_command_table **command)
