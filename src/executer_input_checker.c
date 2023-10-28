@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 12:40:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:38:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ enum e_RedirectType	redir_check(char *redir_str)
 enum e_ValidType	check_input(t_command_table **command)
 {
 	int	i;
-	int	file_fd;
 
 	i = 0;
 	while ((*command)->full_input[i])

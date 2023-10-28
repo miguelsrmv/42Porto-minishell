@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 12:12:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:32:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*expand_env(char *string)
 	return (string);
 }
 
-void	expand_double_vector(t_command_table **command_table, char **vector)
+void	expand_double_vector(char **vector)
 {
 	int				i;
 	char			*temp;
@@ -99,9 +99,9 @@ void	expand_command_table(t_command_table **command_table)
 	current = *command_table;
 	while (current)
 	{
-		expand_double_vector(command_table, current->cmd);
-		expand_double_vector(command_table, current->full_input);
-		expand_double_vector(command_table, current->full_output);
+		expand_double_vector(current->cmd);
+		expand_double_vector(current->full_input);
+		expand_double_vector(current->full_output);
 		current = current->next;
 	}
 }

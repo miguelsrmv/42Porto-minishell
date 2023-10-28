@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 10:16:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:32:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ typedef struct s_error {
 	t_command_table	*command_table;
 }	t_error;
 
-// Function definitions
 
+// Function definitions
 /// Helper functions
 void				exit_error(char *error_message, t_error error);
 void				print_lexer_tokens(t_token *head);
@@ -132,16 +132,14 @@ void				create_command_table(t_token *lexer_list,
 t_command_table		*parse_list(t_token *lexer_list, t_error error);
 
 /// parser_redirs.c
-void				fill_array(char **array, t_token *current,
-						t_command_table **command_table, int i);
+void				fill_array(char **array, t_token *current, int i);
 int					count_redirect_targets(t_token *lexer_sublist);
 void				set_full_redirections(t_token *lexer_sublist,
 						t_command_table **command_table, t_error error);
 
 /// expander.c
 void				expand_command_table(t_command_table **command_table);
-void				expand_double_vector(t_command_table **command_table,
-						char **vector);
+void				expand_double_vector(char **vector);
 char				*expand_env(char *string);
 char				*concatenate_env_substrings(char *left, char *env,
 						char *right, char *string);

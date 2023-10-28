@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 09:28:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:39:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	prepare_processes(t_command_table **command_table)
 	t_command_table	*current;
 
 	process_num = count_processes(command_table);
+	pipe_fd = NULL;
 	pipe_fd = create_pipes(pipe_fd, process_num);
 	path_list = get_path_list();
 	current = create_processes(command_table, process_num);

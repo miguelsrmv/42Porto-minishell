@@ -6,14 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 18:48:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:31:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_array(char **array, t_token *current,
-			t_command_table **command_table, int i)
+void	fill_array(char **array, t_token *current, int i)
 {
 	array[i] = current->token;
 	array[i + 1] = current->next->token;
@@ -52,13 +51,12 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 			if (ft_strchr(current->token, '>'))
 			{
 				fill_array((*command_table)->full_output, current,
-					command_table, output_index);
+					output_index);
 				output_index = output_index + 2;
 			}
 			if (ft_strchr(current->token, '<'))
 			{
-				fill_array((*command_table)->full_input, current,
-					command_table, input_index);
+				fill_array((*command_table)->full_input, current, input_index);
 				input_index = input_index + 2;
 			}
 		}

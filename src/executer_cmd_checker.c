@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/27 20:34:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:39:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	check_builtin(char *command)
 {
+	if (ft_strcmp(command, "echo12345") == 0)
+		return (1);
 	return (0);
 }
 
