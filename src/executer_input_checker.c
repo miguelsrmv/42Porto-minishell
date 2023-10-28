@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 11:57:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 12:40:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,17 @@ enum e_ValidType	check_input(t_command_table **command)
 	while ((*command)->full_input[i])
 	{
 		if (redir_check((*command)->full_input[i]) != INVALID)
-			i++;
+			(*command)->input_type = redir_check((*command)->full_input[i++]);
 		else
 			return (INVALID_INPUT_REDIR);
 		if (access((*command)->full_input[i], F_OK) != 0)
 			return (INVALID_INPUT);
-		i++;
+		(*command)->input_target = (*command)->full_input[i++];
 	}
-	i--;
-	if ((*command)->full_input[i])
-	{
-		(*command)->input_type = redir_check((*command)->full_input[i - 1]);
-		(*command)->input_target = (*command)->full_input[i];
-	}
-	else if ((*command)->command_no != 1)
+	if ((*command)->command_no != 1 && (*command)->input_type != INPUT
+		&& (*command)->input_type != HERE_DOC)
 		(*command)->input_type = PIPE;
-	else
+	if (!*(*command)->full_input && (*command)->input_type != PIPE)
 		(*command)->input_type = NONE;
 	return (VALID);
 }
@@ -63,20 +58,15 @@ enum e_ValidType	check_output(t_command_table **command)
 	while ((*command)->full_output[i])
 	{
 		if (redir_check((*command)->full_output[i]) != INVALID)
-			i++;
+			(*command)->output_type = redir_check((*command)->full_output[i++]);
 		else
 			return (INVALID_OUTPUT_REDIR);
-		i++;
+		(*command)->output_target = (*command)->full_output[i++];
 	}
-	i--;
-	if ((*command)->full_output[i])
-	{
-		(*command)->output_type = redir_check((*command)->full_output[i - 1]);
-		(*command)->output_target = (*command)->full_output[i];
-	}
-	else if ((*command)->next)
+	if ((*command)->next && (*command)->output_type != OUTPUT
+		&& (*command)->output_type != APPEND)
 		(*command)->output_type = PIPE;
-	else
+	if (!*(*command)->full_output && (*command)->output_type != PIPE)
 		(*command)->output_type = NONE;
 	return (VALID);
 }
