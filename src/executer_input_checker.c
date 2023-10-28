@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 10:52:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:24:57 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_valid_redir(char *redir_str)
+enum e_RedirectType	redir_check(char *redir_str)
 {
 	if (ft_strlen(redir_str) == 1 && !ft_strncmp("<", redir_str, 1))
 		return (INPUT);
@@ -26,51 +26,92 @@ int	is_valid_redir(char *redir_str)
 		return (INVALID);
 }
 
-void	check_input(t_command_table **command_table)
+enum e_ValidType	check_input(t_command_table **command)
 {
 	int	i;
-	int	file_fd;
 
 	i = 0;
-	while (full_input[i])
+	while ((*command)->full_input[i])
 	{
-		if (is_valid_redir(full_input[i]) != INVALID)
-			i++;
+		if (redir_check((*command)->full_input[i]) != INVALID)
+			(*command)->input_type = redir_check((*command)->full_input[i++]);
 		else
-		{
-			(*command_table)->validity = INVALID_INPUT_REDIR;
-			return ;
-		}
-		file_fd = open(full_input[i], O_RDONLY);
-		if (file_fd == -1)
-		{
-			(*command_table)->validity = INVALID_INPUT;
-			return ;
-		}
-		close(file_fd);
-		i++;
+			return (INVALID_INPUT_REDIR);
+		if (access((*command)->full_input[i], F_OK) != 0)
+			return (INVALID_INPUT);
+		(*command)->input_target = (*command)->full_input[i++];
 	}
-	(*command_table)->input_target = ft_strdup(full_input[i - 1]);
-	(*command_table)->input_type = is_valid_redir(full_input[i - 2]);
-	(*command_table)->validity = VALID;
+	if ((*command)->command_no != 1 && (*command)->input_type != INPUT
+		&& (*command)->input_type != HERE_DOC)
+		(*command)->input_type = PIPE;
+	if (!(*command)->input_target && (*command)->input_type != PIPE)
+		(*command)->input_type = NONE;
+	return (VALID);
 }
 
-void	check_output(t_command_table **command_table)
+enum e_ValidType	check_output(t_command_table **command)
 {
 	int	i;
 
 	i = 0;
-	while (full_output[i])
+	while ((*command)->full_output[i])
 	{
-		if (is_valid_redir(full_output[i]) != INVALID)
-			i++;
+		if (redir_check((*command)->full_output[i]) != INVALID)
+			(*command)->output_type = redir_check((*command)->full_output[i++]);
 		else
-		{
-			(*command_table)->validity = INVALID_OUTPUT_REDIR;
-			return ;
-		}
-		i++;
+			return (INVALID_OUTPUT_REDIR);
+		(*command)->output_target = (*command)->full_output[i++];
 	}
-	(*command_table)->output_target = ft_strdup(full_output[i - 1]);
-	(*command_table)->output_type = is_valid_redir(full_output[i - 2]);
+	if ((*command)->next && (*command)->output_type != OUTPUT
+		&& (*command)->output_type != APPEND)
+		(*command)->output_type = PIPE;
+	if (!(*command)->output_target && (*command)->output_type != PIPE)
+		(*command)->output_type = NONE;
+	return (VALID);
+}
+
+void	set_redirections(int **pipe_fd, t_command_table **command)
+{
+	if ((*command)->input_type == INPUT || (*command)->input_type == HERE_DOC)
+		(*command)->input_fd = open((*command)->input_target, O_RDONLY);
+	else if ((*command)->input_type == PIPE)
+		(*command)->input_fd = pipe_fd[(*command)->command_no - 2][0];
+	if ((*command)->input_type != NONE)
+		dup2((*command)->input_fd, STDIN_FILENO);
+	if ((*command)->output_type == OUTPUT)
+		(*command)->output_fd = open((*command)->output_target,
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if ((*command)->output_type == APPEND)
+		(*command)->output_fd = open((*command)->output_target,
+				O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else if ((*command)->output_type == PIPE)
+		(*command)->output_fd = pipe_fd[(*command)->command_no - 1][1];
+	if ((*command)->output_type != NONE)
+		dup2((*command)->output_fd, STDOUT_FILENO);
+	if ((*command)->command_no > 1)
+		close(pipe_fd[(*command)->command_no - 2][0]);
+	if ((*command)->next)
+		close(pipe_fd[(*command)->command_no - 1][1]);
+}
+
+void	check_redirections(int **pipe_fd, t_command_table **command)
+{
+	enum e_ValidType	input_status;
+	enum e_ValidType	output_status;
+
+	input_status = check_input(command);
+	output_status = check_output(command);
+	if (input_status == VALID && output_status == VALID)
+	{
+		set_redirections(pipe_fd, command);
+		return ;
+	}
+	else if (input_status == INVALID_INPUT_REDIR)
+		ft_printf("Minishell: syntax error near unexpected token\n");
+	else if (input_status == INVALID_INPUT)
+		ft_printf("Minishell: %s: No such file or directory\n",
+			(*command)->input_target);
+	else if (output_status == INVALID_OUTPUT_REDIR)
+		ft_printf("Minishell: syntax error near unexpected token\n");
+	return ; // Error handling
 }

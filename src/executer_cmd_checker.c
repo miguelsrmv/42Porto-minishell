@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 11:05:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:34:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,69 +14,62 @@
 
 int	check_builtin(char *command)
 {
+	if (ft_strcmp(command, "echo12345") == 0)
+		return (1);
 	return (0);
 }
 
-void	test_comamnds(char **path_list, char *command,
-			t_command_table **command_table)
+char	**get_path_list(void)
 {
+	char	**path_list;
 	int		i;
-	char	*test_command;
-	char	rel_abs_path[2];
+	char	**result;
+	char	*temp;
 
+	path_list = ft_split(getenv("PATH"), ':');
+	i = 0;
+	while (path_list[i])
+		i++;
+	result = (char **)malloc(sizeof(char *) * (i + 3));
+	result[0] = ft_strdup("./");
+	temp = getcwd(NULL, 0);
+	result[1] = ft_strjoin(temp, "/");
+	free(temp);
 	i = 0;
 	while (path_list[i])
 	{
-		test_command = ft_strjoin(path_list[i], command);
-		if (access(test_command, F_OK | X_OK) == 0)
-		{
-			(*command_table)->cmd_target = test_comamnd;
-			return ;
-		}
-		free(test_command);
+		temp = ft_strjoin(path_list[i], "/");
+		result[i + 2] = ft_strdup(temp);
+		free(temp);
 		i++;
 	}
-	rel_abs_path[0] = ".";
-	rel_abs_path[1] = getcwd(NULL, 0);
-	i = 0;
-	while (rel_abs_path[i])
-	{
-		test_command = ft_strjoin(rel_abs_path[i], command);
-		if (access(test_command, F_OK | X_OK) == 0)
-		{
-			(*command_table)->cmd_target = test_comamnd;
-			return ;
-		}
-		free(test_command);
-		i++;
-	}
-	(*command_table)->validity = INVALID_CMD;
+	result[i + 2] = NULL;
+	ft_free_tabs((void **)path_list);
+	return (result);
 }
 
-void	check_commands(t_command_table **command_table)
+void	check_commands(t_command_table **command_table, char **path_list)
 {
-	char	*command;
-	char	*current_dir;
-	char	**path_list;
-	char	*temp;
+	char	*test_command;
+	int		i;
 
-	if (check_builtin(command_table->cmd[0]))
+	if (check_builtin((*command_table)->cmd[0]))
+	{
 		return ;
-	else if ((*command_table)->cmd[0][0] == '.')
-	{
-		current_dir = getcwd(NULL, 0);
-		command = ft_strjoin(current_dir, (*command_table)->cmd[0] + 1);
-		free(current_dir);
 	}
-	else
+	i = 0;
+	while (path_list[i])
 	{
-		command = ft_strdup((*command_table)->cmd[0]);
-		temp = command;
-		command = ft_strjoin("/", (*command_table)->cmd_target);
-		free(temp);
-		path_list = ft_split(getenv("PATH"), ':');
+		test_command = ft_strjoin(path_list[i], (*command_table)->cmd[0]);
+		if (access(test_command, F_OK | X_OK) == 0)
+		{
+			(*command_table)->cmd_target = test_command;
+			(*command_table)->command_type = EXECUTABLE;
+			return ;
+		}
+		free(test_command);
+		i++;
 	}
-	test_commands(path_list, command, command_table);
-	free(command);
-	ft_free_tabs((void **)path_list);
+	ft_printf("minishell: %s: command not found\n", (*command_table)->cmd[0]);
+	return ; // Error
 }

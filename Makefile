@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/10/25 12:01:05 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/10/28 21:00:46 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=   minishell
 
 CC      = 	cc
 
-CFLAGS   =  -g #-Wall -Wextra -Werror
+CFLAGS   =  -g -Wall -Wextra -Werror
 
 SRCDIR	=	src
 
@@ -27,7 +27,8 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
 SRC		=	main.c get_input.c lexer.c lexer_linked_list.c lexer_get_tokens.c \
-			parser.c parser_redirs.c expander.c helper_functions.c
+			parser.c parser_redirs.c expander.c executer.c executer_input_checker.c \
+			executer_cmd_checker.c helper_functions.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

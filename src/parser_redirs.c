@@ -6,14 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 18:48:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:42:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_array(char **array, t_token *current,
-			t_command_table **command_table, int i)
+void	fill_array(char **array, t_token *current, int i)
 {
 	array[i] = current->token;
 	array[i + 1] = current->next->token;
@@ -28,7 +27,7 @@ int	count_redirect_targets(t_token *lexer_sublist)
 
 	i = 0;
 	current = lexer_sublist;
-	while (current && current->type != PIPE)
+	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == REDIRECT)
 			i++;
@@ -44,7 +43,7 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 
 	input_index = 0;
 	output_index = 0;
-	while (current && current->type != PIPE)
+	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == REDIRECT && !ft_strchr(current->token, '\''
 				&& !ft_strchr(current->token, '\"')))
@@ -52,18 +51,32 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 			if (ft_strchr(current->token, '>'))
 			{
 				fill_array((*command_table)->full_output, current,
-					command_table, output_index);
+					output_index);
 				output_index = output_index + 2;
 			}
 			if (ft_strchr(current->token, '<'))
 			{
-				fill_array((*command_table)->full_input, current,
-					command_table, input_index);
+				fill_array((*command_table)->full_input, current, input_index);
 				input_index = input_index + 2;
 			}
 		}
 		current = current->next;
 	}
+}
+
+void	initialize_command_table(t_command_table **command_table)
+{
+	(*command_table)->cmd = NULL;
+	(*command_table)->full_input[0] = NULL;
+	(*command_table)->full_output[0] = NULL;
+	(*command_table)->input_target = NULL;
+	(*command_table)->output_target = NULL;
+	(*command_table)->input_type = NONE;
+	(*command_table)->output_type = NONE;
+	(*command_table)->command_type = EXECUTABLE;
+	(*command_table)->command_no = 0;
+	(*command_table)->pid = 0;
+	(*command_table)->next = NULL;
 }
 
 void	set_full_redirections(t_token *lexer_sublist,
@@ -81,8 +94,7 @@ void	set_full_redirections(t_token *lexer_sublist,
 			* (total_redirects * 2 + 1));
 	if (!(*command_table)->full_input || !(*command_table)->full_output)
 		exit_error("Malloc error\n", error);
-	(*command_table)->full_input[0] = NULL;
-	(*command_table)->full_output[0] = NULL;
+	initialize_command_table(command_table);
 	fill_full_redir(current, command_table);
 	i = 0;
 	while ((*command_table)->full_input[i])
