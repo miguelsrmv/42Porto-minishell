@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 14:39:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:15:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,17 @@ t_command_table	*create_processes(t_command_table **command_table,
 	t_command_table	*current;
 
 	current = *command_table;
-	i = 0;
+	i = 1;
 	while (i < command_no)
 	{
 		current->pid = fork();
-		if (current->pid == 0)
-			return (NULL);
-		current->command_no = i + 1;
+		current->command_no = i;
+		if (current->pid != 0)
+			return (current);
 		i++;
-		if (i == command_no)
-			break ;
 		current = current->next;
 	}
+	current->command_no = i;
 	return (current);
 }
 
@@ -86,11 +85,19 @@ void	close_pipes(int **pipe_fd, t_command_table *current)
 void	prepare_processes(t_command_table **command_table)
 {
 	int				process_num;
+	int				pid;
 	int				**pipe_fd;
 	char			**path_list;
 	t_command_table	*current;
 
 	process_num = count_processes(command_table);
+	pid = fork();
+	if (pid != 0)
+	{
+		while (process_num--)
+			wait(NULL);
+		return ;
+	}
 	pipe_fd = NULL;
 	pipe_fd = create_pipes(pipe_fd, process_num);
 	path_list = get_path_list();
