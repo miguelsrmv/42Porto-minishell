@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 16:07:59 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:12:54 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_minishell {
 	int fd_output;
 	char *pwd;
 	char **env;
+	char **new_env;
 }	t_minishell;
 
 typedef struct s_split_numbers {
@@ -59,11 +60,16 @@ void	ft_init_struct(t_minishell *shell);
 char    *ft_strtok(char *str, char *a);
 int 	minishell_pwd(char **args);
 int 	minishell_exit(char **args); 
-int     ft_builtins(t_minishell *shell);
 int 	minishell_env(char **env);
-char 	**sort_env(char **env);
-int 	minishell_export(char **args, char **env); 
 
+
+/*Builtins*/
+int     ft_builtins(t_minishell *shell);
+int     minishell_export(t_minishell *shell);
+char    *env_to_str(char **new_env);
+int     str_env_len(char **env);
+void    sort_env(char **tab, int env_len);
+void    print_sorted_env(char **new_env);
 
 //void    execute_pwd(char *str);
 

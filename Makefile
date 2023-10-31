@@ -6,7 +6,7 @@
 #    By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/10/25 15:40:08 by bmota-si         ###   ########.fr        #
+#    Updated: 2023/10/30 15:07:12 by bmota-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
-SRC		=	main2.c ft_command_split.c ft_init_struct.c builtins.c ft_strtok.c
+SRC		=	main2.c ft_command_split.c ft_init_struct.c builtins/builtins.c ft_strtok.c \
+	builtins/export.c \
+
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

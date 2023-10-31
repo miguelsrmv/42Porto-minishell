@@ -34,11 +34,26 @@
 
 } */
 
+char    **dupenv(char **env)
+{
+    int i = 0;
+    char **tab;
+
+    tab = malloc(sizeof(char *) * str_env_len(env));
+    while(i < str_env_len(env))
+    {
+        tab[i] = ft_strdup(env[i]);
+        i++;
+    }
+    return (tab);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
     t_minishell shell;
     char *buffer;
     shell.env = envp;
+    shell.new_env = dupenv(shell.env);
 
     while(true)
     {
