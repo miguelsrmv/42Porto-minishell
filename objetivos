@@ -1,0 +1,2 @@
+objetivo e colocar "" no texto depois do '=' no comando export
+Pensei em fazer com 2 strings onde uma coloco o texto ate ao '=' e outra coloco o resto mas com "".

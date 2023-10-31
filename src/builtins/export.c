@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:48:14 by bmota-si          #+#    #+#             */
-/*   Updated: 2023/10/31 16:30:37 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:22:11 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    put_quotes(char **tab, char c)
 {
-    
+    char 
 }
 
 int     str_env_len(char **env)
