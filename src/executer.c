@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 20:23:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:04:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	close_pipes(int **pipe_fd, t_command_table *current)
 	}
 }
 
-void	prepare_processes(t_command_table **command_table)
+void	prepare_processes(t_command_table **command_table, char **envp)
 {
 	int				process_num;
 	int				pid;
@@ -105,5 +105,5 @@ void	prepare_processes(t_command_table **command_table)
 	close_pipes(pipe_fd, current);
 	check_redirections(pipe_fd, &current);
 	check_commands(&current, path_list);
-	execve(current->cmd_target, current->cmd, NULL);
+	execve(current->cmd_target, current->cmd, envp);
 }

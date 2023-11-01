@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 21:40:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:55:00 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+
+# define squote '\''
+# define dquote '\"'
 
 enum e_QuoteType {
 	OUT_QUOTE,
@@ -123,7 +126,6 @@ int					is_valid_bash_char(char c);
 char				*get_pipe_token(char *input, int *start, int *end);
 char				*get_string_token(char *input, int *start, int *end);
 char				*get_redirect_token(char *input, int *start, int *end);
-char				*get_quote_token(char *input, int *start, int *end);
 
 /// parser.c
 int					check_syntax(t_token *lexer_list);
@@ -155,7 +157,7 @@ int					count_processes(t_command_table **command_table);
 int					**create_pipes(int **pipe_fd, int process_num);
 t_command_table		*create_processes(t_command_table **current,
 						int process_num);
-void				prepare_processes(t_command_table **command_table);
+void				prepare_processes(t_command_table **command_table, char **envp);
 
 /// executer_input_checker.c
 enum e_RedirectType	redir_check(char *redir_str);

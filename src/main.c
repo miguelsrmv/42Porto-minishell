@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 19:40:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:04:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_list(t_token *head)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **envp)
 {
 	t_token			*lexer_list;
 	t_command_table	*command_table;
@@ -40,5 +40,6 @@ int	main(void)
 	lexer_list = read_readline(error);
 	command_table = parse_list(lexer_list, error);
 	expand_command_table(&command_table);
-	prepare_processes(&command_table);
+	prepare_processes(&command_table, envp);
+	return (argc);
 }

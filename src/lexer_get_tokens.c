@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_get_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 15:19:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:54:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,7 @@ char	*get_pipe_token(char *input, int *start, int *end)
 	return (ft_strndup(&input[*start], (*end - *start)));
 }
 
-char	*get_string_token(char *input, int *start, int *end)
-{
-	*end = *start;
-	while (is_valid_bash_char(input[*end]) && input[*end])
-		(*end)++;
-	return (ft_strndup(&input[*start], (*end - *start)));
-}
+
 
 char	*get_redirect_token(char *input, int *start, int *end)
 {
@@ -45,6 +39,53 @@ char	*get_redirect_token(char *input, int *start, int *end)
 		(*end)++;
 	result = ft_strndup(&input[*start], (*end - *start));
 	return (result);
+}
+
+char	*get_string_token(char *input, int *start, int *end)
+{
+	char	*result;
+	char	quote_status;
+
+	*end = *start;
+	quote_status = '\0';
+	if (ft_isquote(input[*end]))
+	{
+		quote_status = input[*end];
+		(*end)++;
+	}
+	while((!ft_isspace(input[*end]) || quote_status) && input[*end])
+	{
+		if (quote_status)
+		{
+			(*end)++;
+			while ((input[*end] != quote_status) && input[*end])
+				(*end)++;
+		}
+		quote_status = '\0';
+		if (!quote_status)
+		{
+			while (!ft_isspace(input[*end]) && !quote_status && input[*end])
+			{
+				(*end)++;
+				if (ft_isquote(input[*end]))
+					quote_status = input[*end];
+			}
+		}
+	}
+	result = ft_strndup(&input[*start], (*end - *start));
+	return (result);
+}
+
+/*
+
+CODIGO VELHO!
+
+char	*get_string_token(char *input, int *start, int *end)
+{
+	*end = *start;
+	while (is_valid_bash_char(input[*end]) && input[*end])
+		(*end)++;
+	return (ft_strndup(&input[*start], (*end - *start)));
 }
 
 char	*get_quote_token(char *input, int *start, int *end)
@@ -60,3 +101,5 @@ char	*get_quote_token(char *input, int *start, int *end)
 	result = ft_strndup(&input[*start], (*end - *start));
 	return (result);
 }
+
+*/
