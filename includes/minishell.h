@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/01 10:55:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:22:51 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void				clear_command_table(t_command_table **lst);
 int					is_valid_bash_char(char c);
 char				*get_pipe_token(char *input, int *start, int *end);
 char				*get_string_token(char *input, int *start, int *end);
+void				advance_until_unquoted_whitespace(char *input, int *end, char quote_status);
 char				*get_redirect_token(char *input, int *start, int *end);
 
 /// parser.c
