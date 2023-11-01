@@ -16,3 +16,10 @@ mde-sa--"mde-sa--
 minishell: 
 
 
+echo $'USE'R
+
+
+echo $'USER'
+
+echo "$USER'$USER'"
+mde-sa--'$USER'

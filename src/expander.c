@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/01 13:15:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:22:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,58 +37,63 @@ char	*concatenate_env_substrings(char *left, char *env, char *right,
 	return (result);
 }
 
-char	*expand_env(char *string)
+char	*expand_env(char *string, int start)
 {
 	char	*left;
 	char	*env;
 	char	*right;
 	int		i;
 
-	i = 0;
-	while (string && string[i])
-	{
-		if (string[i] == '$')
-		{
-			left = ft_substr(string, 0, i);
-			i++;
-			while (is_valid_env_char(string[i]) && string[i])
-				i++;
-			env = ft_substr(string, ft_strlen(left) + 1,
-					i - ft_strlen(left) - 1);
-			right = ft_substr(string, i, ft_strlen(string) - i);
-			string = concatenate_env_substrings(left, env, right, string);
-			i = -1;
-		}
+	i = start;
+	left = ft_substr(string, 0, i);
+	i++;
+	while (is_valid_env_char(string[i]) && string[i])
 		i++;
-	}
+	env = ft_substr(string, ft_strlen(left) + 1,
+		i - ft_strlen(left) - 1);
+	right = ft_substr(string, i, ft_strlen(string) - i);
+	string = concatenate_env_substrings(left, env, right, string);
+	i = -1;
 	return (string);
 }
-
 void	expand_double_vector(char **vector)
 {
-	int				i;
-	char			*temp;
+	int		vector_i;
+	int		i;
+	char	quote_status;
 
-	i = 0;
-	while (vector[i])
+	vector_i = 0;
+	while (vector[vector_i])
 	{
-		if (ft_strchr(vector[i], '$') && vector[i][0] != '\'')
+		i = 0;
+		quote_status = '\0';
+		if ((vector[vector_i])[i] == squote)
 		{
-			if (vector[i][0] == '\"')
-			{
-				temp = vector[i];
-				vector[i] = ft_substr(vector[i], 1, ft_strlen(vector[i]) - 2);
-				free(temp);
-			}
-			vector[i] = expand_env(vector[i]);
+			quote_status = vector[vector_i][i];
+			i++;
 		}
-	/*	else if (vector[i][0] == '\'' || vector[i][0] == '\"')
+		while ((vector[vector_i])[i])
 		{
-			temp = vector[i];
-			vector[i] = ft_substr(vector[i], 1, ft_strlen(vector[i]) - 2);
-			free(temp);
-		}*/
-		i++;
+			if (quote_status == squote)
+			{
+				while (vector[vector_i][i] != quote_status && vector[vector_i][i])
+					i++;
+				quote_status = '\0';
+				i++;
+			}
+			else
+			{
+				while (quote_status != squote && (vector[vector_i][i]))
+				{
+					if (vector[vector_i][i] == '$')
+						vector[vector_i] = expand_env(vector[vector_i], i);
+					else if (vector[vector_i][i] == squote)
+						quote_status = vector[vector_i][i];
+					i++;
+				}
+			}
+		}
+		vector_i++;
 	}
 }
 
@@ -110,13 +115,13 @@ void	contract_double_vector(char **vector)
 		quote_status = '\0';
 		i = 0;
 		j = 0;
-		if (ft_isquote((vector[vector_i])[i]))
-		{
-			quote_status = vector[vector_i][i];
-			i++;
-		}
 		while ((vector[vector_i])[i])
 		{
+			if (ft_isquote((vector[vector_i])[i]))
+			{
+				quote_status = vector[vector_i][i];
+				i++;
+			}
 			if (quote_status)
 			{
 				while (vector[vector_i][i] != quote_status && vector[vector_i][i])
@@ -124,7 +129,7 @@ void	contract_double_vector(char **vector)
 				quote_status = '\0';
 				i++;
 			}
-			if (!quote_status)
+			else if (!quote_status)
 			{
 				while (!quote_status && (vector[vector_i][i]))
 				{

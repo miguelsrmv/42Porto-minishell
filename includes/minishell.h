@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/01 11:22:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:11:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void				set_full_redirections(t_token *lexer_sublist,
 /// expander.c
 void				expand_command_table(t_command_table **command_table);
 void				expand_double_vector(char **vector);
-char				*expand_env(char *string);
+char				*expand_env(char *string, int start);
 char				*concatenate_env_substrings(char *left, char *env,
 						char *right, char *string);
 int					is_valid_env_char(char c);
