@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 14:32:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:15:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,64 @@ void	expand_double_vector(char **vector)
 			}
 			vector[i] = expand_env(vector[i]);
 		}
-		else if (vector[i][0] == '\'' || vector[i][0] == '\"')
+	/*	else if (vector[i][0] == '\'' || vector[i][0] == '\"')
 		{
 			temp = vector[i];
 			vector[i] = ft_substr(vector[i], 1, ft_strlen(vector[i]) - 2);
 			free(temp);
-		}
+		}*/
 		i++;
+	}
+}
+
+void	contract_double_vector(char **vector)
+{
+	int		vector_i;
+	int		i;
+	int		j;
+	char	quote_status;
+	char	*result;
+	char	*temp;
+
+	vector_i = 0;
+	while (vector[vector_i])
+	{
+		result = (char *)malloc(sizeof(vector[vector_i]));
+		if (!result)
+			return ;
+		quote_status = '\0';
+		i = 0;
+		j = 0;
+		if (ft_isquote((vector[vector_i])[i]))
+		{
+			quote_status = vector[vector_i][i];
+			i++;
+		}
+		while ((vector[vector_i])[i])
+		{
+			if (quote_status)
+			{
+				while (vector[vector_i][i] != quote_status && vector[vector_i][i])
+					result[j++] = vector[vector_i][i++];
+				quote_status = '\0';
+				i++;
+			}
+			if (!quote_status)
+			{
+				while (!quote_status && (vector[vector_i][i]))
+				{
+					result[j++] = vector[vector_i][i++];
+					if (ft_isquote(vector[vector_i][i]))
+						quote_status = vector[vector_i][i];
+				}
+			}
+		}
+		j++;
+		result[j] = '\0';
+		temp = vector[vector_i];
+		vector[vector_i] = result;
+		free(temp);
+		vector_i++;
 	}
 }
 
@@ -100,8 +151,11 @@ void	expand_command_table(t_command_table **command_table)
 	while (current)
 	{
 		expand_double_vector(current->cmd);
+		contract_double_vector(current->cmd);
 		expand_double_vector(current->full_input);
+		contract_double_vector(current->full_input);
 		expand_double_vector(current->full_output);
+		contract_double_vector(current->full_output);
 		current = current->next;
 	}
 }

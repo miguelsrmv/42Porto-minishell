@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/25 21:38:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:24:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_input(char *prompt)
 	input = readline(prompt);
 	while (check_in_quote(input) != OUT_QUOTE)
 	{
-		added_input = readline(">");
+		added_input = readline("> ");
 		temp = input;
 		input = ft_strjoin(input, added_input);
 		free(temp);
