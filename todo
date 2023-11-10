@@ -23,3 +23,5 @@ echo $'USER'
 
 echo "$USER'$USER'"
 mde-sa--'$USER'
+
+echo "'$USER'" 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/01 15:11:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/10 10:14:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void				initialize_command_table(t_command_table **command_table);
 void				set_full_redirections(t_token *lexer_sublist,
 						t_command_table **command_table, t_error error);
 
-/// expander.c
+/// expander_env.c
 void				expand_command_table(t_command_table **command_table);
 void				expand_double_vector(char **vector);
 char				*expand_env(char *string, int start);
