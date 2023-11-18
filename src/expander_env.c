@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/15 11:05:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/18 18:32:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,65 @@ int	is_valid_env_char(char c)
 	return (0);
 }
 
+// Além da expansão, fazer concatenate de left + esta substring + right e atualizar *start!!!....
+void	expand(char **string, int *start, char *quote_flag)
+{
+	if (!(*string)[(*start) + 1] || (*string)[(*start) + 1] == dquote)
+		expand_to_dollar_sign(string, start);
+	else if (!(*quote_flag) && (*string)[(*start) + 1] != squote)
+		expand_env_no_quotes(string, start);
+	else if (!(*quote_flag) && (*string)[(*start) + 1] == squote)
+		take_out_after_quotes(string, start);
+	else if ((*quote_flag) && (*string)[(*start) + 1] != squote)
+		expand_env_quotes(string, start, quote_flag);
+	else if ((*quote_flag) && (*string)[(*start) + 1] == squote)
+		take_out_quote_flag(string, start);
+}
+
+void	expand_double_vector(char **vector)
+{
+	int		vector_index;
+	int		i;
+	char	quote_flag;
+
+	vector_index = 0;
+	while (vector[vector_index])
+	{
+		i = 0;
+		quote_flag = '\0';
+		while ((vector[vector_index])[i])
+		{
+			if (ft_isquote((vector[vector_index])[i]) && quote_flag == '\0')
+				quote_flag = vector[vector_index][i++];
+			while (quote_flag == squote && vector[vector_index][i] != squote
+					&& vector[vector_index][i])
+				i++;
+			if (ft_isquote((vector[vector_index])[i])
+				&& vector[vector_index][i] == quote_flag)
+				quote_flag = '\0';
+			else if (vector[vector_index][i] == '$')
+				expand(&vector[vector_index], &i, &quote_flag);
+			i++;
+		}
+		vector_index++;
+	}
+}
+
+void	expand_command_table(t_command_table **command_table)
+{
+	t_command_table	*current;
+
+	current = *command_table;
+	while (current)
+	{
+		expand_double_vector(current->cmd);
+		expand_double_vector(current->full_input);
+		expand_double_vector(current->full_output);
+		current = current->next;
+	}
+}
+
+/*
 char	*concatenate_env_substrings(char *left, char *env, char *right,
 			char *string)
 {
@@ -45,21 +104,9 @@ char	*concatenate_env_substrings(char *left, char *env, char *right,
 		return (ft_strdup("\0"));
 	return (result);
 }
+*/
 
-// Além da expansão, fazer concatenate de left + esta substring + right e atualizar *start!!!....
-void	expand(char **string, int *start, char quote_flag)
-{
-	if (!(*string)[(*start) + 1])
-		expand_to_dollar_sign(string, start);
-	else if (!quote_flag && (*string)[(*start) + 1] != squote)
-		expand_env(string, start);
-	else if (!quote_flag && (*string)[(*start) + 1] == squote)
-		take_out_after_quotes(string, start);
-	else if (quote_flag && (*string)[(*start) + 1] != squote)
-		expand_env(string, start);
-	else if (quote_flag && (*string)[(*start) + 1] == squote)
-		take_out_quote_flag(string, start);
-}
+
 
 /*
 char	*expand_env(char *string, int start)
@@ -91,48 +138,4 @@ char	*expand_env(char *string, int start)
 }
 */
 
-void	expand_double_vector(char **vector)
-{
-	int		vector_index;
-	int		i;
-	char	quote_flag;
 
-	vector_index = 0;
-	while (vector[vector_index])
-	{
-		i = 0;
-		quote_flag = '\0';
-		while ((vector[vector_index])[i])
-		{
-			if (ft_isquote((vector[vector_index])[i]) && quote_flag == '\0')
-				quote_flag = vector[vector_index][i++];
-			while (quote_flag == squote && vector[vector_index][i] != squote
-					&& vector[vector_index][i])
-				i++;
-			if (ft_isquote((vector[vector_index])[i])
-				&& vector[vector_index][i] == quote_flag)
-				quote_flag = '\0';
-			else if (vector[vector_index][i] == '$')
-				expand_env(&vector[vector_index], &i, quote_flag);
-			i++;
-		}
-		vector_index++;
-	}
-}
-
-void	expand_command_table(t_command_table **command_table)
-{
-	t_command_table	*current;
-
-	current = *command_table;
-	while (current)
-	{
-		expand_double_vector(current->cmd);
-		expand_double_vector(current->full_input);
-		expand_double_vector(current->full_output);
-/*		contract_double_vector(current->cmd);
-		contract_double_vector(current->full_input);
-		contract_double_vector(current->full_output);
-		current = current->next;*/
-	}
-}

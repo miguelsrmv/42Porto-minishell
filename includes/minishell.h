@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/10 10:14:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/18 18:34:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ void				clear_command_table(t_command_table **lst);
 int					is_valid_bash_char(char c);
 char				*get_pipe_token(char *input, int *start, int *end);
 char				*get_string_token(char *input, int *start, int *end);
-void				advance_until_unquoted_whitespace(char *input, int *end, char quote_status);
+void				advance_until_unquoted_whitespace(char *input, int *end,
+						char quote_status);
 char				*get_redirect_token(char *input, int *start, int *end);
 
 /// parser.c
@@ -148,17 +149,34 @@ void				set_full_redirections(t_token *lexer_sublist,
 /// expander_env.c
 void				expand_command_table(t_command_table **command_table);
 void				expand_double_vector(char **vector);
-char				*expand_env(char *string, int start);
 char				*concatenate_env_substrings(char *left, char *env,
 						char *right, char *string);
 int					is_valid_env_char(char c);
+void				expand(char **string, int *start, char *quote_flag);
+
+
+/// expander_contract.c
+void				contract_double_vector(char **vector);
+char				*take_out_quotes(char *string);
+
+/// expander_subfunc.c
+void				expand_to_dollar_sign(char **string, int *start);
+void				expand_env_no_quotes(char **string, int *start);
+void				expand_env_quotes(char **string, int *start,
+						char *quote_flag);
+void				take_out_after_quotes(char **string, int *start);
+void				take_out_quote_flag(char **string, int *start);
+void				concatenate(char **string, char *expanded_string,
+						int *start, int end);
+
 
 /// executer.c
 int					count_processes(t_command_table **command_table);
 int					**create_pipes(int **pipe_fd, int process_num);
 t_command_table		*create_processes(t_command_table **current,
 						int process_num);
-void				prepare_processes(t_command_table **command_table, char **envp);
+void				prepare_processes(t_command_table **command_table,
+						char **envp);
 
 /// executer_input_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
