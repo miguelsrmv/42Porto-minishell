@@ -5,6 +5,7 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+
 		
 		
 		{
@@ -14,7 +15,7 @@
 			"program": "${workspaceFolder}/minishell",
 			"args": [ "--debug-brk"
 			],
-			"stopAtEntry": true,
+			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,

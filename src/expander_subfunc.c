@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/18 19:42:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:09:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,18 @@ void	concatenate(char **string, char *expanded_string, int *start, int end)
 
 void	expand_env_no_quotes(char **string, int *start)
 {
-	(void)string;
-	(void)start;
-	return ;
+	char	*substring;
+	char	*expanded;
+	int		end;
+
+	end = (*start) + 1;
+	while (is_valid_env_char ((*string)[end]))
+		end++;
+	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
+	expanded = getenv(substring);
+	free(substring);
+	concatenate(string, expanded, start, end);
+	(*start) = (*start) + ft_strlen(expanded) - 1;
 }
 
 void	expand_env_quotes(char **string, int *start, char *quote_flag)
@@ -52,7 +61,10 @@ void	expand_env_quotes(char **string, int *start, char *quote_flag)
 	if (ft_isquote((*string)[(*start)]))
 		(*quote_flag) = (*string)[(*start)];
 	else
+	{
 		(*quote_flag) = '\0';
+		(*start)--;
+	}
 }
 
 void	take_out_after_quotes(char **string, int *start)

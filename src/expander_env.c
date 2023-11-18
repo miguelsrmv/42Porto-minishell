@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/18 18:32:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/18 21:53:26 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	is_valid_env_char(char c)
 	return (0);
 }
 
-// Além da expansão, fazer concatenate de left + esta substring + right e atualizar *start!!!....
 void	expand(char **string, int *start, char *quote_flag)
 {
 	if (!(*string)[(*start) + 1] || (*string)[(*start) + 1] == dquote)
