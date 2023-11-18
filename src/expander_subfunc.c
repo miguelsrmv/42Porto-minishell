@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/18 19:06:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:42:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	concatenate(char **string, char *expanded_string, int *start, int end)
 	char	*right;
 
 	left = ft_substr((*string), ft_isquote((*string)[0]),
-			(*start) - ft_isquote((*string)[0]));
+			(*start) - ft_isquote((*string)[(*start) - 1]));
 	right = ft_substr((*string),
 			(*start) + end + ft_isquote((*string)[0]),
 			ft_strlen(*string) - 2 * ft_isquote((*string)[0]));
@@ -44,10 +44,10 @@ void	expand_env_quotes(char **string, int *start, char *quote_flag)
 	end = (*start) + 1;
 	while (is_valid_env_char ((*string)[end]))
 		end++;
-	substring = ft_substr((*string), (*start) + 1, end - 2);
+	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
 	expanded = getenv(substring);
 	free(substring);
-	concatenate(string, expanded, start, end);
+	concatenate(string, expanded, start, end - 1);
 	(*start) = (*start) + ft_strlen(expanded) - 1;
 	if (ft_isquote((*string)[(*start)]))
 		(*quote_flag) = (*string)[(*start)];
@@ -78,7 +78,7 @@ void	expand_to_dollar_sign(char **string, int *start)
 		return ;
 	expand[0] = '$';
 	expand[1] = '\0';
-	concatenate(string, expand, start, 0);
+	concatenate(string, expand, start, 1);
 	(*start) = (*start) - ft_isquote((*string)[0]);
 	free(expand);
 }
