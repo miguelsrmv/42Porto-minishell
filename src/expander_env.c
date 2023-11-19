@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/19 17:02:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:30:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,28 @@ void	expand(char **string, int *start, char *quote_flag)
 		take_out_quote_flag(string, start);
 }
 
+void	contract(char **string, int *start, char *quote_flag)
+{
+	char	*contracted_char;
+	char	quote;
+	int		end;
+
+	end = (*start) + 1;
+	quote = (*string)[end++];
+	while ((*string)[end] != quote)
+		end++;
+	contracted_char = ft_substr((*string), (*start) + 2, end - (*start) - 2);
+	concatenate(string, contracted_char, start, end + 1);
+	(*start) = (*start) + 1 + ft_strlen(contracted_char);
+	if (ft_isquote((*string)[(*start)]))
+		(*quote_flag) = (*string)[(*start)];
+	else
+	{
+		(*quote_flag) = '\0';
+		(*start)--;
+	}
+}
+
 void	expand_double_vector(char **vector)
 {
 	int		vector_index;
@@ -49,7 +71,7 @@ void	expand_double_vector(char **vector)
 		while ((vector[vector_index])[i])
 		{
 			if (ft_isquote((vector[vector_index])[i]) && quote_flag == '\0')
-				quote_flag = vector[vector_index][i++];
+				quote_flag = vector[vector_index][i++];		/// Substituir por função q tira aspas ??
 			while (quote_flag == squote && vector[vector_index][i] != squote
 					&& vector[vector_index][i])
 				i++;

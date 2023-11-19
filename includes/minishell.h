@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/19 16:49:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:30:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ char				*concatenate_env_substrings(char *left, char *env,
 						char *right, char *string);
 int					is_valid_env_char(char c);
 void				expand(char **string, int *start, char *quote_flag);
-
 
 /// expander_contract.c
 void				contract_double_vector(char **vector);
