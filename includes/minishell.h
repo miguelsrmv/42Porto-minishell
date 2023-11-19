@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/18 18:34:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:32:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,8 @@ char				*take_out_quotes(char *string);
 
 /// expander_subfunc.c
 void				expand_to_dollar_sign(char **string, int *start);
-void				expand_env_no_quotes(char **string, int *start);
+void				expand_env_no_quotes(char **string, int *start,
+						char *quote_flag);
 void				expand_env_quotes(char **string, int *start,
 						char *quote_flag);
 void				take_out_after_quotes(char **string, int *start);
