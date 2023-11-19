@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/19 17:06:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:14:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	expand_env_no_quotes(char **string, int *start, char *quote_flag)
 		end++;
 	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
 	expanded = getenv(substring);
+	if (!expanded)
+		expanded = "";
 	free(substring);
 	concatenate(string, expanded, start, end);
 	(*start) = (*start) + ft_strlen(expanded);
@@ -64,6 +66,8 @@ void	expand_env_quotes(char **string, int *start, char *quote_flag)
 		end++;
 	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
 	expanded = getenv(substring);
+	if (!expanded)
+		expanded = "";
 	free(substring);
 	concatenate(string, expanded, start, end - 1);
 	(*start) = (*start) - 1 + ft_strlen(expanded);
