@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/18 22:32:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/19 16:49:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,8 @@ void				expand_env_no_quotes(char **string, int *start,
 						char *quote_flag);
 void				expand_env_quotes(char **string, int *start,
 						char *quote_flag);
-void				take_out_after_quotes(char **string, int *start);
+void				take_out_after_quotes(char **string, int *start,
+						char *quote_flag);
 void				take_out_quote_flag(char **string, int *start);
 void				concatenate(char **string, char *expanded_string,
 						int *start, int end);

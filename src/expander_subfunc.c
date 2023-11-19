@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/19 11:46:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:06:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	expand_env_no_quotes(char **string, int *start, char *quote_flag)
 	}
 }
 
+// Unir funções pq na linha 68 pode-se trocar por ft_isquote(quote_flag) ? 
 void	expand_env_quotes(char **string, int *start, char *quote_flag)
 {
 	char	*substring;
@@ -75,16 +76,26 @@ void	expand_env_quotes(char **string, int *start, char *quote_flag)
 	}
 }
 
-void	take_out_after_quotes(char **string, int *start)
+void	take_out_after_quotes(char **string, int *start, char *quote_flag)
 {
+	char	*contracted_char;
 	char	quote;
 	int		end;
 
 	end = (*start) + 1;
-	quote = (*string)[end];
+	quote = (*string)[end++];
 	while ((*string)[end] != quote)
 		end++;
-	(*string) = ft_substr((*string), (*start) + 1, end - (*start));
+	contracted_char = ft_substr((*string), (*start) + 2, end - (*start) - 2);
+	concatenate(string, contracted_char, start, end + 1);
+	(*start) = (*start) + 1 + ft_strlen(contracted_char);
+	if (ft_isquote((*string)[(*start)]))
+		(*quote_flag) = (*string)[(*start)];
+	else
+	{
+		(*quote_flag) = '\0';
+		(*start)--;
+	}
 }
 
 void	take_out_quote_flag(char **string, int *start)
