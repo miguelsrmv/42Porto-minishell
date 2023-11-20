@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 18:25:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:59:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	dquote_expansion(char **string, int *pos, char *quote_flag)
 		else
 			(*pos)++;
 	}
+	(*quote_flag) = '\0';
 
 }
 
@@ -50,8 +51,8 @@ void	expand_env_quotes(char **string, int *start, char *quote_flag)
 	if (!expanded)
 		expanded = "";
 	free(substring);
-	concatenate(string, expanded, start, end);
-	(*quote_flag) = '\0';
+	concatenate_for_dquote(string, expanded, start, end);
+	(void)(quote_flag);
 }
 
 void	expand_to_dollar_sign(char **string, int *start, char *quote_flag)
@@ -63,10 +64,10 @@ void	expand_to_dollar_sign(char **string, int *start, char *quote_flag)
 		return ;
 	expand[0] = '$';
 	expand[1] = '\0';
-	concatenate(string, expand, start, 1);
+	concatenate(string, expand, start, *start + 1);
 	(*start)++;
 	free(expand);
-	(*quote_flag) = '\0';
+	(void)(quote_flag);
 }
 
 int	take_out_outer_dquotes(char **string, int start)
