@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 14:32:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:47:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,76 +19,37 @@ int	is_valid_env_char(char c)
 	return (0);
 }
 
-char	*concatenate_env_substrings(char *left, char *env, char *right,
-			char *string)
+void	define_quote_flag(char c, int *pos, char *quote_flag)
 {
-	char	*result;
-	char	*temp;
-
-	result = ft_strjoin(left, getenv(env));
-	temp = result;
-	result = ft_strjoin(result, right);
-	free(left);
-	free(right);
-	free(temp);
-	free(string);
-	if (result == NULL)
-		return (ft_strdup("\0"));
-	return (result);
-}
-
-char	*expand_env(char *string)
-{
-	char	*left;
-	char	*env;
-	char	*right;
-	int		i;
-
-	i = 0;
-	while (string && string[i])
-	{
-		if (string[i] == '$')
-		{
-			left = ft_substr(string, 0, i);
-			i++;
-			while (is_valid_env_char(string[i]) && string[i])
-				i++;
-			env = ft_substr(string, ft_strlen(left) + 1,
-					i - ft_strlen(left) - 1);
-			right = ft_substr(string, i, ft_strlen(string) - i);
-			string = concatenate_env_substrings(left, env, right, string);
-			i = -1;
-		}
-		i++;
-	}
-	return (string);
+	if (*quote_flag == '\0' && (c == squote || c == dquote))
+		*quote_flag = c;
+	else if (ft_isquote(*quote_flag) && (c == *quote_flag))
+		*quote_flag = '\0';
+	(void)(*pos);
 }
 
 void	expand_double_vector(char **vector)
 {
-	int				i;
-	char			*temp;
+	int		vector_index;
+	int		i;
+	char	quote_flag;
 
-	i = 0;
-	while (vector[i])
+	vector_index = 0;
+	while (vector[vector_index])
 	{
-		if (ft_strchr(vector[i], '$') && vector[i][0] != '\'')
+		quote_flag = '\0';
+		i = 0;
+		while ((vector[vector_index])[i])
 		{
-			if (vector[i][0] == '\"')
-			{
-				temp = vector[i];
-				vector[i] = ft_substr(vector[i], 1, ft_strlen(vector[i]) - 2);
-				free(temp);
-			}
-			vector[i] = expand_env(vector[i]);
+			define_quote_flag(vector[vector_index][i], &i, &quote_flag);
+			if (quote_flag == '\0')
+				normal_expansion(&vector[vector_index], &i, &quote_flag);
+			else if (quote_flag == squote)
+				squote_expansion(&vector[vector_index], &i, &quote_flag);
+			else if (quote_flag == dquote)
+				dquote_expansion(&vector[vector_index], &i, &quote_flag);
 		}
-		else if (vector[i][0] == '\'' || vector[i][0] == '\"')
-		{
-			temp = vector[i];
-			vector[i] = ft_substr(vector[i], 1, ft_strlen(vector[i]) - 2);
-			free(temp);
-		}
-		i++;
+		vector_index++;
 	}
 }
 
