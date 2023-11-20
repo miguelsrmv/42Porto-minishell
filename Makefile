@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/11/15 10:41:30 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/11/20 08:48:34 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
 SRC		=	main.c get_input.c lexer.c lexer_linked_list.c lexer_get_tokens.c \
-			parser.c parser_redirs.c expander_env.c expander_subfunc.c \
+			parser.c parser_redirs.c expander.c expander_noquotes.c \
+			expander_squote.c expander_dquote.c expander_subfunc.c \
 			executer.c executer_input_checker.c executer_cmd_checker.c helper_functions.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
