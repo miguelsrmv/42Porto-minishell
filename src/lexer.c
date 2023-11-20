@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:52:58 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/01 10:54:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:14:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	fill_in_list(char *input, t_token **head)
 		else if (input[start] == '|')
 			add_token_end(head, create_token
 				(get_pipe_token(input, &start, &end), SEPARATOR));
-		start = end;
+		if (input[start])
+			start = end;
 	}
 }
 
