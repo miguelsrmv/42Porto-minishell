@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 09:45:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:05:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,7 @@ void	concatenate(char **string, char *expanded_string, int *start, int end)
 }
 
 // Unir funções pq na linha 68 pode-se trocar por ft_isquote(quote_flag) ? 
-void	expand_env_quotes(char **string, int *start, char *quote_flag)
-{
-	char	*substring;
-	char	*expanded;
-	int		end;
 
-	end = (*start) + 1;
-	while (is_valid_env_char ((*string)[end]))
-		end++;
-	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
-	expanded = getenv(substring);
-	if (!expanded)
-		expanded = "";
-	free(substring);
-	concatenate(string, expanded, start, end + 1);
-	(*start) = (*start) - 1 + ft_strlen(expanded);
-	if (ft_isquote((*string)[(*start)]))
-		(*quote_flag) = (*string)[(*start)];
-	else
-	{
-		(*quote_flag) = '\0';
-		(*start)--;
-	}
-}
 
 
 
@@ -64,16 +41,4 @@ void	take_out_quote_flag(char **string, int *start)
 	return ;
 }
 
-void	expand_to_dollar_sign(char **string, int *start)
-{
-	char	*expand;
 
-	expand = (char *)malloc(sizeof(char) * 2);
-	if (!expand)
-		return ;
-	expand[0] = '$';
-	expand[1] = '\0';
-	concatenate(string, expand, start, 1);
-	(*start) = (*start) - ft_isquote((*string)[0]);
-	free(expand);
-}

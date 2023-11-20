@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 10:16:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:07:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	expand_command_table(t_command_table **command_table)
 		current = current->next;
 	}
 }
-
+/*
 void	expand(char **string, int *start, char *quote_flag)
 {
 	if (!(*string)[(*start) + 1]
@@ -134,3 +134,4 @@ void	contract(char **string, int *start, char *quote_flag)
 		(*start)--;
 	}
 }
+*/

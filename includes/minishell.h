@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 10:02:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:06:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,13 +167,14 @@ void				take_out_outer_quotes(char **string, int *start, char *quote_flag);
 
 /// @brief  expander_dquote.c
 void				dquote_expansion(char **string, int *pos, char *quote_flag);
+void				take_out_first_quote(char **string);
+void				expand_to_dollar_sign(char **string, int *start, char *quote_flag);
 
 /// expander_contract.c
 void				contract_double_vector(char **vector);
 char				*take_out_quotes(char *string);
 
 /// expander_subfunc.c
-void				expand_to_dollar_sign(char **string, int *start);
 void				expand_env_quotes(char **string, int *start,
 						char *quote_flag);
 void				take_out_after_quotes(char **string, int *start,
