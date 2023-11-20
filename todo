@@ -4,6 +4,7 @@
 # Mais de 2 comandos
 # Erros e memória
 # Open pipes
+# Expandir $$, $$$...
 
 minishell: echo "$USER"$HOME
 �

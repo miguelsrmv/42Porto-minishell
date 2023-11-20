@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 14:05:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:52:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	squote_expansion(char **string, int *pos, char *quote_flag)
 {
-	take_out_outer_quotes(string, pos, quote_flag);
+	take_out_outer_squotes(string, pos, quote_flag);
 }
 
-void	take_out_outer_quotes(char **string, int *start, char *quote_flag)
+void	take_out_outer_squotes(char **string, int *start, char *quote_flag)
 {
 	char	*unquoted_char;
 	int		end;
