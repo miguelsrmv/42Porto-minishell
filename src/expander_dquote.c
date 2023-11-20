@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 12:05:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:48:07 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,22 @@
 
 void	dquote_expansion(char **string, int *pos, char *quote_flag)
 {
-	int	current_pos;
+	int	original_pos;
 
-	current_pos = 1;
-	while ((*string)[*pos] && (*string)[(current_pos)] != *quote_flag)
+	original_pos = *pos;
+	take_out_outer_quotes(string, pos, quote_flag);
+	(*pos) = original_pos;
+	while ((*string)[*pos])
 	{
-		if ((*string)[*pos] == '$' && (*string)[(*pos) + 1] == dquote)
+		if ((*string)[*pos] == '$' && !(*string)[(*pos) + 1])
 		{
 			expand_to_dollar_sign(string, pos, quote_flag);
 			break ;
 		}
-		else if ((*string)[*pos] == '$' && ft_isquote((*string)[(*pos) + 1]))
-			ansi_quoting(string, pos, quote_flag);
-		else if ((*string)[*pos] == '$')
-		{
+		else if ((*string)[*pos] == '$' && !ft_isquote((*string)[(*pos) + 1]))
 			expand_env_quotes(string, pos, quote_flag);
-			break ;
-		}
-		else if (ft_isquote((*string)[current_pos]))
-			break ;
 		else
 			(*pos)++;
-		current_pos = *pos;
 	}
 }
 
@@ -53,8 +47,8 @@ void	expand_env_quotes(char **string, int *start, char *quote_flag)
 	if (!expanded)
 		expanded = "";
 	free(substring);
-	concatenate(string, expanded, start, end - 1);
-	(*start) = (*start) + ft_strlen(expanded) - 1;
+	concatenate(string, expanded, start, end);
+	(*start) = (*start) + ft_strlen(expanded);
 	(*quote_flag) = '\0';
 }
 

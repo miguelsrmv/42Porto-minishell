@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 12:01:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:49:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	normal_expansion(char **string, int *pos, char *quote_flag)
 		}
 		else if (ft_isquote((*string)[*pos]))
 			break ;
-			/*take_out_after_quotes(string, pos, quote_flag);*/
 		else
 			(*pos)++;
 	}
 }
 
+// Tirar quote flag?
 void	ansi_quoting(char **string, int *start, char *quote_flag)
 {
 	char	*substring;
@@ -47,6 +47,7 @@ void	ansi_quoting(char **string, int *start, char *quote_flag)
 	(void)(quote_flag);
 }
 
+// Tirar quote flag?
 void	expand_env_no_quotes(char **string, int *start, char *quote_flag)
 {
 	char	*substring;
@@ -66,6 +67,7 @@ void	expand_env_no_quotes(char **string, int *start, char *quote_flag)
 	(void)(quote_flag);
 }
 
+// Tirar quote flag?
 void	take_out_after_quotes(char **string, int *start, char *quote_flag)
 {
 	char	*contracted_char;

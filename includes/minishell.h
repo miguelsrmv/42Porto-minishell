@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 12:06:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:51:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,37 +152,32 @@ void				define_quote_flag(char c, int *pos, char *quote_flag);
 void				expand_double_vector(char **vector);
 void				expand_command_table(t_command_table **command_table);
 
-void				expand(char **string, int *start, char *quote_flag);
-void				contract(char **string, int *start, char *quote_flag);
-
 /// expander_noquotes.c
 void				normal_expansion(char **string, int *pos, char *quote_flag);
 void				ansi_quoting(char **string, int *start, char *quote_flag);
-void				expand_env_no_quotes(char **string, int *start, char *quote_flag);
-void				take_out_after_quotes(char **string, int *start, char *quote_flag);
-
-/// expander_squote.c
-void				squote_expansion(char **string, int *pos, char *quote_flag);
-void				take_out_outer_quotes(char **string, int *start, char *quote_flag);
-
-/// @brief  expander_dquote.c
-void				dquote_expansion(char **string, int *pos, char *quote_flag);
-void				take_out_first_quote(char **string);
-void				expand_to_dollar_sign(char **string, int *start, char *quote_flag);
-
-/// expander_contract.c
-void				contract_double_vector(char **vector);
-char				*take_out_quotes(char *string);
-
-/// expander_subfunc.c
-void				expand_env_quotes(char **string, int *start,
+void				expand_env_no_quotes(char **string, int *start,
 						char *quote_flag);
 void				take_out_after_quotes(char **string, int *start,
 						char *quote_flag);
-void				take_out_quote_flag(char **string, int *start);
+
+/// expander_squote.c
+void				squote_expansion(char **string, int *pos, char *quote_flag);
+void				take_out_outer_quotes(char **string, int *start,
+						char *quote_flag);
+
+/// @brief  expander_dquote.c
+void				dquote_expansion(char **string, int *pos,
+						char *quote_flag);
+void				expand_env_quotes(char **string, int *start,
+						char *quote_flag);
+void				expand_to_dollar_sign(char **string, int *start,
+						char *quote_flag);
+void				take_out_double_quotes(char **string, int *start,
+						char *quote_flag);
+
+/// expander_subfunc.c
 void				concatenate(char **string, char *expanded_string,
 						int *start, int end);
-
 
 /// executer.c
 int					count_processes(t_command_table **command_table);

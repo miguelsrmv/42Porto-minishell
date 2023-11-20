@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 12:05:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:51:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,3 @@ void	concatenate(char **string, char *expanded_string, int *start, int end)
 	free(left);
 	free(right);
 }
-
-// Unir funções pq na linha 68 pode-se trocar por ft_isquote(quote_flag) ? 
-
-
-
-
-void	take_out_quote_flag(char **string, int *start)
-{
-	(void)string;
-	(void)start;
-	return ;
-}
-
-
