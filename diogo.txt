@@ -1,0 +1,11 @@
+Makefile
+README.md
+diogo.txt
+en.subject.pdf
+history.c
+includes
+minishell
+output.txt
+readline.supp
+src
+todo

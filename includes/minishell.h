@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 18:53:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:37:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_command_table {
 	char					*input_target;
 	enum e_RedirectType		input_type;
 	int						input_fd;
+	char					*heredoc_buffer;
 
 	char					**full_output;
 	char					*output_target;
@@ -137,7 +138,7 @@ void				create_command_table(t_token *lexer_list,
 						t_command_table **command_table, t_error error);
 t_command_table		*parse_list(t_token *lexer_list, t_error error);
 
-/// parser_redirs.c
+/// parser_set_redirs.c
 void				fill_array(char **array, t_token *current, int i);
 int					count_redirect_targets(t_token *lexer_sublist);
 void				fill_full_redir(t_token *current,
@@ -145,6 +146,13 @@ void				fill_full_redir(t_token *current,
 void				initialize_command_table(t_command_table **command_table);
 void				set_full_redirections(t_token *lexer_sublist,
 						t_command_table **command_table, t_error error);
+
+/// parser_heredoc.c
+void				check_heredocs(t_command_table **command_table);
+void				create_heredoc_buffer(char *delimiter,
+						char **buffer);
+void				create_heredoc_file(t_command_table **command_table, char *buffer);
+
 
 /// expander.c
 int					is_valid_env_char(char c);

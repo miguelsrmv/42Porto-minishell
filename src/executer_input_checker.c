@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 21:24:57 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:24:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ enum e_ValidType	check_input(t_command_table **command)
 	while ((*command)->full_input[i])
 	{
 		if (redir_check((*command)->full_input[i]) != INVALID)
-			(*command)->input_type = redir_check((*command)->full_input[i++]);
+			(*command)->input_type
+				= redir_check((*command)->full_input[i++]);
 		else
 			return (INVALID_INPUT_REDIR);
-		if (access((*command)->full_input[i], F_OK) != 0)
-			return (INVALID_INPUT);
 		(*command)->input_target = (*command)->full_input[i++];
 	}
+	if ((*command)->input_type == INPUT
+		&& access((*command)->full_input[i], F_OK) != 0)
+		return (INVALID_INPUT);
+	else if ((*command)->input_type == HERE_DOC)
+		(*command)->input_target = (*command)->heredoc_buffer;
 	if ((*command)->command_no != 1 && (*command)->input_type != INPUT
 		&& (*command)->input_type != HERE_DOC)
 		(*command)->input_type = PIPE;
@@ -78,6 +82,8 @@ void	set_redirections(int **pipe_fd, t_command_table **command)
 		(*command)->input_fd = pipe_fd[(*command)->command_no - 2][0];
 	if ((*command)->input_type != NONE)
 		dup2((*command)->input_fd, STDIN_FILENO);
+	if ((*command)->input_type == HERE_DOC)
+		unlink((*command)->heredoc_buffer);
 	if ((*command)->output_type == OUTPUT)
 		(*command)->output_fd = open((*command)->output_target,
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -92,6 +98,7 @@ void	set_redirections(int **pipe_fd, t_command_table **command)
 		close(pipe_fd[(*command)->command_no - 2][0]);
 	if ((*command)->next)
 		close(pipe_fd[(*command)->command_no - 1][1]);
+
 }
 
 void	check_redirections(int **pipe_fd, t_command_table **command)

@@ -5,7 +5,8 @@
 # Erros e memória
 # Open pipes
 # Expandir $$, $$$...
-
+# echo $"$USER"
+ 
 minishell: echo "$USER"$HOME
 �
 minishell: echo '$USER'$HOME
@@ -26,3 +27,5 @@ echo "$USER'$USER'"
 mde-sa--'$USER'
 
 echo "'$USER'" 
+
+
