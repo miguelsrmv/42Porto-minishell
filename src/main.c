@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/18 21:55:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:56:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	main(int argc, char **envp)
 	t_command_table	*command_table;
 	t_error			error;
 
+	if (argc > 1)
+	{
+		ft_fprintf(STDERR_FILENO, "Usage: \"./minishell\"\n");
+		return (1);
+	}
 	lexer_list = NULL;
 	command_table = NULL;
 	error.lexer_list = lexer_list;
@@ -44,5 +49,5 @@ int	main(int argc, char **envp)
 		expand_command_table(&command_table);
 		prepare_processes(&command_table, envp);
 	}
-	return (argc);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/23 19:24:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:51:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ enum e_ValidType	check_input(t_command_table **command)
 		(*command)->input_target = (*command)->full_input[i++];
 	}
 	if ((*command)->input_type == INPUT
-		&& access((*command)->full_input[i], F_OK) != 0)
+		&& access((*command)->full_input[i - 1], F_OK) != 0)
 		return (INVALID_INPUT);
 	else if ((*command)->input_type == HERE_DOC)
 		(*command)->input_target = (*command)->heredoc_buffer;
