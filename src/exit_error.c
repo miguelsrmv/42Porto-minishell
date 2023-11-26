@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 16:43:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:13:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,17 @@ void	clear_command_table(t_command_table **lst)
 	*lst = NULL;
 }
 
-void	exit_error(char *error_message, t_memptr memptr)
+void	clean_memory(t_memptr memptr)
 {
 	if (memptr.lexer_list)
 		clear_lexer_list(&(memptr.lexer_list));
 	if (memptr.command_table)
 		clear_command_table(&(memptr.command_table));
-	ft_printf("Error. %s\n", error_message);
+}
+
+void	exit_error(char *error_message, t_memptr memptr)
+{
+	clean_memory(memptr);
+	ft_fprintf(STDERR_FILENO, "Error. %s\n", error_message);
 	exit(0);
 }

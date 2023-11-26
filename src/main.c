@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 17:47:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:02:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int	main(int argc, char **envp)
 	{
 		lexer_list = read_readline(memptr);
 		command_table = parse_list(lexer_list, memptr);
-		expand_command_table(&command_table);
-		prepare_processes(&command_table, envp);
+		expand_command_table(&command_table, memptr);
+		prepare_processes(&command_table, envp, memptr);
+		clean_memory(memptr);
 	}
 	return (0);
 }

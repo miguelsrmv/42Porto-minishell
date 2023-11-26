@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander_subfunc.c                                 :+:      :+:    :+:   */
+/*   expander_concatenate.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 18:52:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:10:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	concatenate(char **string, char *expanded_string, int *start, int end)
+int	concatenate(char **string, char *expanded_string, int *start, int end)
 {
 	char	*left;
 	char	*right;
@@ -23,13 +23,18 @@ void	concatenate(char **string, char *expanded_string, int *start, int end)
 	right = ft_substr((*string),
 			end + 2 * ft_isquote((*string)[(*start) - 1]),
 			ft_strlen(*string) - end - ft_isquote((*string)[(*start) - 1]));
+	if (!left || !right)
+		return (1);
 	left = ft_strjoin(left, expanded_string);
 	*string = ft_strjoin(left, right);
+	if (!left || !(*string))
+		return (1);
 	free(left);
 	free(right);
+	return (0);
 }
 
-void	concatenate_for_dquote(char **string, char *expanded_string,
+int	concatenate_for_dquote(char **string, char *expanded_string,
 			int *start, int end)
 {
 	char	*left;
@@ -41,8 +46,13 @@ void	concatenate_for_dquote(char **string, char *expanded_string,
 	right = ft_substr((*string),
 			end + 2 * ft_isdquote((*string)[(*start) - 1]),
 			ft_strlen(*string) - end - ft_isdquote((*string)[(*start) - 1]));
+	if (!left || !right)
+		return (1);
 	left = ft_strjoin(left, expanded_string);
 	*string = ft_strjoin(left, right);
+	if (!left || !(*string))
+		return (1);
 	free(left);
 	free(right);
+	return (0);
 }

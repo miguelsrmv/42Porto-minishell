@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 17:51:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:10:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define OPEN_ERROR "Open file error."
 # define WRITE_ERROR "Write file error."
 # define CLOSE_ERROR "Close file error."
+# define PIPE_ERROR "Pipe error."
 # define TRUE 1
 # define FALSE 0
 
@@ -104,12 +105,12 @@ typedef struct s_memptr {
 	t_command_table	*command_table;
 }	t_memptr;
 
-
 // Function definitions
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
+void				clean_memory(t_memptr memptr);
 void				exit_error(char *error_message, t_memptr memptr);
 
 /// main.c
@@ -166,45 +167,51 @@ void				create_heredoc_file(t_command_table **command_table,
 /// expander.c
 int					is_valid_env_char(char c);
 void				define_quote_flag(char c, int *pos, char *quote_flag);
-void				expand_double_vector(char **vector);
-void				expand_command_table(t_command_table **command_table);
+void				expand_double_vector(char **vector, t_memptr memptr);
+void				expand_command_table(t_command_table **command_table,
+						t_memptr memptr);
 
 /// expander_noquotes.c
-void				normal_expansion(char **string, int *pos, char *quote_flag);
-void				ansi_quoting(char **string, int *start, char *quote_flag);
+void				normal_expansion(char **string, int *pos, char *quote_flag,
+						t_memptr memptr);
+void				ansi_quoting(char **string, int *start,	t_memptr memptr);
 void				expand_env_no_quotes(char **string, int *start,
-						char *quote_flag);
+						t_memptr memptr);
 void				take_out_after_quotes(char **string, int *start,
-						char *quote_flag);
+						t_memptr memptr);
 
 /// expander_squote.c
-void				squote_expansion(char **string, int *pos, char *quote_flag);
+void				squote_expansion(char **string, int *pos, char *quote_flag,
+						t_memptr memptr);
 void				take_out_outer_squotes(char **string, int *start,
-						char *quote_flag);
+						char *quote_flag, t_memptr memptr);
 
 /// expander_dquote.c
-void				dquote_expansion(char **string, int *pos,
-						char *quote_flag);
+void				dquote_expansion(char **string, int *pos, char *quote_flag,
+						t_memptr memptr);
 void				expand_env_quotes(char **string, int *start,
-						char *quote_flag);
+						t_memptr memptr);
 void				expand_to_dollar_sign(char **string, int *start,
-						char *quote_flag);
-int					take_out_outer_dquotes(char **string, int start);
+						t_memptr memptr);
+int					take_out_outer_dquotes(char **string, int start,
+						t_memptr memptr);
 
 /// expander_concatenate.c
-void				concatenate(char **string, char *expanded_string,
+int					concatenate(char **string, char *expanded_string,
 						int *start, int end);
-void				concatenate_for_dquote(char **string, char *expanded_string,
+int					concatenate_for_dquote(char **string, char *expanded_string,
 						int *start, int end);
-
 
 /// executer.c
 int					count_processes(t_command_table **command_table);
-int					**create_pipes(int **pipe_fd, int process_num);
+int					**create_pipes(int **pipe_fd, int process_num,
+						t_memptr memptr);
 t_command_table		*create_processes(t_command_table **current,
 						int process_num);
+void				close_pipes(int **pipe_fd, t_command_table *current,
+						t_memptr memptr);
 void				prepare_processes(t_command_table **command_table,
-						char **envp);
+						char **envp, t_memptr memptr);
 
 /// executer_input_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
@@ -220,7 +227,7 @@ void				check_commands(t_command_table **command_table,
 char				**get_path_list(void);
 int					check_builtin(char *command);
 
-/// Helper functions
+/// Helper functions (to delete)
 void				print_lexer_tokens(t_token *head);
 void				print_command_table(t_command_table *command_table);
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 16:30:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:28:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	define_quote_flag(char c, int *pos, char *quote_flag)
 	(void)(*pos);
 }
 
-void	expand_double_vector(char **vector)
+void	expand_double_vector(char **vector, t_memptr memptr)
 {
 	int		vector_index;
 	int		i;
@@ -43,26 +43,29 @@ void	expand_double_vector(char **vector)
 		{
 			define_quote_flag(vector[vector_index][i], &i, &quote_flag);
 			if (quote_flag == '\0')
-				normal_expansion(&vector[vector_index], &i, &quote_flag);
+				normal_expansion(&vector[vector_index], &i,
+					&quote_flag, memptr);
 			else if (quote_flag == SQUOTE)
-				squote_expansion(&vector[vector_index], &i, &quote_flag);
+				squote_expansion(&vector[vector_index], &i,
+					&quote_flag, memptr);
 			else if (quote_flag == DQUOTE)
-				dquote_expansion(&vector[vector_index], &i, &quote_flag);
+				dquote_expansion(&vector[vector_index], &i,
+					&quote_flag, memptr);
 		}
 		vector_index++;
 	}
 }
 
-void	expand_command_table(t_command_table **command_table)
+void	expand_command_table(t_command_table **command_table, t_memptr memptr)
 {
 	t_command_table	*current;
 
 	current = *command_table;
 	while (current)
 	{
-		expand_double_vector(current->cmd);
-		expand_double_vector(current->full_input);
-		expand_double_vector(current->full_output);
+		expand_double_vector(current->cmd, memptr);
+		expand_double_vector(current->full_input, memptr);
+		expand_double_vector(current->full_output, memptr);
 		current = current->next;
 	}
 }
