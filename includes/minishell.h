@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 19:10:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:12:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ typedef struct s_command_table {
 }	t_command_table;
 
 typedef struct s_memptr {
-	t_token			*lexer_list;
-	t_command_table	*command_table;
+	t_token			**lexer_list;
+	t_command_table	**command_table;
 }	t_memptr;
 
 // Function definitions
@@ -147,10 +147,11 @@ void				create_command_table(t_token *lexer_list,
 t_command_table		*parse_list(t_token *lexer_list, t_memptr memptr);
 
 /// parser_set_redirs.c
-void				fill_subarray(char **array, t_token *current, int i);
+void				fill_subarray(char **array, t_token *current, int i,
+						t_memptr memptr);
 int					count_redirect_targets(t_token *lexer_sublist);
 void				fill_full_redir(t_token *current,
-						t_command_table **command_table);
+						t_command_table **command_table, t_memptr memptr);
 void				initialize_command_table(t_command_table **command_table,
 						int total_redir, t_memptr memptr);
 void				set_full_redirections(t_token *lexer_sublist,
@@ -199,6 +200,8 @@ int					take_out_outer_dquotes(char **string, int start,
 /// expander_concatenate.c
 int					concatenate(char **string, char *expanded_string,
 						int *start, int end);
+/* int					concatenate_for_squote(char **string, char *expanded_string,
+						int *start, int end); */
 int					concatenate_for_dquote(char **string, char *expanded_string,
 						int *start, int end);
 

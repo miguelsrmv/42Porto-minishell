@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 19:02:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:34:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	main(int argc, char **envp)
 		exit_error(USAGE_ERROR, memptr);
 	lexer_list = NULL;
 	command_table = NULL;
-	memptr.lexer_list = lexer_list;
-	memptr.command_table = command_table;
+	memptr.lexer_list = &lexer_list;
+	memptr.command_table = &command_table;
 	while (1)
 	{
 		lexer_list = read_readline(memptr);

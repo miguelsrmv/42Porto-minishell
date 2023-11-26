@@ -6,17 +6,19 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 17:21:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:22:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_subarray(char **array, t_token *current, int i)
+void	fill_subarray(char **array, t_token *current, int i, t_memptr memptr)
 {
-	array[i] = current->token;
-	array[i + 1] = current->next->token;
+	array[i] = ft_strdup(current->token);
+	array[i + 1] = ft_strdup(current->next->token);
 	array[i + 2] = NULL;
+	if (!array[i] || !array[i] + 1)
+		exit_error(MALLOC_ERROR, memptr);
 	current->next->type = REDIRECT_TARGET;
 }
 
@@ -36,7 +38,8 @@ int	count_redirect_targets(t_token *lexer_sublist)
 	return (i);
 }
 
-void	fill_full_redir(t_token *current, t_command_table **command_table)
+void	fill_full_redir(t_token *current, t_command_table **command_table,
+			t_memptr memptr)
 {
 	int	input_index;
 	int	output_index;
@@ -51,13 +54,13 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 			if (ft_strchr(current->token, '>'))
 			{
 				fill_subarray((*command_table)->full_output, current,
-					output_index);
+					output_index, memptr);
 				output_index = output_index + 2;
 			}
 			if (ft_strchr(current->token, '<'))
 			{
 				fill_subarray((*command_table)->full_input, current,
-					input_index);
+					input_index, memptr);
 				input_index = input_index + 2;
 			}
 		}
@@ -98,7 +101,7 @@ void	set_full_redirections(t_token *lexer_sublist,
 
 	total_redirects = count_redirect_targets(lexer_sublist);
 	initialize_command_table(command_table, total_redirects, memptr);
-	fill_full_redir(lexer_sublist, command_table);
+	fill_full_redir(lexer_sublist, command_table, memptr);
 	check_heredocs(command_table, memptr);
 	// check urandom ! 
 }
