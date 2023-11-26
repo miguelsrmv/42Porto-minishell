@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 16:50:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:51:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 # define USAGE_ERROR "Usage: \'./minishell\'."
 # define MALLOC_ERROR "Malloc error."
 # define SYNTAX_ERROR "Syntax error."
+# define OPEN_ERROR "Open file error."
+# define WRITE_ERROR "Write file error."
+# define CLOSE_ERROR "Close file error."
+# define TRUE 1
+# define FALSE 0
 
 enum e_QuoteType {
 	OUT_QUOTE,
@@ -141,21 +146,22 @@ void				create_command_table(t_token *lexer_list,
 t_command_table		*parse_list(t_token *lexer_list, t_memptr memptr);
 
 /// parser_set_redirs.c
-void				fill_array(char **array, t_token *current, int i);
+void				fill_subarray(char **array, t_token *current, int i);
 int					count_redirect_targets(t_token *lexer_sublist);
 void				fill_full_redir(t_token *current,
 						t_command_table **command_table);
-void				initialize_command_table(t_command_table **command_table);
+void				initialize_command_table(t_command_table **command_table,
+						int total_redir, t_memptr memptr);
 void				set_full_redirections(t_token *lexer_sublist,
 						t_command_table **command_table, t_memptr memptr);
 
 /// parser_heredoc.c
-void				check_heredocs(t_command_table **command_table);
+void				check_heredocs(t_command_table **command_table,
+						t_memptr memptr);
 void				create_heredoc_buffer(char *delimiter,
-						char **buffer);
+						char **buffer, t_memptr memptr);
 void				create_heredoc_file(t_command_table **command_table,
-						char *buffer);
-
+						char *buffer, t_memptr memptr);
 
 /// expander.c
 int					is_valid_env_char(char c);

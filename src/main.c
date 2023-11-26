@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 16:27:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:47:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **envp)
 	t_command_table	*command_table;
 	t_memptr		memptr;
 
-	if (argc > 1)
+	if (argc == 0)
 		exit_error(USAGE_ERROR, memptr);
 	lexer_list = NULL;
 	command_table = NULL;

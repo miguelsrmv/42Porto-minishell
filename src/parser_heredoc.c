@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/23 19:27:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:03:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_heredocs(t_command_table **command_table)
+void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 {
 	int	i;
 
@@ -22,14 +22,15 @@ void	check_heredocs(t_command_table **command_table)
 		if (ft_strlen((*command_table)->full_input[i]) == 2
 			&& !ft_strncmp("<<", (*command_table)->full_input[i], 2))
 			create_heredoc_buffer((*command_table)->full_input[i + 1],
-				&(*command_table)->heredoc_buffer);
+				&(*command_table)->heredoc_buffer, memptr);
 		i = i + 2;
 	}
 	if ((*command_table)->heredoc_buffer)
-		create_heredoc_file(command_table, (*command_table)->heredoc_buffer);
+		create_heredoc_file(command_table, (*command_table)->heredoc_buffer,
+			memptr);
 }
 
-void	create_heredoc_buffer(char *delimiter, char **buffer)
+void	create_heredoc_buffer(char *delimiter, char **buffer, t_memptr memptr)
 {
 	int		bytes_read;
 	char	input[1001];
@@ -40,7 +41,9 @@ void	create_heredoc_buffer(char *delimiter, char **buffer)
 		*buffer = NULL;
 	}
 	*buffer = ft_calloc(1, sizeof(char));
-	while (1)
+	if (!(*buffer))
+		exit_error(MALLOC_ERROR, memptr);
+	while (TRUE)
 	{
 		ft_printf("> ");
 		bytes_read = read(STDIN_FILENO, input, 1000);
@@ -51,18 +54,19 @@ void	create_heredoc_buffer(char *delimiter, char **buffer)
 			break ;
 		*buffer = ft_strjoin(*buffer, input);
 		if (!(*buffer))
-			break ; // error
+			exit_error(MALLOC_ERROR, memptr);
 	}
 }
 
-void	create_heredoc_file(t_command_table **command_table, char *buffer)
+void	create_heredoc_file(t_command_table **command_table,
+			char *buffer, t_memptr memptr)
 {
 	char	*name;
 	int		i;
 	int		fd;
 
 	i = 0;
-	while (1)
+	while (TRUE)
 	{
 		name = ft_itoa(i);
 		if (access(name, F_OK) != 0)
@@ -70,7 +74,12 @@ void	create_heredoc_file(t_command_table **command_table, char *buffer)
 		free(name);
 		i++;
 	}
-	fd = open(name, O_WRONLY | O_CREAT, 0644);
-	write(fd, buffer, sizeof(buffer));
+	fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+		exit_error(OPEN_ERROR, memptr);
+	if (write(fd, buffer, ft_strlen(buffer)) == -1)
+		exit_error(WRITE_ERROR, memptr);
+	if (close(fd) == -1)
+		exit_error(CLOSE_ERROR, memptr);
 	(*command_table)->heredoc_buffer = name;
 }
