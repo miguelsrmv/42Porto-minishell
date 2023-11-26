@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 16:11:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:30:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_valid_env_char(char c)
 
 void	define_quote_flag(char c, int *pos, char *quote_flag)
 {
-	if (*quote_flag == '\0' && (c == squote || c == dquote))
+	if (*quote_flag == '\0' && (c == SQUOTE || c == DQUOTE))
 		*quote_flag = c;
 	else if (ft_isquote(*quote_flag) && (c == *quote_flag))
 		*quote_flag = '\0';
@@ -44,9 +44,9 @@ void	expand_double_vector(char **vector)
 			define_quote_flag(vector[vector_index][i], &i, &quote_flag);
 			if (quote_flag == '\0')
 				normal_expansion(&vector[vector_index], &i, &quote_flag);
-			else if (quote_flag == squote)
+			else if (quote_flag == SQUOTE)
 				squote_expansion(&vector[vector_index], &i, &quote_flag);
-			else if (quote_flag == dquote)
+			else if (quote_flag == DQUOTE)
 				dquote_expansion(&vector[vector_index], &i, &quote_flag);
 		}
 		vector_index++;

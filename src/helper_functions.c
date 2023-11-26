@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:53:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/24 18:50:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:35:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,4 @@ void	print_command_table(t_command_table *command_table)
 	}
 }
 
-void	exit_error(char *error_message, t_error error)
-{
-	if (error.lexer_list)
-		clear_lexer_list(&(error.lexer_list));
-	if (error.command_table)
-	{
-		if (error.command_table->cmd)
-			ft_free_tabs((void **)error.command_table->cmd);
-		if (error.command_table->full_input)
-			ft_free_tabs((void **)error.command_table->full_input);
-		if (error.command_table->full_output)
-			ft_free_tabs((void **)error.command_table->full_output);
-		clear_command_table(&(error.command_table));
-	}
-	ft_printf(error_message);
-	exit(0);
-}
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 18:59:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:30:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	take_out_outer_dquotes(char **string, int start)
 	char	*unquoted_char;
 
 	end = start + 1;
-	while ((*string)[end] != dquote)
+	while ((*string)[end] != DQUOTE)
 		end++;
 	(end)--;
 	(start)++;

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/23 13:42:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:24:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	initialize_command_table(t_command_table **command_table)
 }
 
 void	set_full_redirections(t_token *lexer_sublist,
-			t_command_table **command_table, t_error error)
+			t_command_table **command_table, t_memptr memptr)
 {
 	t_token	*current;
 	int		total_redirects;
@@ -97,7 +97,7 @@ void	set_full_redirections(t_token *lexer_sublist,
 	(*command_table)->full_output = (char **)malloc(sizeof(char *)
 			* (total_redirects * 2 + 1));
 	if (!(*command_table)->full_input || !(*command_table)->full_output)
-		exit_error("Malloc error\n", error);
+		exit_error("Malloc error\n", memptr);
 	initialize_command_table(command_table);
 	fill_full_redir(current, command_table);
 	i = 0;

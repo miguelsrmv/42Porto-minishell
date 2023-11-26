@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/23 18:37:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:50:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-# define squote '\''
-# define dquote '\"'
+# define SQUOTE '\''
+# define DQUOTE '\"'
+# define USAGE_ERROR "Usage: \'./minishell\'."
+# define MALLOC_ERROR "Malloc error."
+# define SYNTAX_ERROR "Syntax error."
 
 enum e_QuoteType {
 	OUT_QUOTE,
@@ -91,17 +94,18 @@ typedef struct s_command_table {
 	struct s_command_table	*next;
 }	t_command_table;
 
-typedef struct s_error {
+typedef struct s_memptr {
 	t_token			*lexer_list;
 	t_command_table	*command_table;
-}	t_error;
+}	t_memptr;
 
 
 // Function definitions
-/// Helper functions
-void				exit_error(char *error_message, t_error error);
-void				print_lexer_tokens(t_token *head);
-void				print_command_table(t_command_table *command_table);
+
+/// Exit Error
+void				clear_lexer_list(t_token **lst);
+void				clear_command_table(t_command_table **lst);
+void				exit_error(char *error_message, t_memptr memptr);
 
 /// main.c
 void				free_list(t_token *head);
@@ -112,15 +116,13 @@ char				*get_input(char *prompt);
 char				*check_valid_input(char *input);
 
 /// lexer.c
-void				fill_in_list(char *input, t_token **head);
-t_token				*read_readline(t_error error);
+void				fill_in_list(char *input, t_token **head, t_memptr memptr);
+t_token				*read_readline(t_memptr memptr);
 
 /// lexer_linked_list.c
-t_token				*create_token(char *string, int type);
+t_token				*create_token(char *token, int type, t_memptr memptr);
 t_token				*last_token(t_token *list);
 void				add_token_end(t_token **list, t_token *new);
-void				clear_lexer_list(t_token **lst);
-void				clear_command_table(t_command_table **lst);
 
 /// lexer_get_tokens.c
 int					is_valid_bash_char(char c);
@@ -133,10 +135,10 @@ char				*get_redirect_token(char *input, int *start, int *end);
 /// parser.c
 int					check_syntax(t_token *lexer_list);
 void				set_cmd(t_token *lexer_sublist,
-						t_command_table **command_table, t_error error);	
+						t_command_table **command_table, t_memptr memptr);	
 void				create_command_table(t_token *lexer_list,
-						t_command_table **command_table, t_error error);
-t_command_table		*parse_list(t_token *lexer_list, t_error error);
+						t_command_table **command_table, t_memptr memptr);
+t_command_table		*parse_list(t_token *lexer_list, t_memptr memptr);
 
 /// parser_set_redirs.c
 void				fill_array(char **array, t_token *current, int i);
@@ -145,13 +147,14 @@ void				fill_full_redir(t_token *current,
 						t_command_table **command_table);
 void				initialize_command_table(t_command_table **command_table);
 void				set_full_redirections(t_token *lexer_sublist,
-						t_command_table **command_table, t_error error);
+						t_command_table **command_table, t_memptr memptr);
 
 /// parser_heredoc.c
 void				check_heredocs(t_command_table **command_table);
 void				create_heredoc_buffer(char *delimiter,
 						char **buffer);
-void				create_heredoc_file(t_command_table **command_table, char *buffer);
+void				create_heredoc_file(t_command_table **command_table,
+						char *buffer);
 
 
 /// expander.c
@@ -210,5 +213,9 @@ void				check_commands(t_command_table **command_table,
 						char **path_list);
 char				**get_path_list(void);
 int					check_builtin(char *command);
+
+/// Helper functions
+void				print_lexer_tokens(t_token *head);
+void				print_command_table(t_command_table *command_table);
 
 #endif
