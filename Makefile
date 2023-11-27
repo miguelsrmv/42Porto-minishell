@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/11/26 16:36:04 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/11/27 19:24:36 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=   minishell
 
 CC      = 	cc
 
-CFLAGS   =  -g -Wall -Wextra -Werror
+CFLAGS   =  -Wall -Wextra -Werror -g
 
 SRCDIR	=	src
 

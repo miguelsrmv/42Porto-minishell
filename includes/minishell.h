@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 21:12:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:14:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,20 +190,18 @@ void				take_out_outer_squotes(char **string, int *start,
 /// expander_dquote.c
 void				dquote_expansion(char **string, int *pos, char *quote_flag,
 						t_memptr memptr);
-void				expand_env_quotes(char **string, int *start,
+void				expand_env_quotes(char **string, int *start, int *end,
 						t_memptr memptr);
 void				expand_to_dollar_sign(char **string, int *start,
 						t_memptr memptr);
-int					take_out_outer_dquotes(char **string, int start,
+int					take_out_outer_dquotes(char **string, int *start,
 						t_memptr memptr);
 
 /// expander_concatenate.c
 int					concatenate(char **string, char *expanded_string,
 						int *start, int end);
-/* int					concatenate_for_squote(char **string, char *expanded_string,
-						int *start, int end); */
-int					concatenate_for_dquote(char **string, char *expanded_string,
-						int *start, int end);
+int					free_concatenate(char *left, char *right, char *temp,
+						char *stringcpy);
 
 /// executer.c
 int					count_processes(t_command_table **command_table);

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 21:12:22 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:17:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	take_out_outer_squotes(char **string, int *start, char *quote_flag,
 	if (concatenate(string, unquoted_char, start, end + 1) == 1)
 		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(unquoted_char);
+	free(unquoted_char);
 	(*quote_flag) = '\0';
 }

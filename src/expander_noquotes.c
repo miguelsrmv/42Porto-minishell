@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 19:11:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:20:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ansi_quoting(char **string, int *start, t_memptr memptr)
 	if (concatenate(string, substring, start, end + 1) == 1)
 		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(substring);
+	free(substring);
 }
 
 // Tirar quote flag?
