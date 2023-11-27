@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 21:20:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:35:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 	{
 		if ((*string)[*pos] == '$' && !(*string)[(*pos) + 1])
 			(*pos)++;
+		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
+			&& (*string)[(*pos) + 1] == '$')
+			expand_to_pid(string, pos, memptr);
 		else if ((*string)[*pos] == '$' && ft_isquote((*string)[(*pos) + 1]))
 			ansi_quoting(string, pos, memptr);
 		else if ((*string)[*pos] == '$')
@@ -33,7 +36,19 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 	}
 }
 
-// Tirar quote flag?
+void	expand_to_pid(char **string, int *start, t_memptr memptr)
+{
+	char	*pid_str;
+
+	pid_str = ft_itoa(getpid());
+	if (!pid_str)
+		exit_error(MALLOC_ERROR, memptr);
+	if (concatenate(string, pid_str, start, (*start) + 2) == 1)
+		exit_error(MALLOC_ERROR, memptr);
+	(*start) = (*start) + ft_strlen(pid_str);
+	free(pid_str);
+}
+
 void	ansi_quoting(char **string, int *start, t_memptr memptr)
 {
 	char	*substring;
@@ -51,7 +66,6 @@ void	ansi_quoting(char **string, int *start, t_memptr memptr)
 	free(substring);
 }
 
-// Tirar quote flag?
 void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 {
 	char	*substring;
@@ -73,7 +87,6 @@ void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 	(*start) = (*start) + ft_strlen(expanded);
 }
 
-// Tirar quote flag?
 void	take_out_after_quotes(char **string, int *start, t_memptr memptr)
 {
 	char	*contracted_char;
