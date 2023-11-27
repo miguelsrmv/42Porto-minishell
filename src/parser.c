@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 20:23:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:57:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,40 @@ int	check_syntax(t_token *lexer_list)
 	return (VALID);
 }
 
-void	set_cmd(t_token *lexer_sublist, t_command_table **command_table,
-				t_memptr memptr)
+int	count_cmds(t_token *current)
 {
-	t_token	*current;
-	int		i;
+	int	i;
 
 	i = 0;
-	current = lexer_sublist;
 	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == STRING)
 			i++;
 		current = current->next;
 	}
-	(*command_table)->cmd = (char **)malloc(sizeof(char *) * (i + 1));
+	return (i);
+}
+
+void	set_cmd(t_token *lexer_sublist, t_command_table **command_table,
+			t_memptr memptr)
+{
+	t_token	*current;
+	int		i;
+
+	(*command_table)->cmd = (char **)malloc(sizeof(char *)
+			* (count_cmds(lexer_sublist) + 1));
 	if (!(*command_table)->cmd)
 		exit_error(MALLOC_ERROR, memptr);
-	i = 0;
 	current = lexer_sublist;
+	i = 0;
 	while (current && current->type != SEPARATOR)
 	{
 		if (current->type == STRING)
+		{
 			(*command_table)->cmd[i] = ft_strdup(current->token);
-		if (!(*command_table)->cmd[i++])
-			exit_error(MALLOC_ERROR, memptr);
+			if (!(*command_table)->cmd[i++])
+				exit_error(MALLOC_ERROR, memptr);
+		}
 		current = current->next;
 	}
 	(*command_table)->cmd[i] = NULL;

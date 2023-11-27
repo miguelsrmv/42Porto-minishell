@@ -1,7 +1,6 @@
 # Sinais
 # Builtins
 # Open pipes
-# echo $"$USER"
 # Syntaxe
  
 minishell: echo "$USER"$HOME
