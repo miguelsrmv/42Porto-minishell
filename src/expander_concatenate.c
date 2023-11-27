@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 21:15:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 23:14:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	concatenate(char **string, char *expanded_string, int *start, int end)
 	right = NULL;
 	temp = NULL;
 	stringcpy = NULL;
-	left = ft_substr((*string), (ft_isquote((*string)[0])), (*start));
+	left = ft_substr((*string), 0, (*start));
 	if (!left)
 		return (free_concatenate(left, right, temp, stringcpy));
 	right = ft_substr((*string), end, ft_strlen(*string) - end);
