@@ -1,11 +1,11 @@
 # Sinais
-# "l"s
 # Builtins
-# Mais de 2 comandos
 # Erros e memória
 # Open pipes
 # Expandir $$, $$$...
-
+# echo $"$USER"
+# Syntaxe
+ 
 minishell: echo "$USER"$HOME
 �
 minishell: echo '$USER'$HOME
@@ -26,3 +26,5 @@ echo "$USER'$USER'"
 mde-sa--'$USER'
 
 echo "'$USER'" 
+
+

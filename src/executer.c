@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 19:19:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:14:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ int	count_processes(t_command_table **command_table)
 	return (processes_count);
 }
 
-int	**create_pipes(int **pipe_fd, int process_num)
+int	**create_pipes(int **pipe_fd, int process_num, t_memptr memptr)
 {
 	pipe_fd = (int **)malloc(sizeof(int *) * (process_num));
 	if (!pipe_fd)
-		return pipe_fd ; // Error
+		exit_error(MALLOC_ERROR, memptr);
 	process_num--;
 	pipe_fd[process_num] = NULL;
 	while (process_num--)
 	{
 		pipe_fd[process_num] = (int *)malloc(sizeof(int) * 2);
 		if (!pipe_fd[process_num])
-			return pipe_fd ;	// Error
+			exit_error(MALLOC_ERROR, memptr);
 		if (pipe(pipe_fd[process_num]) == -1)
-			return pipe_fd ;	// Error
+			exit_error(PIPE_ERROR, memptr);
 	}
 	return (pipe_fd);
 }
@@ -67,7 +67,7 @@ t_command_table	*create_processes(t_command_table **command_table,
 	return (current);
 }
 
-void	close_pipes(int **pipe_fd, t_command_table *current)
+void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 {
 	int	i;
 
@@ -75,14 +75,21 @@ void	close_pipes(int **pipe_fd, t_command_table *current)
 	while (pipe_fd[i])
 	{
 		if (i != current->command_no - 2)
-			close(pipe_fd[i][0]);
+		{
+			if (close(pipe_fd[i][0]) == -1)
+				exit_error(CLOSE_ERROR, memptr);
+		}
 		if (i != current->command_no - 1)
-			close(pipe_fd[i][1]);
+		{
+			if (close(pipe_fd[i][1]) == -1)
+				exit_error(CLOSE_ERROR, memptr);
+		}
 		i++;
 	}
 }
 
-void	prepare_processes(t_command_table **command_table, char **envp)
+void	prepare_processes(t_command_table **command_table, char **envp,
+			t_memptr memptr)
 {
 	int				process_num;
 	int				pid;
@@ -99,11 +106,11 @@ void	prepare_processes(t_command_table **command_table, char **envp)
 		return ;
 	}
 	pipe_fd = NULL;
-	pipe_fd = create_pipes(pipe_fd, process_num);
+	pipe_fd = create_pipes(pipe_fd, process_num, memptr);
 	path_list = get_path_list();
 	current = create_processes(command_table, process_num);
-	close_pipes(pipe_fd, current);
-	check_redirections(pipe_fd, &current);
+	close_pipes(pipe_fd, current, memptr);
+	check_redirections(pipe_fd, &current); // falta meter memptr a partir daqui!!
 	check_commands(&current, path_list);
 	execve(current->cmd_target, current->cmd, envp);
 }

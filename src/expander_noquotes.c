@@ -6,23 +6,24 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 14:49:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:20:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	normal_expansion(char **string, int *pos, char *quote_flag)
+void	normal_expansion(char **string, int *pos, char *quote_flag,
+			t_memptr memptr)
 {
 	while ((*string)[*pos] && (*string)[*pos] != *quote_flag)
 	{
 		if ((*string)[*pos] == '$' && !(*string)[(*pos) + 1])
 			(*pos)++;
 		else if ((*string)[*pos] == '$' && ft_isquote((*string)[(*pos) + 1]))
-			ansi_quoting(string, pos, quote_flag);
+			ansi_quoting(string, pos, memptr);
 		else if ((*string)[*pos] == '$')
 		{
-			expand_env_no_quotes(string, pos, quote_flag);
+			expand_env_no_quotes(string, pos, memptr);
 			break ;
 		}
 		else if (ft_isquote((*string)[*pos]))
@@ -33,7 +34,7 @@ void	normal_expansion(char **string, int *pos, char *quote_flag)
 }
 
 // Tirar quote flag?
-void	ansi_quoting(char **string, int *start, char *quote_flag)
+void	ansi_quoting(char **string, int *start, t_memptr memptr)
 {
 	char	*substring;
 	int		end;
@@ -42,13 +43,16 @@ void	ansi_quoting(char **string, int *start, char *quote_flag)
 	while ((*string)[end] != ((*string)[*start + 1]))
 		end++;
 	substring = ft_substr((*string), (*start) + 2, end - (*start) - 2);
-	concatenate(string, substring, start, end + 1);
+	if (!substring)
+		exit_error(MALLOC_ERROR, memptr);
+	if (concatenate(string, substring, start, end + 1) == 1)
+		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(substring);
-	(void)(quote_flag);
+	free(substring);
 }
 
 // Tirar quote flag?
-void	expand_env_no_quotes(char **string, int *start, char *quote_flag)
+void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 {
 	char	*substring;
 	char	*expanded;
@@ -58,17 +62,19 @@ void	expand_env_no_quotes(char **string, int *start, char *quote_flag)
 	while (is_valid_env_char ((*string)[end]))
 		end++;
 	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
+	if (!substring)
+		exit_error(MALLOC_ERROR, memptr);
 	expanded = getenv(substring);
 	if (!expanded)
 		expanded = "";
 	free(substring);
-	concatenate(string, expanded, start, end);
+	if (concatenate(string, expanded, start, end) == 1)
+		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(expanded);
-	(void)(quote_flag);
 }
 
 // Tirar quote flag?
-void	take_out_after_quotes(char **string, int *start, char *quote_flag)
+void	take_out_after_quotes(char **string, int *start, t_memptr memptr)
 {
 	char	*contracted_char;
 	char	quote;
@@ -79,7 +85,9 @@ void	take_out_after_quotes(char **string, int *start, char *quote_flag)
 	while ((*string)[end] != quote)
 		end++;
 	contracted_char = ft_substr((*string), (*start) + 2, end - (*start) - 2);
-	concatenate(string, contracted_char, start, end + 1);
+	if (!contracted_char)
+		exit_error(MALLOC_ERROR, memptr);
+	if (concatenate(string, contracted_char, start, end + 1) == 1)
+		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + 1 + ft_strlen(contracted_char);
-	(void)(quote_flag);
 }

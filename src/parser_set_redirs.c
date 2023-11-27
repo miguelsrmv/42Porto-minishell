@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_redirs.c                                    :+:      :+:    :+:   */
+/*   parser_set_redirs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/28 21:42:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:22:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_array(char **array, t_token *current, int i)
+void	fill_subarray(char **array, t_token *current, int i, t_memptr memptr)
 {
-	array[i] = current->token;
-	array[i + 1] = current->next->token;
+	array[i] = ft_strdup(current->token);
+	array[i + 1] = ft_strdup(current->next->token);
 	array[i + 2] = NULL;
+	if (!array[i] || !array[i] + 1)
+		exit_error(MALLOC_ERROR, memptr);
 	current->next->type = REDIRECT_TARGET;
 }
 
@@ -36,7 +38,8 @@ int	count_redirect_targets(t_token *lexer_sublist)
 	return (i);
 }
 
-void	fill_full_redir(t_token *current, t_command_table **command_table)
+void	fill_full_redir(t_token *current, t_command_table **command_table,
+			t_memptr memptr)
 {
 	int	input_index;
 	int	output_index;
@@ -50,13 +53,14 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 		{
 			if (ft_strchr(current->token, '>'))
 			{
-				fill_array((*command_table)->full_output, current,
-					output_index);
+				fill_subarray((*command_table)->full_output, current,
+					output_index, memptr);
 				output_index = output_index + 2;
 			}
 			if (ft_strchr(current->token, '<'))
 			{
-				fill_array((*command_table)->full_input, current, input_index);
+				fill_subarray((*command_table)->full_input, current,
+					input_index, memptr);
 				input_index = input_index + 2;
 			}
 		}
@@ -64,44 +68,40 @@ void	fill_full_redir(t_token *current, t_command_table **command_table)
 	}
 }
 
-void	initialize_command_table(t_command_table **command_table)
+void	initialize_command_table(t_command_table **command_table,
+			int total_redir, t_memptr memptr)
 {
+	(*command_table)->full_input = (char **)malloc(sizeof(char *)
+			* (total_redir * 2 + 1));
+	(*command_table)->full_output = (char **)malloc(sizeof(char *)
+			* (total_redir * 2 + 1));
+	if (!(*command_table)->full_input || !(*command_table)->full_output)
+		exit_error(MALLOC_ERROR, memptr);
 	(*command_table)->cmd = NULL;
-	(*command_table)->full_input[0] = NULL;
-	(*command_table)->full_output[0] = NULL;
-	(*command_table)->input_target = NULL;
-	(*command_table)->output_target = NULL;
-	(*command_table)->input_type = NONE;
-	(*command_table)->output_type = NONE;
+	(*command_table)->cmd_target = NULL;
 	(*command_table)->command_type = EXECUTABLE;
-	(*command_table)->command_no = 0;
+	(*command_table)->full_input[0] = NULL;
+	(*command_table)->input_target = NULL;
+	(*command_table)->input_type = NONE;
+	(*command_table)->input_fd = 0;
+	(*command_table)->heredoc_buffer = NULL;
+	(*command_table)->full_output[0] = NULL;
+	(*command_table)->output_target = NULL;
+	(*command_table)->output_type = NONE;
+	(*command_table)->output_fd = 0;
 	(*command_table)->pid = 0;
+	(*command_table)->command_no = 0;
 	(*command_table)->next = NULL;
 }
 
 void	set_full_redirections(t_token *lexer_sublist,
-			t_command_table **command_table, t_error error)
+			t_command_table **command_table, t_memptr memptr)
 {
-	t_token	*current;
 	int		total_redirects;
-	int		i;
 
-	current = lexer_sublist;
 	total_redirects = count_redirect_targets(lexer_sublist);
-	(*command_table)->full_input = (char **)malloc(sizeof(char *)
-			* (total_redirects * 2 + 1));
-	(*command_table)->full_output = (char **)malloc(sizeof(char *)
-			* (total_redirects * 2 + 1));
-	if (!(*command_table)->full_input || !(*command_table)->full_output)
-		exit_error("Malloc error\n", error);
-	initialize_command_table(command_table);
-	fill_full_redir(current, command_table);
-	i = 0;
-	while ((*command_table)->full_input[i])
-		i++;
-	(*command_table)->full_input[i] = NULL;
-	i = 0;
-	while ((*command_table)->full_output[i])
-		i++;
-	(*command_table)->full_output[i] = NULL;
+	initialize_command_table(command_table, total_redirects, memptr);
+	fill_full_redir(lexer_sublist, command_table, memptr);
+	check_heredocs(command_table, memptr);
+	// check urandom ! 
 }
