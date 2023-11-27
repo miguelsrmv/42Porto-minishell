@@ -3,25 +3,4 @@
 # Open pipes
 # Syntaxe
  
-minishell: echo "$USER"$HOME
-�
-minishell: echo '$USER'$HOME
-$USER$HOME
-minishell: echo "$USER"
-mde-sa--
-minishell: echo "$USER""$USER"
-mde-sa--"mde-sa--
-minishell: 
-
-
-echo $'USE'R
-
-
-echo $'USER'
-
-echo "$USER'$USER'"
-mde-sa--'$USER'
-
 echo "'$USER'" 
-
-
