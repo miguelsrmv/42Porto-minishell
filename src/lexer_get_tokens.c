@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_get_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/01 11:22:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:40:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ char	*get_pipe_token(char *input, int *start, int *end)
 	(*end)++;
 	return (ft_strndup(&input[*start], (*end - *start)));
 }
-
-
 
 char	*get_redirect_token(char *input, int *start, int *end)
 {
@@ -58,9 +56,11 @@ char	*get_string_token(char *input, int *start, int *end)
 	return (result);
 }
 
-void	advance_until_unquoted_whitespace(char *input, int *end, char quote_status)
+void	advance_until_unquoted_whitespace(char *input, int *end,
+			char quote_status)
 {
-	while((!ft_isspace(input[*end]) || quote_status) && input[*end])
+	while ((!ft_isspace(input[*end]) || quote_status)
+		&& input[*end])
 	{
 		if (quote_status)
 		{
