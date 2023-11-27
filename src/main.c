@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 21:40:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:21:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **envp)
 	command_table = NULL;
 	memptr.lexer_list = &lexer_list;
 	memptr.command_table = &command_table;
-	while (1)
+ 	while (1)
 	{
 		lexer_list = read_readline(memptr);
 		command_table = parse_list(lexer_list, memptr);

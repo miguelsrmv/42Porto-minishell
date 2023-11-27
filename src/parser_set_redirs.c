@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 20:22:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:49:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,4 @@ void	set_full_redirections(t_token *lexer_sublist,
 	initialize_command_table(command_table, total_redirects, memptr);
 	fill_full_redir(lexer_sublist, command_table, memptr);
 	check_heredocs(command_table, memptr);
-	// check urandom ! 
 }

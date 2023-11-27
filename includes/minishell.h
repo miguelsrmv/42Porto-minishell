@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 21:38:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:14:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,8 @@ void				normal_expansion(char **string, int *pos, char *quote_flag,
 void				ansi_quoting(char **string, int *start,	t_memptr memptr);
 void				expand_env_no_quotes(char **string, int *start,
 						t_memptr memptr);
-void				take_out_after_quotes(char **string, int *start,
-						t_memptr memptr);
 void				expand_to_pid(char **string, int *start, t_memptr memptr);
+void				localization(char **string, int *start,	t_memptr memptr);
 
 /// expander_squote.c
 void				squote_expansion(char **string, int *pos, char *quote_flag,
