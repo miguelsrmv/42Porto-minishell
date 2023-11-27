@@ -1,9 +1,6 @@
 # Sinais
 # Builtins
-# Erros e memória
 # Open pipes
-# Expandir $$, $$$...
-# echo $"$USER"
 # Syntaxe
  
 minishell: echo "$USER"$HOME
