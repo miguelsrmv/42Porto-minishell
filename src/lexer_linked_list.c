@@ -6,20 +6,21 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:31:44 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 19:57:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:49:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*create_token(char *string)
+t_token	*create_token(char *token, int type, t_memptr memptr)
 {
 	t_token	*node;
 
 	node = (t_token *)malloc(sizeof(t_token));
 	if (!node)
-		return (NULL);
-	node->token = string;
+		exit_error(MALLOC_ERROR, memptr);
+	node->token = token;
+	node->type = type;
 	node->next = NULL;
 	return (node);
 }

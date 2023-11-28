@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:52:58 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/17 11:44:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:36:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Aqui ponderar não ter Is_balid_bash_char mas sim simplesmente um else
 // e tratar a validade dos caracteres no parser mais à frente
 // Alternativamente, avisar logo aqui de invalid char e dar free e exit
-void	fill_in_list(char *input, t_token **head)
+void	fill_in_list(char *input, t_token **head, t_memptr memptr)
 {	
 	int	start;
 	int	end;
@@ -28,30 +28,35 @@ void	fill_in_list(char *input, t_token **head)
 			start++;
 		if (ft_isquote(input[start]))
 			add_token_end(head, create_token
-				(get_quote_token(input, &start, &end)));
+				(get_string_token(input, &start, &end), STRING, memptr));
 		else if (is_valid_bash_char(input[start]))
 			add_token_end(head, create_token
-				(get_string_token(input, &start, &end)));
+				(get_string_token(input, &start, &end), STRING, memptr));
 		else if (input[start] == '<' || input[start] == '>')
 			add_token_end(head, create_token
-				(get_redirect_token(input, &start, &end)));
+				(get_redirect_token(input, &start, &end), REDIRECT, memptr));
 		else if (input[start] == '|')
 			add_token_end(head, create_token
-				(get_pipe_token(input, &start, &end)));
-		start = end;
+				(get_pipe_token(input, &start, &end), SEPARATOR, memptr));
+		if (input[start])
+			start = end;
 	}
 }
 
-t_token	*read_readline(void)
+t_token	*read_readline(t_memptr memptr)
 {
 	char	*input;
 	t_token	*head;
 
-	input = get_input("minishell: ");
-	if (!input)
-		exit_error("Error: input is NULL\n");
+	input = NULL;
+	while (!input || ft_strlen(input) == 0)
+	{
+		input = get_input("minishell: ", memptr);
+		if (!input || ft_strlen(input) == 0)
+			rl_on_new_line();
+	}
 	head = NULL;
-	fill_in_list(input, &head);
+	fill_in_list(input, &head, memptr);
 	free(input);
 	return (head);
 }

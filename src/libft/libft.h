@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/10/13 22:44:15 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:52:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,7 @@ char	*ft_str_tolower(char *str);
 char	*ft_str_toupper(char *str);
 int		ft_checkextension(const char *str, const char *suffix);
 char	*ft_strndup(const char *s, size_t n);
+int		ft_issquote(int c);
+int		ft_isdquote(int c);
 
 #endif
