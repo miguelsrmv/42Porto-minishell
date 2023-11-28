@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:52:58 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 16:47:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:36:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ t_token	*read_readline(t_memptr memptr)
 	char	*input;
 	t_token	*head;
 
-	input = get_input("minishell: ");
-	if (!input)
-		exit_error("Error: input is NULL\n", memptr);
+	input = NULL;
+	while (!input || ft_strlen(input) == 0)
+	{
+		input = get_input("minishell: ", memptr);
+		if (!input || ft_strlen(input) == 0)
+			rl_on_new_line();
+	}
 	head = NULL;
 	fill_in_list(input, &head, memptr);
 	free(input);
