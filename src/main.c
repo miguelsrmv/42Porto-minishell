@@ -6,26 +6,11 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 14:49:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:12:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_list(t_token *head)
-{
-	t_token	*current;
-	t_token	*next;
-
-	current = head;
-	while (current)
-	{
-		next = current->next;
-		free(current->token);
-		free(current);
-		current = next;
-	}
-}
 
 int	main(int argc, char **envp)
 {
