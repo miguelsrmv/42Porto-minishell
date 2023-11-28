@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 15:12:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:16:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define SQUOTE '\''
 # define DQUOTE '\"'
 # define USAGE_ERROR "Usage: \'./minishell\'."
-# define NULL_ INPUT_ERROR "No input."
 # define MALLOC_ERROR "Malloc error."
 # define SYNTAX_ERROR "Syntax error."
 # define OPEN_ERROR "Open file error."
@@ -228,9 +227,5 @@ void				check_commands(t_command_table **command_table,
 						char **path_list);
 char				**get_path_list(void);
 int					check_builtin(char *command);
-
-/// Helper functions (to delete)
-void				print_lexer_tokens(t_token *head);
-void				print_command_table(t_command_table *command_table);
 
 #endif
