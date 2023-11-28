@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/01 13:24:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:33:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,45 @@ char	*check_valid_input(char *input)
 	return (input);
 }
 
-char	*get_input(char *prompt)
+void	update_readline_history(char **input, t_memptr memptr)
+{
+	char	*added_input;
+	char	*input_nl;
+	char	*temp;
+
+	added_input = readline("> ");
+	input_nl = ft_strjoin(*input, "\n");
+	if (!input_nl)
+	{
+		free(*input);
+		free(added_input);
+		exit_error(MALLOC_ERROR, memptr);
+	}
+	temp = *input;
+	*input = ft_strjoin(input_nl, added_input);
+	if (!(*input))
+	{
+		free(added_input);
+		free(input_nl);
+		free(temp);
+		exit_error(MALLOC_ERROR, memptr);
+	}
+	rl_replace_line(*input, 0);
+	free(temp);
+	free(input_nl);
+	free(added_input);
+}
+
+char	*get_input(char *prompt, t_memptr memptr)
 {
 	char	*input;
-	char	*added_input;
-	char	*temp;
 
 	input = readline(prompt);
 	while (check_in_quote(input) != OUT_QUOTE)
-	{
-		added_input = readline("> ");
-		temp = input;
-		input = ft_strjoin(input, added_input);
-		free(temp);
-		free(added_input);
-	}
+		update_readline_history(&input, memptr);
+	rl_redisplay();
 	input = check_valid_input(input);
+	if (input && ft_strlen(input))
+		add_history(input);
 	return (input);
 }
