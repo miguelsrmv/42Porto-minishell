@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 14:33:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:45:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ void				free_list(t_token *head);
 
 /// get_input.c
 int					check_in_quote(char *input);
-void				update_readline_history(char **input, t_memptr memptr);
+void				trim_left_whitespace(char **input, t_memptr memptr);
+void				update_input(char **input, t_memptr memptr);
 char				*get_input(char *prompt, t_memptr memptr);
 char				*check_valid_input(char *input);
 
