@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:11:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:48:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	check_builtin(t_command_table *current)
 {
-	if (!ft_strcmp(current->cmd[0], "echo"))
+	if (!ft_strcmp(current->cmd[0], "echo2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
-	else if (!ft_strcmp(current->cmd[0], "cd"))
+	else if (!ft_strcmp(current->cmd[0], "cd2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
-	else if (!ft_strcmp(current->cmd[0], "pwd"))
+	else if (!ft_strcmp(current->cmd[0], "pwd2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
-	else if (!ft_strcmp(current->cmd[0], "export"))
+	else if (!ft_strcmp(current->cmd[0], "export2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
-	else if (!ft_strcmp(current->cmd[0], "unset"))
+	else if (!ft_strcmp(current->cmd[0], "unset2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
-	else if (!ft_strcmp(current->cmd[0], "env"))
+	else if (!ft_strcmp(current->cmd[0], "env2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
-	else if (!ft_strcmp(current->cmd[0], "exit"))
+	else if (!ft_strcmp(current->cmd[0], "exit2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
 	if (current->builtin_pointer)
 		current->command_type = BUILTIN;

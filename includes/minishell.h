@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:34:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:27:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,28 @@
 # define FALSE 0
 
 // Process Errors
-# define MALLOC_ERROR "Error: Malloc error."
-# define OPEN_ERROR "Error: Open error."
-# define WRITE_ERROR "Error: Write file error."
-# define CLOSE_ERROR "Error: Close file error."
-# define PIPE_ERROR "Error: Pipe error."
-# define FORK_ERROR "Error: Fork error."
+# define MALLOC_ERROR "Error: Malloc error.\n"
+# define WRITE_ERROR "Error: Write file error.\n"
+# define CLOSE_ERROR "Error: Close file error.\n"
+# define PIPE_ERROR "Error: Pipe error.\n"
+# define FORK_ERROR "Error: Fork error.\n"
 
 // Usage errors
-# define USAGE_ERROR "Usage: \'./minishell\'."
-# define SYNTAX_ERROR "Syntax error near unexpected token."
-# define COMMAND_ERROR "Command not found."
+# define USAGE_ERROR "Usage error: \'./minishell\'.\n"
+# define QUOTE_ERROR "Input error: unclosed quote.\n"
+# define SYNTAX_ERROR "Syntax error near unexpected token.\n"
+# define COMMAND_ERROR "command not found.\n"
+# define OPEN_ERROR "No such file or directory.\n"
 
 enum e_QuoteType {
 	OUT_QUOTE,
 	IN_QUOTE,
 	IN_DQUOTE
+};
+
+enum e_PipeType {
+	OUT_PIPE,
+	IN_PIPE,
 };
 
 enum e_TokenType {
@@ -128,10 +134,13 @@ void				clean_memory(t_memptr memptr);
 void				exit_error(char *error_message, t_memptr memptr, ...);
 
 /// get_input.c
-int					check_in_quote(char *input);
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
 char				*get_input(char *prompt, t_memptr memptr);
+
+/// input_checker.c
+int					check_in_quote(char *input);
+int					check_in_pipe(char *input);
 char				*check_valid_input(char *input);
 
 /// lexer.c

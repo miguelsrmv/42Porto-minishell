@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:45:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:45:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	advance_until_unquoted_whitespace(char *input, int *end,
 				(*end)++;
 				if (ft_isquote(input[*end]))
 					quote_status = input[*end];
-				else if (input[*end] == '|')
+				else if (input[*end] == '|'
+					|| input[*end] == '<' || input[*end] == '>')
 					return ;
 			}
 		}

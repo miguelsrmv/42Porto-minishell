@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/11/29 12:16:32 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/11/29 14:14:18 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,14 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
-SRC		=	main.c get_input.c lexer.c lexer_linked_list.c lexer_get_tokens.c \
-			parser.c parser_set_redirs.c parser_heredoc.c expander.c \
-			expander_noquotes.c expander_squote.c expander_dquote.c expander_concatenate.c \
-			executer_processes.c executer_redir_checker.c executer_cmd_checker.c executer_get_path.c \
-			executer.c exit_error.c builtins.c
+SRC		=	main.c get_input.c input_checker.c \
+			lexer.c lexer_linked_list.c lexer_get_tokens.c \
+			parser.c parser_set_redirs.c parser_heredoc.c \
+			expander.c expander_noquotes.c expander_squote.c expander_dquote.c \
+			expander_concatenate.c \
+			executer_processes.c executer_redir_checker.c executer_cmd_checker.c \
+			executer_get_path.c executer.c \
+			exit_error.c builtins.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

@@ -3,7 +3,6 @@
 # Open pipes
 # Syntaxe
 
-minishell: ls|wc
-ls|wc: command not found
-mde-sa--@c1r10s3:~/CommonCore/minishell$ ls|wc
-      8       8      70
+Open pipes
+Tirar unclosed quotes
+Verificar que cmd[0] nao e' uma pasta

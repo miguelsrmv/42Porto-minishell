@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:33:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:07:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,19 @@ void	clean_memory(t_memptr memptr)
 		ft_free_tabs((void **)memptr.pipe_fd);
 }
 
-void	exit_error(char *error_message, t_memptr memptr, ...)
+void	exit_error(char *error_msg, t_memptr memptr, ...)
 {
 	va_list args;
+
 	va_start(args, memptr);
-	if (!ft_strcmp(error_message, COMMAND_ERROR))
-		ft_fprintf(STDERR_FILENO,
-			"%s: command not found\n", va_arg(args, char *));
-	else if (!ft_strcmp(error_message, OPEN_ERROR))
-		ft_fprintf(STDERR_FILENO,
-			"%s: No such file or directory\n", va_arg(args, char *));
+	if (!ft_strcmp(error_msg, COMMAND_ERROR))
+		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
+	else if (!ft_strcmp(error_msg, OPEN_ERROR))
+		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
+	else if (!ft_strcmp(error_msg, QUOTE_ERROR))
+		ft_fprintf(STDERR_FILENO, QUOTE_ERROR);
 	else
-		perror(error_message);
+		perror(error_msg);
 	va_end(args);
 	clean_memory(memptr);
 	exit(0);
