@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:20:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:58:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,30 @@ t_memptr	initialize_memptr(t_token **lexer_list,
 	return (memptr);
 }
 
-int	main(int argc, char **envp)
+void	set_environment_vars(char **envp, t_memptr memptr)
+{
+	t_env			*envv;
+
+	envv = init_envv(envp);
+	if (envv == NULL)
+		exit_error(ENV_ERROR, memptr);
+	set_envp(envp);
+	set_envv(envv);
+}
+
+int	main(int argc, char **argv, char **envp)
 {
 	t_token			*lexer_list;
 	t_command_table	*command_table;
 	t_memptr		memptr;
 
+	(void)argv;
 	lexer_list = NULL;
 	command_table = NULL;
 	memptr = initialize_memptr(&lexer_list, &command_table);
 	if (argc >10) // Mudar no fim
 		exit_error(USAGE_ERROR, memptr);
+	set_environment_vars(envp, memptr);
 	while (TRUE)
 	{
 		lexer_list = read_readline(memptr);

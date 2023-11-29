@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:32:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:02:26 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-# include <stdbool.h>
-# include <dirent.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <string.h>
+# include <errno.h>
+# include <dirent.h>
+# include <stdbool.h>
+
 
 # define SQUOTE '\''
 # define DQUOTE '\"'
@@ -37,6 +40,7 @@
 # define CLOSE_ERROR "Error: Close file error.\n"
 # define PIPE_ERROR "Error: Pipe error.\n"
 # define FORK_ERROR "Error: Fork error.\n"
+# define ENV_ERROR "Error: Env error.\n"
 
 // Usage errors
 # define USAGE_ERROR "Usage error: \'./minishell\'.\n"
@@ -143,6 +147,7 @@ typedef struct s_export
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table);
+void				set_environment_vars(char **envp, t_memptr memptr);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
@@ -276,10 +281,8 @@ void				fill_in_result_from_path_list(char **path_list,
 						char **result, t_memptr memptr);
 
 /// executer.c
-void				execute(t_command_table *current, char **envp);
-
-/// builtins_placeholder.c
-void				builtin_placeholder(void);
+void				execute(t_command_table *current, char **envp,
+						t_memptr memptr);
 
 //env2.c
 int					env(char **argv);
