@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_get_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 13:45:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:33:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	advance_until_unquoted_whitespace(char *input, int *end,
 		if (!quote_status)
 		{
 			while ((!ft_isspace(input[*end]) && !quote_status
-				&& input[*end]))
+					&& input[*end]))
 			{
 				(*end)++;
 				if (ft_isquote(input[*end]))

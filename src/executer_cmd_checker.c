@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_cmd_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 14:53:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:35:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_executables(t_command_table *current, char **path_list)
 void	check_commands(t_command_table **command_table, char **path_list,
 			t_memptr memptr)
 {	
-	t_command_table *current;
+	t_command_table	*current;
 
 	current = (*command_table);
 	while (current)

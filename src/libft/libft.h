@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/20 18:52:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:20:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 /* Part 1: Libc functions */
 int		ft_isalpha(int c);
@@ -118,5 +119,17 @@ int		ft_checkextension(const char *str, const char *suffix);
 char	*ft_strndup(const char *s, size_t n);
 int		ft_issquote(int c);
 int		ft_isdquote(int c);
+
+/* Part 7: extra funcions for Builtins */
+char	**ft_str_arr_dup(char **arr);
+int		ft_str_arr_len(char **arr);
+char	**ft_realloc_str_arr(char **arr, int size);
+void	ft_free_str_array(char ***arr);
+void	ft_free_str(char **str);
+char	*ft_strstrjoin(char *s1, char *s2, char *divider);
+char	*ft_append(char **dst, char *src);
+void	*ft_free(void **p);
+long	ft_atol(const char *str);
+bool	ft_issign(char c);
 
 #endif

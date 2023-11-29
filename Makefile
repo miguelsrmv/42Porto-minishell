@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
+#    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/11/29 14:14:18 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/11/29 17:30:34 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,11 @@ SRC		=	main.c get_input.c input_checker.c \
 			expander_concatenate.c \
 			executer_processes.c executer_redir_checker.c executer_cmd_checker.c \
 			executer_get_path.c executer.c \
-			exit_error.c builtins.c
+			exit_error.c \
+			builtin_cd.c builtin_echo.c builtin_env2.c builtin_exit.c \
+			builtin_export.c builtin_export2.c builtin_export3.c builtin_export4.c \
+			builtin_pwd.c builtin_unset.c get_set.c\
+			builtins_placeholder.c \
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
