@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 10:19:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:16:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 			wait(NULL);
 		return ;
 	}
-	path_list = get_path_list();
+	path_list = get_path_list(&memptr);
 	check_commands(command_table, path_list, memptr);
 	pipe_fd = NULL;
 	pipe_fd = create_pipes(pipe_fd, process_num, memptr);

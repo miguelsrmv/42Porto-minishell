@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 10:32:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:13:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,15 @@ typedef struct s_command_table {
 typedef struct s_memptr {
 	t_token			**lexer_list;
 	t_command_table	**command_table;
+	char			**path_list;
+	int				**pipe_fd;
 }	t_memptr;
 
 // Function definitions
+
+/// Main.c
+t_memptr			initialize_memptr(t_token **lexer_list,
+						t_command_table **command_table);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
@@ -230,13 +236,17 @@ void				check_redirections(int **pipe_fd,
 						t_command_table **command);
 
 /// executer_cmd_checker.c
-char				**get_path_list(void);
+
 void				check_builtin(t_command_table *current);
 void				check_executables(t_command_table *current,
 						char **path_list);
 void				check_commands(t_command_table **command_table,
 						char **path_list, t_memptr memptr);
 
+/// executer_get_path.c
+char				**get_path_list(t_memptr *memptr);
+void			    fill_in_result_from_path_list(char **path_list, char **result,
+							t_memptr memptr);
 // builtins.c
 void				builtin_placeholder(void);
 

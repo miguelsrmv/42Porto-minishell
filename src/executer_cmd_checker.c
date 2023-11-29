@@ -6,40 +6,11 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 10:30:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 10:48:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**get_path_list(void)
-{
-	char	**path_list;
-	int		i;
-	char	**result;
-	char	*temp;
-
-	path_list = ft_split(getenv("PATH"), ':');
-	i = 0;
-	while (path_list[i])
-		i++;
-	result = (char **)malloc(sizeof(char *) * (i + 3));
-	result[0] = ft_strdup("./");
-	temp = getcwd(NULL, 0);
-	result[1] = ft_strjoin(temp, "/");
-	free(temp);
-	i = 0;
-	while (path_list[i])
-	{
-		temp = ft_strjoin(path_list[i], "/");
-		result[i + 2] = ft_strdup(temp);
-		free(temp);
-		i++;
-	}
-	result[i + 2] = NULL;
-	ft_free_tabs((void **)path_list);
-	return (result);
-}
 
 void	check_builtin(t_command_table *current)
 {
