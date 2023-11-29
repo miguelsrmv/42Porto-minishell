@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:18:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:48:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	pipe_fd = create_pipes(pipe_fd, process_num, &memptr);
 	current = create_processes(command_table, process_num);
 	close_pipes(pipe_fd, current, memptr);
-	check_redirections(pipe_fd, &current, memptr); // falta meter memptr a partir daqui!!
+	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui!
 	execute(current, envp);
 }
