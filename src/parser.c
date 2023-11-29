@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 22:57:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:09:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	set_cmd(t_token *lexer_sublist, t_command_table **command_table,
 	int		i;
 
 	(*command_table)->cmd = (char **)malloc(sizeof(char *)
-			* (count_cmds(lexer_sublist) + 1));
+			* (count_cmds(lexer_sublist) + 2));
 	if (!(*command_table)->cmd)
 		exit_error(MALLOC_ERROR, memptr);
 	current = lexer_sublist;

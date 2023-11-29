@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:35:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:42:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	check_builtin(t_command_table *current)
 {
 	if (!ft_strcmp(current->cmd[0], "echo2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
-	else if (!ft_strcmp(current->cmd[0], "cd2"))
-		current->builtin_pointer = (void *)builtin_placeholder;
+	else if (!ft_strcmp(current->cmd[0], "cd"))
+		current->builtin_pointer = (void *)cd;
 	else if (!ft_strcmp(current->cmd[0], "pwd2"))
 		current->builtin_pointer = (void *)builtin_placeholder;
 	else if (!ft_strcmp(current->cmd[0], "export2"))
