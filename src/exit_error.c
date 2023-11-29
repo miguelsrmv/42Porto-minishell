@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:23:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:29:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ void	exit_error(char *error_message, t_memptr memptr, ...)
 	if (!ft_strcmp(error_message, COMMAND_ERROR))
 		ft_fprintf(STDERR_FILENO,
 			"%s: command not found\n", va_arg(args, char *));
+	else if (!ft_strcmp(error_message, FILE_ERROR) ||
+		!ft_strcmp(error_message, OPEN_ERROR))
+		ft_fprintf(STDERR_FILENO,
+			"%s: No such file or directory\n", va_arg(args, char *));
 	else
 		perror(error_message);
 	va_end(args);
