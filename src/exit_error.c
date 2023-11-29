@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 20:16:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 10:30:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	clean_memory(t_memptr memptr)
 void	exit_error(char *error_message, t_memptr memptr)
 {
 	clean_memory(memptr);
-	ft_fprintf(STDERR_FILENO, "Error. %s\n", error_message);
+	ft_fprintf(STDERR_FILENO, "%s\n", error_message);
 	exit(0);
 }

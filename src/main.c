@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 15:12:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 08:45:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	main(int argc, char **envp)
 	t_command_table	*command_table;
 	t_memptr		memptr;
 
-	if (argc == 0) // Mudar no fim
-		exit_error(USAGE_ERROR, memptr);
 	lexer_list = NULL;
 	command_table = NULL;
 	memptr.lexer_list = &lexer_list;
 	memptr.command_table = &command_table;
+	if (argc == 0) // Mudar no fim
+		exit_error(USAGE_ERROR, memptr);
 	while (TRUE)
 	{
 		lexer_list = read_readline(memptr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 15:16:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 10:32:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,20 @@
 
 # define SQUOTE '\''
 # define DQUOTE '\"'
-# define USAGE_ERROR "Usage: \'./minishell\'."
-# define MALLOC_ERROR "Malloc error."
-# define SYNTAX_ERROR "Syntax error."
-# define OPEN_ERROR "Open file error."
-# define WRITE_ERROR "Write file error."
-# define CLOSE_ERROR "Close file error."
-# define PIPE_ERROR "Pipe error."
 # define TRUE 1
 # define FALSE 0
+
+// Process Errors
+# define MALLOC_ERROR "Error: Malloc error."
+# define OPEN_ERROR "Error: Open file error."
+# define WRITE_ERROR "Error: Write file error."
+# define CLOSE_ERROR "Error: Close file error."
+# define PIPE_ERROR "Error: Pipe error."
+
+// Usage errors
+# define USAGE_ERROR "Error: Usage: \'./minishell\'."
+# define SYNTAX_ERROR "Syntax error."
+# define COMMAND_ERROR ": Command not found."
 
 enum e_QuoteType {
 	OUT_QUOTE,
@@ -50,17 +55,18 @@ enum e_TokenType {
 };
 
 enum e_CommandType {
+	NULL_COMMANDTYPE,
 	EXECUTABLE,
-	BUILTIN
+	BUILTIN,
 };
 
 enum e_RedirectType {
+	NULL_REDIRECT,
 	INPUT,
 	OUTPUT,
 	APPEND,
 	HERE_DOC,
 	PIPE,
-	NONE,
 	INVALID
 };
 
@@ -83,6 +89,7 @@ typedef struct s_command_table {
 	char					**cmd;
 	char					*cmd_target;
 	enum e_CommandType		command_type;
+	void					*builtin_pointer;
 
 	char					**full_input;
 	char					*input_target;
@@ -223,9 +230,14 @@ void				check_redirections(int **pipe_fd,
 						t_command_table **command);
 
 /// executer_cmd_checker.c
-void				check_commands(t_command_table **command_table,
-						char **path_list);
 char				**get_path_list(void);
-int					check_builtin(char *command);
+void				check_builtin(t_command_table *current);
+void				check_executables(t_command_table *current,
+						char **path_list);
+void				check_commands(t_command_table **command_table,
+						char **path_list, t_memptr memptr);
+
+// builtins.c
+void				builtin_placeholder(void);
 
 #endif

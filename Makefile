@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
+#    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/11/27 21:40:57 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/11/29 10:06:22 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 SRC		=	main.c get_input.c lexer.c lexer_linked_list.c lexer_get_tokens.c \
 			parser.c parser_set_redirs.c parser_heredoc.c expander.c \
 			expander_noquotes.c expander_squote.c expander_dquote.c expander_concatenate.c \
-			executer.c executer_input_checker.c executer_cmd_checker.c exit_error.c
+			executer.c executer_input_checker.c executer_cmd_checker.c exit_error.c \
+			builtins.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
