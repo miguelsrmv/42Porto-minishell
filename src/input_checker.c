@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:12:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 14:29:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:40:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,20 @@ int    check_in_pipe(char *input)
     int pipe_status;
     
     i = 0;
-    pipe_status = OUT_PIPE;
     while (input[i])
     {
-        if (input[i] == '|')
+        if ((input[i]) != '|')
+        {
+            pipe_status = OUT_PIPE;
+            i++;
+        }
+        else if (input[i] == '|')
         {
             pipe_status = IN_PIPE;
             i++;
         }
         while (ft_isspace(input[i]))
             i++;
-        if ((input[i]) != '|')
-            pipe_status = OUT_PIPE;
-        i++;
     }
     return (pipe_status);
 }
