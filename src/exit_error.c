@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 14:07:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:34:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	clean_memory(t_memptr memptr)
 
 void	exit_error(char *error_msg, t_memptr memptr, ...)
 {
-	va_list args;
+	va_list	args;
 
 	va_start(args, memptr);
 	if (!ft_strcmp(error_msg, COMMAND_ERROR))

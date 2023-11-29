@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_processes.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 14:53:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:26:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,5 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	current = create_processes(command_table, process_num);
 	close_pipes(pipe_fd, current, memptr);
 	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui! Expandir tb o ?$
-	execute(current, envp);
+	execute(current, envp, memptr);
 }

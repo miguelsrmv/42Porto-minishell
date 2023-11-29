@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.c                                         :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:27:05 by mde-sa--         ###   ########.fr       */
+/*   Created: 2023/11/29 17:24:38 by mde-sa--          #+#    #+#             */
+/*   Updated: 2023/11/29 17:24:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute(t_command_table *current, char **envp, t_memptr memptr)
+int	    pwd(void)
 {
-	int	(*function_pointer)(char **);
-	int	exit_value;
+	char	*cwd;
 
-	if (current->command_type == EXECUTABLE)
-		execve(current->cmd_target, current->cmd, envp);
-	else
+	cwd = NULL;
+	cwd = getcwd(cwd, 0);
+	if (cwd == NULL)
 	{
-		function_pointer = (int (*)(char **))current->builtin_pointer;
-		exit_value = function_pointer(current->cmd);
-		clean_memory(memptr);
-		exit(exit_value);
+		perror("Error");
+		return (EXIT_FAILURE);
 	}
+	else if (!ft_printf("%s\n", cwd))
+	{
+		ft_free_str(&cwd);
+		perror("\nError: printf failed");
+		return (EXIT_FAILURE);
+	}
+	ft_free_str(&cwd);
+	return (EXIT_SUCCESS);
 }

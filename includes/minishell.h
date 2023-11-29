@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 14:27:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:32:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+# include <stdbool.h>
+# include <dirent.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 
@@ -121,8 +123,23 @@ typedef struct s_memptr {
 	int				**pipe_fd;
 }	t_memptr;
 
-// Function definitions
+typedef struct s_env
+{
+	char	**envp;
+	char	**env_var;
+	char	*pwd;
+	char	*oldpwd;
+}			t_env;
 
+typedef struct s_export
+{
+	int		i;
+	int		j;
+	char	*var;
+}			t_export;
+
+
+// Function definitions
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table);
@@ -255,13 +272,72 @@ void				check_commands(t_command_table **command_table,
 
 /// executer_get_path.c
 char				**get_path_list(t_memptr *memptr);
-void			    fill_in_result_from_path_list(char **path_list, char **result,
-							t_memptr memptr);
+void				fill_in_result_from_path_list(char **path_list,
+						char **result, t_memptr memptr);
 
 /// executer.c
-void			    execute(t_command_table *current, char **envp);
+void				execute(t_command_table *current, char **envp);
 
-// builtins.c
+/// builtins_placeholder.c
 void				builtin_placeholder(void);
+
+//env2.c
+int					env(char **argv);
+
+///export.c
+//static int		ft_export_new(t_env *envv, t_export *exp, char **argv);
+//static int		ft_export_found(t_env *envv, t_export *exp, char **argv);
+//static void		ft_split_var(t_export *exp, char **argv);
+//static int		ft_export_loop(t_env *envv, t_export *exp, char **argv);
+int					export(char **argv);
+
+///export2.c
+//static int		ft_print_with_value(char **env_var_cpy, int i);
+//static int		ft_export_exit(char ***array, bool exit_status);
+//static int		ft_sort_loop(char **env_var_cpy, int i, int j);
+int					export_only(t_env *environment);
+
+///export3.c
+int					export_special(t_env *envv, t_export *exp);
+int					export_wd(t_env *envv, t_export *exp, char **argv);
+
+///export4.c
+//static int	export_error_loop(char **var, char **argv);
+int					export_input_error(char **argv);
+
+///unset.c
+//static char		*ft_get_var(t_env *envv, int i);
+//static void		ft_del_var(t_env *envv, int i);
+//static int		ft_inner_loop(char **argv, t_env *envv, int i, int k);
+int					unset(char **argv);
+
+///cd.c
+//static char	*find_home(t_env *envv);
+//static void	ft_update_env_var(t_env *envv, char *var, char *value);
+//static int	ft_exit_cd(char **cwd, int exit_status);
+//static int	ft_cd_home(t_env *envv);
+int					cd(char **argv);
+
+///pwd.c
+int					pwd(void);
+
+///echo.c
+int					echo(char **args);
+
+///exit.c
+//static bool		is_valid_exit_arg(char **args);
+int					exit_inbuilt(char **args);
+
+///get_set.c
+//static void		get_env_var_value_utils(t_env *envv, char *var, char **value, int i);
+char				*get_env_var_value(t_env *envv, char *var);
+t_env				*init_envv(char **envp);
+void				free_envv(t_env *envv);
+//static char		**_get_envp(char **envp, bool reset);
+void				set_envp(char **envp);
+//static t_env	*_get_envv(t_env *envv);
+void				set_envv(t_env *envv);
+t_env				*get_envv(void);
+int					reinit_env_var(t_env *envv, char **argv);
 
 #endif

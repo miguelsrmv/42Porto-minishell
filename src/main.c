@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 13:51:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:20:00 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_memptr	initialize_memptr(t_token **lexer_list,
 	memptr.command_table = command_table;
 	memptr.path_list = NULL;
 	memptr.pipe_fd = NULL;
-	return(memptr);
+	return (memptr);
 }
 
 int	main(int argc, char **envp)
@@ -35,7 +35,7 @@ int	main(int argc, char **envp)
 	memptr = initialize_memptr(&lexer_list, &command_table);
 	if (argc >10) // Mudar no fim
 		exit_error(USAGE_ERROR, memptr);
- 	while (TRUE)
+	while (TRUE)
 	{
 		lexer_list = read_readline(memptr);
 		command_table = parse_list(lexer_list, memptr);
