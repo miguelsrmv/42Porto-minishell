@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/11/29 17:30:34 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/11/29 19:02:34 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SRC		=	main.c get_input.c input_checker.c \
 			builtin_cd.c builtin_echo.c builtin_env2.c builtin_exit.c \
 			builtin_export.c builtin_export2.c builtin_export3.c builtin_export4.c \
 			builtin_pwd.c builtin_unset.c get_set.c\
-			builtins_placeholder.c \
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
