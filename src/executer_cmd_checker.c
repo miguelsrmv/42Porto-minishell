@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 13:48:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:53:11 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_executables(t_command_table *current, char **path_list)
 	while (path_list[i])
 	{
 		test_command = ft_strjoin(path_list[i], current->cmd[0]);
-		if (access(test_command, F_OK | X_OK) == 0)
+		if (access(test_command, F_OK | X_OK) == 0)					// Acrescentar SE NAO FOR UMA PASTA!!
 		{
 			current->cmd_target = test_command;
 			current->command_type = EXECUTABLE;
