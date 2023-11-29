@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:30:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:34:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 # define USAGE_ERROR "Usage: \'./minishell\'."
 # define SYNTAX_ERROR "Syntax error near unexpected token."
 # define COMMAND_ERROR "Command not found."
-# define FILE_ERROR "File not found."
 
 enum e_QuoteType {
 	OUT_QUOTE,

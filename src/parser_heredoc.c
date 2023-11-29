@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 18:03:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:32:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	create_heredoc_file(t_command_table **command_table,
 	}
 	fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
-		exit_error(OPEN_ERROR, memptr);
+		exit_error(OPEN_ERROR, memptr, name);
 	if (write(fd, buffer, ft_strlen(buffer)) == -1)
 		exit_error(WRITE_ERROR, memptr);
 	if (close(fd) == -1)

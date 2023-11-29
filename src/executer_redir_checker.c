@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 12:20:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:32:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	check_redirections(int **pipe_fd, t_command_table **command,
 	else if (input_status == INVALID_INPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr);
 	else if (input_status == INVALID_INPUT)
-		exit_error(OPEN_ERROR, memptr);
+		exit_error(OPEN_ERROR, memptr, (*command)->input_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr);
 }
