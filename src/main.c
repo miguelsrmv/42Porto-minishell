@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 11:16:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:55:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,18 @@ int	main(int argc, char **envp)
 	memptr = initialize_memptr(&lexer_list, &command_table);
 	if (argc >10) // Mudar no fim
 		exit_error(USAGE_ERROR, memptr);
-	while (TRUE)
+/* 	while (TRUE)
 	{
 		lexer_list = read_readline(memptr);
 		command_table = parse_list(lexer_list, memptr);
 		expand_command_table(&command_table, memptr);
 		prepare_processes(&command_table, envp, memptr);
 		clean_memory(memptr);
-	}
+	} */
+	lexer_list = read_readline(memptr);
+	command_table = parse_list(lexer_list, memptr);
+	expand_command_table(&command_table, memptr);
+	prepare_processes(&command_table, envp, memptr);
+	clean_memory(memptr);
 	return (0);
 }

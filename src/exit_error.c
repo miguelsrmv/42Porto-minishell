@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 11:15:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:02:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,23 @@ void	clean_memory(t_memptr memptr)
 		clear_command_table(memptr.command_table);
 	if (memptr.path_list)
 		ft_free_tabs((void **)memptr.path_list);
+	if (memptr.pipe_fd)
+		ft_free_tabs((void **)memptr.pipe_fd);
 }
 
-void	exit_error(char *error_message, t_memptr memptr)
+void	exit_error(char *error_message, t_memptr memptr, ...)
 {
+	va_list args;
+
+	if (!ft_strcmp(error_message, COMMAND_ERROR))
+	{
+		va_start(args, memptr);
+		ft_fprintf(STDERR_FILENO,
+			"%s: command not found\n", va_arg(args, char *));
+		va_end(args);
+	}
+	else
+		perror(error_message);
 	clean_memory(memptr);
-	ft_fprintf(STDERR_FILENO, "%s\n", error_message);
 	exit(0);
 }

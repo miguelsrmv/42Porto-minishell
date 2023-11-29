@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 10:48:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:50:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ void	check_commands(t_command_table **command_table, char **path_list,
 		if (current->command_type != BUILTIN)
 			check_executables(current, path_list);
 		if (current->command_type == NULL_COMMANDTYPE)
-		{
-			ft_fprintf(STDERR_FILENO, current->cmd[0]);
-			exit_error(COMMAND_ERROR, memptr);
-		}
+			exit_error(COMMAND_ERROR, memptr, current->cmd[0]);
 		current = current->next;
 	}
 }

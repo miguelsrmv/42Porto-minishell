@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 11:13:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:50:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@
 # define WRITE_ERROR "Error: Write file error."
 # define CLOSE_ERROR "Error: Close file error."
 # define PIPE_ERROR "Error: Pipe error."
+# define FORK_ERROR "Error: Fork error."
 
 // Usage errors
 # define USAGE_ERROR "Error: Usage: \'./minishell\'."
 # define SYNTAX_ERROR "Syntax error."
-# define COMMAND_ERROR ": Command not found."
+# define COMMAND_ERROR "Command not found."
 
 enum e_QuoteType {
 	OUT_QUOTE,
@@ -124,7 +125,7 @@ t_memptr			initialize_memptr(t_token **lexer_list,
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
 void				clean_memory(t_memptr memptr);
-void				exit_error(char *error_message, t_memptr memptr);
+void				exit_error(char *error_message, t_memptr memptr, ...);
 
 /// get_input.c
 int					check_in_quote(char *input);
@@ -219,7 +220,7 @@ int					free_concatenate(char *left, char *right, char *temp,
 /// executer.c
 int					count_processes(t_command_table **command_table);
 int					**create_pipes(int **pipe_fd, int process_num,
-						t_memptr memptr);
+						t_memptr *memptr);
 t_command_table		*create_processes(t_command_table **current,
 						int process_num);
 void				close_pipes(int **pipe_fd, t_command_table *current,
