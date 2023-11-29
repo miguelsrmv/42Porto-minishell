@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 20:16:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:07:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,30 @@ void	clear_command_table(t_command_table **lst)
 
 void	clean_memory(t_memptr memptr)
 {
-	if (*(memptr.lexer_list))
+	if (memptr.lexer_list)
 		clear_lexer_list(memptr.lexer_list);
-	if (*(memptr.command_table))
+	if (memptr.command_table)
 		clear_command_table(memptr.command_table);
+	if (memptr.path_list)
+		ft_free_tabs((void **)memptr.path_list);
+	if (memptr.pipe_fd)
+		ft_free_tabs((void **)memptr.pipe_fd);
 }
 
-void	exit_error(char *error_message, t_memptr memptr)
+void	exit_error(char *error_msg, t_memptr memptr, ...)
 {
+	va_list args;
+
+	va_start(args, memptr);
+	if (!ft_strcmp(error_msg, COMMAND_ERROR))
+		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
+	else if (!ft_strcmp(error_msg, OPEN_ERROR))
+		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
+	else if (!ft_strcmp(error_msg, QUOTE_ERROR))
+		ft_fprintf(STDERR_FILENO, QUOTE_ERROR);
+	else
+		perror(error_msg);
+	va_end(args);
 	clean_memory(memptr);
-	ft_fprintf(STDERR_FILENO, "Error. %s\n", error_message);
 	exit(0);
 }

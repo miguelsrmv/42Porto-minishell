@@ -2,3 +2,7 @@
 # Builtins
 # Open pipes
 # Syntaxe
+
+Open pipes
+Tirar unclosed quotes
+Verificar que cmd[0] nao e' uma pasta

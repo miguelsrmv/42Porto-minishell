@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_get_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 21:40:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:45:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ char	*get_string_token(char *input, int *start, int *end)
 void	advance_until_unquoted_whitespace(char *input, int *end,
 			char quote_status)
 {
-	while ((!ft_isspace(input[*end]) || quote_status)
-		&& input[*end])
+	while ((!ft_isspace(input[*end]) || quote_status) && input[*end])
 	{
 		if (quote_status)
 		{
@@ -71,38 +70,16 @@ void	advance_until_unquoted_whitespace(char *input, int *end,
 		quote_status = '\0';
 		if (!quote_status)
 		{
-			while (!ft_isspace(input[*end]) && !quote_status && input[*end])
+			while ((!ft_isspace(input[*end]) && !quote_status
+				&& input[*end]))
 			{
 				(*end)++;
 				if (ft_isquote(input[*end]))
 					quote_status = input[*end];
+				else if (input[*end] == '|'
+					|| input[*end] == '<' || input[*end] == '>')
+					return ;
 			}
 		}
 	}
 }
-
-/*
-CODIGO VELHO!
-char	*get_string_token(char *input, int *start, int *end)
-{
-	*end = *start;
-	while (is_valid_bash_char(input[*end]) && input[*end])
-		(*end)++;
-	return (ft_strndup(&input[*start], (*end - *start)));
-}
-
-char	*get_quote_token(char *input, int *start, int *end)
-{
-	char	*result;
-	char	quote;
-
-	*end = *start + 1;
-	quote = input[*start];
-	while (input[(*end)] != quote && input[(*end)])
-		(*end)++;
-	(*end)++;
-	result = ft_strndup(&input[*start], (*end - *start));
-	return (result);
-}
-
-*/

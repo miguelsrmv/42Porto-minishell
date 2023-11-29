@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 14:50:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:27:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	check_in_quote(char *input)
-{
-	int	i;
-	int	quote_status;
-
-	i = 0;
-	quote_status = OUT_QUOTE;
-	while (input[i])
-	{
-		if (input[i] == '\'' || input[i] == '\"')
-		{
-			quote_status = input[i];
-			i++;
-			while (input[i] != quote_status && input[i])
-				i++;
-			if (input[i] == quote_status)
-			{
-				quote_status = OUT_QUOTE;
-				i++;
-			}
-		}
-		else
-			i++;
-	}
-	return (quote_status);
-}
-
-/// Check if only valid characters are being used. Add in error exit here.
-char	*check_valid_input(char *input)
-{
-	return (input);
-}
 
 void	trim_left_whitespace(char **input, t_memptr memptr)
 {
@@ -52,7 +19,7 @@ void	trim_left_whitespace(char **input, t_memptr memptr)
 
 	i = 0;
 	temp = *input;
-	while ((*input)[i] == ' ')
+	while (ft_isspace((*input)[i]))
 		i++;
 	*input = ft_strdup(&(*input)[i]);
 	if (!(*input))
@@ -89,7 +56,11 @@ char	*get_input(char *prompt, t_memptr memptr)
 
 	input = readline(prompt);
 	trim_left_whitespace(&input, memptr);
-	while (check_in_quote(input) != OUT_QUOTE)
+	if (check_in_quote(input) != OUT_QUOTE)
+		exit_error(QUOTE_ERROR, memptr);
+	if (input[0] == '|')
+		exit_error(SYNTAX_ERROR, memptr);
+	while (check_in_pipe(input))
 		update_input(&input, memptr);
 	rl_replace_line(input, 0);
 	rl_redisplay();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 15:16:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:27:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,32 @@
 
 # define SQUOTE '\''
 # define DQUOTE '\"'
-# define USAGE_ERROR "Usage: \'./minishell\'."
-# define MALLOC_ERROR "Malloc error."
-# define SYNTAX_ERROR "Syntax error."
-# define OPEN_ERROR "Open file error."
-# define WRITE_ERROR "Write file error."
-# define CLOSE_ERROR "Close file error."
-# define PIPE_ERROR "Pipe error."
 # define TRUE 1
 # define FALSE 0
+
+// Process Errors
+# define MALLOC_ERROR "Error: Malloc error.\n"
+# define WRITE_ERROR "Error: Write file error.\n"
+# define CLOSE_ERROR "Error: Close file error.\n"
+# define PIPE_ERROR "Error: Pipe error.\n"
+# define FORK_ERROR "Error: Fork error.\n"
+
+// Usage errors
+# define USAGE_ERROR "Usage error: \'./minishell\'.\n"
+# define QUOTE_ERROR "Input error: unclosed quote.\n"
+# define SYNTAX_ERROR "Syntax error near unexpected token.\n"
+# define COMMAND_ERROR "command not found.\n"
+# define OPEN_ERROR "No such file or directory.\n"
 
 enum e_QuoteType {
 	OUT_QUOTE,
 	IN_QUOTE,
 	IN_DQUOTE
+};
+
+enum e_PipeType {
+	OUT_PIPE,
+	IN_PIPE,
 };
 
 enum e_TokenType {
@@ -50,17 +62,18 @@ enum e_TokenType {
 };
 
 enum e_CommandType {
+	NULL_COMMANDTYPE,
 	EXECUTABLE,
-	BUILTIN
+	BUILTIN,
 };
 
 enum e_RedirectType {
+	NULL_REDIRECT,
 	INPUT,
 	OUTPUT,
 	APPEND,
 	HERE_DOC,
 	PIPE,
-	NONE,
 	INVALID
 };
 
@@ -83,6 +96,7 @@ typedef struct s_command_table {
 	char					**cmd;
 	char					*cmd_target;
 	enum e_CommandType		command_type;
+	void					*builtin_pointer;
 
 	char					**full_input;
 	char					*input_target;
@@ -103,21 +117,30 @@ typedef struct s_command_table {
 typedef struct s_memptr {
 	t_token			**lexer_list;
 	t_command_table	**command_table;
+	char			**path_list;
+	int				**pipe_fd;
 }	t_memptr;
 
 // Function definitions
+
+/// Main.c
+t_memptr			initialize_memptr(t_token **lexer_list,
+						t_command_table **command_table);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
 void				clean_memory(t_memptr memptr);
-void				exit_error(char *error_message, t_memptr memptr);
+void				exit_error(char *error_message, t_memptr memptr, ...);
 
 /// get_input.c
-int					check_in_quote(char *input);
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
 char				*get_input(char *prompt, t_memptr memptr);
+
+/// input_checker.c
+int					check_in_quote(char *input);
+int					check_in_pipe(char *input);
 char				*check_valid_input(char *input);
 
 /// lexer.c
@@ -203,10 +226,10 @@ int					concatenate(char **string, char *expanded_string,
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
 
-/// executer.c
+/// executer_processes.c
 int					count_processes(t_command_table **command_table);
 int					**create_pipes(int **pipe_fd, int process_num,
-						t_memptr memptr);
+						t_memptr *memptr);
 t_command_table		*create_processes(t_command_table **current,
 						int process_num);
 void				close_pipes(int **pipe_fd, t_command_table *current,
@@ -214,18 +237,31 @@ void				close_pipes(int **pipe_fd, t_command_table *current,
 void				prepare_processes(t_command_table **command_table,
 						char **envp, t_memptr memptr);
 
-/// executer_input_checker.c
+/// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
 enum e_ValidType	check_input(t_command_table **command);
 enum e_ValidType	check_output(t_command_table **command);
 void				set_redirections(int **pipe_fd, t_command_table **command);
-void				check_redirections(int **pipe_fd,
-						t_command_table **command);
+void				check_redirections(int **pipe_fd, t_command_table **command,
+						t_memptr memptr);
 
 /// executer_cmd_checker.c
-void				check_commands(t_command_table **command_table,
+
+void				check_builtin(t_command_table *current);
+void				check_executables(t_command_table *current,
 						char **path_list);
-char				**get_path_list(void);
-int					check_builtin(char *command);
+void				check_commands(t_command_table **command_table,
+						char **path_list, t_memptr memptr);
+
+/// executer_get_path.c
+char				**get_path_list(t_memptr *memptr);
+void			    fill_in_result_from_path_list(char **path_list, char **result,
+							t_memptr memptr);
+
+/// executer.c
+void			    execute(t_command_table *current, char **envp);
+
+// builtins.c
+void				builtin_placeholder(void);
 
 #endif

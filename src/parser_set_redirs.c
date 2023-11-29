@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_set_redirs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 22:29:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 09:16:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,16 @@ void	initialize_command_table(t_command_table **command_table,
 		exit_error(MALLOC_ERROR, memptr);
 	(*command_table)->cmd = NULL;
 	(*command_table)->cmd_target = NULL;
-	(*command_table)->command_type = EXECUTABLE;
+	(*command_table)->command_type = NULL_COMMANDTYPE;
+	(*command_table)->builtin_pointer= NULL;
 	(*command_table)->full_input[0] = NULL;
 	(*command_table)->input_target = NULL;
-	(*command_table)->input_type = NONE;
+	(*command_table)->input_type = NULL_REDIRECT;
 	(*command_table)->input_fd = 0;
 	(*command_table)->heredoc_buffer = NULL;
 	(*command_table)->full_output[0] = NULL;
 	(*command_table)->output_target = NULL;
-	(*command_table)->output_type = NONE;
+	(*command_table)->output_type = NULL_REDIRECT;
 	(*command_table)->output_fd = 0;
 	(*command_table)->pid = 0;
 	(*command_table)->command_no = 0;
