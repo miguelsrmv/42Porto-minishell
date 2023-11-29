@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/28 14:50:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:38:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	trim_left_whitespace(char **input, t_memptr memptr)
 
 	i = 0;
 	temp = *input;
-	while ((*input)[i] == ' ')
+	while (ft_isspace((*input)[i]))
 		i++;
 	*input = ft_strdup(&(*input)[i]);
 	if (!(*input))
