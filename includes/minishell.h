@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 11:50:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:23:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@
 # define FORK_ERROR "Error: Fork error."
 
 // Usage errors
-# define USAGE_ERROR "Error: Usage: \'./minishell\'."
-# define SYNTAX_ERROR "Syntax error."
+# define USAGE_ERROR "Usage: \'./minishell\'."
+# define SYNTAX_ERROR "Syntax error near unexpected token."
 # define COMMAND_ERROR "Command not found."
+# define FILE_ERROR ""
 
 enum e_QuoteType {
 	OUT_QUOTE,
@@ -217,7 +218,7 @@ int					concatenate(char **string, char *expanded_string,
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
 
-/// executer.c
+/// executer_processes.c
 int					count_processes(t_command_table **command_table);
 int					**create_pipes(int **pipe_fd, int process_num,
 						t_memptr *memptr);
@@ -228,13 +229,13 @@ void				close_pipes(int **pipe_fd, t_command_table *current,
 void				prepare_processes(t_command_table **command_table,
 						char **envp, t_memptr memptr);
 
-/// executer_input_checker.c
+/// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
 enum e_ValidType	check_input(t_command_table **command);
 enum e_ValidType	check_output(t_command_table **command);
 void				set_redirections(int **pipe_fd, t_command_table **command);
-void				check_redirections(int **pipe_fd,
-						t_command_table **command);
+void				check_redirections(int **pipe_fd, t_command_table **command,
+						t_memptr memptr);
 
 /// executer_cmd_checker.c
 
@@ -248,6 +249,10 @@ void				check_commands(t_command_table **command_table,
 char				**get_path_list(t_memptr *memptr);
 void			    fill_in_result_from_path_list(char **path_list, char **result,
 							t_memptr memptr);
+
+/// executer.c
+void			    execute(t_command_table *current, char **envp);
+
 // builtins.c
 void				builtin_placeholder(void);
 

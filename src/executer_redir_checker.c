@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer_input_checker.c                           :+:      :+:    :+:   */
+/*   executer_redir_checker.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 09:17:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:20:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	set_redirections(int **pipe_fd, t_command_table **command)
 
 }
 
-void	check_redirections(int **pipe_fd, t_command_table **command)
+void	check_redirections(int **pipe_fd, t_command_table **command,
+			t_memptr memptr)
 {
 	enum e_ValidType	input_status;
 	enum e_ValidType	output_status;
@@ -114,11 +115,9 @@ void	check_redirections(int **pipe_fd, t_command_table **command)
 		return ;
 	}
 	else if (input_status == INVALID_INPUT_REDIR)
-		ft_printf("Minishell: syntax error near unexpected token\n");
+		exit_error(SYNTAX_ERROR, memptr);
 	else if (input_status == INVALID_INPUT)
-		ft_printf("Minishell: %s: No such file or directory\n",
-			(*command)->input_target);
+		exit_error(OPEN_ERROR, memptr);
 	else if (output_status == INVALID_OUTPUT_REDIR)
-		ft_printf("Minishell: syntax error near unexpected token\n");
-	return ; // Error handling
+		exit_error(SYNTAX_ERROR, memptr);
 }
