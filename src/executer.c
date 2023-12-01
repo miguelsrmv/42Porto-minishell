@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/30 15:17:11 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:05:36 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr)
 		//exit_value = function_pointer(current->cmd);
 		function_pointer(current->cmd);
 		clean_memory(memptr);
-		//exit(exit_value);
+		return ;
 	}
 }
