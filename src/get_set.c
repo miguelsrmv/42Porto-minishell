@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:30:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:40:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:01:57 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,25 @@ void	set_envv(t_env *envv)
 t_env	*get_envv(void)
 {
 	return (_get_envv(NULL));
+}
+
+char	*get_echo_var(char *str)
+{
+	t_env 	*envv;
+	char	*str2;
+
+	envv = get_envv();
+	if (envv == NULL || envv->env_var == NULL)
+		return (EXIT_FAILURE);
+	while (envv->env_var != NULL)
+	{
+		if(containsStr(envv->env_var, str) == EXIT_SUCCESS)
+		{
+			str2 = ft_strdup(envv->env_var);
+			return(ft_strchr(str2));
+		}
+		else
+			i++;
+	}
+	return (NULL);
 }

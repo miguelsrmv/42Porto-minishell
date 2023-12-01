@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:24:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:04:09 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@ int containsChar(const char *str, char target)
 		return (EXIT_SUCCESS);
 	else
 		return (EXIT_FAILURE);
+}
+
+int		containsStr(const char *str1, char *str2)
+{
+	int i = 0;
+	
+	while(str1[i] && str2[i] && str1[i] == str2[i])
+	{
+		if(str1[i] == str2[i])
+		{
+			if((str1[i + 1] == '=') && str2[i + 1] == '\0')
+				return (EXIT_SUCCESS);
+		}
+		i++;
+	}
+	return (EXIT_FAILURE);
 }
 
 int		env(char **argv)

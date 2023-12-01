@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/30 22:04:48 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:02:06 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ void				execute(t_command_table *current, char **envp,
 
 //env2.c
 int					env(char **argv);
+int					containsStr(const char *str1, char *str2);
 
 ///export.c
 //static int		ft_export_new(t_env *envv, t_export *exp, char **argv);
@@ -342,5 +343,6 @@ void				set_envp(char **envp);
 void				set_envv(t_env *envv);
 t_env				*get_envv(void);
 int					reinit_env_var(t_env *envv, char **argv);
+char				*get_echo_var(char *str);
 
 #endif
