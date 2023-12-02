@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 20:09:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 21:51:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ void	bash_main(t_token *lexer_list, t_command_table *command_table,
 		if (pid < 0)
 			exit_error(FORK_ERROR, memptr);
 		else if (pid > 0)
-			bash_parent(main_pipe);
+			bash_parent(main_pipe, pid);
 		else
 			bash_child(lexer_list, command_table, memptr, envp, main_pipe);
+		clean_memory(memptr);
 	}
 }
 
-void	bash_parent(int *main_pipe)
+void	bash_parent(int *main_pipe, int pid)
 {
 	extern int	signal_flag;
 
@@ -44,7 +45,7 @@ void	bash_parent(int *main_pipe)
 	close (main_pipe[1]);
 	read (main_pipe[0], &signal_flag, sizeof(int));
 	close(main_pipe[1]);
-	wait(NULL);
+	wait4(pid, NULL, 0, NULL);
 }
 
 void	bash_child(t_token *lexer_list, t_command_table *command_table,
@@ -57,5 +58,4 @@ void	bash_child(t_token *lexer_list, t_command_table *command_table,
 	command_table = parse_list(lexer_list, memptr);
 	expand_command_table(&command_table, memptr);
 	prepare_processes(&command_table, envp, memptr);
-	clean_memory(memptr);
 }

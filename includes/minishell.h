@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 20:09:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:52:25 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <readline/history.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include <sys/time.h>
+# include <sys/resource.h>
 # include <sys/wait.h>
 # include <signal.h>
 # include <string.h>
@@ -153,7 +155,7 @@ void				set_environment_vars(char **envp, t_memptr memptr);
 void				bash_main(t_token *lexer_list,
 						t_command_table *command_table, t_memptr memptr,
 						char **envp);
-void				bash_parent(int *main_pipe);
+void				bash_parent(int *main_pipe, int pid);
 void				bash_child(t_token *lexer_list,
 						t_command_table *command_table, t_memptr memptr,
 						char **envp, int *main_pipe);
