@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:30:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/01 16:01:57 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/02 01:16:34 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,20 +142,34 @@ t_env	*get_envv(void)
 	return (_get_envv(NULL));
 }
 
+char	*ft_strchr2(const char *s, int c)
+{
+	while (*s && (unsigned char)c != *s)
+		s++;
+	if ((unsigned char)c == *s)
+	{
+		s++;
+		return ((char *)s);
+	}
+	return (0);
+}
+
 char	*get_echo_var(char *str)
 {
 	t_env 	*envv;
 	char	*str2;
+	int		i;
 
 	envv = get_envv();
 	if (envv == NULL || envv->env_var == NULL)
-		return (EXIT_FAILURE);
-	while (envv->env_var != NULL)
+		return (NULL);
+	i = 0;
+	while (envv->env_var[i] != NULL)
 	{
-		if(containsStr(envv->env_var, str) == EXIT_SUCCESS)
+		if(containsStr(envv->env_var[i], str) == EXIT_SUCCESS)
 		{
-			str2 = ft_strdup(envv->env_var);
-			return(ft_strchr(str2));
+			str2 = ft_strdup(envv->env_var[i]);
+			return(ft_strchr2(str2, '='));
 		}
 		else
 			i++;

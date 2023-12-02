@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/01 16:02:06 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/02 01:17:18 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,5 +344,6 @@ void				set_envv(t_env *envv);
 t_env				*get_envv(void);
 int					reinit_env_var(t_env *envv, char **argv);
 char				*get_echo_var(char *str);
+char				*ft_strchr2(const char *s, int c);
 
 #endif
