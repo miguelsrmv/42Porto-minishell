@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:53:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:30:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,21 @@ int	count_processes(t_command_table **command_table)
 	return (processes_count);
 }
 
-int	**create_pipes(int **pipe_fd, int process_num, t_memptr *memptr)
+int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
 {
-	pipe_fd = (int **)malloc(sizeof(int *) * (process_num));
+	if (!pipe_num)
+		return (NULL);
+	pipe_fd = (int **)malloc(sizeof(int *) * (pipe_num + 1));
 	if (!pipe_fd)
 		exit_error(MALLOC_ERROR, *memptr);
-	process_num--;
-	pipe_fd[process_num] = NULL;
+	pipe_fd[pipe_num] = NULL;
 	memptr->pipe_fd = pipe_fd;
-	while (process_num--)
+	while (pipe_num--)
 	{
-		pipe_fd[process_num] = (int *)malloc(sizeof(int) * 2);
-		if (!pipe_fd[process_num])
+		pipe_fd[pipe_num] = (int *)malloc(sizeof(int) * 2);
+		if (!pipe_fd[pipe_num])
 			exit_error(MALLOC_ERROR, *memptr);
-		if (pipe(pipe_fd[process_num]) == -1)
+		if (pipe(pipe_fd[pipe_num]) == -1)
 			exit_error(PIPE_ERROR, *memptr);
 	}
 	return (pipe_fd);
@@ -73,6 +74,8 @@ void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 	int	i;
 
 	i = 0;
+	if (!pipe_fd)
+		return ;
 	while (pipe_fd[i])
 	{
 		if (i != current->command_no - 2)
@@ -93,25 +96,15 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 			t_memptr memptr)
 {
 	int				process_num;
-	int				pid;
 	int				**pipe_fd;
 	char			**path_list;
 	t_command_table	*current;
 
 	process_num = count_processes(command_table);
-	pid = fork();
-	if (pid == -1)
-		exit_error(FORK_ERROR, memptr);
-	else if (pid > 0)
-	{
-		while (process_num--)
-			wait(NULL);
-		return ;
-	}
 	path_list = get_path_list(&memptr);
 	check_commands(command_table, path_list, memptr);
 	pipe_fd = NULL;
-	pipe_fd = create_pipes(pipe_fd, process_num, &memptr);
+	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
 	current = create_processes(command_table, process_num);
 	close_pipes(pipe_fd, current, memptr);
 	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui! Expandir tb o ?$

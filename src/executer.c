@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:33:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 21:48:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr)
 		function_pointer = (int (*)(char **))current->builtin_pointer;
 		exit_value = function_pointer(current->cmd);
 		clean_memory(memptr);
-		exit(exit_value);
+		(void)exit_value;
 	}
 }

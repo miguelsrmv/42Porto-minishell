@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 22:21:57 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:40:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,10 @@ void	expand_to_pid(char **string, int *start, t_memptr memptr)
 {
 	char	*pid_str;
 
-	pid_str = ft_itoa(getpid());
-	if (!pid_str)
-		exit_error(MALLOC_ERROR, memptr);
+	pid_str = "'Process ID'";
 	if (concatenate(string, pid_str, start, (*start) + 2) == 1)
 		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(pid_str);
-	free(pid_str);
 }
 
 void	ansi_quoting(char **string, int *start, t_memptr memptr)
