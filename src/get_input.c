@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:34:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:47:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ void	update_input(char **input, t_memptr memptr)
 char	*get_input(char *prompt, t_memptr memptr, int *main_pipe)
 {
 	char							*input;
-	extern enum e_SignalType		signal_flag;
+	extern enum e_SignalType		g_signal_flag;
 
 	input = readline(prompt);
 	if (!input)
-		signal_flag = 2;
+		g_signal_flag = EOF_SIGNAL;
 	close (main_pipe[0]);
-	write(main_pipe[1], &signal_flag, sizeof(enum e_SignalType));
+	write(main_pipe[1], &g_signal_flag, sizeof(enum e_SignalType));
 	close (main_pipe[1]);
-	if (signal_flag == 2)
+	if (g_signal_flag == EOF_SIGNAL)
 		exit(128);
 	trim_left_whitespace(&input, memptr);
 	if (check_in_quote(input) != OUT_QUOTE)
