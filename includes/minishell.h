@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 20:52:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 22:11:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,13 +152,9 @@ t_memptr			initialize_memptr(t_token **lexer_list,
 void				set_environment_vars(char **envp, t_memptr memptr);
 
 /// Bash_main.c
-void				bash_main(t_token *lexer_list,
-						t_command_table *command_table, t_memptr memptr,
-						char **envp);
+void				bash_main(char **envp, t_memptr memptr);
 void				bash_parent(int *main_pipe, int pid);
-void				bash_child(t_token *lexer_list,
-						t_command_table *command_table, t_memptr memptr,
-						char **envp, int *main_pipe);
+void				bash_child(char **envp, t_memptr memptr, int *main_pipe);
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);

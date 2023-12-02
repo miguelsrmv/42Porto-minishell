@@ -6,14 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 21:51:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 22:11:25 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	bash_main(t_token *lexer_list, t_command_table *command_table,
-			t_memptr memptr, char **envp)
+void	bash_main(char **envp, t_memptr memptr)
 {
 	extern int	signal_flag;
 	int			pid;
@@ -32,7 +31,7 @@ void	bash_main(t_token *lexer_list, t_command_table *command_table,
 		else if (pid > 0)
 			bash_parent(main_pipe, pid);
 		else
-			bash_child(lexer_list, command_table, memptr, envp, main_pipe);
+			bash_child(envp, memptr, main_pipe);
 		clean_memory(memptr);
 	}
 }
@@ -48,14 +47,13 @@ void	bash_parent(int *main_pipe, int pid)
 	wait4(pid, NULL, 0, NULL);
 }
 
-void	bash_child(t_token *lexer_list, t_command_table *command_table,
-			t_memptr memptr, char **envp, int *main_pipe)
+void	bash_child(char **envp, t_memptr memptr, int *main_pipe)
 {
 	extern int	signal_flag;
 
 	set_child_signal();
-	lexer_list = read_readline(memptr, main_pipe);
-	command_table = parse_list(lexer_list, memptr);
-	expand_command_table(&command_table, memptr);
-	prepare_processes(&command_table, envp, memptr);
+	*(memptr.lexer_list) = read_readline(memptr, main_pipe);
+	*(memptr.command_table) = parse_list(*(memptr.lexer_list), memptr);
+	expand_command_table(memptr.command_table, memptr);
+	prepare_processes(memptr.command_table, envp, memptr);
 }

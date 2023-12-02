@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 18:55:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 22:10:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc >10) // Mudar no fim
 		exit_error(USAGE_ERROR, memptr);
 	set_environment_vars(envp, memptr);
-	bash_main(lexer_list, command_table, memptr, envp);
+	bash_main(envp, memptr);
 	return (0);
 }
