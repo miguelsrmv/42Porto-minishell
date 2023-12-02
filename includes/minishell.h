@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:46:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:51:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,10 +297,9 @@ void				execute(t_command_table *current, char **envp,
 						t_memptr memptr);
 
 // set_signals.c
-void				set_parent_signal(void);
-void				set_child_signal(void);
-void				sigquit_handler(int signum);
 void				sigint_handler(int signum);
+void				set_child_signal(void);
+void				set_parent_signal(void);
 
 //env2.c
 int					env(char **argv);
