@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:53:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 15:22:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	t_command_table	*current;
 
 	process_num = count_processes(command_table);
+	path_list = get_path_list(&memptr);
+	check_commands(command_table, path_list, memptr);
+	pipe_fd = NULL;
+	pipe_fd = create_pipes(pipe_fd, process_num, &memptr);
+	current = create_processes(command_table, process_num);
+
 	pid = fork();
 	if (pid == -1)
 		exit_error(FORK_ERROR, memptr);
@@ -108,11 +114,6 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 			wait(NULL);
 		return ;
 	}
-	path_list = get_path_list(&memptr);
-	check_commands(command_table, path_list, memptr);
-	pipe_fd = NULL;
-	pipe_fd = create_pipes(pipe_fd, process_num, &memptr);
-	current = create_processes(command_table, process_num);
 	close_pipes(pipe_fd, current, memptr);
 	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui! Expandir tb o ?$
 	execute(current, envp, memptr);

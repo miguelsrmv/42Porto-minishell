@@ -6,11 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:58:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:55:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	signal_flag = 0;
 
 t_memptr	initialize_memptr(t_token **lexer_list,
 				t_command_table **command_table)
@@ -48,18 +50,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc >10) // Mudar no fim
 		exit_error(USAGE_ERROR, memptr);
 	set_environment_vars(envp, memptr);
-	while (TRUE)
-	{
-		lexer_list = read_readline(memptr);
-		command_table = parse_list(lexer_list, memptr);
-		expand_command_table(&command_table, memptr);
-		prepare_processes(&command_table, envp, memptr);
-		clean_memory(memptr);
-	}
-/* 	lexer_list = read_readline(memptr);
-	command_table = parse_list(lexer_list, memptr);
-	expand_command_table(&command_table, memptr);
-	prepare_processes(&command_table, envp, memptr);
-	clean_memory(memptr);
-	return (0); */
+	bash_main(lexer_list, command_table, memptr, envp);
+	return (0);
 }

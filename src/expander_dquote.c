@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 21:08:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:33:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	expand_env_quotes(char **string, int *start, int *end, t_memptr memptr)
 	(*start) = (*start) + ft_strlen(expanded);
 }
 
-// Desnecessário ?? Posso só passar à frente e dar break ? Incorporar $$ ??
 void	expand_to_dollar_sign(char **string, int *start, t_memptr memptr)
 {
 	char	*expand;

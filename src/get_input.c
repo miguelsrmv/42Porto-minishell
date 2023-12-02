@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 14:27:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:08:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,19 @@ void	update_input(char **input, t_memptr memptr)
 		exit_error(MALLOC_ERROR, memptr);
 }
 
-char	*get_input(char *prompt, t_memptr memptr)
+char	*get_input(char *prompt, t_memptr memptr, int *main_pipe)
 {
-	char	*input;
+	char			*input;
+	extern int		signal_flag;
 
 	input = readline(prompt);
+	if (!input)
+		signal_flag = 2;
+	close (main_pipe[0]);
+	write(main_pipe[1], &signal_flag, sizeof(int));
+	close (main_pipe[1]);
+	if (signal_flag == 2)
+		exit(128);
 	trim_left_whitespace(&input, memptr);
 	if (check_in_quote(input) != OUT_QUOTE)
 		exit_error(QUOTE_ERROR, memptr);

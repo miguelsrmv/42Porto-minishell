@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 19:02:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:09:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 # include <string.h>
 # include <errno.h>
 # include <dirent.h>
 # include <stdbool.h>
-
+# include <signal.h>
 
 # define SQUOTE '\''
 # define DQUOTE '\"'
@@ -142,13 +143,20 @@ typedef struct s_export
 	char	*var;
 }			t_export;
 
-
 // Function definitions
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table);
 void				set_environment_vars(char **envp, t_memptr memptr);
 
+/// Bash_main.c
+void				bash_main(t_token *lexer_list,
+						t_command_table *command_table, t_memptr memptr,
+						char **envp);
+void				bash_parent(int *main_pipe);
+void				bash_child(t_token *lexer_list,
+						t_command_table *command_table, t_memptr memptr,
+						char **envp, int *main_pipe);
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
@@ -158,7 +166,7 @@ void				exit_error(char *error_message, t_memptr memptr, ...);
 /// get_input.c
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
-char				*get_input(char *prompt, t_memptr memptr);
+char				*get_input(char *prompt, t_memptr memptr, int *main_pipe);
 
 /// input_checker.c
 int					check_in_quote(char *input);
@@ -167,7 +175,7 @@ char				*check_valid_input(char *input);
 
 /// lexer.c
 void				fill_in_list(char *input, t_token **head, t_memptr memptr);
-t_token				*read_readline(t_memptr memptr);
+t_token				*read_readline(t_memptr memptr, int *maine_pipe);
 
 /// lexer_linked_list.c
 t_token				*create_token(char *token, int type, t_memptr memptr);
@@ -283,6 +291,12 @@ void				fill_in_result_from_path_list(char **path_list,
 /// executer.c
 void				execute(t_command_table *current, char **envp,
 						t_memptr memptr);
+
+// set_signals.c
+void				set_parent_signal(void);
+void				set_child_signal(void);
+void				sigquit_handler(int signum);
+void				sigint_handler(int signum);
 
 //env2.c
 int					env(char **argv);
