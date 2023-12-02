@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 22:11:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:34:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@
 # define COMMAND_ERROR "command not found.\n"
 # define OPEN_ERROR "No such file or directory.\n"
 
+
+enum e_SignalType {
+	NO_SIGNAL,
+	SIGINT_SIGNAL,
+	SIGQUIT_SIGNAL
+};
+
 enum e_QuoteType {
 	OUT_QUOTE,
 	IN_QUOTE,
@@ -60,7 +67,7 @@ enum e_QuoteType {
 
 enum e_PipeType {
 	OUT_PIPE,
-	IN_PIPE,
+	IN_PIPE
 };
 
 enum e_TokenType {
@@ -73,7 +80,7 @@ enum e_TokenType {
 enum e_CommandType {
 	NULL_COMMANDTYPE,
 	EXECUTABLE,
-	BUILTIN,
+	BUILTIN
 };
 
 enum e_RedirectType {

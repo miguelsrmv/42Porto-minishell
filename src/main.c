@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 22:10:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:34:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	signal_flag = 0;
+enum e_SignalType signal_flag = NO_SIGNAL;
 
 t_memptr	initialize_memptr(t_token **lexer_list,
 				t_command_table **command_table)

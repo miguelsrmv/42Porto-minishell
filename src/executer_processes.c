@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 21:46:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:30:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	count_processes(t_command_table **command_table)
 
 int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
 {
-	pipe_fd = (int **)malloc(sizeof(int *) * (pipe_num));
+	if (!pipe_num)
+		return (NULL);
+	pipe_fd = (int **)malloc(sizeof(int *) * (pipe_num + 1));
 	if (!pipe_fd)
 		exit_error(MALLOC_ERROR, *memptr);
 	pipe_fd[pipe_num] = NULL;
@@ -72,6 +74,8 @@ void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 	int	i;
 
 	i = 0;
+	if (!pipe_fd)
+		return ;
 	while (pipe_fd[i])
 	{
 		if (i != current->command_no - 2)
@@ -92,7 +96,6 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 			t_memptr memptr)
 {
 	int				process_num;
-	int				pid;
 	int				**pipe_fd;
 	char			**path_list;
 	t_command_table	*current;
@@ -103,9 +106,6 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	pipe_fd = NULL;
 	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
 	current = create_processes(command_table, process_num);
-	(void)pid;
-/* 	while (--process_num)
-		wait(NULL); */
 	close_pipes(pipe_fd, current, memptr);
 	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui! Expandir tb o ?$
 	execute(current, envp, memptr);
