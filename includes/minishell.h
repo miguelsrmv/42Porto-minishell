@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:34:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:46:51 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@
 # define COMMAND_ERROR "command not found.\n"
 # define OPEN_ERROR "No such file or directory.\n"
 
-
 enum e_SignalType {
 	NO_SIGNAL,
 	SIGINT_SIGNAL,
-	SIGQUIT_SIGNAL
+	EOF_SIGNAL
 };
 
 enum e_QuoteType {
@@ -351,7 +350,8 @@ int					echo(char **args);
 int					exit_inbuilt(char **args);
 
 ///get_set.c
-//static void		get_env_var_value_utils(t_env *envv, char *var, char **value, int i);
+//static void		get_env_var_value_utils(t_env *envv, char *var,
+//						char **value, int i);
 char				*get_env_var_value(t_env *envv, char *var);
 t_env				*init_envv(char **envp);
 void				free_envv(t_env *envv);
