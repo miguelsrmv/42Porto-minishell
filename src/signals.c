@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:47:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:50:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@ void	sigint_handler(int signum)
 	exit(128 + signum);
 }
 
-void	sigquit_handler(int signum)
-{
-	extern enum e_SignalType	g_signal_flag;
-
-	g_signal_flag = EOF_SIGNAL;
-	exit(128 + signum);
-}
-
 void	set_child_signal(void)
 {
 	struct sigaction	sa;
@@ -37,6 +29,10 @@ void	set_child_signal(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
+	sa.sa_handler = SIG_IGN;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGQUIT, &sa, NULL);
 }
 
 void	set_parent_signal(void)
@@ -47,8 +43,8 @@ void	set_parent_signal(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = sigquit_handler;
+	sa.sa_handler = SIG_IGN;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
-	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 }
