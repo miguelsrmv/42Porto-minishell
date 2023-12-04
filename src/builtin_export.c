@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:24:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:08:11 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	ft_export_new(t_env *envv, t_export *exp, char **argv)
 {
+	if(check_argv_var(argv) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (envv->env_var[exp->i] == NULL)
 	{
 		envv->env_var = ft_realloc_str_arr

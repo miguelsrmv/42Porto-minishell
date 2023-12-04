@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/01 14:53:26 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:36:55 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr)
 	{
 		function_pointer = (int (*)(char **))current->builtin_pointer;
 		//exit_value = function_pointer(current->cmd);
+		if(ft_strcmp(current->cmd[0], "exit") == 0)
+			exit(1);
 		function_pointer(current->cmd);
 		clean_memory(memptr);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/30 15:35:11 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:32:18 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_builtin(t_command_table *current)
 	else if (!ft_strcmp(current->cmd[0], "env"))
 		current->builtin_pointer = (void *)env;
 	else if (!ft_strcmp(current->cmd[0], "exit"))
-		current->builtin_pointer = (void *)exit_inbuilt;
+		current->builtin_pointer = exit_inbuilt;
 	if (current->builtin_pointer)
 		current->command_type = BUILTIN;
 }

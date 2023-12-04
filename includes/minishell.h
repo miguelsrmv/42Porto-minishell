@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 01:17:18 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:32:46 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,7 +330,8 @@ int					echo(char **args);
 
 ///exit.c
 //static bool		is_valid_exit_arg(char **args);
-int					exit_inbuilt(char **args);
+//int					exit_inbuilt(char **args); ATENCAO
+void				exit_inbuilt(char **args);
 
 ///get_set.c
 //static void		get_env_var_value_utils(t_env *envv, char *var, char **value, int i);
@@ -345,5 +346,8 @@ t_env				*get_envv(void);
 int					reinit_env_var(t_env *envv, char **argv);
 char				*get_echo_var(char *str);
 char				*ft_strchr2(const char *s, int c);
+
+///utils.c
+int 				check_argv_var(char **argv);
 
 #endif

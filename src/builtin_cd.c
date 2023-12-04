@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:41:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:08:02 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,21 +90,25 @@ static int	ft_cd_home(t_env *envv)
 	return (ft_exit_cd(&cwd, EXIT_SUCCESS));
 }
 
-/* int		ft_check_cd(char *str, t_env *envv)
+int		ft_check_cd(char *str, t_env *envv)
 {
-	int i = 0;
+	int 	i = 0;
+	char 	*cwd;
+	char	*cwd2;
 
 	if(str[i] == '-')
 	{
 		chdir(envv->oldpwd);
-		//cwd = envv->oldpwd;
+		cwd = ft_strdup(envv->oldpwd);
+		cwd2 = ft_strdup(cwd);
 		ft_update_env_var(envv, "OLDPWD", envv->pwd);
 		ft_update_env_var(envv, "PWD", envv->oldpwd);
+		ft_printf("%s\n", cwd2);
 		return (EXIT_SUCCESS);
 	}
 	else
 		return (EXIT_FAILURE);
-} */
+}
 
 int	cd(char **argv)
 {
@@ -118,10 +122,8 @@ int	cd(char **argv)
 	if (argv[1] == NULL)
 		return (ft_cd_home(envv));
 	cwd = NULL;
-	/* if (ft_check_cd(argv[1], envv))
+	if (ft_check_cd(argv[1], envv) == EXIT_SUCCESS)
 		return (ft_exit_cd(&cwd, EXIT_SUCCESS));
-	else
-		return (ft_exit_cd(&cwd, EXIT_FAILURE)); */
 	directory = opendir(argv[1]);
 	if (directory == NULL)
 		return (ft_exit_cd(&cwd, EXIT_FAILURE));
