@@ -116,3 +116,10 @@ readline.supp:
 	@ echo "}" >> readline.supp
 
 .PHONY: all clean fclean re libft leaks readline.supp
+2
+[?2004hminishell: [?2004l
+2
+[?2004hminishell: l^C[?2004l[?2004hminishell: [?2004l2
+[?2004hminishell: ^C[?2004l[?2004hminishell: [?2004l
+2
+[?2004hminishell: [?2004l

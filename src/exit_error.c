@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 13:43:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:49:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 	else if (!ft_strcmp(error_msg, OPEN_ERROR))
 		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR))
-		ft_fprintf(STDERR_FILENO, "%s: %s", &va_arg(args, char *)[2], error_msg);
+		ft_fprintf(STDERR_FILENO, "%s: %s", &va_arg(args, char *)[2],
+			error_msg);
 	else if (!ft_strcmp(error_msg, SYNTAX_ERROR))
 		ft_fprintf(STDERR_FILENO, SYNTAX_ERROR);
 	else if (!ft_strcmp(error_msg, QUOTE_ERROR))
