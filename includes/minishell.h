@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:51:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:33:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define SYNTAX_ERROR "Syntax error near unexpected token.\n"
 # define COMMAND_ERROR "command not found.\n"
 # define OPEN_ERROR "No such file or directory.\n"
+# define DIRECTORY_ERROR "Is a directory\n"
 
 enum e_SignalType {
 	NO_SIGNAL,
@@ -283,7 +284,7 @@ void				check_redirections(int **pipe_fd, t_command_table **command,
 
 void				check_builtin(t_command_table *current);
 void				check_executables(t_command_table *current,
-						char **path_list);
+						char **path_list, t_memptr memptr);
 void				check_commands(t_command_table **command_table,
 						char **path_list, t_memptr memptr);
 

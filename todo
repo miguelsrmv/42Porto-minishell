@@ -1,14 +1,1 @@
 # Builtins
-
-# Syntaxe
-
-miguel@DellXPS:~/Coding/42Porto/CommonCore/minishell$ ./minishell
-minishell: cat echo |
->    |
-> asasdpaosdpaosd |
-> echo
-Syntax error near unexpected token.
-: Success
-
-# Verificar que cmd[0] nao e' uma pasta
-# Sinais

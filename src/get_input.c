@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:47:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:54:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*get_input(char *prompt, t_memptr memptr, int *main_pipe)
 		update_input(&input, memptr);
 	rl_replace_line(input, 0);
 	rl_redisplay();
-	input = check_valid_input(input);
+	input = check_valid_input(input); // retirar ?? Checkar caractéres inválidos ? 
 	if (input && ft_strlen(input))
 		add_history(input);
 	return (input);

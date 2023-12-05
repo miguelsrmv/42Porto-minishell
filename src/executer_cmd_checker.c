@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:54:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:40:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	check_builtin(t_command_table *current)
 		current->command_type = BUILTIN;
 }
 
-void	check_executables(t_command_table *current, char **path_list)
+void	check_executables(t_command_table *current, char **path_list,
+			t_memptr memptr)
 {
 	int				i;
 	char			*test_command;
@@ -41,8 +42,10 @@ void	check_executables(t_command_table *current, char **path_list)
 	while (path_list[i])
 	{
 		test_command = ft_strjoin(path_list[i], current->cmd[0]);
-		if (access(test_command, F_OK | X_OK) == 0)					// Acrescentar SE NAO FOR UMA PASTA!!
+		if (access(test_command, F_OK | X_OK) == 0)
 		{
+			if (opendir(test_command) != NULL)
+				exit_error(DIRECTORY_ERROR, memptr, test_command);
 			current->cmd_target = test_command;
 			current->command_type = EXECUTABLE;
 			return ;
@@ -62,7 +65,7 @@ void	check_commands(t_command_table **command_table, char **path_list,
 	{
 		check_builtin(current);
 		if (current->command_type != BUILTIN)
-			check_executables(current, path_list);
+			check_executables(current, path_list, memptr);
 		if (current->command_type == NULL_COMMANDTYPE)
 			exit_error(COMMAND_ERROR, memptr, current->cmd[0]);
 		current = current->next;
