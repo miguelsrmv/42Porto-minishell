@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:03:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:29:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ enum e_ValidType	check_output(t_command_table **command)
 	while ((*command)->full_output[i])
 	{
 		if (redir_check((*command)->full_output[i]) != INVALID)
-			(*command)->output_type = redir_check((*command)->full_output[i++]);
+			(*command)->output_type
+				= redir_check((*command)->full_output[i++]);
 		else
 			return (INVALID_OUTPUT_REDIR);
 		(*command)->output_target = (*command)->full_output[i++];

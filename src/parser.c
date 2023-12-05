@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 18:09:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:15:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_syntax(t_token *lexer_list)
 	{
 		if (current->type == SEPARATOR)
 		{
-			if (!current->next || current->next->type == SEPARATOR)
+			if (current->next->type == SEPARATOR)
 				return (INVALID);
 		}
 		else if (current->type == REDIRECT)
