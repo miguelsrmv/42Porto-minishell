@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/04 19:32:29 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/05 11:29:24 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	exit_inbuilt(char **args)
 			exit_code = 255;
 		}
 	}
-
 	ft_fprintf(2, "exit\n");
 	exit(exit_code);
 }

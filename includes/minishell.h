@@ -147,7 +147,7 @@ typedef struct s_export
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table);
-void				set_environment_vars(char **envp, t_memptr memptr);
+t_env				*set_environment_vars(char **envp, t_memptr memptr);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
@@ -256,8 +256,8 @@ t_command_table		*create_processes(t_command_table **current,
 						int process_num);
 void				close_pipes(int **pipe_fd, t_command_table *current,
 						t_memptr memptr);
-void				prepare_processes(t_command_table **command_table,
-						char **envp, t_memptr memptr);
+void				prepare_processes(t_command_table **command_table, t_env *envv_teste,
+						t_memptr memptr);
 
 /// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
@@ -281,8 +281,7 @@ void				fill_in_result_from_path_list(char **path_list,
 						char **result, t_memptr memptr);
 
 /// executer.c
-void				execute(t_command_table *current, char **envp,
-						t_memptr memptr);
+void				execute(t_command_table *current, t_env *envv_teste, t_memptr memptr);
 
 //env2.c
 int					env(char **argv);
