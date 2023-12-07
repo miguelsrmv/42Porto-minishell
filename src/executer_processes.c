@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 15:37:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:15:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_command_table	*create_processes(t_command_table **command_table,
 	return (current);
 }
 
-void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
+void	close_pipes(int **pipe_fd, int*envv_pipe, t_command_table *current,
+			t_memptr memptr)
 {
 	int	i;
 
@@ -90,10 +91,15 @@ void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 		}
 		i++;
 	}
+	if (current->command_no != 1 || current->command_type == EXECUTABLE)
+	{
+		close(envv_pipe[0]);
+		close(envv_pipe[1]);
+	}
 }
 
 void	prepare_processes(t_command_table **command_table, char **envp,
-			t_memptr memptr)
+			t_memptr memptr, int *envv_pipe)
 {
 	int				process_num;
 	int				**pipe_fd;
@@ -106,7 +112,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	pipe_fd = NULL;
 	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
 	current = create_processes(command_table, process_num);
-	close_pipes(pipe_fd, current, memptr);
+	close_pipes(pipe_fd, envv_pipe, current, memptr);
 	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui! Expandir tb o ?$
-	execute(current, envp, memptr);
+	execute(current, envp, memptr, envv_pipe);
 }
