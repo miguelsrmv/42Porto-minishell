@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 12:33:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:46:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ enum e_ValidType {
 	INVALID_CMD
 };
 
+enum e_BuiltinType {
+	EXPORT,
+	CD
+};
+
 // Structs
 typedef struct s_token {
 	char			*token;
@@ -133,6 +138,7 @@ typedef struct s_command_table {
 typedef struct s_memptr {
 	t_token			**lexer_list;
 	t_command_table	**command_table;
+	char			**envp_cpy;
 	char			**path_list;
 	int				**pipe_fd;
 }	t_memptr;
@@ -155,13 +161,16 @@ typedef struct s_export
 // Function definitions
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
-						t_command_table **command_table);
-void				set_environment_vars(char **envp, t_memptr memptr);
+						t_command_table **command_table, char **envp_cpy);
+void				set_environment_vars(char **envp_cpy, t_memptr memptr);
 
 /// Bash_main.c
-void				bash_main(char **envp, t_memptr memptr);
-void				bash_parent(int *main_pipe, int pid);
-void				bash_child(char **envp, t_memptr memptr, int *main_pipe);
+void				bash_main(char **envp_cpy, t_memptr memptr);
+void				bash_parent(int *signal_pipe, int pid);
+void				bash_child(char **envp_cpy, t_memptr memptr, int *signal_pipe,
+						int *envv_pipe);
+void				read_envv(int *envv_pipe, char **envp_cpy);
+
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
@@ -171,7 +180,7 @@ void				exit_error(char *error_message, t_memptr memptr, ...);
 /// get_input.c
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
-char				*get_input(char *prompt, t_memptr memptr, int *main_pipe);
+char				*get_input(char *prompt, t_memptr memptr, int *signal_pipe);
 
 /// input_checker.c
 int					check_in_quote(char *input);
@@ -267,10 +276,10 @@ int					**create_pipes(int **pipe_fd, int process_num,
 						t_memptr *memptr);
 t_command_table		*create_processes(t_command_table **current,
 						int process_num);
-void				close_pipes(int **pipe_fd, t_command_table *current,
-						t_memptr memptr);
+void				close_pipes(int **pipe_fd, int *envv_pipe,
+						t_command_table *current, t_memptr memptr);
 void				prepare_processes(t_command_table **command_table,
-						char **envp, t_memptr memptr);
+						char **envp, t_memptr memptr, int *envv_pipe);
 
 /// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
@@ -295,7 +304,8 @@ void				fill_in_result_from_path_list(char **path_list,
 
 /// executer.c
 void				execute(t_command_table *current, char **envp,
-						t_memptr memptr);
+						t_memptr memptr, int *envv_pipe);
+void				write_envv(int *envv_pipe, char **envp);
 
 // set_signals.c
 void				sigint_handler(int signum);
