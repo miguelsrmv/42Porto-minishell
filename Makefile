@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/12/02 19:00:08 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/12/08 16:08:43 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,13 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
-SRC		=	main.c bash_main.c get_input.c input_checker.c \
+SRC		=	main.c bash_main.c bash_prepare_next.c \
+			get_input.c input_checker.c \
 			lexer.c lexer_linked_list.c lexer_get_tokens.c \
 			parser.c parser_set_redirs.c parser_heredoc.c \
 			expander.c expander_noquotes.c expander_squote.c expander_dquote.c \
 			expander_concatenate.c \
-			executer_processes.c executer_redir_checker.c executer_cmd_checker.c \
+			executer_prepare_processes.c executer_redir_checker.c executer_cmd_checker.c \
 			executer_get_path.c executer.c \
 			signals.c \
 			exit_error.c \

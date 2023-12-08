@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 10:36:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 13:44:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	clean_memory(t_memptr memptr)
 		clear_lexer_list(memptr.lexer_list);
 	if (memptr.command_table)
 		clear_command_table(memptr.command_table);
-	if (memptr.envp_cpy)
-		ft_free_tabs((void **)memptr.envp_cpy);
 	if (memptr.path_list)
 		ft_free_tabs((void **)memptr.path_list);
 	if (memptr.pipe_fd)
@@ -73,20 +71,21 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 	va_list	args;
 
 	va_start(args, memptr);
-	if (!ft_strcmp(error_msg, COMMAND_ERROR))
-		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
-	else if (!ft_strcmp(error_msg, OPEN_ERROR))
+	if (!ft_strcmp(error_msg, COMMAND_ERROR)
+		|| !ft_strcmp(error_msg, OPEN_ERROR))
 		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR))
 		ft_fprintf(STDERR_FILENO, "%s: %s", &va_arg(args, char *)[2],
 			error_msg);
-	else if (!ft_strcmp(error_msg, SYNTAX_ERROR))
-		ft_fprintf(STDERR_FILENO, SYNTAX_ERROR);
-	else if (!ft_strcmp(error_msg, QUOTE_ERROR))
-		ft_fprintf(STDERR_FILENO, QUOTE_ERROR);
+	else if (!ft_strcmp(error_msg, SYNTAX_ERROR)
+		|| !ft_strcmp(error_msg, QUOTE_ERROR)
+		|| !ft_strcmp(error_msg, EOF_ERROR))
+		ft_fprintf(STDERR_FILENO, error_msg);
 	else
 		perror(error_msg);
 	va_end(args);
 	clean_memory(memptr);
+	if (memptr.envp_cpy)
+		ft_free_tabs((void **)memptr.envp_cpy);
 	exit(0);
 }

@@ -6,26 +6,26 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 23:50:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:16:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sigint_handler(int signum)
+void	sigint_handler_main(int signum)
 {
 	extern enum e_SignalType	g_signal_flag;
 
+	(void)signum;
 	g_signal_flag = SIGINT_SIGNAL;
 	write(2, "\n", 1);
-	exit(128 + signum);
 }
 
-void	set_child_signal(void)
+void	set_signal(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = sigint_handler;
+	sa.sa_handler = sigint_handler_main;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
@@ -35,16 +35,17 @@ void	set_child_signal(void)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-void	set_parent_signal(void)
+void	sigint_handler_subprocess(int signum)
+{
+	exit(signum + SIGINT_SIGNAL);
+}
+
+void	set_subprocess_signal(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = SIG_IGN;
+	sa.sa_handler = sigint_handler_subprocess;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = SIG_IGN;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGQUIT, &sa, NULL);
 }

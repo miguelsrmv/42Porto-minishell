@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:52:58 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/02 20:10:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:30:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	fill_in_list(char *input, t_token **head, t_memptr memptr)
 	}
 }
 
-t_token	*read_readline(t_memptr memptr, int *main_pipe)
+t_token	*read_readline(t_memptr memptr)
 {
 	char		*input;
 	t_token		*head;
 
 	input = NULL;
-	input = get_input("minishell: ", memptr, main_pipe);
+	input = get_input("minishell: ", memptr);
 	head = NULL;
 	fill_in_list(input, &head, memptr);
 	free(input);
