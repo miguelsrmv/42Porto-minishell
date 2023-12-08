@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:46:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 16:52:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:16:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,10 @@ void	write_envp(int *envv_pipe, char **envp, t_memptr memptr)
 
 void	read_envp(int *envp_pipe, char ***envp_cpy, t_memptr *memptr)
 {
-	extern enum e_SignalType	g_signal_flag;
 	int							tab_len;
 
 	if (close(envp_pipe[1]) == -1)
 		exit_error(CLOSE_ERROR, *memptr);
-	if (g_signal_flag == SIGINT_SIGNAL)
-	{
-		if (close(envp_pipe[0]) == -1)
-			exit_error(CLOSE_ERROR, *memptr);
-		return ;
-	}
 	tab_len = 0;
 	if (read(envp_pipe[0], &tab_len, sizeof(int)) == -1)
 		exit_error(READ_ERROR, *memptr);

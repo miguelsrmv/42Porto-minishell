@@ -6,27 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 16:54:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:52:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_processes(t_command_table **command_table)
-{
-	t_command_table	*current;
-	int				processes_count;
 
-	current = *command_table;
-	processes_count = 1;
-	while (current)
-	{
-		if (current->next)
-			processes_count++;
-		current = current->next;
-	}
-	return (processes_count);
-}
 
 int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
 {
@@ -101,13 +87,14 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 
 	path_list = get_path_list(&memptr);
 	check_commands(command_table, path_list, memptr);
+	ft_free_tabs((void **)path_list);
 	if (pipe(envp_pipe) == -1)
 		exit_error(PIPE_ERROR, memptr);
 	pid = fork();
 	if (pid < 0)
 		exit_error(FORK_ERROR, memptr);
 	else if (pid > 0)
-		process_main(command_table, envp, envp_pipe, memptr);
+		process_parent(command_table, envp, envp_pipe, memptr);
 	else
 		process_commands(command_table, envp, envp_pipe, memptr);
 }

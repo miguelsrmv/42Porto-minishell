@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/12/08 16:51:04 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/12/08 19:34:37 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC		=	main.c bash_main.c \
 			expander_concatenate.c \
 			executer_prepare_processes.c executer_redir_checker.c executer_cmd_checker.c \
 			executer_get_path.c executer.c \
-			signals.c \
+			signals.c signals_handler.c \
 			pass_envp.c \
 			exit_error.c \
 			builtin_cd.c builtin_echo.c builtin_env2.c builtin_exit.c \

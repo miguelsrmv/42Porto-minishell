@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 16:54:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 20:01:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,6 @@ int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
 
 /// executer_prepare_processes.c
-int					count_processes(t_command_table **command_table);
 int					**create_pipes(int **pipe_fd, int process_num,
 						t_memptr *memptr);
 t_command_table		*create_processes(t_command_table **current,
@@ -302,12 +301,15 @@ void				fill_in_result_from_path_list(char **path_list,
 						char **result, t_memptr memptr);
 
 /// executer.c
-void				execute(t_command_table *current, char **envp,
-						t_memptr memptr, int *envp_pipe);
-void				process_main(t_command_table **command_table,
-						char **envp, int *envp_pipe, t_memptr memptr);
+int					count_processes(t_command_table **command_table);
 void				process_commands(t_command_table **command_table,
 						char **envp, int *envp_pipe, t_memptr memptr);
+void				process_parent(t_command_table **command_table, char **envp,
+						int *envp_pipe, t_memptr memptr);
+void				execute(t_command_table *current, char **envp,
+						t_memptr memptr, int *envp_pipe);
+
+
 
 /// pass_envp.c
 void				write_envp(int *envp_pipe, char **envp, t_memptr memptr);
@@ -316,9 +318,15 @@ void				read_envp(int *envp_pipe, char ***envp_cpy,
 void				read_subenvp(int *envp_pipe, char **envp_cpy,
 						t_memptr *memptr, int tab_len);
 
-// set_signals.c
-void				sigint_handler(int signum);
+/// signals.c
 void				set_signal(void);
+void				set_signal_during_processes_child(void);
+void				set_signal_during_processes_parent(void);
+
+/// signals_handler.c
+void				sigint_handler(int signum);
+void				sigint_handler_during_processes_child(int signum);
+void				sigint_handler_during_processes_parent(int signum);
 
 //env2.c
 int					env(char **argv);
