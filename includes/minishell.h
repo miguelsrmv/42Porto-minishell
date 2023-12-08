@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 16:16:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:54:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,13 +170,6 @@ void				bash_main(char **envp_cpy, t_memptr memptr);
 void				bash_run(char **envp_cpy, t_memptr memptr);
 void				set_environment_vars(char **envp_cpy, t_memptr memptr);
 
-/// Bash_prepare_next.c
-void				prepare_next_command(char **envp_cpy, t_memptr *memptr);
-void				read_envv(int *envp_pipe, char ***envp_cpy,
-						t_memptr *memptr);
-void				read_subenvv(int *envp_pipe, char **envp_cpy,
-						t_memptr *memptr, int tab_len);
-
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
@@ -311,16 +304,21 @@ void				fill_in_result_from_path_list(char **path_list,
 /// executer.c
 void				execute(t_command_table *current, char **envp,
 						t_memptr memptr, int *envp_pipe);
-void				process_main(t_command_table **command_table);
+void				process_main(t_command_table **command_table,
+						char **envp, int *envp_pipe, t_memptr memptr);
 void				process_commands(t_command_table **command_table,
-						char **envp, t_memptr memptr, int *envp_pipe);
-void				write_envv(int *envp_pipe, char **envp);
+						char **envp, int *envp_pipe, t_memptr memptr);
+
+/// pass_envp.c
+void				write_envp(int *envp_pipe, char **envp, t_memptr memptr);
+void				read_envp(int *envp_pipe, char ***envp_cpy,
+						t_memptr *memptr);
+void				read_subenvp(int *envp_pipe, char **envp_cpy,
+						t_memptr *memptr, int tab_len);
 
 // set_signals.c
 void				sigint_handler(int signum);
 void				set_signal(void);
-void				sigint_handler_subprocess(int signum);
-void				set_subprocess_signal(void);
 
 //env2.c
 int					env(char **argv);

@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bash_prepare_next.c                                :+:      :+:    :+:   */
+/*   pass_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 13:25:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 15:54:01 by mde-sa--         ###   ########.fr       */
+/*   Created: 2023/12/08 16:46:45 by mde-sa--          #+#    #+#             */
+/*   Updated: 2023/12/08 16:52:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	prepare_next_command(char **envp_cpy, t_memptr	*memptr)
+void	write_envp(int *envv_pipe, char **envp, t_memptr memptr)
 {
-	/*
-	extern enum e_SignalType	g_signal_flag;
+	int							tab_len;
+	int							str_len;
 
- 	char *message = ft_strjoin(ft_strjoin("\nPreparing NEXT process, signal is ", ft_itoa(g_signal_flag)), "\n");
-	int message_len = ft_strlen(message);
-	write(2, message, message_len);
-
-	if (g_signal_flag == NO_SIGNAL)	
-		read_envv(envp_pipe, envp_cpy, memptr);
-	else if (g_signal_flag == SIGINT_SIGNAL)
-	{
-		if (close(envp_pipe[0]) == -1)
-			exit_error(CLOSE_ERROR, *memptr);
-		if (close(envp_pipe[1]) == -1)
-			exit_error(CLOSE_ERROR, *memptr);
-		g_signal_flag = NO_SIGNAL;
-	}
-	else if (g_signal_flag == EOF_SIGNAL)
-		exit_error(EOF_ERROR, *memptr);
-	clean_memory(*memptr); */
-	(void)envp_cpy;
 	(void)memptr;
-	return ;
+	close(envv_pipe[0]);
+	tab_len = 0;
+	while (envp[tab_len])
+		tab_len++;
+	write(envv_pipe[1], &tab_len, sizeof(int));
+	tab_len = 0;
+	while (envp[tab_len])
+	{
+		str_len = ft_strlen(envp[tab_len]);
+		write(envv_pipe[1], &str_len, sizeof(int));
+		write(envv_pipe[1], envp[tab_len], str_len + 1);
+		tab_len++;
+	}
+	close(envv_pipe[1]);
 }
 
-void	read_envv(int *envp_pipe, char ***envp_cpy, t_memptr *memptr)
+void	read_envp(int *envp_pipe, char ***envp_cpy, t_memptr *memptr)
 {
 	extern enum e_SignalType	g_signal_flag;
 	int							tab_len;
@@ -60,12 +55,12 @@ void	read_envv(int *envp_pipe, char ***envp_cpy, t_memptr *memptr)
 	*envp_cpy = (char **)malloc((tab_len + 1) * sizeof(char *));
 	if (!(*envp_cpy))
 		exit_error(MALLOC_ERROR, *memptr);
-	read_subenvv(envp_pipe, *envp_cpy, memptr, tab_len);
+	read_subenvp(envp_pipe, *envp_cpy, memptr, tab_len);
 	if (close(envp_pipe[0]) == -1)
 		exit_error(CLOSE_ERROR, *memptr);
 }
 
-void	read_subenvv(int *envp_pipe, char **envp_cpy,
+void	read_subenvp(int *envp_pipe, char **envp_cpy,
 			t_memptr *memptr, int tab_len)
 {
 	int	str_len;

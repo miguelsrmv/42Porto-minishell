@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 16:14:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:54:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	if (pid < 0)
 		exit_error(FORK_ERROR, memptr);
 	else if (pid > 0)
-		process_main(command_table);
+		process_main(command_table, envp, envp_pipe, memptr);
 	else
-	{
-		set_subprocess_signal();
-		process_commands(command_table, envp, memptr, envp_pipe);
-	}
+		process_commands(command_table, envp, envp_pipe, memptr);
 }
