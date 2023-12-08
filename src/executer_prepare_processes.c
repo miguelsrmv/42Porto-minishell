@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer_processes.c                               :+:      :+:    :+:   */
+/*   executer_prepare_processes.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 19:15:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:52:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_processes(t_command_table **command_table)
-{
-	t_command_table	*current;
-	int				processes_count;
 
-	current = *command_table;
-	processes_count = 1;
-	while (current)
-	{
-		if (current->next)
-			processes_count++;
-		current = current->next;
-	}
-	return (processes_count);
-}
 
 int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
 {
@@ -69,8 +55,7 @@ t_command_table	*create_processes(t_command_table **command_table,
 	return (current);
 }
 
-void	close_pipes(int **pipe_fd, int*envv_pipe, t_command_table *current,
-			t_memptr memptr)
+void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 {
 	int	i;
 
@@ -91,28 +76,25 @@ void	close_pipes(int **pipe_fd, int*envv_pipe, t_command_table *current,
 		}
 		i++;
 	}
-	if (current->command_no != 1 || current->command_type == EXECUTABLE)
-	{
-		close(envv_pipe[0]);
-		close(envv_pipe[1]);
-	}
 }
 
 void	prepare_processes(t_command_table **command_table, char **envp,
-			t_memptr memptr, int *envv_pipe)
+			t_memptr memptr)
 {
-	int				process_num;
-	int				**pipe_fd;
 	char			**path_list;
-	t_command_table	*current;
+	int				pid;
+	int				envp_pipe[2];
 
-	process_num = count_processes(command_table);
 	path_list = get_path_list(&memptr);
 	check_commands(command_table, path_list, memptr);
-	pipe_fd = NULL;
-	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
-	current = create_processes(command_table, process_num);
-	close_pipes(pipe_fd, envv_pipe, current, memptr);
-	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui! Expandir tb o ?$
-	execute(current, envp, memptr, envv_pipe);
+	ft_free_tabs((void **)path_list);
+	if (pipe(envp_pipe) == -1)
+		exit_error(PIPE_ERROR, memptr);
+	pid = fork();
+	if (pid < 0)
+		exit_error(FORK_ERROR, memptr);
+	else if (pid > 0)
+		process_parent(command_table, envp, envp_pipe, memptr);
+	else
+		process_commands(command_table, envp, envp_pipe, memptr);
 }

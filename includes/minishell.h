@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 10:46:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/08 20:01:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@
 
 // Process Errors
 # define MALLOC_ERROR "Error: Malloc error.\n"
-# define WRITE_ERROR "Error: Write file error.\n"
-# define CLOSE_ERROR "Error: Close file error.\n"
+# define WRITE_ERROR "Error: Write error.\n"
+# define READ_ERROR "Error: Read error.\n"
+# define CLOSE_ERROR "Error: Close error.\n"
 # define PIPE_ERROR "Error: Pipe error.\n"
 # define FORK_ERROR "Error: Fork error.\n"
 # define ENV_ERROR "Error: Env error.\n"
+# define EOF_ERROR "exit\n"
 
 // Usage errors
 # define USAGE_ERROR "Usage error: \'./minishell\'.\n"
@@ -162,14 +164,11 @@ typedef struct s_export
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table, char **envp_cpy);
-void				set_environment_vars(char **envp_cpy, t_memptr memptr);
 
 /// Bash_main.c
 void				bash_main(char **envp_cpy, t_memptr memptr);
-void				bash_parent(int *signal_pipe, int pid);
-void				bash_child(char **envp_cpy, t_memptr memptr, int *signal_pipe,
-						int *envv_pipe);
-void				read_envv(int *envv_pipe, char **envp_cpy);
+void				bash_run(char **envp_cpy, t_memptr memptr);
+void				set_environment_vars(char **envp_cpy, t_memptr memptr);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
@@ -180,7 +179,7 @@ void				exit_error(char *error_message, t_memptr memptr, ...);
 /// get_input.c
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
-char				*get_input(char *prompt, t_memptr memptr, int *signal_pipe);
+char				*get_input(char *prompt, t_memptr memptr);
 
 /// input_checker.c
 int					check_in_quote(char *input);
@@ -189,7 +188,7 @@ char				*check_valid_input(char *input);
 
 /// lexer.c
 void				fill_in_list(char *input, t_token **head, t_memptr memptr);
-t_token				*read_readline(t_memptr memptr, int *maine_pipe);
+t_token				*read_readline(t_memptr memptr);
 
 /// lexer_linked_list.c
 t_token				*create_token(char *token, int type, t_memptr memptr);
@@ -270,16 +269,15 @@ int					concatenate(char **string, char *expanded_string,
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
 
-/// executer_processes.c
-int					count_processes(t_command_table **command_table);
+/// executer_prepare_processes.c
 int					**create_pipes(int **pipe_fd, int process_num,
 						t_memptr *memptr);
 t_command_table		*create_processes(t_command_table **current,
 						int process_num);
-void				close_pipes(int **pipe_fd, int *envv_pipe,
-						t_command_table *current, t_memptr memptr);
+void				close_pipes(int **pipe_fd, t_command_table *current,
+						t_memptr memptr);
 void				prepare_processes(t_command_table **command_table,
-						char **envp, t_memptr memptr, int *envv_pipe);
+						char **envp, t_memptr memptr);
 
 /// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
@@ -303,14 +301,32 @@ void				fill_in_result_from_path_list(char **path_list,
 						char **result, t_memptr memptr);
 
 /// executer.c
+int					count_processes(t_command_table **command_table);
+void				process_commands(t_command_table **command_table,
+						char **envp, int *envp_pipe, t_memptr memptr);
+void				process_parent(t_command_table **command_table, char **envp,
+						int *envp_pipe, t_memptr memptr);
 void				execute(t_command_table *current, char **envp,
-						t_memptr memptr, int *envv_pipe);
-void				write_envv(int *envv_pipe, char **envp);
+						t_memptr memptr, int *envp_pipe);
 
-// set_signals.c
+
+
+/// pass_envp.c
+void				write_envp(int *envp_pipe, char **envp, t_memptr memptr);
+void				read_envp(int *envp_pipe, char ***envp_cpy,
+						t_memptr *memptr);
+void				read_subenvp(int *envp_pipe, char **envp_cpy,
+						t_memptr *memptr, int tab_len);
+
+/// signals.c
+void				set_signal(void);
+void				set_signal_during_processes_child(void);
+void				set_signal_during_processes_parent(void);
+
+/// signals_handler.c
 void				sigint_handler(int signum);
-void				set_child_signal(void);
-void				set_parent_signal(void);
+void				sigint_handler_during_processes_child(int signum);
+void				sigint_handler_during_processes_parent(int signum);
 
 //env2.c
 int					env(char **argv);

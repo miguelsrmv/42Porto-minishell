@@ -2,3 +2,28 @@
 
 
 # Para bash_main enviar o envv em vez do envp?
+
+Libft relink???
+Relink normal ? 
+
+
+Error: Env error.
+: Success
+==30045== Invalid read of size 8
+==30045==    at 0x11240B: ft_free_tabs (in /home/miguel/Coding/42Porto/CommonCore/minishell/minishell)
+==30045==    by 0x10E515: exit_error (exit_error.c:89)
+==30045==    by 0x10953C: set_environment_vars (main.c:37)
+==30045==    by 0x10996E: prepare_process (bash_main.c:66)
+==30045==    by 0x1096B4: bash_main (bash_main.c:24)
+==30045==    by 0x10963B: main (main.c:58)
+==30045==  Address 0x4b1d040 is 0 bytes inside a block of size 288 free'd
+==30045==    at 0x484B0C4: free (vg_replace_malloc.c:884)
+==30045==    by 0x11241E: ft_free_tabs (in /home/miguel/Coding/42Porto/CommonCore/minishell/minishell)
+==30045==    by 0x109BDC: read_envv (bash_prepare_next.c:48)
+==30045==    by 0x109A13: prepare_next_process (bash_prepare_next.c:21)
+==30045==    by 0x10976B: bash_main (bash_main.c:33)
+==30045==    by 0x10963B: main (main.c:58)
+==30045==  Block was alloc'd at
+==30045==    at 0x484884F: malloc (vg_replace_malloc.c:393)
+==30045==    by 0x112B5F: ft_tabdup (in /home/miguel/Coding/42Porto/CommonCore/minishell/minishell)
+==30045==    by 0x1095CE: main (main.c:54)
