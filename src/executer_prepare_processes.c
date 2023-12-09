@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/09 18:11:45 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/09 18:26:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	ft_free_tabs((void **)path_list);
 	if (pipe(envp_pipe) == -1)
 		exit_error(PIPE_ERROR, memptr);
+	(&memptr)->envp_pipe = envp_pipe;
 	pid = fork();
 	if (pid < 0)
 		exit_error(FORK_ERROR, memptr);
