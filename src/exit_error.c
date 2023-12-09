@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 13:44:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/09 18:27:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ void	clear_command_table(t_command_table **lst)
 	*lst = NULL;
 }
 
+void	close_pipes_error(int **pipe)
+{
+	int	i;
+
+	i = 0;
+	while (pipe[i])
+	{
+		close(pipe[i][0]);
+		close(pipe[i][i]);
+		i++;
+	}
+}
+
 void	clean_memory(t_memptr memptr)
 {
 	if (memptr.lexer_list)
@@ -63,7 +76,15 @@ void	clean_memory(t_memptr memptr)
 	if (memptr.path_list)
 		ft_free_tabs((void **)memptr.path_list);
 	if (memptr.pipe_fd)
-		ft_free_tabs((void **)memptr.pipe_fd); /// Confirmar
+	{
+		close_pipes_error(memptr.pipe_fd);
+		ft_free_tabs((void **)memptr.pipe_fd);
+	}
+	if (memptr.envp_pipe)
+	{
+		close(memptr.envp_pipe[0]);
+		close(memptr.envp_pipe[1]);
+	}
 }
 
 void	exit_error(char *error_msg, t_memptr memptr, ...)
