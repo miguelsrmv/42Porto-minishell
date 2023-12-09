@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 20:01:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/09 18:04:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 # define PIPE_ERROR "Error: Pipe error.\n"
 # define FORK_ERROR "Error: Fork error.\n"
 # define ENV_ERROR "Error: Env error.\n"
+# define DUP_ERROR "Error: Dup2 error.\n"
+# define UNLINK_ERROR "Error: Unlink error.\n"
 # define EOF_ERROR "exit\n"
 
 // Usage errors
@@ -283,9 +285,17 @@ void				prepare_processes(t_command_table **command_table,
 enum e_RedirectType	redir_check(char *redir_str);
 enum e_ValidType	check_input(t_command_table **command);
 enum e_ValidType	check_output(t_command_table **command);
-void				set_redirections(int **pipe_fd, t_command_table **command);
 void				check_redirections(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
+
+/// executer_redir_setter.c
+void				set_input_redir(int **pipe_fd, t_command_table **command,
+						t_memptr memptr);
+void				set_output_redir(int **pipe_fd, t_command_table **command,
+						t_memptr memptr);
+void				close_redir_pipes(int **pipe_fd, t_command_table **command,
+						t_memptr memptr);
+
 
 /// executer_cmd_checker.c
 
@@ -308,8 +318,6 @@ void				process_parent(t_command_table **command_table, char **envp,
 						int *envp_pipe, t_memptr memptr);
 void				execute(t_command_table *current, char **envp,
 						t_memptr memptr, int *envp_pipe);
-
-
 
 /// pass_envp.c
 void				write_envp(int *envp_pipe, char **envp, t_memptr memptr);

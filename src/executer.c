@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 19:53:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/09 18:12:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,8 @@ void	process_commands(t_command_table **command_table, char **envp,
 	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
 	current = create_processes(command_table, process_num);
 	close_pipes(pipe_fd, current, memptr);
-	check_redirections(pipe_fd, &current, memptr);	// Meter error management aqui! Expandir tb o ?$
+	check_redirections(pipe_fd, &current, memptr);
 	execute(current, envp, memptr, envp_pipe);
-}
-
-void	process_parent(t_command_table **command_table, char **envp,
-			int *envp_pipe, t_memptr memptr)
-{
-	int	process_num;
-
-	set_signal_during_processes_parent();
-	process_num = count_processes(command_table);
-	while (process_num--)
-		wait(NULL);
-	if ((*command_table)->command_type == BUILTIN && !(*command_table)->next)
-		read_envp(envp_pipe, &envp, &memptr);
 }
 
 void	execute(t_command_table *current, char **envp, t_memptr memptr,
@@ -64,6 +51,7 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr,
 	int	exit_value;
 
 	set_signal_during_processes_child();
+	// Expandir exit status mais recente!!
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)
@@ -71,7 +59,7 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr,
 		function_pointer = (int (*)(char **, char **))current->builtin_pointer;
 		exit_value = function_pointer(current->cmd, envp);
 		if (!current->next && (!ft_strcmp(current->cmd[0], "echo")
-			|| !ft_strcmp(current->cmd[0], "cd"))) // Acrescnetar outros builtins que mexam en envp
+			|| !ft_strcmp(current->cmd[0], "cd"))) // Acrescentar outros builtins que mexam en envp
 			write_envp(envp_pipe, envp, memptr);
 		else
 		{
@@ -80,4 +68,5 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr,
 		}
 		exit(exit_value);
 	}
+	// Falta mandar o exit value para $? para expandir depois!!
 }
