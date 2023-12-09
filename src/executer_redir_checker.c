@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 12:29:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:50:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,33 +75,6 @@ enum e_ValidType	check_output(t_command_table **command)
 	return (VALID);
 }
 
-void	set_redirections(int **pipe_fd, t_command_table **command)
-{
-	if ((*command)->input_type == INPUT || (*command)->input_type == HERE_DOC)
-		(*command)->input_fd = open((*command)->input_target, O_RDONLY);
-	else if ((*command)->input_type == PIPE)
-		(*command)->input_fd = pipe_fd[(*command)->command_no - 2][0];
-	if ((*command)->input_type != NULL_REDIRECT)
-		dup2((*command)->input_fd, STDIN_FILENO);
-	if ((*command)->input_type == HERE_DOC)
-		unlink((*command)->heredoc_buffer);
-	if ((*command)->output_type == OUTPUT)
-		(*command)->output_fd = open((*command)->output_target,
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if ((*command)->output_type == APPEND)
-		(*command)->output_fd = open((*command)->output_target,
-				O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else if ((*command)->output_type == PIPE)
-		(*command)->output_fd = pipe_fd[(*command)->command_no - 1][1];
-	if ((*command)->output_type != NULL_REDIRECT)
-		dup2((*command)->output_fd, STDOUT_FILENO);
-	if ((*command)->command_no > 1)
-		close(pipe_fd[(*command)->command_no - 2][0]);
-	if ((*command)->next)
-		close(pipe_fd[(*command)->command_no - 1][1]);
-
-}
-
 void	check_redirections(int **pipe_fd, t_command_table **command,
 			t_memptr memptr)
 {
@@ -112,7 +85,9 @@ void	check_redirections(int **pipe_fd, t_command_table **command,
 	output_status = check_output(command);
 	if (input_status == VALID && output_status == VALID)
 	{
-		set_redirections(pipe_fd, command);
+		set_input_redir(pipe_fd, command, memptr);
+		set_output_redir(pipe_fd, command, memptr);
+		close_redir_pipes(pipe_fd, command, memptr);
 		return ;
 	}
 	else if (input_status == INVALID_INPUT_REDIR)

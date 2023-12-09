@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 19:52:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/09 18:11:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,17 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 		process_parent(command_table, envp, envp_pipe, memptr);
 	else
 		process_commands(command_table, envp, envp_pipe, memptr);
+}
+
+void	process_parent(t_command_table **command_table, char **envp,
+			int *envp_pipe, t_memptr memptr)
+{
+	int	process_num;
+
+	set_signal_during_processes_parent();
+	process_num = count_processes(command_table);
+	while (process_num--)
+		wait(NULL);
+	if ((*command_table)->command_type == BUILTIN && !(*command_table)->next)
+		read_envp(envp_pipe, &envp, &memptr); // RECEBER TAMBÉM A EXIT STATUS!!
 }
