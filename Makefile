@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/12/10 14:24:27 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/12/10 14:51:48 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,20 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
-SRC		=	main.c bash_main.c \
-			get_input.c input_checker.c \
-			lexer.c lexer_linked_list.c lexer_get_tokens.c \
-			parser.c parser_set_redirs.c parser_heredoc.c \
-			expander.c expander_noquotes.c expander_squote.c expander_dquote.c \
-			expander_concatenate.c \
-			executer_prepare_processes.c executer_redir_checker.c executer_redir_setter.c \
-			executer_cmd_checker.c executer_get_path.c executer.c \
-			signals.c signals_handler.c \
-			exit_error.c \
-			builtin_cd.c builtin_echo.c builtin_env2.c builtin_exit.c \
-			builtin_export.c builtin_export2.c builtin_export3.c builtin_export4.c \
-			builtin_pwd.c builtin_unset.c get_set.c\
+SRC		=	main.c bash_main.c exit_error.c\
+			lexer/get_input.c lexer/input_checker.c \
+			lexer/lexer.c lexer/lexer_linked_list.c lexer/lexer_get_tokens.c \
+			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
+			expander/expander.c expander/expander_noquotes.c expander/expander_squote.c \
+			expander/expander_dquote.c expander/expander_concatenate.c \
+			executer/executer_prepare_processes.c executer/executer_redir_checker.c \
+			executer/executer_redir_setter.c executer/executer_cmd_checker.c \
+			executer/executer_get_path.c executer/executer.c \
+			signals/signals.c signals/signals_handler.c \
+			builtins/builtin_cd.c builtins/builtin_echo.c builtins/builtin_env2.c \
+			builtins/builtin_exit.c builtins/builtin_export.c builtins/builtin_export2.c \
+			builtins/builtin_export3.c builtins/builtin_export4.c builtins/builtin_pwd.c \
+			builtins/builtin_unset.c builtins/get_set.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
