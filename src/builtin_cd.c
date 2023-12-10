@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 11:06:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:33:35 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static int	ft_cd_home(t_env *envv)
 	cwd = getcwd(cwd, 0);
 	ft_update_env_var(envv, "PWD", cwd);
 	ft_free_str(&home_path);
+	//envp = ft_tabdup(envv->envp);
 	if (envv->pwd == NULL || envv->oldpwd == NULL)
 		return (ft_exit_cd(&cwd, EXIT_FAILURE));
 	return (ft_exit_cd(&cwd, EXIT_SUCCESS));
@@ -132,6 +133,7 @@ int	cd(char **argv)
 	ft_update_env_var(envv, "OLDPWD", envv->pwd);
 	cwd = getcwd(cwd, 0);
 	ft_update_env_var(envv, "PWD", cwd);
+	//envp = ft_tabdup(envv->envp);
 	if (envv->pwd == NULL || envv->oldpwd == NULL)
 		return (ft_exit_cd(&cwd, EXIT_FAILURE));
 	return (ft_exit_cd(&cwd, EXIT_SUCCESS));
