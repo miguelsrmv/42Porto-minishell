@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 14:28:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 20:30:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	int				pid;
 
 	path_list = get_path_list(&memptr);
-	check_commands(command_table, path_list, memptr);
+	if (!check_commands(command_table, path_list, memptr))
+		return ;
 	ft_free_tabs((void **)path_list);
 	memptr.path_list = NULL;
 	process_num = count_processes(command_table);

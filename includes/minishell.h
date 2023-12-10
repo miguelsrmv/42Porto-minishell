@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 14:34:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 20:32:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,7 @@ void				close_redir_pipes(int **pipe_fd, t_command_table **command,
 void				check_builtin(t_command_table *current);
 void				check_executables(t_command_table *current,
 						char **path_list, t_memptr memptr);
-void				check_commands(t_command_table **command_table,
+int					check_commands(t_command_table **command_table,
 						char **path_list, t_memptr memptr);
 
 /// executer_get_path.c
