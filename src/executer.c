@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 10:39:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 11:05:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr,
 			// ft_free_tabs((void **)envp);
 			envp = ft_tabdup(envv->env_var);
 			write_envp(envp_pipe, envp, memptr);
+			free(envv);
 		}
 		else
 		{
