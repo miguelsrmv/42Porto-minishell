@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:46:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/08 19:16:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 11:26:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	read_envp(int *envp_pipe, char ***envp_cpy, t_memptr *memptr)
 	read_subenvp(envp_pipe, *envp_cpy, memptr, tab_len);
 	if (close(envp_pipe[0]) == -1)
 		exit_error(CLOSE_ERROR, *memptr);
+	memptr->envp_cpy = *envp_cpy;
 }
 
 void	read_subenvp(int *envp_pipe, char **envp_cpy,
