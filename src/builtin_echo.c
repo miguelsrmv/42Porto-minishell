@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 15:24:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:33:50 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	echo(char **args)
 {
 	bool	print_newline;
 
+	//(void)envp;
 	print_newline = true;
 	if (ft_strncmp(*args, "echo", ft_strlen(*args)) != 0)
 		return (EXIT_FAILURE);

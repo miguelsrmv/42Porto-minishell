@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:24:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:27:40 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int     export(char **argv)
 {
     t_export    *exp;
     t_env       *envv;
-
+	
     envv = get_envv();
     if (envv == NULL || envv->env_var == NULL)
 		return (EXIT_FAILURE);

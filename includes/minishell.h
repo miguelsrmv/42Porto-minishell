@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/09 18:26:15 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 10:26:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,7 @@ int					count_processes(t_command_table **command_table);
 void				process_commands(t_command_table **command_table,
 						char **envp, int *envp_pipe, t_memptr memptr);
 void				process_parent(t_command_table **command_table, char **envp,
-						int *envp_pipe, t_memptr memptr);
+						int *envp_pipe, t_memptr *memptr);
 void				execute(t_command_table *current, char **envp,
 						t_memptr memptr, int *envp_pipe);
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/09 18:12:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 10:39:25 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void	process_commands(t_command_table **command_table, char **envp,
 void	execute(t_command_table *current, char **envp, t_memptr memptr,
 			int *envp_pipe)
 {
-	int	(*function_pointer)(char **, char **);
-	int	exit_value;
+	int		(*function_pointer)(char **, char **);
+	int		exit_value;
+	t_env	*envv;
 
 	set_signal_during_processes_child();
 	// Expandir exit status mais recente!!
@@ -58,13 +59,21 @@ void	execute(t_command_table *current, char **envp, t_memptr memptr,
 	{
 		function_pointer = (int (*)(char **, char **))current->builtin_pointer;
 		exit_value = function_pointer(current->cmd, envp);
-		if (!current->next && (!ft_strcmp(current->cmd[0], "echo")
-			|| !ft_strcmp(current->cmd[0], "cd"))) // Acrescentar outros builtins que mexam en envp
+		if (!current->next && (!ft_strcmp(current->cmd[0], "export")
+				|| !ft_strcmp(current->cmd[0], "cd")
+				|| !ft_strcmp(current->cmd[0], "unset")
+				|| !ft_strcmp(current->cmd[0], "env")))
+		{
+			envv = get_envv();
+			// ft_free_tabs((void **)envp);
+			envp = ft_tabdup(envv->env_var);
 			write_envp(envp_pipe, envp, memptr);
+		}
 		else
 		{
 			if (close(envp_pipe[0]) == -1 || (close(envp_pipe[1]) == -1))
 				exit_error(CLOSE_ERROR, memptr);
+			envp_pipe = NULL;
 		}
 		exit(exit_value);
 	}
