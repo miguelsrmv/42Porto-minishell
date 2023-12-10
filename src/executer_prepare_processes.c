@@ -6,13 +6,11 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 11:25:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 14:28:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
 {
@@ -78,45 +76,44 @@ void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 	}
 }
 
+int	count_processes(t_command_table **command_table)
+{
+	t_command_table	*current;
+	int				processes_count;
+
+	current = *command_table;
+	processes_count = 1;
+	while (current)
+	{
+		if (current->next)
+			processes_count++;
+		current = current->next;
+	}
+	return (processes_count);
+}
+
 void	prepare_processes(t_command_table **command_table, char **envp,
 			t_memptr memptr)
 {
 	char			**path_list;
+	int				process_num;
 	int				pid;
-	int				envp_pipe[2];
 
 	path_list = get_path_list(&memptr);
 	check_commands(command_table, path_list, memptr);
 	ft_free_tabs((void **)path_list);
 	memptr.path_list = NULL;
-	if (pipe(envp_pipe) == -1)
-		exit_error(PIPE_ERROR, memptr);
-	(&memptr)->envp_pipe = envp_pipe;
-	pid = fork();
-	if (pid < 0)
-		exit_error(FORK_ERROR, memptr);
-	else if (pid > 0)
-		process_parent(command_table, envp, envp_pipe, &memptr);
-	else
-		process_commands(command_table, envp, envp_pipe, memptr);
-}
-
-void	process_parent(t_command_table **command_table, char **envp,
-			int *envp_pipe, t_memptr *memptr)
-{
-	int		process_num;
-
-	set_signal_during_processes_parent();
 	process_num = count_processes(command_table);
-	while (process_num--)
-		wait(NULL);
-	if ((*command_table)->command_type == BUILTIN && !(*command_table)->next
-		&& (!ft_strcmp((*command_table)->cmd[0], "export")
-			|| !ft_strcmp((*command_table)->cmd[0], "cd")
-			|| !ft_strcmp((*command_table)->cmd[0], "unset")
-			|| !ft_strcmp((*command_table)->cmd[0], "env")))
-		read_envp(envp_pipe, &envp, memptr); // RECEBER TAMBÉM A EXIT STATUS!!
-	memptr->envp_pipe = NULL;
-	clean_memory(*memptr);
-	memptr->envp_cpy = envp;
+	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
+		execute_builtin(*command_table, envp, memptr);
+	else
+	{
+		pid = fork();
+		if (pid < 0)
+			exit_error(FORK_ERROR, memptr);
+		else if (pid > 0)
+			process_parent(envp, process_num, &memptr);
+		else
+			process_forks(command_table, envp, process_num, memptr);
+	}
 }

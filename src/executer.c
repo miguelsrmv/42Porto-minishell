@@ -6,77 +6,50 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 13:28:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 14:27:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_processes(t_command_table **command_table)
+int	execute_builtin(t_command_table *current,
+			char **envp, t_memptr memptr)
 {
-	t_command_table	*current;
-	int				processes_count;
+	int		(*function_pointer)(char **, char **);
+	int		exit_value;
 
-	current = *command_table;
-	processes_count = 1;
-	while (current)
-	{
-		if (current->next)
-			processes_count++;
-		current = current->next;
-	}
-	return (processes_count);
+	set_signal_during_processes_child();
+	function_pointer
+		= (int (*)(char **, char **))current->builtin_pointer;
+	exit_value = function_pointer(current->cmd, envp);
+	clean_memory(memptr);
+	return (exit_value);
 }
 
-void	process_commands(t_command_table **command_table, char **envp,
-			int *envp_pipe, t_memptr memptr)
+void	process_parent(char **envp,	int process_num,
+			t_memptr *memptr)
 {
-	int				process_num;
+	set_signal_during_processes_parent();
+	while (process_num--)
+		wait(NULL);
+	clean_memory(*memptr);
+	memptr->envp_cpy = envp;
+}
+
+void	process_forks(t_command_table **command_table, char **envp,
+			int process_num, t_memptr memptr)
+{
 	int				**pipe_fd;
 	t_command_table	*current;
 
-	process_num = count_processes(command_table);
 	pipe_fd = NULL;
 	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
 	current = create_processes(command_table, process_num);
 	close_pipes(pipe_fd, current, memptr);
 	check_redirections(pipe_fd, &current, memptr);
-	execute(current, envp, memptr, envp_pipe);
-}
-
-void	execute(t_command_table *current, char **envp, t_memptr memptr,
-			int *envp_pipe)
-{
-	int		(*function_pointer)(char **, char **);
-	int		exit_value;
-	t_env	*envv;
-
 	set_signal_during_processes_child();
-	// Expandir exit status mais recente!!
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)
-	{
-		function_pointer = (int (*)(char **, char **))current->builtin_pointer;
-		exit_value = function_pointer(current->cmd, envp);
-		if (!current->next && (!ft_strcmp(current->cmd[0], "export")
-				|| !ft_strcmp(current->cmd[0], "cd")
-				|| !ft_strcmp(current->cmd[0], "unset")
-				|| !ft_strcmp(current->cmd[0], "env")))
-		{
-			envv = get_envv();
-			// ft_free_tabs((void **)envp);
-			envp = ft_tabdup(envv->env_var);
-			write_envp(envp_pipe, envp, memptr);
-			free(envv);
-		}
-		else
-		{
-			if (close(envp_pipe[0]) == -1 || (close(envp_pipe[1]) == -1))
-				exit_error(CLOSE_ERROR, memptr);
-			envp_pipe = NULL;
-		}
-		exit(exit_value);
-	}
-	// Falta mandar o exit value para $? para expandir depois!!
+		execute_builtin(current, envp, memptr);
 }

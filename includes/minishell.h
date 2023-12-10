@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 10:26:45 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/10 14:34:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ t_memptr			initialize_memptr(t_token **lexer_list,
 /// Bash_main.c
 void				bash_main(char **envp_cpy, t_memptr memptr);
 void				bash_run(char **envp_cpy, t_memptr memptr);
-void				set_environment_vars(char **envp_cpy, t_memptr memptr);
+t_env				*set_environment_vars(char **envp_cpy, t_memptr memptr);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
@@ -280,6 +280,7 @@ t_command_table		*create_processes(t_command_table **current,
 						int process_num);
 void				close_pipes(int **pipe_fd, t_command_table *current,
 						t_memptr memptr);
+int					count_processes(t_command_table **command_table);
 void				prepare_processes(t_command_table **command_table,
 						char **envp, t_memptr memptr);
 
@@ -298,9 +299,7 @@ void				set_output_redir(int **pipe_fd, t_command_table **command,
 void				close_redir_pipes(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
 
-
 /// executer_cmd_checker.c
-
 void				check_builtin(t_command_table *current);
 void				check_executables(t_command_table *current,
 						char **path_list, t_memptr memptr);
@@ -313,20 +312,12 @@ void				fill_in_result_from_path_list(char **path_list,
 						char **result, t_memptr memptr);
 
 /// executer.c
-int					count_processes(t_command_table **command_table);
-void				process_commands(t_command_table **command_table,
-						char **envp, int *envp_pipe, t_memptr memptr);
-void				process_parent(t_command_table **command_table, char **envp,
-						int *envp_pipe, t_memptr *memptr);
-void				execute(t_command_table *current, char **envp,
-						t_memptr memptr, int *envp_pipe);
-
-/// pass_envp.c
-void				write_envp(int *envp_pipe, char **envp, t_memptr memptr);
-void				read_envp(int *envp_pipe, char ***envp_cpy,
+int					execute_builtin(t_command_table *current,
+						char **envp, t_memptr memptr);
+void				process_parent(char **envp,	int process_num,
 						t_memptr *memptr);
-void				read_subenvp(int *envp_pipe, char **envp_cpy,
-						t_memptr *memptr, int tab_len);
+void				process_forks(t_command_table **command_table, char **envp,
+						int process_num, t_memptr memptr);
 
 /// signals.c
 void				set_signal(void);
