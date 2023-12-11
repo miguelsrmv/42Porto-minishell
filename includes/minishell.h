@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 14:30:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:02:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ void				ansi_quoting(char **string, int *start,	t_memptr memptr);
 void				expand_env_no_quotes(char **string, int *start,
 						t_memptr memptr);
 void				expand_to_number(char **string, int *start, t_memptr memptr,
-						enum e_ExpandType number);
+						enum e_ExpandType expand_number);
 void				localization(char **string, int *start,	t_memptr memptr);
 
 /// expander_squote.c
@@ -273,6 +273,8 @@ void				expand_to_dollar_sign(char **string, int *start,
 						t_memptr memptr);
 int					take_out_outer_dquotes(char **string, int *start,
 						t_memptr memptr);
+void				expand_to_number_quotes(char **string, int *start,
+						t_memptr memptr, enum e_ExpandType expand_number);
 
 /// expander_concatenate.c
 int					concatenate(char **string, char *expanded_string,
