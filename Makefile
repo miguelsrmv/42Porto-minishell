@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/12/11 14:31:09 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/12/11 17:46:53 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC		=	main.c bash_main.c exit_error.c\
 			lexer/lexer.c lexer/lexer_linked_list.c lexer/lexer_get_tokens.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
 			expander/expander.c expander/expander_noquotes.c expander/expander_squote.c \
-			expander/expander_dquote.c expander/expander_concatenate.c expander/ft_getpid.c \
+			expander/expander_dquote.c expander/expander_concatenate.c \
 			executer/executer_prepare_processes.c executer/executer_redir_checker.c \
 			executer/executer_redir_setter.c executer/executer_cmd_checker.c \
 			executer/executer_get_path.c executer/executer.c \

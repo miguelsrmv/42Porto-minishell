@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 16:02:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:44:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,10 +281,6 @@ int					concatenate(char **string, char *expanded_string,
 						int *start, int end);
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
-
-/// ft_getpid.c
-int					ft_getpid(void);
-int					get_pid_from_line(char *line);
 
 /// executer_prepare_processes.c
 int					**create_pipes(int **pipe_fd, int process_num,
