@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/01 11:40:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:33:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 			(*pos)++;
 		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
 			&& (*string)[(*pos) + 1] == '$')
-			expand_to_pid(string, pos, memptr);
+			expand_to_number(string, pos, memptr, PID);
+		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
+			&& (*string)[(*pos) + 1] == '?')
+			expand_to_number(string, pos, memptr, EXIT_STATUS);
 		else if ((*string)[*pos] == '$' && ((*string)[(*pos) + 1]) == SQUOTE)
 			ansi_quoting(string, pos, memptr);
 		else if ((*string)[*pos] == '$' && ((*string)[(*pos) + 1]) == DQUOTE)
@@ -38,14 +41,26 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 	}
 }
 
-void	expand_to_pid(char **string, int *start, t_memptr memptr)
+void	expand_to_number(char **string, int *start, t_memptr memptr,
+			enum e_ExpandType number)
 {
+	int		pid;
 	char	*pid_str;
 
-	pid_str = "'Process ID'";
+	if (number == PID)
+	{
+		pid = ft_getpid();
+		if (pid == 0)
+			pid_str = ft_strdup("#PID");
+		else
+			pid_str = ft_itoa(pid);
+	}
+	else if (number == EXIT_STATUS)
+		pid_str = ft_itoa(memptr.return_value);
 	if (concatenate(string, pid_str, start, (*start) + 2) == 1)
 		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(pid_str);
+	free(pid_str);
 }
 
 void	ansi_quoting(char **string, int *start, t_memptr memptr)

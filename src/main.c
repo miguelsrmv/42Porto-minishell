@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 10:33:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:52:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_memptr	initialize_memptr(t_token **lexer_list,
 	memptr.path_list = NULL;
 	memptr.pipe_fd = NULL;
 	memptr.envp_pipe = NULL;
+	memptr.return_value = 0;
 	return (memptr);
 }
 
@@ -45,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!envp_cpy)
 		exit_error(MALLOC_ERROR, memptr);
 	memptr = initialize_memptr(&lexer_list, &command_table, envp_cpy);
-	bash_main(envp_cpy, memptr);
+	bash_main(envp_cpy, &memptr);
 	ft_free_tabs((void **)envp_cpy);
 	return (0);
 }
