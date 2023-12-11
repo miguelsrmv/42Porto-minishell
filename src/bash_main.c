@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 18:46:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:57:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	bash_run(char **envp, t_memptr *memptr)
 	prepare_processes(memptr->command_table, envp, memptr);
 }
 
+void	update_envp(char ***envp, t_memptr *memptr, t_env *env_vars)
+{
+	ft_free_tabs((void **)*envp);
+	*envp = ft_tabdup(env_vars->env_var);
+	if (!*envp)
+		exit_error(MALLOC_ERROR, *memptr);
+	memptr->envp = *envp;
+	free_envv(env_vars);
+}
+
 void	bash_main(char **envp, t_memptr *memptr)
 {
 	extern enum e_SignalType	g_signal_flag;
@@ -49,6 +59,6 @@ void	bash_main(char **envp, t_memptr *memptr)
 		if (g_signal_flag == SIGINT_SIGNAL)
 			g_signal_flag = NO_SIGNAL;
 		bash_run(envp, memptr);
-		free_envv(env_vars);
+		update_envp(&envp, memptr, env_vars);
 	}
 }
