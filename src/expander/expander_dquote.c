@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/01 11:33:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:37:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void	dquote_expansion(char **string, int *pos, char *quote_flag,
 			expand_to_dollar_sign(string, pos, memptr);
 			break ;
 		}
+		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
+			&& (*string)[(*pos) + 1] == '$')
+			expand_to_number(string, pos, memptr, PID);
+		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
+			&& (*string)[(*pos) + 1] == '?')
+			expand_to_number(string, pos, memptr, EXIT_STATUS);
 		else if ((*string)[*pos] == '$' && !ft_isquote((*string)[(*pos) + 1]))
 			expand_env_quotes(string, pos, &end_pos, memptr);
 		else

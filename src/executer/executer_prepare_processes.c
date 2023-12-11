@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 20:30:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:55:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,28 +93,28 @@ int	count_processes(t_command_table **command_table)
 }
 
 void	prepare_processes(t_command_table **command_table, char **envp,
-			t_memptr memptr)
+			t_memptr *memptr)
 {
 	char			**path_list;
 	int				process_num;
 	int				pid;
 
-	path_list = get_path_list(&memptr);
-	if (!check_commands(command_table, path_list, memptr))
+	path_list = get_path_list(memptr);
+	if (!check_commands(command_table, path_list, *memptr))
 		return ;
 	ft_free_tabs((void **)path_list);
-	memptr.path_list = NULL;
+	memptr->path_list = NULL;
 	process_num = count_processes(command_table);
 	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
-		execute_builtin(*command_table, envp, memptr);
+		execute_builtin(*command_table, envp, *memptr);
 	else
 	{
 		pid = fork();
 		if (pid < 0)
-			exit_error(FORK_ERROR, memptr);
+			exit_error(FORK_ERROR, *memptr);
 		else if (pid > 0)
-			process_parent(envp, process_num, &memptr);
+			process_parent(envp, process_num, memptr);
 		else
-			process_forks(command_table, envp, process_num, memptr);
+			process_forks(command_table, envp, process_num, *memptr);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 14:27:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:09:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,18 @@ int	execute_builtin(t_command_table *current,
 void	process_parent(char **envp,	int process_num,
 			t_memptr *memptr)
 {
+	int	status;
+	int	value;
+
+	status = 0;
 	set_signal_during_processes_parent();
 	while (process_num--)
-		wait(NULL);
+		wait(&status);
 	clean_memory(*memptr);
+	if (WIFEXITED(status))
+		value = WEXITSTATUS(status);
 	memptr->envp_cpy = envp;
+	memptr->return_value = value;
 }
 
 void	process_forks(t_command_table **command_table, char **envp,

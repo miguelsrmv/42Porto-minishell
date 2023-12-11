@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 20:32:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:30:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ enum e_BuiltinType {
 	CD
 };
 
+enum e_ExpandType {
+	PID,
+	EXIT_STATUS,
+};
+
 // Structs
 typedef struct s_token {
 	char			*token;
@@ -146,6 +151,7 @@ typedef struct s_memptr {
 	char			**path_list;
 	int				**pipe_fd;
 	int				*envp_pipe;
+	int				return_value;
 }	t_memptr;
 
 typedef struct s_env
@@ -169,8 +175,8 @@ t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table, char **envp_cpy);
 
 /// Bash_main.c
-void				bash_main(char **envp_cpy, t_memptr memptr);
-void				bash_run(char **envp_cpy, t_memptr memptr);
+void				bash_main(char **envp_cpy, t_memptr *memptr);
+void				bash_run(char **envp_cpy, t_memptr *memptr);
 t_env				*set_environment_vars(char **envp_cpy, t_memptr memptr);
 
 /// Exit Error
@@ -248,7 +254,8 @@ void				normal_expansion(char **string, int *pos, char *quote_flag,
 void				ansi_quoting(char **string, int *start,	t_memptr memptr);
 void				expand_env_no_quotes(char **string, int *start,
 						t_memptr memptr);
-void				expand_to_pid(char **string, int *start, t_memptr memptr);
+void				expand_to_number(char **string, int *start, t_memptr memptr,
+						enum e_ExpandType number);
 void				localization(char **string, int *start,	t_memptr memptr);
 
 /// expander_squote.c
@@ -273,6 +280,10 @@ int					concatenate(char **string, char *expanded_string,
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
 
+/// ft_getpid.c
+int					ft_getpid(void);
+int					get_pid_from_line(char *line);
+
 /// executer_prepare_processes.c
 int					**create_pipes(int **pipe_fd, int process_num,
 						t_memptr *memptr);
@@ -282,7 +293,7 @@ void				close_pipes(int **pipe_fd, t_command_table *current,
 						t_memptr memptr);
 int					count_processes(t_command_table **command_table);
 void				prepare_processes(t_command_table **command_table,
-						char **envp, t_memptr memptr);
+						char **envp, t_memptr *memptr);
 
 /// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
