@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 14:33:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:45:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 }
 
 void	expand_to_number(char **string, int *start, t_memptr memptr,
-			enum e_ExpandType number)
+			enum e_ExpandType expand_number)
 {
 	int		pid;
 	char	*pid_str;
 
-	if (number == PID)
+	if (expand_number == PID)
 	{
 		pid = ft_getpid();
 		if (pid == 0)
@@ -55,7 +55,7 @@ void	expand_to_number(char **string, int *start, t_memptr memptr,
 		else
 			pid_str = ft_itoa(pid);
 	}
-	else if (number == EXIT_STATUS)
+	else if (expand_number == EXIT_STATUS)
 		pid_str = ft_itoa(memptr.return_value);
 	if (concatenate(string, pid_str, start, (*start) + 2) == 1)
 		exit_error(MALLOC_ERROR, memptr);
@@ -92,7 +92,7 @@ void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
 	if (!substring)
 		exit_error(MALLOC_ERROR, memptr);
-	expanded = getenv(substring);
+	expanded = get_echo_var(substring);
 	if (!expanded)
 		expanded = "";
 	free(substring);

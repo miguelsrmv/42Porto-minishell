@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 18:33:50 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:46:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,52 @@ int	echo(char **args)
 		if (!ft_printf("\n"))
 			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
+}
+
+char    *ft_strchr2(const char *s, int c)
+{
+    while (*s && (unsigned char)c != *s)
+        s++;
+    if ((unsigned char)c == *s)
+    {
+        s++;
+        return ((char *)s);
+    }
+    return (0);
+}
+char    *get_echo_var(char *str)
+{
+    t_env   *envv;
+    char    *str2;
+    int     i;
+    envv = get_envv();
+    if (envv == NULL || envv->env_var == NULL)
+        return (NULL);
+    i = 0;
+    while (envv->env_var[i] != NULL)
+    {
+        if(containsStr(envv->env_var[i], str) == EXIT_SUCCESS)
+        {
+            str2 = ft_strdup(envv->env_var[i]);
+            return(ft_strchr2(str2, '='));
+        }
+        else
+            i++;
+    }
+    return (NULL);
+}
+
+int     containsStr(const char *str1, char *str2)
+{
+    int i = 0;
+    while(str1[i] && str2[i] && str1[i] == str2[i])
+    {
+        if(str1[i] == str2[i])
+        {
+            if((str1[i + 1] == '=') && str2[i + 1] == '\0')
+                return (EXIT_SUCCESS);
+        }
+        i++;
+    }
+    return (EXIT_FAILURE);
 }
