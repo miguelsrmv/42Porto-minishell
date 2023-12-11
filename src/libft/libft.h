@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 10:23:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:42:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ char	*ft_strndup(const char *s, size_t n);
 int		ft_issquote(int c);
 int		ft_isdquote(int c);
 char	**ft_tabdup(char **tab);
+int		ft_getpid(void);
+int		ft_getppid(void);
 
 /* Part 7: extra funcions for Builtins */
 char	**ft_str_arr_dup(char **arr);
