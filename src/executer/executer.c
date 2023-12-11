@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 14:09:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:45:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	execute_builtin(t_command_table *current,
 	return (exit_value);
 }
 
-void	process_parent(char **envp,	int process_num,
+void	process_parent(int process_num,
 			t_memptr *memptr)
 {
 	int	status;
@@ -39,7 +39,6 @@ void	process_parent(char **envp,	int process_num,
 	clean_memory(*memptr);
 	if (WIFEXITED(status))
 		value = WEXITSTATUS(status);
-	memptr->envp_cpy = envp;
 	memptr->return_value = value;
 }
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 17:44:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:47:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,8 @@ typedef struct s_command_table {
 typedef struct s_memptr {
 	t_token			**lexer_list;
 	t_command_table	**command_table;
-	char			**envp_cpy;
 	char			**path_list;
 	int				**pipe_fd;
-	int				*envp_pipe;
 	int				return_value;
 }	t_memptr;
 
@@ -172,12 +170,12 @@ typedef struct s_export
 // Function definitions
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
-						t_command_table **command_table, char **envp_cpy);
+						t_command_table **command_table);
 
 /// Bash_main.c
-void				bash_main(char **envp_cpy, t_memptr *memptr);
-void				bash_run(char **envp_cpy, t_memptr *memptr);
-t_env				*set_environment_vars(char **envp_cpy, t_memptr memptr);
+void				bash_main(char **envp, t_memptr *memptr);
+void				bash_run(char **envp, t_memptr *memptr);
+t_env				*set_environment_vars(char **envp, t_memptr memptr);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);
@@ -323,7 +321,7 @@ void				fill_in_result_from_path_list(char **path_list,
 /// executer.c
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
-void				process_parent(char **envp,	int process_num,
+void				process_parent(int process_num,
 						t_memptr *memptr);
 void				process_forks(t_command_table **command_table, char **envp,
 						int process_num, t_memptr memptr);
