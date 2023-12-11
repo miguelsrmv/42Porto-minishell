@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 18:47:45 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:57:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_memptr {
 	t_command_table	**command_table;
 	char			**path_list;
 	int				**pipe_fd;
+	char			**envp;
 	int				return_value;
 }	t_memptr;
 
@@ -170,12 +171,13 @@ typedef struct s_export
 // Function definitions
 /// Main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
-						t_command_table **command_table);
+						t_command_table **command_table, char **envp);
 
 /// Bash_main.c
 void				bash_main(char **envp, t_memptr *memptr);
 void				bash_run(char **envp, t_memptr *memptr);
 t_env				*set_environment_vars(char **envp, t_memptr memptr);
+void				update_envp(char ***envp, t_memptr *memptr, t_env *env_vars);
 
 /// Exit Error
 void				clear_lexer_list(t_token **lst);

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 18:47:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:53:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 		perror(error_msg);
 	va_end(args);
 	clean_memory(memptr);
+	if (*memptr.envp)
+		ft_free_tabs((void **)memptr.envp);
 	exit(0);
 }
