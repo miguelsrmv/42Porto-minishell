@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 18:46:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:47:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ typedef struct s_memptr {
 	t_command_table	**command_table;
 	char			**path_list;
 	int				**pipe_fd;
-	int				*envp_pipe;
 	int				return_value;
 }	t_memptr;
 

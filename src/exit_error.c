@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 18:44:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:47:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,6 @@ void	clean_memory(t_memptr memptr)
 	{
 		close_pipes_error(memptr.pipe_fd);
 		ft_free_tabs((void **)memptr.pipe_fd);
-	}
-	if (memptr.envp_pipe)
-	{
-		close(memptr.envp_pipe[0]);
-		close(memptr.envp_pipe[1]);
 	}
 }
 
