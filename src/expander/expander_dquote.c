@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 15:07:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:34:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ void	dquote_expansion(char **string, int *pos, char *quote_flag,
 			break ;
 		}
 		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
-			&& (*string)[(*pos) + 1] == '$')
-			expand_to_number_quotes(string, pos, memptr, PID);
-		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
-			&& (*string)[(*pos) + 1] == '?')
-			expand_to_number_quotes(string, pos, memptr, EXIT_STATUS);
+			&& ((*string)[(*pos) + 1] == '$' || (*string)[(*pos) + 1] == '?'))
+			expand_to_number_quotes(string, pos, &end_pos, memptr);
 		else if ((*string)[*pos] == '$' && !ft_isquote((*string)[(*pos) + 1]))
 			expand_env_quotes(string, pos, &end_pos, memptr);
 		else
@@ -55,7 +52,7 @@ void	expand_env_quotes(char **string, int *start, int *end, t_memptr memptr)
 			limit - (*start) - 1);
 	if (!substring)
 		exit_error(MALLOC_ERROR, memptr);
-	expanded = getenv(substring);
+	expanded = get_echo_var(substring);
 	if (!expanded)
 		expanded = "";
 	free(substring);
@@ -97,27 +94,25 @@ int	take_out_outer_dquotes(char **string, int *start, t_memptr memptr)
 	return (end - (*start) - 2);
 }
 
-void	expand_to_number_quotes(char **string, int *start, t_memptr memptr,
-			enum e_ExpandType expand_number)
+void	expand_to_number_quotes(char **string, int *start, int *end,
+			t_memptr memptr)
 {
-	int		num;
 	char	*number_str;
+	int		limit;
 
-	if (expand_number == PID)
-		num = ft_getpid();
-	else if (expand_number == EXIT_STATUS)
-		num = memptr.return_value;
-	if (num == 0)
-	{
-		if (expand_number == PID)
-			number_str = ft_strdup("#PID");
-		else if (expand_number == EXIT_STATUS)
-			number_str = ft_strdup("0");
-	}
-	else
-		number_str = ft_itoa(num);
-	if (concatenate(string, number_str, start, (*start) + 2) == 1)
+	limit = (*start) + 1;
+	while ((*string)[limit] && (*string)[limit] != '$'
+			&& (*string)[limit] != '?'
+			&& (*string)[limit] != SQUOTE && limit <= *end)
+		limit++;
+	limit++;
+	if ((*string)[(*start) + 1] == '$')
+		number_str = ft_itoa(ft_getpid());
+	else if (((*string)[(*start) + 1]) == '?')
+		number_str = ft_itoa(memptr.return_value);
+	if (concatenate(string, number_str, start, limit) == 1)
 		exit_error(MALLOC_ERROR, memptr);
-	(*start) = (*start) + ft_strlen(number_str) - expand_number;
+	(*end) = (*end) + ft_strlen(number_str) - (limit - (*start));
+	(*start) = (*start) + ft_strlen(number_str);
 	free(number_str);
 }

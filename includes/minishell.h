@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 15:02:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:02:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,8 +273,8 @@ void				expand_to_dollar_sign(char **string, int *start,
 						t_memptr memptr);
 int					take_out_outer_dquotes(char **string, int *start,
 						t_memptr memptr);
-void				expand_to_number_quotes(char **string, int *start,
-						t_memptr memptr, enum e_ExpandType expand_number);
+void				expand_to_number_quotes(char **string, int *start, int*end,
+						t_memptr memptr);
 
 /// expander_concatenate.c
 int					concatenate(char **string, char *expanded_string,
@@ -384,6 +384,9 @@ int					pwd(void);
 
 ///echo.c
 int					echo(char **args);
+char   				*ft_strchr2(const char *s, int c);
+char    			*get_echo_var(char *str);
+int					containsStr(const char *str1, char *str2);
 
 ///exit.c
 //static bool		is_valid_exit_arg(char **args);
