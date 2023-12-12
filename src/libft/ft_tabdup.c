@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstrjoin.c                                    :+:      :+:    :+:   */
+/*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 15:33:30 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 15:33:32 by mde-sa--         ###   ########.fr       */
+/*   Created: 2023/12/07 09:57:57 by mde-sa--          #+#    #+#             */
+/*   Updated: 2023/12/07 10:23:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strstrjoin(char *s1, char *s2, char *divider)
+char	**ft_tabdup(char **tab)
 {
-	char	*out;
+	char	**newtab;
+	char	*temp;
 	int		i;
-	int		j;
 
-	if (!s1)
+	i = 0;
+	if (tab == NULL)
+		return (NULL);
+	while (tab[i] != NULL)
+		i++;
+	newtab = (char **)malloc(sizeof(char *) * (i + 1));
+	if (newtab == NULL)
 		return (NULL);
 	i = 0;
-	j = 0;
-	s1 = ft_append(&s1, divider);
-	out = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (out == NULL)
-		return (0);
-	while (s1[i])
+	while (tab[i] != NULL)
 	{
-		out[i] = s1[i];
-		i++;
+		temp = ft_strdup(tab[i]);
+		if (temp == NULL)
+		{
+			ft_free_tabs((void **)newtab);
+			return (NULL);
+		}
+		newtab[i++] = temp;
 	}
-	while (s2 && s2[j])
-		out[i++] = s2[j++];
-	out[i] = '\0';
-	ft_free_str(&s1);
-	return (out);
+	newtab[i] = NULL;
+	return (newtab);
 }

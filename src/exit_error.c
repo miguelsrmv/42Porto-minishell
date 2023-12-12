@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 14:10:09 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:53:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ void	clear_command_table(t_command_table **lst)
 	*lst = NULL;
 }
 
+void	close_pipes_error(int **pipe)
+{
+	int	i;
+
+	i = 0;
+	while (pipe[i])
+	{
+		close(pipe[i][0]);
+		close(pipe[i][i]);
+		i++;
+	}
+}
+
 void	clean_memory(t_memptr memptr)
 {
 	if (memptr.lexer_list)
@@ -63,7 +76,10 @@ void	clean_memory(t_memptr memptr)
 	if (memptr.path_list)
 		ft_free_tabs((void **)memptr.path_list);
 	if (memptr.pipe_fd)
+	{
+		close_pipes_error(memptr.pipe_fd);
 		ft_free_tabs((void **)memptr.pipe_fd);
+	}
 }
 
 void	exit_error(char *error_msg, t_memptr memptr, ...)
@@ -71,15 +87,21 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 	va_list	args;
 
 	va_start(args, memptr);
-	if (!ft_strcmp(error_msg, COMMAND_ERROR))
+	if (!ft_strcmp(error_msg, COMMAND_ERROR)
+		|| !ft_strcmp(error_msg, OPEN_ERROR))
 		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
-	else if (!ft_strcmp(error_msg, OPEN_ERROR))
-		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
-	else if (!ft_strcmp(error_msg, QUOTE_ERROR))
-		ft_fprintf(STDERR_FILENO, QUOTE_ERROR);
+	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR))
+		ft_fprintf(STDERR_FILENO, "%s: %s", &va_arg(args, char *)[2],
+			error_msg);
+	else if (!ft_strcmp(error_msg, SYNTAX_ERROR)
+		|| !ft_strcmp(error_msg, QUOTE_ERROR)
+		|| !ft_strcmp(error_msg, EOF_ERROR))
+		ft_fprintf(STDERR_FILENO, error_msg);
 	else
 		perror(error_msg);
 	va_end(args);
 	clean_memory(memptr);
+	if (*memptr.envp)
+		ft_free_tabs((void **)memptr.envp);
 	exit(0);
 }
