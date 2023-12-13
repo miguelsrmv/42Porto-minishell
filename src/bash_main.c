@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 22:57:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 14:50:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_env	*set_environment_vars(char **envp, t_memptr memptr)
 void	bash_run(char **envp, t_memptr *memptr)
 {
 	*(memptr->lexer_list) = read_readline(*memptr);
-	if (!(memptr->lexer_list))
+	if (!*(memptr->lexer_list))
 		return ;
 	*(memptr->command_table) = parse_list(*(memptr->lexer_list), *memptr);
 	expand_command_table(memptr->command_table, *memptr);
@@ -52,11 +52,9 @@ void	bash_main(char **envp, t_memptr *memptr)
 	while (TRUE)
 	{
 		set_signal();
-  		if (g_signal_flag != SIGINT_SIGNAL)
+   		if (g_signal_flag != SIGINT_SIGNAL)
 			env_vars = set_environment_vars(envp, *memptr);
 		else if (g_signal_flag == SIGINT_SIGNAL)
-			g_signal_flag = NO_SIGNAL;
-		if (g_signal_flag == SIGINT_SIGNAL)
 			g_signal_flag = NO_SIGNAL;
 		bash_run(envp, memptr);
 		update_envp(&envp, memptr, env_vars);

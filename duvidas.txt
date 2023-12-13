@@ -1,6 +1,13 @@
-# echo
+curl parrot.live -> ctrl+c -> qq coisa 
 
-Linhas 20 a 21:
-	if (ft_strncmp(*args, "echo", ft_strlen(*args)) != 0)
-		return (EXIT_FAILURE);
-Isto é preciso? Ele só ativa se tiver "echo" no nome...
+echo $=			$=
+echo $n			= argv[n]
+echo $@			&argv[1]
+echo $#			= argc - 1
+echo $!			$!
+echo $$
+echo $?
+echo $*
+
+
+export a =1
