@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 14:50:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:48:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,20 @@ void	bash_main(char **envp, t_memptr *memptr)
 	extern enum e_SignalType	g_signal_flag;
 	t_env						*env_vars;
 
+	env_vars = set_environment_vars(envp, *memptr);
 	while (TRUE)
 	{
-		set_signal();
-   		if (g_signal_flag != SIGINT_SIGNAL)
+		while (g_signal_flag == NO_SIGNAL)
+		{
+			set_signal();
+			bash_run(envp, memptr);
+			update_envp(&envp, memptr, env_vars);
 			env_vars = set_environment_vars(envp, *memptr);
-		else if (g_signal_flag == SIGINT_SIGNAL)
-			g_signal_flag = NO_SIGNAL;
-		bash_run(envp, memptr);
-		update_envp(&envp, memptr, env_vars);
+		}
+		if (g_signal_flag == SIGINT_SIGNAL)
+		{
+			clean_memory(*memptr);
+			exit(128);
+		}
 	}
 }

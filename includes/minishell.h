@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 13:27:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:46:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define ENV_ERROR "Error: Env error.\n"
 # define DUP_ERROR "Error: Dup2 error.\n"
 # define UNLINK_ERROR "Error: Unlink error.\n"
+# define WAIT_ERROR "Error: Wait error.\n"
 # define EOF_ERROR "exit\n"
 
 // Usage errors
@@ -113,6 +114,9 @@ enum e_BuiltinType {
 enum e_ExpandType {
 	PID,
 	EXIT_STATUS,
+	NUMBER,
+	ATSIGN,
+	HASHTAG
 };
 
 // Structs
@@ -256,8 +260,7 @@ void				normal_expansion(char **string, int *pos, char *quote_flag,
 void				ansi_quoting(char **string, int *start,	t_memptr memptr);
 void				expand_env_no_quotes(char **string, int *start,
 						t_memptr memptr);
-void				expand_to_number(char **string, int *start, t_memptr memptr,
-						enum e_ExpandType expand_number);
+void				exit_value_expand(char **string, int *start, t_memptr memptr);
 void				localization(char **string, int *start,	t_memptr memptr);
 
 /// expander_squote.c
@@ -275,8 +278,8 @@ void				expand_to_dollar_sign(char **string, int *start,
 						t_memptr memptr);
 int					take_out_outer_dquotes(char **string, int *start,
 						t_memptr memptr);
-void				expand_to_number_quotes(char **string, int *start, int*end,
-						t_memptr memptr);
+void				exit_value_expand_quotes(char **string, int *start,
+						int *end, t_memptr memptr);
 
 /// expander_concatenate.c
 int					concatenate(char **string, char *expanded_string,
@@ -325,8 +328,7 @@ void				fill_in_result_from_path_list(char **path_list,
 /// executer.c
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
-void				process_parent(int process_num,
-						t_memptr *memptr);
+void				process_parent(int process_num, t_memptr *memptr, int pid);
 void				process_forks(t_command_table **command_table, char **envp,
 						int process_num, t_memptr memptr);
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 13:33:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:01:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	is_valid_bash_char(char c)
 {
-	if (ft_isalnum(c)
+	return (c);
+/* 	if (ft_isalnum(c)
 		|| c == '_' || c == '/' || c == '.' || c == '-' || c == '~'
-		|| c == '$' || c == '=')
+		|| c == '$' || c == '=' || c == '@' || c == '#' || c == '_')
 		return (1);
-	return (0);
+	return (0); */
 }
 
 char	*get_pipe_token(char *input, int *start, int *end)

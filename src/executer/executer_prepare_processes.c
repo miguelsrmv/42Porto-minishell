@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 10:54:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:46:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	ft_free_tabs((void **)path_list);
 	memptr->path_list = NULL;
 	process_num = count_processes(command_table);
+	set_signal_during_processes_child();
 	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
 		execute_builtin(*command_table, envp, *memptr);
 	else
@@ -113,7 +114,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 		if (pid < 0)
 			exit_error(FORK_ERROR, *memptr);
 		else if (pid > 0)
-			process_parent(process_num, memptr);
+			process_parent(process_num, memptr, pid);
 		else
 			process_forks(command_table, envp, process_num, *memptr);
 	}

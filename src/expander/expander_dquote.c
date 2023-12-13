@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 17:34:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 19:18:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	dquote_expansion(char **string, int *pos, char *quote_flag,
 			break ;
 		}
 		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
-			&& ((*string)[(*pos) + 1] == '$' || (*string)[(*pos) + 1] == '?'))
-			expand_to_number_quotes(string, pos, &end_pos, memptr);
+			&& (*string)[(*pos) + 1] == '?')
+			exit_value_expand_quotes(string, pos, &end_pos, memptr);
 		else if ((*string)[*pos] == '$' && !ft_isquote((*string)[(*pos) + 1]))
 			expand_env_quotes(string, pos, &end_pos, memptr);
 		else
@@ -94,22 +94,18 @@ int	take_out_outer_dquotes(char **string, int *start, t_memptr memptr)
 	return (end - (*start) - 2);
 }
 
-void	expand_to_number_quotes(char **string, int *start, int *end,
+void	exit_value_expand_quotes(char **string, int *start, int *end,
 			t_memptr memptr)
 {
 	char	*number_str;
 	int		limit;
 
 	limit = (*start) + 1;
-	while ((*string)[limit] && (*string)[limit] != '$'
-			&& (*string)[limit] != '?'
+	while ((*string)[limit] && (*string)[limit] != '?'
 			&& (*string)[limit] != SQUOTE && limit <= *end)
 		limit++;
 	limit++;
-	if ((*string)[(*start) + 1] == '$')
-		number_str = ft_itoa(ft_getpid());
-	else if (((*string)[(*start) + 1]) == '?')
-		number_str = ft_itoa(memptr.return_value);
+	number_str = ft_itoa(memptr.return_value);
 	if (concatenate(string, number_str, start, limit) == 1)
 		exit_error(MALLOC_ERROR, memptr);
 	(*end) = (*end) + ft_strlen(number_str) - (limit - (*start));

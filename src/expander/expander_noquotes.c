@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 12:25:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 19:12:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 	{
 		if ((*string)[*pos] == '$' && !(*string)[(*pos) + 1])
 			(*pos)++;
-		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
-			&& (*string)[(*pos) + 1] == '$')
-			expand_to_number(string, pos, memptr, PID);
-		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
+		else if ((*string)[*pos] == '$' && ((*string)[(*pos) + 1])
 			&& (*string)[(*pos) + 1] == '?')
-			expand_to_number(string, pos, memptr, EXIT_STATUS);
+			exit_value_expand(string, pos, memptr);
 		else if ((*string)[*pos] == '$' && ((*string)[(*pos) + 1]) == SQUOTE)
 			ansi_quoting(string, pos, memptr);
 		else if ((*string)[*pos] == '$' && ((*string)[(*pos) + 1]) == DQUOTE)
@@ -41,26 +38,17 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 	}
 }
 
-void	expand_to_number(char **string, int *start, t_memptr memptr,
-			enum e_ExpandType expand_number)
+void	exit_value_expand(char **string, int *start, t_memptr memptr)
 {
-	int		pid;
-	char	*pid_str;
+	char	*exit_value_str;
 
-	if (expand_number == PID)
-	{
-		pid = ft_getpid();
-		if (pid == 0)
-			pid_str = ft_strdup("#PID");
-		else
-			pid_str = ft_itoa(pid);
-	}
-	else if (expand_number == EXIT_STATUS)
-		pid_str = ft_itoa(memptr.return_value);
-	if (concatenate(string, pid_str, start, (*start) + 2) == 1)
+	exit_value_str = ft_itoa(memptr.return_value);
+	if (!exit_value_str)
 		exit_error(MALLOC_ERROR, memptr);
-	(*start) = (*start) + ft_strlen(pid_str);
-	free(pid_str);
+	if (concatenate(string, exit_value_str, start, (*start) + 2) == 1)
+		exit_error(MALLOC_ERROR, memptr);
+	(*start) = (*start) + ft_strlen(exit_value_str);
+	free(exit_value_str);
 }
 
 void	ansi_quoting(char **string, int *start, t_memptr memptr)
