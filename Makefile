@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/12/11 17:46:53 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/12/13 21:42:01 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,8 +70,12 @@ re: fclean all
 
 # Estes aqui servem para avaliar leaks ignorando os leaks do readline!
 
+val: readline.supp
+	@ clear
+	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=readline.supp ./minishell
+
 leaks: readline.supp
-	@ valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=output.log ./minishell
+	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=output.log --suppressions=readline.supp  ./minishell
 
 readline.supp:
 	@ echo "{" > readline.supp

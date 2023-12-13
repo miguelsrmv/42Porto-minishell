@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/11 22:53:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 21:52:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	clean_memory(t_memptr memptr)
 void	exit_error(char *error_msg, t_memptr memptr, ...)
 {
 	va_list	args;
+	t_env	*envv;
 
 	va_start(args, memptr);
 	if (!ft_strcmp(error_msg, COMMAND_ERROR)
@@ -100,6 +101,8 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 	else
 		perror(error_msg);
 	va_end(args);
+	envv = get_envv();
+	free_envv(envv);
 	clean_memory(memptr);
 	if (*memptr.envp)
 		ft_free_tabs((void **)memptr.envp);
