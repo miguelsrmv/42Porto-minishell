@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:42 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 18:34:04 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:17:55 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,20 @@ static int	ft_inner_loop(char **argv, t_env *envv, int i, int k)
 	char	*var;
 
 	var = NULL;
-    // Verifica se a variável de ambiente é igual ao argumento ou se o argumento é um sinal de igual
 	if (ft_strcmp(envv->env_var[i], argv[k]) == 0
 		|| ft_strcmp(envv->env_var[i], argv[k]) == 61)
 	{
-		// Obtém o valor atual da variável de ambiente
-        var = ft_get_var(envv, i);
+		var = ft_get_var(envv, i);
 		if (var == NULL)
 			return (EXIT_FAILURE);
-        // Verifica se o valor da variável de ambiente corresponde ao argumento
 		if (ft_strncmp(var, argv[k], ft_strlen(var) != 0)
 			|| ft_strncmp(var, argv[k], ft_strlen(argv[k]) != 0))
 		{
-			// Libera a memória alocada para var e retorna 2
-            ft_free_str(&var);
+			ft_free_str(&var);
 			return (2);
 		}
-        // Remove a variável de ambiente
 		ft_del_var(envv, i);
 	}
-    // Libera a memória alocada para var e retorna EXIT_SUCCESS
 	ft_free_str(&var);
 	return (EXIT_SUCCESS);
 }
@@ -95,6 +89,5 @@ int	unset(char **argv)
 		}
 		k++;
 	}
-	//envp = ft_tabdup(envv->envp);
 	return (EXIT_SUCCESS);
 }

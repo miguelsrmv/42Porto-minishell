@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   builtin_cd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 17:24:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/12 17:16:54 by bmota-si         ###   ########.fr       */
+/*   Created: 2023/12/12 16:54:07 by bmota-si          #+#    #+#             */
+/*   Updated: 2023/12/12 16:56:36 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	pwd(void)
+int	ft_check_cd(char *str, t_env *envv)
 {
+	int		i;
 	char	*cwd;
 
+	i = 0;
 	cwd = NULL;
-	cwd = getcwd(cwd, 0);
-	if (cwd == NULL)
+	if (str[i] == '-')
 	{
-		perror("Error");
-		return (EXIT_FAILURE);
+		chdir(envv->oldpwd);
+		cwd = ft_strdup(envv->oldpwd);
+		ft_update_env_var(envv, "OLDPWD", envv->pwd);
+		ft_update_env_var(envv, "PWD", cwd);
+		ft_printf("%s\n", cwd);
+		free(cwd);
+		return (EXIT_SUCCESS);
 	}
-	else if (!ft_printf("%s\n", cwd))
-	{
-		ft_free_str(&cwd);
-		perror("\nError: printf failed");
+	else
 		return (EXIT_FAILURE);
-	}
-	ft_free_str(&cwd);
-	return (EXIT_SUCCESS);
 }

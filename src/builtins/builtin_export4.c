@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:24:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:43:00 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ int	export_input_error(char **argv)
 		split = ft_split(argv[i], '=');
 		if (split == NULL)
 			return (EXIT_FAILURE);
-		var = ft_strdup(split[0]);
-		ft_free_str_array(&split);
+		if (split[0])
+		{
+			var = ft_strdup(split[0]);
+			ft_free_str_array(&split);
+		}
 		if (var == NULL)
 			return (EXIT_FAILURE);
 		if (export_error_loop(&var, argv) == EXIT_FAILURE)
@@ -53,4 +56,17 @@ int	export_input_error(char **argv)
 		ft_free_str(&var);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int	check_argv_var(char *argv)
+{
+	if (!ft_isalpha(argv[0]) && argv[0] != '_' && argv[0] != '|')
+	{
+		ft_printf("minishell: '%c' Not a valid identifier!\n", argv[0]);
+		return (EXIT_FAILURE);
+	}
+	else if (argv[0] == '_')
+		return (EXIT_FAILURE);
+	else
+		return (EXIT_SUCCESS);
 }

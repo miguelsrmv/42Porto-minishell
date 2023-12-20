@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 19:12:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/20 08:51:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 	char	*expanded;
 	int		end;
 
+	expanded = NULL;
 	end = (*start) + 1;
 	while (is_valid_env_char ((*string)[end]))
 		end++;
@@ -87,6 +88,7 @@ void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 	if (concatenate(string, expanded, start, end) == 1)
 		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(expanded);
+	free(expanded);
 }
 
 void	localization(char **string, int *start, t_memptr memptr)

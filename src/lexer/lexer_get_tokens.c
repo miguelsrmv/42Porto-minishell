@@ -6,15 +6,18 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 18:01:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/20 09:04:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// Acrescentar aqui check de caractéres estranhos? Ou fazer parse ao input dado logo no readline?
 int	is_valid_bash_char(char c)
 {
-	return (c);
+	if (c == '|' || c == '<' || c == '>')
+		return (0);
+	return (1);
 /* 	if (ft_isalnum(c)
 		|| c == '_' || c == '/' || c == '.' || c == '-' || c == '~'
 		|| c == '$' || c == '=' || c == '@' || c == '#' || c == '_')
