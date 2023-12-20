@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 20:29:37 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:34:20 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ int	exit_inbuilt(char **args)
 		exit_code = ft_atol(args[i]);
 	else
 		exit_code = 0;
-	/* if (!is_valid_exit_arg(args + i)  || ft_strlen(args[i]) > 19)
-	{
-		ft_fprintf(2, "exit: not a valid argument\n");
-		exit_code = 255;
-	} */
 	if (!is_valid_exit_arg(args + i))
 	{
 		ft_fprintf(2, "exit: not a valid argument\n");

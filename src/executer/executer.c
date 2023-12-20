@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 23:47:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:50:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	process_parent(int process_num, t_memptr *memptr, int pid)
 
 	status = 0;
 	set_signal_during_processes_parent();
+	// É assim? Ou espero só pelo último de todos??
 	waitpid(pid, &status, 0);
 	while (--process_num)
 		wait(NULL);

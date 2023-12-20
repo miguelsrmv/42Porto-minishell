@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/07 18:33:35 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:05:00 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*find_home(t_env *envv)
 	return (path);
 }
 
-static void	ft_update_env_var(t_env *envv, char *var, char *value)
+void	ft_update_env_var(t_env *envv, char *var, char *value)
 {
 	int	i;
 
@@ -85,27 +85,10 @@ static int	ft_cd_home(t_env *envv)
 	cwd = getcwd(cwd, 0);
 	ft_update_env_var(envv, "PWD", cwd);
 	ft_free_str(&home_path);
-	//envp = ft_tabdup(envv->envp);
 	if (envv->pwd == NULL || envv->oldpwd == NULL)
 		return (ft_exit_cd(&cwd, EXIT_FAILURE));
 	return (ft_exit_cd(&cwd, EXIT_SUCCESS));
 }
-
-/* int		ft_check_cd(char *str, t_env *envv)
-{
-	int i = 0;
-
-	if(str[i] == '-')
-	{
-		chdir(envv->oldpwd);
-		//cwd = envv->oldpwd;
-		ft_update_env_var(envv, "OLDPWD", envv->pwd);
-		ft_update_env_var(envv, "PWD", envv->oldpwd);
-		return (EXIT_SUCCESS);
-	}
-	else
-		return (EXIT_FAILURE);
-} */
 
 int	cd(char **argv)
 {
@@ -119,10 +102,8 @@ int	cd(char **argv)
 	if (argv[1] == NULL)
 		return (ft_cd_home(envv));
 	cwd = NULL;
-	/* if (ft_check_cd(argv[1], envv))
+	if (ft_check_cd(argv[1], envv) == EXIT_SUCCESS)
 		return (ft_exit_cd(&cwd, EXIT_SUCCESS));
-	else
-		return (ft_exit_cd(&cwd, EXIT_FAILURE)); */
 	directory = opendir(argv[1]);
 	if (directory == NULL)
 		return (ft_exit_cd(&cwd, EXIT_FAILURE));
@@ -133,7 +114,6 @@ int	cd(char **argv)
 	ft_update_env_var(envv, "OLDPWD", envv->pwd);
 	cwd = getcwd(cwd, 0);
 	ft_update_env_var(envv, "PWD", cwd);
-	//envp = ft_tabdup(envv->envp);
 	if (envv->pwd == NULL || envv->oldpwd == NULL)
 		return (ft_exit_cd(&cwd, EXIT_FAILURE));
 	return (ft_exit_cd(&cwd, EXIT_SUCCESS));

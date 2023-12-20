@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:41:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/27 23:14:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/20 08:56:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	concatenate(char **string, char *expanded_string, int *start, int end)
 		return (free_concatenate(left, right, temp, stringcpy));
 	stringcpy = (*string);
 	(*string) = ft_strjoin(temp, right);
-	if (!string)
+	if (!(*string))
 		return (free_concatenate(left, right, temp, stringcpy));
 	free_concatenate(left, right, temp, stringcpy);
 	return (0);

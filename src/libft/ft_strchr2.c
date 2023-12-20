@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_strchr2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 17:24:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/12 17:16:54 by bmota-si         ###   ########.fr       */
+/*   Created: 2023/12/18 16:43:27 by bmota-si          #+#    #+#             */
+/*   Updated: 2023/12/18 16:44:01 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	pwd(void)
+char	*ft_strchr2(const char *s, int c)
 {
-	char	*cwd;
-
-	cwd = NULL;
-	cwd = getcwd(cwd, 0);
-	if (cwd == NULL)
+	while (*s && (unsigned char)c != *s)
+		s++;
+	if ((unsigned char)c == *s)
 	{
-		perror("Error");
-		return (EXIT_FAILURE);
+		s++;
+		return ((char *)s);
 	}
-	else if (!ft_printf("%s\n", cwd))
-	{
-		ft_free_str(&cwd);
-		perror("\nError: printf failed");
-		return (EXIT_FAILURE);
-	}
-	ft_free_str(&cwd);
-	return (EXIT_SUCCESS);
+	return (0);
 }

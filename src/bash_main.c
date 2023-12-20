@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 23:48:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/20 08:55:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_env	*set_environment_vars(char **envp, t_memptr memptr)
 	envv = init_envv(envp);
 	if (envv == NULL)
 		exit_error(ENV_ERROR, memptr);
-	set_envp(envp);
 	set_envv(envv);
 	return (envv);
 }

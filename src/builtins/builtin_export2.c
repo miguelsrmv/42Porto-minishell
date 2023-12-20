@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:26 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:24:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:14:14 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ static int	ft_print_with_value(char **env_var_cpy, int i)
 {
 	int	j;
 
-	/* if (ft_printf("declare -x ") != ft_strlen("decalre -x "))
-		return (ft_export_exit(&env_var_cpy, EXIT_FAILURE)); */
-    ft_printf("declare -x ");
+	ft_printf("declare -x ");
 	j = 0;
 	while (env_var_cpy[i][j])
 	{
@@ -72,9 +70,9 @@ static int	ft_print_with_value(char **env_var_cpy, int i)
 	return (EXIT_SUCCESS);
 }
 
-int     export_only(t_env *environment)
+int	export_only(t_env *environment)
 {
-    char	**env_var_cpy;
+	char	**env_var_cpy;
 	int		i;
 	int		j;
 
@@ -83,9 +81,9 @@ int     export_only(t_env *environment)
 		return (EXIT_FAILURE);
 	i = 0;
 	j = 0;
-    if (ft_sort_loop(env_var_cpy, i, j) == EXIT_FAILURE)
+	if (ft_sort_loop(env_var_cpy, i, j) == EXIT_FAILURE)
 		return (ft_export_exit(&env_var_cpy, EXIT_FAILURE));
-    while (env_var_cpy[i] != NULL)
+	while (env_var_cpy[i] != NULL)
 	{
 		if (ft_strchr(env_var_cpy[i], '=') != NULL)
 		{
@@ -93,12 +91,9 @@ int     export_only(t_env *environment)
 				== EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
-		/*else if (ft_printf("declare -x %s\n",
-				env_var_cpy[i]) != 12 + ft_strlen(env_var_cpy[i]))
-			return (ft_export_exit(&env_var_cpy, EXIT_FAILURE)); */
-        else if (!ft_printf("declare -x %s\n", env_var_cpy[i]))
-            return (ft_export_exit(&env_var_cpy, EXIT_FAILURE));
+		else if (!ft_printf("declare -x %s\n", env_var_cpy[i]))
+			return (ft_export_exit(&env_var_cpy, EXIT_FAILURE));
 		i++;
 	}
-    return (ft_export_exit(&env_var_cpy, EXIT_SUCCESS));
+	return (ft_export_exit(&env_var_cpy, EXIT_SUCCESS));
 }

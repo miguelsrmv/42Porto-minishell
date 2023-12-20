@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 23:46:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/20 08:55:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,16 +346,9 @@ void				sigint_handler_during_processes_parent(int signum);
 int					env(char **argv);
 
 ///export.c
-//static int		ft_export_new(t_env *envv, t_export *exp, char **argv);
-//static int		ft_export_found(t_env *envv, t_export *exp, char **argv);
-//static void		ft_split_var(t_export *exp, char **argv);
-//static int		ft_export_loop(t_env *envv, t_export *exp, char **argv);
 int					export(char **argv);
 
 ///export2.c
-//static int		ft_print_with_value(char **env_var_cpy, int i);
-//static int		ft_export_exit(char ***array, bool exit_status);
-//static int		ft_sort_loop(char **env_var_cpy, int i, int j);
 int					export_only(t_env *environment);
 
 ///export3.c
@@ -363,46 +356,43 @@ int					export_special(t_env *envv, t_export *exp);
 int					export_wd(t_env *envv, t_export *exp, char **argv);
 
 ///export4.c
-//static int	export_error_loop(char **var, char **argv);
 int					export_input_error(char **argv);
+int					check_argv_var(char *argv);
 
 ///unset.c
-//static char		*ft_get_var(t_env *envv, int i);
-//static void		ft_del_var(t_env *envv, int i);
-//static int		ft_inner_loop(char **argv, t_env *envv, int i, int k);
 int					unset(char **argv);
 
 ///cd.c
-//static char	*find_home(t_env *envv);
-//static void	ft_update_env_var(t_env *envv, char *var, char *value);
-//static int	ft_exit_cd(char **cwd, int exit_status);
-//static int	ft_cd_home(t_env *envv);
+void				ft_update_env_var(t_env *envv, char *var, char *value);
 int					cd(char **argv);
+
+///cd2.c
+int					ft_check_cd(char *str, t_env *envv);
 
 ///pwd.c
 int					pwd(void);
 
 ///echo.c
 int					echo(char **args);
-char   				*ft_strchr2(const char *s, int c);
-char    			*get_echo_var(char *str);
-int					containsStr(const char *str1, char *str2);
+int					check_echo_arg(char *args);
+char				*get_echo_var(char *str);
+int					contains_str(const char *str1, char *str2);
+
+///echo2.c
+int					print_echo(char **args, bool print_newline, int i);
+int					check_hifen(char *args, int *n, int i);
 
 ///exit.c
-//static bool		is_valid_exit_arg(char **args);
 int					exit_inbuilt(char **args);
 
 ///get_set.c
-//static void		get_env_var_value_utils(t_env *envv, char *var,
-//						char **value, int i);
 char				*get_env_var_value(t_env *envv, char *var);
-t_env				*init_envv(char **envp);
-void				free_envv(t_env *envv);
-//static char		**_get_envp(char **envp, bool reset);
-void				set_envp(char **envp);
-//static t_env	*_get_envv(t_env *envv);
 void				set_envv(t_env *envv);
 t_env				*get_envv(void);
+
+///get_set2.c
+t_env				*init_envv(char **envp);
+void				free_envv(t_env *envv);
 int					reinit_env_var(t_env *envv, char **argv);
 
 #endif
