@@ -3,61 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/19 18:34:20 by bmota-si         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:25:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	is_valid_exit_arg(char **args)
+int	ft_exit_status(t_command_table *current)
 {
-	int	i;
-	int	j;
+	int	count;
+	int	status;
 
-	i = 0;
-	while (args && args[i])
-	{
-		j = 0;
-		while (args[i][j])
-		{
-			if (ft_issign(args[i][j]))
-				j++;
-			if (!ft_isdigit(args[i][j]))
-				return (false);
-			j++;
-		}
-		i++;
-	}
-	return (true);
+	count = ft_word_count(current->cmd);
+	wait(&status);
+	if (WIFEXITED(status))
+		return (exit_status2(current, count));
+	return (0);
 }
 
-int	exit_inbuilt(char **args)
+int	exit_status2(t_command_table *current, int count)
 {
-	long	exit_code;
-	int		i;
+	extern int	g_status_flag;
+
+	if (count == 1)
+	{
+		printf("exit\n");
+		g_status_flag = 0;
+		return (0);
+	}
+	if (check_arg_exit(current->cmd[1]) == 0)
+	{
+		printf("exit\n");
+		ft_putstr_fd("minishell: numeric argument required\n", 2);
+		g_status_flag = 2;
+		return (0);
+	}
+	if (count > 2)
+	{
+		printf("exit\n");
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		g_status_flag = 1;
+		return (1);
+	}
+	else
+		return (exit_status3(current));
+}
+
+int	exit_status3(t_command_table *current)
+{
+	long long	num;
+	char		*str;
+	extern int	g_status_flag;
+
+	num = ft_atol(current->cmd[1]);
+	str = ft_ltoa(num);
+	if (ft_strncmp(str, current->cmd[1], ft_strlen(str)) != 0)
+	{
+		printf("exit\n");
+		ft_putstr_fd("minishell: numeric argument required\n", 2);
+		g_status_flag = 2;
+		free(str);
+		return (0);
+	}
+	free(str);
+	printf("exit\n");
+	num = ft_atol(current->cmd[1]);
+	g_status_flag = (num % 256);
+	return (0);
+}
+
+int	ft_word_count(char **str)
+{
+	int	i;
 
 	i = 0;
-	if (ft_strncmp(args[i], "exit", ft_strlen(args[i])) != 0)
-		return (EXIT_FAILURE);
-	i++;
-	if (args[i])
-		exit_code = ft_atol(args[i]);
-	else
-		exit_code = 0;
-	if (!is_valid_exit_arg(args + i))
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	check_arg_exit(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i = 1;
+	while (str[i])
 	{
-		ft_fprintf(2, "exit: not a valid argument\n");
-		exit_code = 255;
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
 	}
-	else if (args[i] && args[++i])
-	{
-		ft_fprintf(2, "exit: too many arguments\n");
-		ft_fprintf(2, "exit\n");
-		return (EXIT_FAILURE);
-	}
-	ft_fprintf(2, "exit\n");
-	return (exit_code);
+	return (1);
 }

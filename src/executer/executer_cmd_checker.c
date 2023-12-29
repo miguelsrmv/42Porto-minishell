@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/10 20:35:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:35:51 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	check_builtin(t_command_table *current)
 	else if (!ft_strcmp(current->cmd[0], "env"))
 		current->builtin_pointer = (void *)env;
 	else if (!ft_strcmp(current->cmd[0], "exit"))
-		current->builtin_pointer = (void *)exit;
+/* 	{
+		ft_exit_status(current); */
+		current->builtin_pointer = (void *)ft_exit;
+/* 	} */
 	if (current->builtin_pointer)
 		current->command_type = BUILTIN;
 }
