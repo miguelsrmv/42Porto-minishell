@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/20 09:04:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:58:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Acrescentar aqui check de caractéres estranhos? Ou fazer parse ao input dado logo no readline?
 int	is_valid_bash_char(char c)
 {
-	if (c == '|' || c == '<' || c == '>')
+	if (c == '|' || c == '<' || c == '>' || c == '\0') /// Acrescentei o c == \0
 		return (0);
 	return (1);
 /* 	if (ft_isalnum(c)
