@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/20 08:55:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:02:57 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	update_envp(char ***envp, t_memptr *memptr, t_env *env_vars)
 
 void	bash_main(char **envp, t_memptr *memptr)
 {
-	extern enum e_SignalType	g_signal_flag;
-	t_env						*env_vars;
+	extern int	g_signal_flag;
+	t_env		*env_vars;
 
 	env_vars = set_environment_vars(envp, *memptr);
 	while (TRUE)

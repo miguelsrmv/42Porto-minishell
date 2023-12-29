@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/20 08:55:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:04:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@
 # define OPEN_ERROR "No such file or directory.\n"
 # define DIRECTORY_ERROR "Is a directory\n"
 
-enum e_SignalType {
-	NO_SIGNAL,
-	SIGINT_SIGNAL,
-	EOF_SIGNAL
-};
+// Exit code / signal errors
+# define NO_SIGNAL 0
+# define SIGINT_SIGNAL 130
+# define EOF_SIGNAL -1
 
 enum e_QuoteType {
 	OUT_QUOTE,
