@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/29 13:04:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:35:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,9 +381,6 @@ int					contains_str(const char *str1, char *str2);
 int					print_echo(char **args, bool print_newline, int i);
 int					check_hifen(char *args, int *n, int i);
 
-///exit.c
-int					exit_inbuilt(char **args);
-
 ///get_set.c
 char				*get_env_var_value(t_env *envv, char *var);
 void				set_envv(t_env *envv);
@@ -393,5 +390,19 @@ t_env				*get_envv(void);
 t_env				*init_envv(char **envp);
 void				free_envv(t_env *envv);
 int					reinit_env_var(t_env *envv, char **argv);
+
+///exit.c
+int					ft_exit_status(t_command_table *current);
+int					exit_status2(t_command_table *current, int count);
+int					exit_status3(t_command_table *current);
+int					ft_word_count(char **str);
+int					check_arg_exit(char *str);
+
+///exit2.c
+void				ft_exit(t_command_table *current);
+/* static char			*posnum(char *str, long long n, int len);
+static char			*negnum(char *str, long long n, int len);
+static int			int_len(long long n); */
+char				*ft_ltoa(long long n);
 
 #endif

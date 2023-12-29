@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/12/29 12:45:05 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/12/29 13:15:22 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,10 @@ SRC		=	main.c bash_main.c exit_error.c\
 			signals/signals.c signals/signals_handler.c \
 			builtins/builtin_cd.c builtins/builtin_cd2.c builtins/builtin_echo.c \
 			builtins/builtin_echo2.c  builtins/builtin_env2.c \
-			builtins/builtin_exit.c builtins/builtin_export.c builtins/builtin_export2.c \
+			builtins/builtin_export.c builtins/builtin_export2.c \
 			builtins/builtin_export3.c builtins/builtin_export4.c builtins/builtin_pwd.c \
-			builtins/builtin_unset.c builtins/get_set.c builtins/get_set2.c
+			builtins/builtin_unset.c builtins/get_set.c builtins/get_set2.c \
+			builtins/builtin_exit.c builtins/builtin_exit2.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

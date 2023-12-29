@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/29 12:40:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:41:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 int	execute_builtin(t_command_table *current,
 			char **envp, t_memptr memptr)
 {
-	int		(*function_pointer)(char **, char **);
+	int		(*function_pointer)(char **, char **, t_command_table *current);
 	int		exit_value;
 
 	function_pointer
-		= (int (*)(char **, char **))current->builtin_pointer;
-	exit_value = function_pointer(current->cmd, envp);
+		= (int (*)(char **, char **,
+				t_command_table *))current->builtin_pointer;
+	exit_value = function_pointer(current->cmd, envp, current);
 	clean_memory(memptr);
 	return (exit_value);
 }
@@ -33,6 +34,7 @@ void	process_parent(int process_num, t_memptr *memptr, int pid)
 	status = 0;
 	set_signal_during_processes_parent();
 	// É assim? Ou espero só pelo último de todos??
+	// Nem sempre está bem! Testar com "cat Makefile | exit | cat README.md !!!"
 	waitpid(pid, &status, 0);
 	while (--process_num)
 		wait(NULL);
