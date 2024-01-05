@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 10:13:37 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:31:54 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_echo_arg(char *args)
 char	*get_echo_var(char *str)
 {
 	t_env		*envv;
-	char		*str2;
+	char		*result;
 	int			i;
 
 	envv = get_envv();
@@ -61,12 +61,13 @@ char	*get_echo_var(char *str)
 	{
 		if (contains_str(envv->env_var[i], str) == EXIT_SUCCESS)
 		{
-			str2 = ft_strdup(envv->env_var[i]);
-			return (ft_strchr2(str2, '='));
+			result = ft_strchr2(envv->env_var[i], '=');
+			return (result);
 		}
 		else
 			i++;
 	}
+	(void)result;
 	return (NULL);
 }
 

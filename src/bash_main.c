@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bash_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/29 13:09:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:28:52 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,17 @@ void	update_envp(char ***envp, t_memptr *memptr, t_env *env_vars)
 
 void	bash_main(char **envp, t_memptr *memptr)
 {
-	extern int	g_status_flag;
 	t_env		*env_vars;
 
 	env_vars = set_environment_vars(envp, *memptr);
 	while (TRUE)
 	{
-		while (g_status_flag == NO_SIGNAL)
+		while (g_status_flag == NO_SIGNAL || g_status_flag == SIGINT_SIGNAL)
 		{
 			set_signal();
 			bash_run(envp, memptr);
 			update_envp(&envp, memptr, env_vars);
 			env_vars = set_environment_vars(envp, *memptr);
-		}
-		if (g_status_flag == SIGINT_SIGNAL)
-		{
-			clean_memory(*memptr);
-			exit(128);
 		}
 	}
 }
