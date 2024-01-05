@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 12:36:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:47:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	expand_env_quotes(char **string, int *start, int *end, t_memptr memptr)
 	int		limit;
 
 	limit = (*start) + 1;
-	while ((*string)[limit] && (*string)[limit] != '$'
+	while ((*string)[limit] && (*string)[limit] != '$' && !ft_isspace((*string)[limit])
 			&& (*string)[limit] != SQUOTE && limit <= *end)
 		limit++;
 	substring = ft_substr((*string), (*start) + 1,
