@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_cmd_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 11:36:44 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:27:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 void	check_builtin(t_command_table *current)
 {
-	if (!ft_strcmp(current->cmd[0], "echo"))
+	if (!ft_strcmp(current->cmd[0], "echo2"))
 		current->builtin_pointer = (void *)echo;
-	else if (!ft_strcmp(current->cmd[0], "cd"))
+	else if (!ft_strcmp(current->cmd[0], "cd2"))
 		current->builtin_pointer = (void *)cd;
-	else if (!ft_strcmp(current->cmd[0], "pwd"))
+	else if (!ft_strcmp(current->cmd[0], "pwd2"))
 		current->builtin_pointer = (void *)pwd;
-	else if (!ft_strcmp(current->cmd[0], "export"))
+	else if (!ft_strcmp(current->cmd[0], "export2"))
 		current->builtin_pointer = (void *)export;
-	else if (!ft_strcmp(current->cmd[0], "unset"))
+	else if (!ft_strcmp(current->cmd[0], "unset2"))
 		current->builtin_pointer = (void *)unset;
-	else if (!ft_strcmp(current->cmd[0], "env"))
+	else if (!ft_strcmp(current->cmd[0], "env2"))
 		current->builtin_pointer = (void *)env;
-	else if (!ft_strcmp(current->cmd[0], "exit"))
- 	{
-		/* ft_exit_status(current);
-		exit(g_status_flag); */
+	else if (!ft_strcmp(current->cmd[0], "exit2"))
 		current->builtin_pointer = (void *)ft_exit;
- 	}
 	if (current->builtin_pointer)
 		current->command_type = BUILTIN;
 }
