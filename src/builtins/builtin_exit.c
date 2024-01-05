@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 11:18:00 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:28:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit_status(t_command_table *current)
+int	ft_exit_status(char *command, char **envp, t_command_table *current)
 {
 	int	count;
 	//int	status;
 
+	(void)command;
+	(void)envp;
 	count = ft_word_count(current->cmd);
 	//wait(&status);
 	/* if (WIFEXITED(status))
