@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_noquotes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/20 08:51:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:25:11 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	exit_value_expand(char **string, int *start, t_memptr memptr)
 {
 	char	*exit_value_str;
 
+	memptr.return_value = g_status_flag;
 	exit_value_str = ft_itoa(memptr.return_value);
 	if (!exit_value_str)
 		exit_error(MALLOC_ERROR, memptr);
@@ -88,7 +89,6 @@ void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 	if (concatenate(string, expanded, start, end) == 1)
 		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(expanded);
-	free(expanded);
 }
 
 void	localization(char **string, int *start, t_memptr memptr)

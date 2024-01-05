@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/29 13:25:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:08:58 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ int	ft_exit_status(t_command_table *current)
 
 int	exit_status2(t_command_table *current, int count)
 {
-	extern int	g_status_flag;
-
 	if (count == 1)
 	{
 		printf("exit\n");
 		g_status_flag = 0;
 		return (0);
 	}
-	if (check_arg_exit(current->cmd[1]) == 0)
+	if (check_arg_exit(current) == 0)
 	{
 		printf("exit\n");
 		ft_putstr_fd("minishell: numeric argument required\n", 2);
@@ -56,7 +54,6 @@ int	exit_status3(t_command_table *current)
 {
 	long long	num;
 	char		*str;
-	extern int	g_status_flag;
 
 	num = ft_atol(current->cmd[1]);
 	str = ft_ltoa(num);
@@ -85,18 +82,19 @@ int	ft_word_count(char **str)
 	return (i);
 }
 
-int	check_arg_exit(char *str)
+int	check_arg_exit(t_command_table *current)
 {
 	int	i;
 
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if (current->cmd[1][i] == '-' || current->cmd[1][i] == '+')
 		i = 1;
-	while (str[i])
+	while (current->cmd[1][i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(current->cmd[1][i]))
 			return (0);
 		i++;
 	}
+	current->cmd[1] = ft_strtrim(current->cmd[1], "+");
 	return (1);
 }

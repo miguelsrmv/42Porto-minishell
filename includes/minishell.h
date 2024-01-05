@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/29 13:35:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:08:55 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@
 # define NO_SIGNAL 0
 # define SIGINT_SIGNAL 130
 # define EOF_SIGNAL -1
+
+extern int	g_status_flag;
 
 enum e_QuoteType {
 	OUT_QUOTE,
@@ -396,7 +398,7 @@ int					ft_exit_status(t_command_table *current);
 int					exit_status2(t_command_table *current, int count);
 int					exit_status3(t_command_table *current);
 int					ft_word_count(char **str);
-int					check_arg_exit(char *str);
+int					check_arg_exit(t_command_table *current);
 
 ///exit2.c
 void				ft_exit(t_command_table *current);
