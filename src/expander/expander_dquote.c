@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 12:34:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:36:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	dquote_expansion(char **string, int *pos, char *quote_flag,
 		else if ((*string)[*pos] == '$' && (*string)[(*pos) + 1]
 			&& (*string)[(*pos) + 1] == '?')
 			exit_value_expand_quotes(string, pos, &end_pos, memptr);
-		else if ((*string)[*pos] == '$' && !ft_isquote((*string)[(*pos) + 1]))
+		else if ((*string)[*pos] == '$' && !ft_isquote((*string)[(*pos) + 1])
+				&& !ft_isspace((*string)[(*pos) + 1]))
 			expand_env_quotes(string, pos, &end_pos, memptr);
 		else
 			(*pos)++;
@@ -46,8 +47,7 @@ void	expand_env_quotes(char **string, int *start, int *end, t_memptr memptr)
 
 	limit = (*start) + 1;
 	while ((*string)[limit] && (*string)[limit] != '$'
-			&& !ft_isspace((*string)[limit]) && (*string)[limit] != SQUOTE
-				&& limit <= *end)
+			&& (*string)[limit] != SQUOTE && limit <= *end)
 		limit++;
 	substring = ft_substr((*string), (*start) + 1,
 			limit - (*start) - 1);
