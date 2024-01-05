@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 19:33:12 by bmota-si          #+#    #+#             */
-/*   Updated: 2023/12/29 13:35:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:21:39 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_exit(t_command_table *current)
 {
-	extern int	g_status_flag;
-
 	ft_exit_status(current);
 	exit(g_status_flag);
 }
