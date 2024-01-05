@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 10:28:52 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:00:34 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	bash_main(char **envp, t_memptr *memptr)
 	env_vars = set_environment_vars(envp, *memptr);
 	while (TRUE)
 	{
-		while (g_status_flag == NO_SIGNAL || g_status_flag == SIGINT_SIGNAL)
+		while (g_status_flag != EOF_SIGNAL)
 		{
 			set_signal();
 			bash_run(envp, memptr);

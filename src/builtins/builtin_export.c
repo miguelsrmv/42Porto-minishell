@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/18 16:35:10 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:30:15 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ static int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
 					return (EXIT_FAILURE);
 			}
 		}
+		else
+			g_status_flag = 1;
 		exp->j++;
 	}
 	return (EXIT_SUCCESS);

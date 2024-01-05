@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/02 12:05:33 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:38:11 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,22 @@ int	export_input_error(char **argv)
 
 int	check_argv_var(char *argv)
 {
+	int		i;
+
+	i = 0;
 	if (!ft_isalpha(argv[0]) && argv[0] != '_' && argv[0] != '|')
 	{
 		ft_printf("minishell: '%c' Not a valid identifier!\n", argv[0]);
+		//g_status_flag = 1;
 		return (EXIT_FAILURE);
 	}
-	else if (argv[0] == '_' && argv[1] == '\0')
+	if (argv[0] == '_' && argv[1] == '\0')
 		return (EXIT_FAILURE);
-	else
-		return (EXIT_SUCCESS);
+	while(argv[i] != '\0' && argv[i] != '=')
+	{
+		if(argv[i] == '-' || argv[i] == '+')
+			return(EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
 }
