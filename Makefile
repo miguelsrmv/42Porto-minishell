@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/12/29 13:15:22 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/01/05 09:55:53 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(SRCDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
 	@ $(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
 
 libft:
-	@ cd $(LIBFTDIR) && make -s && make -s clean
+	@ cd $(LIBFTDIR) && make -s
 
 clean:
 	@ $(MAKE) -sC $(LIBFTDIR) clean

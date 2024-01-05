@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/19 18:48:05 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:13:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*get_echo_var(char *str)
 		if (contains_str(envv->env_var[i], str) == EXIT_SUCCESS)
 		{
 			str2 = ft_strdup(envv->env_var[i]);
-			free(str);
 			return (ft_strchr2(str2, '='));
 		}
 		else
