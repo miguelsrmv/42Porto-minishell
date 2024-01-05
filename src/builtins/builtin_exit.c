@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/04 13:08:58 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:38:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 int	ft_exit_status(t_command_table *current)
 {
 	int	count;
-	int	status;
+	//int	status;
 
 	count = ft_word_count(current->cmd);
-	wait(&status);
-	if (WIFEXITED(status))
-		return (exit_status2(current, count));
+	//wait(&status);
+	/* if (WIFEXITED(status))
+		return (exit_status2(current, count)); */
+	exit_status2(current, count);
 	return (0);
 }
 

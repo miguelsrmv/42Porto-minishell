@@ -1,0 +1,4 @@
+A corrigir:
+
+echo hi | echo bye
+	Acho que o problema está no echo porque se usarmos o execve em vez do builtin, ele funcinoa bem. Notar também que ficam processos fantasmas abertos.

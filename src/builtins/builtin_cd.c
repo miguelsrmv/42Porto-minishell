@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/12 17:05:00 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:49:58 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	ft_exit_cd(char **cwd, int exit_status)
 		return (EXIT_SUCCESS);
 	else
 	{
+		g_status_flag = 1;
 		perror("Error");
 		return (EXIT_FAILURE);
 	}
@@ -97,8 +98,11 @@ int	cd(char **argv)
 	t_env	*envv;
 
 	envv = get_envv();
-	if (argv == NULL || envv == NULL)
+	if (argv == NULL || envv == NULL || argv[2] != NULL)
+	{
+		g_status_flag = 1;
 		return (EXIT_FAILURE);
+	}
 	if (argv[1] == NULL)
 		return (ft_cd_home(envv));
 	cwd = NULL;

@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/04 13:08:55 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:00:44 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -401,7 +401,7 @@ int					ft_word_count(char **str);
 int					check_arg_exit(t_command_table *current);
 
 ///exit2.c
-void				ft_exit(t_command_table *current);
+void				ft_exit(char *command, char **envp, t_command_table *current);
 /* static char			*posnum(char *str, long long n, int len);
 static char			*negnum(char *str, long long n, int len);
 static int			int_len(long long n); */
