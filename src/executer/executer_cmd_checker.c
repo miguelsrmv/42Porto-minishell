@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_cmd_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/29 13:35:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:04:40 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	check_builtin(t_command_table *current)
 		current->builtin_pointer = (void *)env;
 	else if (!ft_strcmp(current->cmd[0], "exit"))
 /* 	{
-		ft_exit_status(current); */
+		ft_exit_status(current);
+		exit(g_status_flag) */
 		current->builtin_pointer = (void *)ft_exit;
 /* 	} */
 	if (current->builtin_pointer)
