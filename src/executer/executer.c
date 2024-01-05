@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 14:39:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:55:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void	process_parent(int process_num, t_memptr *memptr, int pid)
 	(void)pid;
 	status = 0;
 	set_signal_during_processes_parent();
-	// É assim? Ou espero só pelo último de todos??
-	// Nem sempre está bem! Testar com "cat Makefile | exit | cat README.md !!!"
-	//waitpid(pid, &status, 0);
 	while (process_num--)
-		wait(NULL);
+		waitpid(-1, &status, 0);
 	clean_memory(*memptr);
 	if (WIFEXITED(status))
 		value = WEXITSTATUS(status);
 	memptr->return_value = value;
+	// Para retirar depois, é uma espécie de sleep
+	for (int i = 0; i < 10000; i++)
+		;
 }
 
 void	process_forks(t_command_table **command_table, char **envp,
