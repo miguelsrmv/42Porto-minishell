@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:49:43 by bmota-si          #+#    #+#             */
 /*   Updated: 2024/01/10 12:14:01 by bmota-si         ###   ########.fr       */
