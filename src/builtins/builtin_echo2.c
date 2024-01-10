@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:49:43 by bmota-si          #+#    #+#             */
-/*   Updated: 2023/12/19 17:42:19 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:14:01 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ int	print_echo(char **args, bool print_newline, int i)
 	{
 		if (!ft_printf("%s", args[i]))
 			return (EXIT_FAILURE);
-		if (ft_strlen(args[i]) != 0 && args[i + 1] != NULL)
+		/* if (ft_strlen(args[i]) != 0 && args[i + 1] != NULL)
 			if (!ft_printf(" "))
-				return (EXIT_FAILURE);
+				return (EXIT_FAILURE); */
 		i++;
 	}
-	if (print_newline)
+	(void)print_newline;
+	/* if (print_newline)
 		if (!ft_printf("\n"))
-			return (EXIT_FAILURE);
+			return (EXIT_FAILURE); */
 	return (EXIT_SUCCESS);
 }
 
