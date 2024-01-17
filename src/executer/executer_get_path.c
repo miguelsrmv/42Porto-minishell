@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_get_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/29 12:30:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:29:36 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ char	**get_path_list(t_memptr *memptr)
 	char	**result;
 
 	path_list = ft_split(getenv("PATH"), ':');
-	if (!path_list)
-		exit_error(MALLOC_ERROR, *memptr);
 	i = 0;
 	while (path_list[i])
 		i++;

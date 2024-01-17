@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 14:55:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/17 10:56:27 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ void	process_forks(t_command_table **command_table, char **envp,
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)
 		execute_builtin(current, envp, memptr);
+	close(pipe_fd[current->command_no - 2][0]);
+	close(pipe_fd[current->command_no - 1][1]);
 }

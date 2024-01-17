@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/04 11:31:54 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:01:36 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ int	echo(char **args)
 
 	i = 0;
 	print_newline = true;
+	while (ft_strcmp(args[i], "") == 0)
+		i++;
 	if (ft_strncmp(args[i], "echo", ft_strlen(args[i])) != 0)
 		return (EXIT_FAILURE);
 	i++;
+	if (!args[i])
+	{
+		g_status_flag = 1;
+		return (EXIT_FAILURE);
+	}
 	if (check_echo_arg(args[i]) == 2)
 	{
 		print_newline = false;

@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 11:53:29 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:03:11 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 		else if ((*string)[*pos] == '$')
 		{
 			expand_env_no_quotes(string, pos, memptr);
+			(*memptr.command_table)->command_type = NO_NULL_COMMANDTYPE;
 			break ;
 		}
 		else if (ft_isquote((*string)[*pos]))

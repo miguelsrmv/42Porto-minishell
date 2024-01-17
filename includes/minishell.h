@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 12:00:44 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:03:16 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ enum e_TokenType {
 
 enum e_CommandType {
 	NULL_COMMANDTYPE,
+	NO_NULL_COMMANDTYPE,
 	EXECUTABLE,
 	BUILTIN
 };
@@ -348,6 +349,10 @@ int					env(char **argv);
 
 ///export.c
 int					export(char **argv);
+int					ft_export_loop(t_env *envv, t_export *exp, char **argv);
+int					ft_export_new(t_env *envv, t_export *exp, char **argv);
+int					ft_export_loop2(t_env *envv, t_export *exp, char **argv, char *str);
+void				ft_split_var(t_export *exp, char **argv);
 
 ///export2.c
 int					export_only(t_env *environment);
@@ -359,6 +364,8 @@ int					export_wd(t_env *envv, t_export *exp, char **argv);
 ///export4.c
 int					export_input_error(char **argv);
 int					check_argv_var(char *argv);
+int					export2(char **argv, t_export *exp, t_env *envv);
+int					ft_export_found(t_env *envv, t_export *exp, char **argv);
 
 ///unset.c
 int					unset(char **argv);
@@ -366,9 +373,13 @@ int					unset(char **argv);
 ///cd.c
 void				ft_update_env_var(t_env *envv, char *var, char *value);
 int					cd(char **argv);
+char				*find_home(t_env *envv);
+int					ft_cd_home(t_env *envv);
+int					ft_cd2(char **argv, t_env *envv);
 
 ///cd2.c
 int					ft_check_cd(char *str, t_env *envv);
+int					ft_exit_cd(char **cwd, int exit_status);
 
 ///pwd.c
 int					pwd(void);

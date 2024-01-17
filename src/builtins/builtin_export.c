@@ -6,13 +6,13 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 12:30:15 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:44:50 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_export_new(t_env *envv, t_export *exp, char **argv)
+int	ft_export_new(t_env *envv, t_export *exp, char **argv)
 {
 	if (envv->env_var[exp->i] == NULL)
 	{
@@ -29,34 +29,7 @@ static int	ft_export_new(t_env *envv, t_export *exp, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-static int	ft_export_found(t_env *envv, t_export *exp, char **argv)
-{
-	int	check;
-
-	if (ft_strcmp(envv->env_var[exp->i], exp->var) == 0
-		|| ft_strcmp(envv->env_var[exp->i], exp->var) == 61)
-	{
-		ft_free_str(&envv->env_var[exp->i]);
-		envv->env_var[exp->i] = ft_strdup(argv[exp->j++]);
-		ft_free_str(&exp->var);
-		if (envv->env_var[exp->i] == NULL)
-			return (EXIT_FAILURE);
-		exp->i++;
-		return (2);
-	}
-	else
-	{
-		exp->i++;
-		check = ft_export_new(envv, exp, argv);
-		if (check == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		else if (check == 2)
-			return (2);
-	}
-	return (EXIT_SUCCESS);
-}
-
-static void	ft_split_var(t_export *exp, char **argv)
+void	ft_split_var(t_export *exp, char **argv)
 {
 	char	**var_split;
 
@@ -70,10 +43,8 @@ static void	ft_split_var(t_export *exp, char **argv)
 	}
 }
 
-static int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
+int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
 {
-	int		check;
-
 	exp->j = 1;
 	while (argv[exp->j])
 	{
@@ -85,18 +56,27 @@ static int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
 			exp->i = 0;
 			if (export_wd(envv, exp, argv) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
-			while (envv->env_var[exp->i])
-			{
-				check = ft_export_found(envv, exp, argv);
-				if (check == 2)
-					break ;
-				else if (check == EXIT_FAILURE)
-					return (EXIT_FAILURE);
-			}
+			if (!ft_export_loop2(envv, exp, argv, envv->env_var[exp->i]))
+				return (EXIT_FAILURE);
 		}
 		else
 			g_status_flag = 1;
 		exp->j++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	ft_export_loop2(t_env *envv, t_export *exp, char **argv, char *str)
+{
+	int	check;
+
+	while (str)
+	{
+		check = ft_export_found(envv, exp, argv);
+		if (check == 2)
+			break ;
+		else if (check == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -116,14 +96,10 @@ int	export(char **argv)
 		exp = ft_calloc(1, sizeof(t_export));
 		if (exp == NULL)
 			return (EXIT_FAILURE);
-		if (reinit_env_var(envv, argv) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		if (ft_export_loop(envv, exp, argv) == EXIT_FAILURE)
-		{
+		if (export2(argv, exp, envv) == EXIT_SUCCESS)
 			ft_free((void *)&exp);
+		else
 			return (EXIT_FAILURE);
-		}
-		ft_free((void *)&exp);
 	}
 	return (EXIT_SUCCESS);
 }

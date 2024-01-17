@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 21:52:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:16:07 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,20 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 	va_start(args, memptr);
 	if (!ft_strcmp(error_msg, COMMAND_ERROR)
 		|| !ft_strcmp(error_msg, OPEN_ERROR))
+	{
 		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
+		exit(g_status_flag);
+	}
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR))
 		ft_fprintf(STDERR_FILENO, "%s: %s", &va_arg(args, char *)[2],
 			error_msg);
 	else if (!ft_strcmp(error_msg, SYNTAX_ERROR)
 		|| !ft_strcmp(error_msg, QUOTE_ERROR)
 		|| !ft_strcmp(error_msg, EOF_ERROR))
+	{
 		ft_fprintf(STDERR_FILENO, error_msg);
+		exit(g_status_flag);
+	}
 	else
 		perror(error_msg);
 	va_end(args);
