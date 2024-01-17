@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_redir_checker.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/09 17:50:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:21:12 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ void	check_redirections(int **pipe_fd, t_command_table **command,
 	else if (input_status == INVALID_INPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr);
 	else if (input_status == INVALID_INPUT)
+	{
+		g_status_flag = 2;
 		exit_error(OPEN_ERROR, memptr, (*command)->input_target);
+	}
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr);
 }

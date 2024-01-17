@@ -6,13 +6,13 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 12:49:58 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/11 12:13:08 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*find_home(t_env *envv)
+char	*find_home(t_env *envv)
 {
 	char	*path;
 
@@ -55,20 +55,7 @@ void	ft_update_env_var(t_env *envv, char *var, char *value)
 	}
 }
 
-static int	ft_exit_cd(char **cwd, int exit_status)
-{
-	ft_free_str(cwd);
-	if (exit_status == EXIT_SUCCESS)
-		return (EXIT_SUCCESS);
-	else
-	{
-		g_status_flag = 1;
-		perror("Error");
-		return (EXIT_FAILURE);
-	}
-}
-
-static int	ft_cd_home(t_env *envv)
+int	ft_cd_home(t_env *envv)
 {
 	char	*home_path;
 	char	*cwd;
@@ -93,8 +80,6 @@ static int	ft_cd_home(t_env *envv)
 
 int	cd(char **argv)
 {
-	char	*cwd;
-	DIR		*directory;
 	t_env	*envv;
 
 	envv = get_envv();
@@ -105,6 +90,15 @@ int	cd(char **argv)
 	}
 	if (argv[1] == NULL)
 		return (ft_cd_home(envv));
+	else
+		return (ft_cd2(argv, envv));
+}
+
+int	ft_cd2(char **argv, t_env *envv)
+{
+	char	*cwd;
+	DIR		*directory;
+
 	cwd = NULL;
 	if (ft_check_cd(argv[1], envv) == EXIT_SUCCESS)
 		return (ft_exit_cd(&cwd, EXIT_SUCCESS));

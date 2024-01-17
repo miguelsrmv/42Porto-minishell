@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_cmd_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 14:57:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:19:26 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,83 @@ void	check_builtin(t_command_table *current)
 		current->command_type = BUILTIN;
 }
 
+char **removeEmptyStrings(char **array)
+{
+    int		i;
+	int		j;
+	int		count_empty;
+
+	i = 0;
+	count_empty = 0;
+    while (array[i])
+	{
+		if (!ft_strcmp(array[i], ""))
+			count_empty++;
+		i++;
+	}
+    char **newArray = (char**)malloc((i - count_empty) * sizeof(char*));
+    if (newArray == NULL)
+	{
+        perror("Falha ao alocar memória");
+        exit(EXIT_FAILURE);
+	}
+    j = 0;
+	i = 0;
+	while (array[i])
+	{
+		while((!ft_strcmp(array[i], "")) && array[i])
+			i++;
+		newArray[j] = ft_strdup(array[i]);
+		i++;
+		j++;
+	}
+	newArray[j] = NULL;
+	ft_free_str_array(&array);
+    return (newArray);
+}
+
+void	check_builtin2(t_command_table *current)
+{
+	int		i;
+
+	i = 0;
+
+	current->cmd = ft_str_arr_dup(removeEmptyStrings(current->cmd));
+	//check_builtin(current->cmd);
+	while (current->cmd[i])
+	{
+		if (!ft_strcmp(current->cmd[i], "echo"))
+			current->builtin_pointer = (void *)echo;
+		else if (!ft_strcmp(current->cmd[i], "cd"))
+			current->builtin_pointer = (void *)cd;
+		else if (!ft_strcmp(current->cmd[i], "pwd"))
+			current->builtin_pointer = (void *)pwd;
+		else if (!ft_strcmp(current->cmd[i], "export"))
+			current->builtin_pointer = (void *)export;
+		else if (!ft_strcmp(current->cmd[i], "unset"))
+			current->builtin_pointer = (void *)unset;
+		else if (!ft_strcmp(current->cmd[i], "env"))
+			current->builtin_pointer = (void *)env;
+		else if (!ft_strcmp(current->cmd[i], "exit"))
+			current->builtin_pointer = (void *)ft_exit;
+		if (current->builtin_pointer)
+		{
+			current->command_type = BUILTIN;
+			break ;
+		}
+		else
+			i++;
+	}
+}
+
 void	check_executables(t_command_table *current, char **path_list,
 			t_memptr memptr)
 {
 	int				i;
 	char			*test_command;
 
+	if (!path_list)
+		return ;
 	i = 0;
 	while (path_list[i])
 	{
@@ -55,19 +126,41 @@ void	check_executables(t_command_table *current, char **path_list,
 	}
 }
 
+int	check_commands2(t_command_table *current)
+{
+	if (ft_strcmp(current->cmd[0], "") == 0 && current->cmd[1] == NULL)
+	{
+		g_status_flag = 0;
+		return (0);
+	}
+	else if (ft_strcmp(current->cmd[0], "") 
+		== 0 && current->cmd[1] != NULL)
+		check_builtin2(current);
+	else
+	{
+		g_status_flag = 126;
+		ft_fprintf(STDERR_FILENO, "%s: %s", current->cmd[0], DIRECTORY_ERROR);
+		return (0);
+	}
+	return (1);
+}
+
 int	check_commands(t_command_table **command_table, char **path_list,
 			t_memptr memptr)
-{	
+{
 	t_command_table	*current;
 
 	current = (*command_table);
 	while (current)
 	{
 		check_builtin(current);
+		if (current->command_type == NO_NULL_COMMANDTYPE)
+			return (check_commands2(current));
 		if (current->command_type != BUILTIN)
 			check_executables(current, path_list, memptr);
 		if (current->command_type == NULL_COMMANDTYPE)
 		{
+			g_status_flag = 127;
 			ft_fprintf(STDERR_FILENO, "%s: %s", current->cmd[0], COMMAND_ERROR);
 			return (0);
 		}

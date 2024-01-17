@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_prepare_processes.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 23:46:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/17 00:02:37 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,20 @@ int	count_processes(t_command_table **command_table)
 	return (processes_count);
 }
 
+int		check_path(char **envp)
+{
+	int		i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH:", 4) == 0)
+			return (EXIT_SUCCESS);
+		i++;
+	}
+	return (EXIT_FAILURE);
+}
+
 void	prepare_processes(t_command_table **command_table, char **envp,
 			t_memptr *memptr)
 {
@@ -99,11 +113,20 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	int				process_num;
 	int				pid;
 
-	path_list = get_path_list(memptr);
-	if (!check_commands(command_table, path_list, *memptr))
-		return ;
-	ft_free_tabs((void **)path_list);
-	memptr->path_list = NULL;
+	path_list = NULL;
+	if(check_path(envp) == EXIT_SUCCESS)
+	{
+		path_list = get_path_list(memptr);
+		if (!check_commands(command_table, path_list, *memptr))
+			return ;
+		ft_free_tabs((void **)path_list);
+		memptr->path_list = NULL;	
+	}
+	else
+		if (!check_commands(command_table, path_list, *memptr))
+			return ;
+	if ((*command_table)->command_type == EXECUTABLE)
+		g_status_flag = 0;
 	process_num = count_processes(command_table);
 	set_signal_during_processes_child();
 	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
