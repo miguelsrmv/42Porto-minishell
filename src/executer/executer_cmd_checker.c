@@ -73,7 +73,7 @@ void	check_builtin2(t_command_table *current)
 	int		i;
 
 	i = 0;
-	current->cmd = ft_str_arr_dup(removeEmptyStrings(current->cmd));
+	current->cmd = ft_str_arr_dup(remove_empty_strings(current->cmd));
 	while (current->cmd[i])
 	{
 		if (!ft_strcmp(current->cmd[i], "echo"))
