@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/11 12:16:00 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:35:56 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_argv_var(char *argv)
 		g_status_flag = 1;
 		return (EXIT_FAILURE);
 	}
-	if (argv[0] == '_' && argv[1] == '\0')
+	if ((argv[0] == '_' && (argv[1] == '\0' || argv[1] == '=')))
 		return (EXIT_FAILURE);
 	while (argv[i] != '\0' && argv[i] != '=')
 	{
