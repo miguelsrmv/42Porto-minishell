@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/16 14:19:26 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:03:02 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,40 @@ void	check_builtin(t_command_table *current)
 		current->command_type = BUILTIN;
 }
 
-char **removeEmptyStrings(char **array)
+char	**remove_empty_strings(char **array)
 {
-    int		i;
+	int		i;
 	int		j;
 	int		count_empty;
+	char	**new_array;
 
 	i = 0;
 	count_empty = 0;
-    while (array[i])
+	while (array[i])
 	{
 		if (!ft_strcmp(array[i], ""))
 			count_empty++;
 		i++;
 	}
-    char **newArray = (char**)malloc((i - count_empty) * sizeof(char*));
-    if (newArray == NULL)
+	new_array = (char **) malloc((i - count_empty) * sizeof (char *));
+	if (new_array == NULL)
 	{
-        perror("Falha ao alocar memória");
-        exit(EXIT_FAILURE);
+		perror("Falha ao alocar memória");
+		exit(EXIT_FAILURE);
 	}
-    j = 0;
+	j = 0;
 	i = 0;
 	while (array[i])
 	{
-		while((!ft_strcmp(array[i], "")) && array[i])
+		while ((!ft_strcmp(array[i], "")) && array[i])
 			i++;
-		newArray[j] = ft_strdup(array[i]);
+		new_array[j] = ft_strdup(array[i]);
 		i++;
 		j++;
 	}
-	newArray[j] = NULL;
+	new_array[j] = NULL;
 	ft_free_str_array(&array);
-    return (newArray);
+	return (new_array);
 }
 
 void	check_builtin2(t_command_table *current)
@@ -72,9 +73,7 @@ void	check_builtin2(t_command_table *current)
 	int		i;
 
 	i = 0;
-
 	current->cmd = ft_str_arr_dup(removeEmptyStrings(current->cmd));
-	//check_builtin(current->cmd);
 	while (current->cmd[i])
 	{
 		if (!ft_strcmp(current->cmd[i], "echo"))
@@ -133,7 +132,7 @@ int	check_commands2(t_command_table *current)
 		g_status_flag = 0;
 		return (0);
 	}
-	else if (ft_strcmp(current->cmd[0], "") 
+	else if (ft_strcmp(current->cmd[0], "")
 		== 0 && current->cmd[1] != NULL)
 		check_builtin2(current);
 	else
