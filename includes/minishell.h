@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/16 13:03:16 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:42:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,11 +328,15 @@ void				fill_in_result_from_path_list(char **path_list,
 						char **result, t_memptr memptr);
 
 /// executer.c
+int					execute_single_builtin(t_command_table *current,
+						char **envp, t_memptr memptr);
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
 void				process_parent(int process_num, t_memptr *memptr, int pid);
 void				process_forks(t_command_table **command_table, char **envp,
 						int process_num, t_memptr memptr);
+void				close_remaining_pipes(t_command_table *current, int **pipe_fd, 
+						t_memptr memptr);
 
 /// signals.c
 void				set_signal(void);

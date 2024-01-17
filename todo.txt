@@ -1,4 +1,3 @@
-A corrigir:
-
-echo hi | echo bye
-	Acho que o problema está no echo porque se usarmos o execve em vez do builtin, ele funcinoa bem. Notar também que ficam processos fantasmas abertos.
+#1
+Neste momento, um single builtin NÃO ESTÁ A REDIRECIONAR CORRETAMENTE!!!
+Em vez de execute_builtin, criar função com execute_single_builtin que redirectiona antes.

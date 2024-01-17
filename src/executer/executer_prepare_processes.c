@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_prepare_processes.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 11:54:49 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:44:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	process_num = count_processes(command_table);
 	set_signal_during_processes_child();
 	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
-		execute_builtin(*command_table, envp, *memptr);
+		execute_single_builtin(*command_table, envp, *memptr);
 	else
 	{
 		pid = fork();

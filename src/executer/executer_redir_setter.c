@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:46:53 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/09 18:07:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:48:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	set_output_redir(int **pipe_fd, t_command_table **command,
 void	close_redir_pipes(int **pipe_fd, t_command_table **command,
 			t_memptr memptr)
 {
+	if (!pipe_fd)
+		return ;
 	if ((*command)->command_no > 1)
 	{
 		if (close(pipe_fd[(*command)->command_no - 2][0]) == -1)
