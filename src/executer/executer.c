@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 22:23:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/17 23:14:25 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	execute_single_builtin(t_command_table *current,
 		close(current->input_fd);
 	if (current->output_fd)
 		close(current->output_fd);
-	execute_builtin(current, envp, memptr);
+	g_status_flag = execute_builtin(current, envp, memptr);
 	dup2(original_stdin, STDIN_FILENO);
 	dup2(original_stdout, STDOUT_FILENO);
 	close(original_stdin);
@@ -50,23 +50,14 @@ int	execute_builtin(t_command_table *current,
 
 void	process_parent(int process_num, t_memptr *memptr, int pid)
 {
-	int	status;
-	int	value;
-
 	(void)pid;
-	status = 0;
-	value = 0;
 	set_signal_during_processes_parent();
 	while (process_num--)
-		waitpid(-1, &status, 0);
-	if (WIFEXITED(status))
-		value = WEXITSTATUS(status);
+		waitpid(-1, &g_status_flag, 0);
+	if (WIFEXITED(g_status_flag))
+		g_status_flag = WEXITSTATUS(g_status_flag);
 	clean_memory(*memptr);
-	memptr->return_value = value;
-	g_status_flag = value;
-	// Para retirar depois, é uma espécie de sleep
-	for (int i = 0; i < 10000; i++)
-		;
+	memptr->return_value = g_status_flag;
 }
 
 void	process_forks(t_command_table **command_table, char **envp,

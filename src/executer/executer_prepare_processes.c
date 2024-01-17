@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 18:44:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/17 23:18:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_command_table	*create_processes(t_command_table **command_table,
 	{
 		current->pid = fork();
 		current->command_no = i;
-		if (current->pid != 0)
+		if (current->pid == 0)
 			return (current);
 		i++;
 		current = current->next;
