@@ -6,13 +6,13 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/11 11:04:59 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:04:48 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_status_flag = NO_SIGNAL;
+int	g_status_flag;
 
 t_memptr	initialize_memptr(t_token **lexer_list,
 				t_command_table **command_table,
@@ -44,6 +44,6 @@ int	main(int argc, char **argv, char **envp)
 	envp_cpy = ft_tabdup(envp);
 	memptr = initialize_memptr(&lexer_list, &command_table, argv, envp_cpy);
 	bash_main(envp_cpy, &memptr);
-	ft_free_tabs((void**)envp);
+	ft_free_tabs((void **)envp);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/16 15:16:07 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:07:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,18 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 		|| !ft_strcmp(error_msg, OPEN_ERROR))
 	{
 		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *), error_msg);
-		exit(g_status_flag);
+		g_status_flag = 1;
 	}
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR))
+	{
 		ft_fprintf(STDERR_FILENO, "%s: %s", &va_arg(args, char *)[2],
 			error_msg);
+		g_status_flag = 127;
+	}
 	else if (!ft_strcmp(error_msg, SYNTAX_ERROR)
 		|| !ft_strcmp(error_msg, QUOTE_ERROR)
 		|| !ft_strcmp(error_msg, EOF_ERROR))
-	{
-		ft_fprintf(STDERR_FILENO, error_msg);
 		exit(g_status_flag);
-	}
 	else
 		perror(error_msg);
 	va_end(args);
@@ -112,5 +112,5 @@ void	exit_error(char *error_msg, t_memptr memptr, ...)
 	clean_memory(memptr);
 	if (*memptr.envp)
 		ft_free_tabs((void **)memptr.envp);
-	exit(0);
+	exit(g_status_flag);
 }

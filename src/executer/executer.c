@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 10:56:27 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:38:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	process_parent(int process_num, t_memptr *memptr, int pid)
 	if (WIFEXITED(status))
 		value = WEXITSTATUS(status);
 	memptr->return_value = value;
+	g_status_flag = value;
 	// Para retirar depois, é uma espécie de sleep
 	for (int i = 0; i < 10000; i++)
 		;

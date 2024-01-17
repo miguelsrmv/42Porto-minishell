@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 00:02:37 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:54:49 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	count_processes(t_command_table **command_table)
 	return (processes_count);
 }
 
-int		check_path(char **envp)
+int	check_path(char **envp)
 {
 	int		i;
 
@@ -114,13 +114,13 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	int				pid;
 
 	path_list = NULL;
-	if(check_path(envp) == EXIT_SUCCESS)
+	if (check_path(envp) == EXIT_SUCCESS)
 	{
 		path_list = get_path_list(memptr);
 		if (!check_commands(command_table, path_list, *memptr))
 			return ;
 		ft_free_tabs((void **)path_list);
-		memptr->path_list = NULL;	
+		memptr->path_list = NULL;
 	}
 	else
 		if (!check_commands(command_table, path_list, *memptr))
