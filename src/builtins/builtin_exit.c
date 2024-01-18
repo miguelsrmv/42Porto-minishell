@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/11 10:09:07 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:45:18 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int	ft_exit_status(t_command_table *current)
 	int	count;
 
 	count = ft_word_count(current->cmd);
-	exit_status2(current, count);
-	return (0);
+	return (exit_status2(current, count));
 }
 
 int	exit_status2(t_command_table *current, int count)
 {
-	if (count == 1)
+	if (count == 1 || current->cmd[1][0] == '#')
 	{
 		printf("exit\n");
 		return (0);

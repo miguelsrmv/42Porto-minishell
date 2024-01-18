@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/11 11:44:50 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:21:48 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
 			if (export_wd(envv, exp, argv) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 			if (!ft_export_loop2(envv, exp, argv, envv->env_var[exp->i]))
-				return (EXIT_FAILURE);
+				return (EXIT_SUCCESS);
 		}
 		else
-			g_status_flag = 1;
+			return (EXIT_FAILURE);
+			//g_status_flag = 1;
 		exp->j++;
 	}
 	return (EXIT_SUCCESS);
