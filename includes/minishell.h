@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 18:42:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:18:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ enum e_RedirectType {
 enum e_ValidType {
 	VALID,
 	INVALID_INPUT,
+	NONEXISTENT_INPUT,
 	INVALID_INPUT_REDIR,
 	INVALID_OUTPUT_REDIR,
 	INVALID_CMD
@@ -304,7 +305,7 @@ void				prepare_processes(t_command_table **command_table,
 enum e_RedirectType	redir_check(char *redir_str);
 enum e_ValidType	check_input(t_command_table **command);
 enum e_ValidType	check_output(t_command_table **command);
-void				check_redirections(int **pipe_fd, t_command_table **command,
+enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
 
 /// executer_redir_setter.c

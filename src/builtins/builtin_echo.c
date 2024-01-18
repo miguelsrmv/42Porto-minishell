@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/12 16:01:36 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:17:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// Mudei o g_status_flag para 0 e return EXIT_SUCCESS se não houver args[1]!!!!
 int	echo(char **args)
 {
 	bool	print_newline;
@@ -26,8 +27,8 @@ int	echo(char **args)
 	i++;
 	if (!args[i])
 	{
-		g_status_flag = 1;
-		return (EXIT_FAILURE);
+		g_status_flag = 0;
+		return (EXIT_SUCCESS);
 	}
 	if (check_echo_arg(args[i]) == 2)
 	{

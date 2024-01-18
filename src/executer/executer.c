@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 23:14:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:56:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int	execute_single_builtin(t_command_table *current,
 	current->command_no = 1;
 	original_stdin = dup(STDIN_FILENO);
 	original_stdout = dup(STDOUT_FILENO);
-	check_redirections(NULL, &current, memptr);
+	if (check_redirections(NULL, &current, memptr) != VALID)
+	{
+		close(original_stdin);
+		close(original_stdin);
+		return (1);
+	}
 	if (current->input_fd)
 		close(current->input_fd);
 	if (current->output_fd)
@@ -70,7 +75,8 @@ void	process_forks(t_command_table **command_table, char **envp,
 	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
 	current = create_processes(command_table, process_num);
 	close_pipes(pipe_fd, current, memptr);
-	check_redirections(pipe_fd, &current, memptr);
+	if (check_redirections(pipe_fd, &current, memptr) != VALID)
+		exit(g_status_flag);
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)

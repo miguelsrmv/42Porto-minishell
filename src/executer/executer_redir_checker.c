@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 17:07:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:19:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ enum e_ValidType	check_input(t_command_table **command)
 		else
 			return (INVALID_INPUT_REDIR);
 		(*command)->input_target = (*command)->full_input[i++];
+		if ((*command)->input_type == INPUT
+			&& access((*command)->input_target, F_OK) != 0)
+			return (INVALID_INPUT);
 	}
-	if ((*command)->input_type == INPUT
-		&& access((*command)->full_input[i - 1], F_OK) != 0)
-		return (INVALID_INPUT);
-	else if ((*command)->input_type == HERE_DOC)
+	if ((*command)->input_type == HERE_DOC)
 		(*command)->input_target = (*command)->heredoc_buffer;
 	if ((*command)->command_no != 1 && (*command)->input_type != INPUT
 		&& (*command)->input_type != HERE_DOC)
@@ -75,7 +75,8 @@ enum e_ValidType	check_output(t_command_table **command)
 	return (VALID);
 }
 
-void	check_redirections(int **pipe_fd, t_command_table **command,
+// Transformar caso de INVALID_INPUT em non-exit-error!!!!
+enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 			t_memptr memptr)
 {
 	enum e_ValidType	input_status;
@@ -88,7 +89,7 @@ void	check_redirections(int **pipe_fd, t_command_table **command,
 		set_input_redir(pipe_fd, command, memptr);
 		set_output_redir(pipe_fd, command, memptr);
 		close_redir_pipes(pipe_fd, command, memptr);
-		return ;
+		return (VALID);
 	}
 	else if (input_status == INVALID_INPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr);
@@ -96,4 +97,5 @@ void	check_redirections(int **pipe_fd, t_command_table **command,
 		exit_error(OPEN_ERROR, memptr, (*command)->input_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr);
+	return (VALID);
 }
