@@ -31,27 +31,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (str);
 }
 
-/* char	*ft_strtrim(char const *s1, char const *set)
-{
-    char *str;
-    size_t i;
-
-    while (*s1 && ft_strchr(set, *s1))
-        s1++;
-    i = ft_strlen(s1);
-    while (*s1 && ft_strrchr(set, s1[i]))
-        i--;
-
-    // Liberar a memória original antes de alocar a nova string
-    char *original = ft_strdup(s1);  // fazer uma cópia da string original
-    if (!original)
-        return (NULL);
-
-    // Alocar a nova string
-    str = ft_substr(original, 0, i + 1);
-
-    // Liberar a memória da cópia original
-    free(original);
-
-    return (str);
-} */
