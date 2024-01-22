@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:25:58 by bmota-si          #+#    #+#             */
-/*   Updated: 2023/12/19 20:01:53 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:37:08 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_env	*init_envv(char **envp)
 		if (envv->env_var != NULL && envv->pwd != NULL && envv->oldpwd != NULL)
 			return (envv);
 	}
+	free_envv(envv);
 	return (NULL);
 }
 

@@ -45,7 +45,8 @@ int	check_hifen(char *args, int *n, int i)
 				return (-1);
 			i++;
 		}
-		return (EXIT_SUCCESS);
 	}
-	return (-1);
+	else
+		return (-1);
+	return (EXIT_SUCCESS);
 }

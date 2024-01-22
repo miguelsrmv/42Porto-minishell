@@ -102,7 +102,7 @@ int	ft_export_found(t_env *envv, t_export *exp, char **argv)
 		|| ft_strcmp(envv->env_var[exp->i], exp->var) == 61)
 	{
 		ft_free_str(&envv->env_var[exp->i]);
-		envv->env_var[exp->i] = ft_strdup(argv[exp->j++]);
+		envv->env_var[exp->i] = ft_strdup(argv[exp->j]);
 		ft_free_str(&exp->var);
 		if (envv->env_var[exp->i] == NULL)
 			return (EXIT_FAILURE);

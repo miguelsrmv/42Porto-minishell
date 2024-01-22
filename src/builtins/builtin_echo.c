@@ -30,7 +30,7 @@ int	echo(char **args)
 		g_status_flag = 0;
 		return (EXIT_SUCCESS);
 	}
-	if (check_echo_arg(args[i]) == 2)
+	while (check_echo_arg(args[i]) == 2)
 	{
 		print_newline = false;
 		i++;

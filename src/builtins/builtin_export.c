@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/19 13:09:55 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:37:07 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_split_var(t_export *exp, char **argv)
 int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
 {
 	exp->j = 1;
-	while (argv[exp->j])
+	while (argv[exp->j] != NULL)
 	{
 		if (check_argv_var(argv[exp->j]) == EXIT_SUCCESS)
 		{

@@ -88,7 +88,7 @@ int	cd(char **argv)
 		g_status_flag = 1;
 		return (EXIT_FAILURE);
 	}
-	if (argv[1] == NULL)
+	if (!ft_strcmp(argv[1], "~"))
 		return (ft_cd_home(envv));
 	else
 		return (ft_cd2(argv, envv));
