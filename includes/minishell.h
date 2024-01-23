@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/19 14:52:06 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:05:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,7 @@ int					free_concatenate(char *left, char *right, char *temp,
 int					**create_pipes(int **pipe_fd, int process_num,
 						t_memptr *memptr);
 t_command_table		*create_processes(t_command_table **current,
-						int process_num);
+						int process_num, t_memptr memptr);
 void				close_pipes(int **pipe_fd, t_command_table *current,
 						t_memptr memptr);
 int					count_processes(t_command_table **command_table);
@@ -333,7 +333,8 @@ int					execute_single_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
-void				process_parent(int process_num, t_memptr *memptr, int pid);
+void				process_parent(int process_num,
+						t_memptr *memptr, int pid);
 void				process_forks(t_command_table **command_table, char **envp,
 						int process_num, t_memptr memptr);
 void				close_remaining_pipes(t_command_table *current, int **pipe_fd, 

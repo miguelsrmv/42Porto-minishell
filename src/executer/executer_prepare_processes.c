@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/17 23:18:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:36:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,6 @@ int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
 			exit_error(PIPE_ERROR, *memptr);
 	}
 	return (pipe_fd);
-}
-
-t_command_table	*create_processes(t_command_table **command_table,
-		int command_no)
-{
-	int				i;
-	t_command_table	*current;
-
-	current = *command_table;
-	i = 1;
-	while (i < command_no)
-	{
-		current->pid = fork();
-		current->command_no = i;
-		if (current->pid == 0)
-			return (current);
-		i++;
-		current = current->next;
-	}
-	current->command_no = i;
-	return (current);
 }
 
 void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
@@ -111,7 +90,6 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 {
 	char			**path_list;
 	int				process_num;
-	int				pid;
 
 	path_list = NULL;
 	if (check_path(envp) == EXIT_SUCCESS)
@@ -132,13 +110,5 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
 		execute_single_builtin(*command_table, envp, *memptr);
 	else
-	{
-		pid = fork();
-		if (pid < 0)
-			exit_error(FORK_ERROR, *memptr);
-		else if (pid > 0)
-			process_parent(process_num, memptr, pid);
-		else
-			process_forks(command_table, envp, process_num, *memptr);
-	}
+		process_forks(command_table, envp, process_num, *memptr);
 }

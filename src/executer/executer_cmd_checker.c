@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_cmd_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/19 15:01:40 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:47:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_builtin(t_command_table *current)
 		current->builtin_pointer = (void *)export;
 	else if (!ft_strcmp(current->cmd[0], "unset"))
 		current->builtin_pointer = (void *)unset;
-	else if (!ft_strcmp(current->cmd[0], "env2")) //trocar para env
+	else if (!ft_strcmp(current->cmd[0], "env"))
 		current->builtin_pointer = (void *)env;
 	else if (!ft_strcmp(current->cmd[0], "exit"))
 		current->builtin_pointer = (void *)ft_exit;
@@ -86,7 +86,7 @@ void	check_builtin2(t_command_table *current)
 			current->builtin_pointer = (void *)export;
 		else if (!ft_strcmp(current->cmd[i], "unset"))
 			current->builtin_pointer = (void *)unset;
-		else if (!ft_strcmp(current->cmd[i], "env2"))
+		else if (!ft_strcmp(current->cmd[i], "env"))
 			current->builtin_pointer = (void *)env;
 		else if (!ft_strcmp(current->cmd[i], "exit"))
 			current->builtin_pointer = (void *)ft_exit;
