@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 20:55:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 22:11:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	execute_single_builtin(t_command_table *current,
 	{
 		close(original_stdin);
 		close(original_stdout);
-		return (1);
+		return (g_status_flag);
 	}
 	if (current->input_fd)
 		close(current->input_fd);
@@ -53,8 +53,8 @@ int	execute_builtin(t_command_table *current,
 	return (exit_value);
 }
 
-// Introduzed a pseudo-wait function
-void	process_parent(int **pipe_fd, int process_num, int *pid_array, t_memptr *memptr)
+void	process_parent(int **pipe_fd, int process_num, int *pid_array,
+	t_memptr *memptr)
 {
 	int	i;
 
@@ -66,7 +66,6 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array, t_memptr *me
 		g_status_flag = WEXITSTATUS(g_status_flag);
 	else if (WIFSIGNALED(g_status_flag))
 		g_status_flag = WTERMSIG(g_status_flag + 128);
-	//ft_fprintf(2, "FINISHED A PROCESS WITH STATUS %i\n", g_status_flag);
 	memptr->return_value = g_status_flag;
 	free(pid_array);
 	clean_memory(*memptr);
@@ -76,6 +75,8 @@ void	process_child(int **pipe_fd, t_command_table *current,
 			char **envp, t_memptr memptr)
 {
 	close_pipes(pipe_fd, current, memptr);
+	if (current->command_type != EXECUTABLE && current->command_type != BUILTIN)
+		exit(g_status_flag);
 	if (check_redirections(pipe_fd, &current, memptr) != VALID)
 		exit(g_status_flag);
 	if (current->command_type == EXECUTABLE)

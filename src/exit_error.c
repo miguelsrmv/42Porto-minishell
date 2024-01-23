@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 21:07:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 23:02:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	non_exit_error(char *error_msg, t_memptr memptr, ...)
 {
 	va_list	args;
 
+
 	va_start(args, memptr);
 	if (!ft_strcmp(error_msg, OPEN_ERROR))
 	{
@@ -136,7 +137,7 @@ void	non_exit_error(char *error_msg, t_memptr memptr, ...)
 	else if (!ft_strcmp(error_msg, PERMISSION_ERROR)
 		|| !ft_strcmp(error_msg, DIRECTORY_ERROR))
 	{
-		ft_fprintf(STDERR_FILENO, "%s: %s", &va_arg(args, char *)[2],
+		ft_fprintf(STDERR_FILENO, "%s: %s", va_arg(args, char *),
 			error_msg);
 		g_status_flag = 126;
 	}

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 20:05:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 22:01:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,8 @@ enum e_ValidType	non_exit_check_redirections(int **pipe_fd, t_command_table **co
 		non_exit_error(OPEN_ERROR, memptr, (*command)->output_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		non_exit_error(SYNTAX_ERROR, memptr);
-	return (VALID);
+	if (input_status != VALID)
+		return (input_status);
+	else
+		return (output_status);
 }
