@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 17:09:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:55:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	execute_single_builtin(t_command_table *current,
 	current->command_no = 1;
 	original_stdin = dup(STDIN_FILENO);
 	original_stdout = dup(STDOUT_FILENO);
-	if (check_redirections(NULL, &current, memptr) != VALID)
+	if (non_exit_check_redirections(NULL, &current, memptr) != VALID)
 	{
 		close(original_stdin);
 		close(original_stdout);
@@ -54,19 +54,22 @@ int	execute_builtin(t_command_table *current,
 }
 
 // Introduzed a pseudo-wait function
-void	process_parent(int process_num, t_memptr *memptr, int pid)
+void	process_parent(int **pipe_fd, int process_num, int *pid_array, t_memptr *memptr)
 {
-	(void)pid;
-	(void)process_num;
-	(void)memptr;
+	int	i;
 
-	set_signal_during_processes_parent();
-	waitpid(-1, &g_status_flag, 0);
+	i = 0;
+	close_parent_pipes(pipe_fd, process_num, *memptr);
+	while (i < process_num)
+		waitpid(pid_array[i++], &g_status_flag, 0);
 	if (WIFEXITED(g_status_flag))
 		g_status_flag = WEXITSTATUS(g_status_flag);
 	else if (WIFSIGNALED(g_status_flag))
 		g_status_flag = WTERMSIG(g_status_flag + 128);
 	//ft_fprintf(2, "FINISHED A PROCESS WITH STATUS %i\n", g_status_flag);
+	memptr->return_value = g_status_flag;
+	free(pid_array);
+	clean_memory(*memptr);
 }
 
 void	process_child(int **pipe_fd, t_command_table *current,
@@ -87,6 +90,7 @@ void	process_forks(t_command_table **command_table, char **envp,
 			int process_num, t_memptr memptr)
 {
 	int				**pipe_fd;
+	int				*pid_array;
 	int				i;
 	int				pid;
 	t_command_table	*current;
@@ -94,6 +98,9 @@ void	process_forks(t_command_table **command_table, char **envp,
 	pipe_fd = NULL;
 	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
 	current = *command_table;
+	pid_array = (int *)malloc(sizeof(int) * process_num);
+	if (!pid_array)
+		exit_error(MALLOC_ERROR, memptr);
 	i = 0;
 	while (i++ < process_num)
 	{
@@ -105,19 +112,9 @@ void	process_forks(t_command_table **command_table, char **envp,
 			current->command_no = i;
 			process_child(pipe_fd, current, envp, memptr);
 		}
+		else
+			pid_array[i - 1] = pid;
 		current = current->next;
 	}
-	i = 0;
-	while (pipe_fd[i])
-	{
-		if (close(pipe_fd[i][0]) == -1)
-			exit_error(CLOSE_ERROR, memptr);
-		if (close(pipe_fd[i++][1]) == -1)
-			exit_error(CLOSE_ERROR, memptr);
-	}
-	i = 0;
-	while (i++ < process_num)
-		process_parent(process_num, &memptr, pid);
-	clean_memory(memptr);
-	memptr.return_value = g_status_flag;
+	process_parent(pipe_fd, process_num, pid_array, &memptr);
 }

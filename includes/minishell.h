@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 17:05:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:31:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@
 
 // Usage errors
 # define USAGE_ERROR "Usage error: \'./minishell\'.\n"
-# define QUOTE_ERROR "Input error: unclosed quote.\n"
-# define SYNTAX_ERROR "Syntax error near unexpected token.\n"
+# define QUOTE_ERROR "Input error: unclosed quote\n"
+# define SYNTAX_ERROR "Syntax error near unexpected token\n"
 # define COMMAND_ERROR "command not found\n"
-# define OPEN_ERROR "No such file or directory.\n"
+# define OPEN_ERROR "No such file or directory\n"
 # define DIRECTORY_ERROR "Is a directory\n"
+# define PERMISSION_ERROR "Permission denied\n"
 
 // Exit code / signal errors
 # define NO_SIGNAL 0
@@ -87,7 +88,9 @@ enum e_CommandType {
 	NULL_COMMANDTYPE,
 	NO_NULL_COMMANDTYPE,
 	EXECUTABLE,
-	BUILTIN
+	BUILTIN,
+	PERMISSION,
+	DIRECTORY
 };
 
 enum e_RedirectType {
@@ -106,7 +109,8 @@ enum e_ValidType {
 	NONEXISTENT_INPUT,
 	INVALID_INPUT_REDIR,
 	INVALID_OUTPUT_REDIR,
-	INVALID_CMD
+	INVALID_CMD,
+	INVALID_OUTPUT,
 };
 
 enum e_BuiltinType {
@@ -194,6 +198,7 @@ void				clear_command_table(t_command_table **lst);
 void				clean_memory(t_memptr memptr);
 void				close_pipes_error(int **pipe);
 void				exit_error(char *error_message, t_memptr memptr, ...);
+void				non_exit_error(char *error_msg, t_memptr memptr, ...);
 
 /// get_input.c
 void				trim_left_whitespace(char **input, t_memptr memptr);
@@ -304,9 +309,12 @@ void				prepare_processes(t_command_table **command_table,
 /// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
 enum e_ValidType	check_input(t_command_table **command);
+enum e_ValidType	check_output_directory(char *target);
 enum e_ValidType	check_output(t_command_table **command);
 enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
+enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
+						t_command_table **command, t_memptr memptr);
 
 /// executer_redir_setter.c
 void				set_input_redir(int **pipe_fd, t_command_table **command,
@@ -315,11 +323,13 @@ void				set_output_redir(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
 void				close_redir_pipes(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
+void				close_parent_pipes(int **pipe_fd, int process_num,
+						t_memptr memptr);
 
 /// executer_cmd_checker.c
 void				check_builtin(t_command_table *current);
 void				check_executables(t_command_table *current,
-						char **path_list, t_memptr memptr);
+						char **path_list);
 int					check_commands(t_command_table **command_table,
 						char **path_list, t_memptr memptr);
 
@@ -333,12 +343,10 @@ int					execute_single_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
-void				process_parent(int process_num,
-						t_memptr *memptr, int pid);
+void				process_parent(int **pipe_fd, int process_num, int *pid_array,
+						t_memptr *memptr);
 void				process_forks(t_command_table **command_table, char **envp,
 						int process_num, t_memptr memptr);
-void				close_remaining_pipes(t_command_table *current, int **pipe_fd, 
-						t_memptr memptr);
 
 /// signals.c
 void				set_signal(void);

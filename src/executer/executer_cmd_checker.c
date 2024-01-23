@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 14:47:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:59:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ void	check_builtin2(t_command_table *current)
 	}
 }
 
-void	check_executables(t_command_table *current, char **path_list,
-			t_memptr memptr)
+void	check_executables(t_command_table *current, char **path_list)
 {
 	int				i;
 	char			*test_command;
@@ -111,17 +110,20 @@ void	check_executables(t_command_table *current, char **path_list,
 	i = 0;
 	while (path_list[i])
 	{
-		test_command = ft_strjoin(path_list[i], current->cmd[0]);
-		if (access(test_command, F_OK | X_OK) == 0)
+		test_command = ft_strjoin(path_list[i++], current->cmd[0]);
+		if (access(test_command, F_OK) == 0)
 		{
-			if (opendir(test_command) != NULL)
-				exit_error(DIRECTORY_ERROR, memptr, test_command);
-			current->cmd_target = test_command;
-			current->command_type = EXECUTABLE;
+			current->cmd_target = ft_strdup(test_command);
+			if (access(test_command, X_OK) != 0)
+				current->command_type = PERMISSION;
+			else if (opendir(test_command) != NULL)
+				current->command_type = DIRECTORY;
+			else
+				current->command_type = EXECUTABLE;
+			free(test_command);
 			return ;
 		}
 		free(test_command);
-		i++;
 	}
 }
 
@@ -144,6 +146,7 @@ int	check_commands2(t_command_table *current)
 	return (1);
 }
 
+// Temos que tratar desse check_commands2. Depois explicas-me o que é.
 int	check_commands(t_command_table **command_table, char **path_list,
 			t_memptr memptr)
 {
@@ -153,16 +156,16 @@ int	check_commands(t_command_table **command_table, char **path_list,
 	while (current)
 	{
 		check_builtin(current);
-		if (current->command_type == NO_NULL_COMMANDTYPE)
-			return (check_commands2(current));
+/* 		if (current->command_type == NO_NULL_COMMANDTYPE)
+			return (check_commands2(current)); */
 		if (current->command_type != BUILTIN)
-			check_executables(current, path_list, memptr);
+			check_executables(current, path_list);
 		if (current->command_type == NULL_COMMANDTYPE)
-		{
-			g_status_flag = 127;
-			ft_fprintf(STDERR_FILENO, "%s: %s", current->cmd[0], COMMAND_ERROR);
-			return (0);
-		}
+			non_exit_error(COMMAND_ERROR, memptr, current->cmd_target);
+		else if (current->command_type == DIRECTORY)
+			non_exit_error(DIRECTORY_ERROR, memptr, current->cmd_target);
+		else if (current->command_type == PERMISSION)
+			non_exit_error(PERMISSION_ERROR, memptr, current->cmd_target);
 		current = current->next;
 	}
 	return (1);

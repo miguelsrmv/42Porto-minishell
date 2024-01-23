@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:46:53 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 15:09:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:23:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,22 @@ void	close_redir_pipes(int **pipe_fd, t_command_table **command,
 	{
 		if (close(pipe_fd[(*command)->command_no - 1][1]) == -1)
 			exit_error(CLOSE_ERROR, memptr);
+	}
+}
+
+void	close_parent_pipes(int **pipe_fd, int process_num, t_memptr memptr)
+{
+	int	i;
+
+	i = 0;
+	if (process_num > 1)
+	{
+		while (pipe_fd[i])
+		{
+			if (close(pipe_fd[i][0]) == -1)
+				exit_error(CLOSE_ERROR, memptr);
+			if (close(pipe_fd[i++][1]) == -1)
+				exit_error(CLOSE_ERROR, memptr);
+		}
 	}
 }
