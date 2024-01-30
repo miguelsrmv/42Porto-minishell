@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 23:07:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:19:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,14 @@ void	check_executables(t_command_table *current, char **path_list)
 		if (access(test_command, F_OK) == 0)
 		{
 			current->cmd_target = test_command;
-			if (access(test_command, X_OK) != 0)
+			if (access(test_command, X_OK) != 0
+				&& (current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
 				current->command_type = PERMISSION;
-			else if (opendir(test_command) != NULL)
+			else if (opendir(test_command) != NULL
+				&& (current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
 				current->command_type = DIRECTORY;
-			else
+			else if (opendir(test_command) == NULL
+				&& (access(test_command, X_OK) == 0))
 				current->command_type = EXECUTABLE;
 			return ;
 		}
