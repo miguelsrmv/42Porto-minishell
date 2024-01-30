@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 22:01:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:02:15 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,61 +96,4 @@ enum e_ValidType	check_output(t_command_table **command)
 	if (!(*command)->output_target && (*command)->output_type != PIPE)
 		(*command)->output_type = NULL_REDIRECT;
 	return (VALID);
-}
-
-// Transformar caso de INVALID_INPUT em non-exit-error!!!!
-// Apagar (null) em caso de Invalid output (criar exit específico ???)
-enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
-			t_memptr memptr)
-{
-	enum e_ValidType	input_status;
-	enum e_ValidType	output_status;
-
-	input_status = check_input(command);
-	output_status = check_output(command);
-	if (input_status == VALID && output_status == VALID)
-	{
-		set_input_redir(pipe_fd, command, memptr);
-		set_output_redir(pipe_fd, command, memptr);
-		close_redir_pipes(pipe_fd, command, memptr);
-		return (VALID);
-	}
-	else if (input_status == INVALID_INPUT_REDIR)
-		exit_error(SYNTAX_ERROR, memptr);
-	else if (input_status == INVALID_INPUT)
-		exit_error(OPEN_ERROR, memptr, (*command)->input_target);
-	else if (output_status == INVALID_OUTPUT)
-		exit_error(OPEN_ERROR, memptr, (*command)->output_target);
-	else if (output_status == INVALID_OUTPUT_REDIR)
-		exit_error(SYNTAX_ERROR, memptr);
-	return (VALID);
-}
-
-enum e_ValidType	non_exit_check_redirections(int **pipe_fd, t_command_table **command,
-			t_memptr memptr)
-{
-	enum e_ValidType	input_status;
-	enum e_ValidType	output_status;
-
-	input_status = check_input(command);
-	output_status = check_output(command);
-	if (input_status == VALID && output_status == VALID)
-	{
-		set_input_redir(pipe_fd, command, memptr);
-		set_output_redir(pipe_fd, command, memptr);
-		close_redir_pipes(pipe_fd, command, memptr);
-		return (VALID);
-	}
-	else if (input_status == INVALID_INPUT_REDIR)
-		non_exit_error(SYNTAX_ERROR, memptr);
-	else if (input_status == INVALID_INPUT)
-		non_exit_error(OPEN_ERROR, memptr, (*command)->input_target);
-	else if (output_status == INVALID_OUTPUT)
-		non_exit_error(OPEN_ERROR, memptr, (*command)->output_target);
-	else if (output_status == INVALID_OUTPUT_REDIR)
-		non_exit_error(SYNTAX_ERROR, memptr);
-	if (input_status != VALID)
-		return (input_status);
-	else
-		return (output_status);
 }

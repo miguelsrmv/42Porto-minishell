@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/05 12:15:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:12:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ t_command_table	*parse_list(t_token *lexer_list, t_memptr memptr)
 	t_command_table	*command_table;
 
 	if (check_syntax(lexer_list) == INVALID)
-		exit_error(SYNTAX_ERROR, memptr);
+	{
+		non_exit_error(SYNTAX_ERROR, memptr);
+		return (NULL);
+	}
 	command_table = (t_command_table *)malloc(sizeof(t_command_table));
 	if (!command_table)
 		exit_error(MALLOC_ERROR, memptr);

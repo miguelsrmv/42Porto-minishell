@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 11:19:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:01:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,24 +181,28 @@ typedef struct s_export
 }			t_export;
 
 // Function definitions
-/// Main.c
+/// main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table,
-							char **argv, char **envp);
+						char **argv, char **envp);
 
-/// Bash_main.c
+/// bash_main.c
 void				bash_main(char **envp, t_memptr *memptr);
 void				bash_run(char **envp, t_memptr *memptr);
 t_env				*set_environment_vars(char **envp, t_memptr memptr);
-void				update_envp(char ***envp, t_memptr *memptr, t_env *env_vars);
+void				update_envp(char ***envp, t_memptr *memptr,
+						t_env *env_vars);
 
-/// Exit Error
+/// clean_memory.c
 void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
 void				clean_memory(t_memptr memptr);
 void				close_pipes_error(int **pipe);
+
+/// exit_error.c
 void				exit_error(char *error_message, t_memptr memptr, ...);
 void				non_exit_error(char *error_msg, t_memptr memptr, ...);
+void				set_g_status_flag(char *error_msg);
 
 /// get_input.c
 void				trim_left_whitespace(char **input, t_memptr memptr);
@@ -268,7 +272,8 @@ void				normal_expansion(char **string, int *pos, char *quote_flag,
 void				ansi_quoting(char **string, int *start,	t_memptr memptr);
 void				expand_env_no_quotes(char **string, int *start,
 						t_memptr memptr);
-void				exit_value_expand(char **string, int *start, t_memptr memptr);
+void				exit_value_expand(char **string, int *start,
+						t_memptr memptr);
 void				localization(char **string, int *start,	t_memptr memptr);
 
 /// expander_squote.c
@@ -311,6 +316,8 @@ enum e_RedirectType	redir_check(char *redir_str);
 enum e_ValidType	check_input(t_command_table **command);
 enum e_ValidType	check_output_directory(char *target);
 enum e_ValidType	check_output(t_command_table **command);
+
+/// executer_redir_checker2.c
 enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
 enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
@@ -328,29 +335,39 @@ void				close_parent_pipes(int **pipe_fd, int process_num,
 
 /// executer_cmd_checker.c
 void				check_builtin(t_command_table *current);
-void				check_executables(t_command_table *current,
-						char **path_list);
-void				remove_null_strings(t_command_table *current, t_memptr memptr);
+void				remove_null_strings(t_command_table *current,
+						t_memptr memptr);
 int					check_commands(t_command_table **command_table,
 						char **path_list, t_memptr memptr);
-void 				absolute_check_executables(t_command_table *current);
-void				 relative_check_executables(t_command_table *current, char **path_list);
 
+/// executer_executable_checker.c
+void				check_executables(t_command_table *current,
+						char **path_list, t_memptr memptr);
+void				absolute_check_executables(t_command_table *current,
+						t_memptr memptr);
+void				relative_check_executables(t_command_table *current,
+						char **path_list, t_memptr memptr);
 
 /// executer_get_path.c
 char				**get_path_list(t_memptr *memptr);
 void				fill_in_result_from_path_list(char **path_list,
 						char **result, t_memptr memptr);
 
+/// executer_childparent_processes.c
+void				process_parent(int **pipe_fd, int process_num,
+						int *pid_array,	t_memptr *memptr);
+void				process_child(int **pipe_fd, t_command_table *current,
+						char **envp, t_memptr memptr);
+void				process_forks(t_command_table **command_table, char **envp,
+						int process_num, t_memptr memptr);
+void				create_pid_array(int **pid_array, int process_num,
+						t_memptr memptr);
+
 /// executer.c
 int					execute_single_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
-void				process_parent(int **pipe_fd, int process_num, int *pid_array,
-						t_memptr *memptr);
-void				process_forks(t_command_table **command_table, char **envp,
-						int process_num, t_memptr memptr);
 
 /// signals.c
 void				set_signal(void);
@@ -369,7 +386,8 @@ int					env(char **argv);
 int					export(char **argv);
 int					ft_export_loop(t_env *envv, t_export *exp, char **argv);
 int					ft_export_new(t_env *envv, t_export *exp, char **argv);
-int					ft_export_loop2(t_env *envv, t_export *exp, char **argv, char *str);
+int					ft_export_loop2(t_env *envv, t_export *exp, char **argv,
+						char *str);
 void				ft_split_var(t_export *exp, char **argv);
 
 ///export2.c
@@ -430,7 +448,8 @@ int					ft_word_count(char **str);
 int					check_arg_exit(t_command_table *current);
 
 ///exit2.c
-void				ft_exit(char *command, char **envp, t_command_table *current);
+void				ft_exit(char *command, char **envp,
+						t_command_table *current);
 /* static char			*posnum(char *str, long long n, int len);
 static char			*negnum(char *str, long long n, int len);
 static int			int_len(long long n); */

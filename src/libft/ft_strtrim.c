@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:40:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/19 15:21:22 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:26:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str = ft_substr(s1, 0, i + 1);
 	return (str);
 }
-

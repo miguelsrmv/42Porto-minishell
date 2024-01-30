@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/01/17 15:59:38 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/01/30 15:01:20 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,17 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
-SRC		=	main.c bash_main.c exit_error.c\
+SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			lexer/get_input.c lexer/input_checker.c \
 			lexer/lexer.c lexer/lexer_linked_list.c lexer/lexer_get_tokens.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
 			expander/expander.c expander/expander_noquotes.c expander/expander_squote.c \
 			expander/expander_dquote.c expander/expander_concatenate.c \
 			executer/executer_prepare_processes.c executer/executer_redir_checker.c \
-			executer/executer_redir_setter.c executer/executer_cmd_checker.c \
-			executer/executer_get_path.c executer/executer.c \
+			executer/executer_redir_checker2.c executer/executer_redir_setter.c \
+			executer/executer_cmd_checker.c executer/executer_executable_checker.c \
+			executer/executer_get_path.c executer/executer_childparent_processes.c \
+			executer/executer.c \
 			signals/signals.c signals/signals_handler.c \
 			builtins/builtin_cd.c builtins/builtin_cd2.c builtins/builtin_echo.c \
 			builtins/builtin_echo2.c  builtins/builtin_env2.c \

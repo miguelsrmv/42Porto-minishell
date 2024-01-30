@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/19 16:11:08 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:48:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_word_count(char **str)
 int	check_arg_exit(t_command_table *current)
 {
 	int		i;
-	char 	*cpy;
+	char	*cpy;
 
 	i = 0;
 	if (current->cmd[1][i] == '-' || current->cmd[1][i] == '+')
