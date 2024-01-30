@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 22:28:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:19:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,6 +333,9 @@ void				check_executables(t_command_table *current,
 void				remove_null_strings(t_command_table *current, t_memptr memptr);
 int					check_commands(t_command_table **command_table,
 						char **path_list, t_memptr memptr);
+void 				absolute_check_executables(t_command_table *current);
+void				 relative_check_executables(t_command_table *current, char **path_list);
+
 
 /// executer_get_path.c
 char				**get_path_list(t_memptr *memptr);

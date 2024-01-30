@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 10:19:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:43:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,29 @@ void	check_builtin2(t_command_table *current)
 	}
 }
 
-void	check_executables(t_command_table *current, char **path_list)
+void	absolute_check_executables(t_command_table *current)
 {
-	int				i;
-	char			*test_command;
+	char	*test_command;
 
-	if (!path_list || !ft_strlen(*current->cmd))
-		return ;
+	test_command = ft_strdup(current->cmd[0]);
+	if (access(test_command, F_OK) == 0)
+	{
+		current->cmd_target = test_command;
+		if (access(test_command, X_OK) != 0)
+			current->command_type = PERMISSION;
+		else if (opendir(test_command) != NULL)
+			current->command_type = DIRECTORY;
+		else if (opendir(test_command) == NULL
+			&& (access(test_command, X_OK) == 0))
+			current->command_type = EXECUTABLE;
+	}
+}
+
+void	relative_check_executables(t_command_table *current, char **path_list)
+{
+	int		i;
+	char	*test_command;
+
 	i = 0;
 	while (path_list[i])
 	{
@@ -120,7 +136,8 @@ void	check_executables(t_command_table *current, char **path_list)
 				&& (current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
 				current->command_type = PERMISSION;
 			else if (opendir(test_command) != NULL
-				&& (current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
+				&& (((current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
+				|| (current->cmd[0][0] == '/')))
 				current->command_type = DIRECTORY;
 			else if (opendir(test_command) == NULL
 				&& (access(test_command, X_OK) == 0))
@@ -129,6 +146,16 @@ void	check_executables(t_command_table *current, char **path_list)
 		}
 		free(test_command);
 	}
+}
+
+void	check_executables(t_command_table *current, char **path_list)
+{
+	if (!path_list || !ft_strlen(*current->cmd))
+		return ;
+	if (current->cmd[0][0] == '/')
+		absolute_check_executables(current);
+	else
+		relative_check_executables(current, path_list);
 }
 
 int	check_commands2(t_command_table *current)
