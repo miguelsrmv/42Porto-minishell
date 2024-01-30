@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 15:02:15 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:48:07 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ enum e_ValidType	check_output_directory(char *target)
 	int		len;
 	char	*path;
 
+	path = NULL;
 	len = ft_strlen(target) - 1;
 	if (ft_strchr(target, '/'))
 	{
