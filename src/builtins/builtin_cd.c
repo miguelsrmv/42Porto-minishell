@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/11 12:13:08 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:37:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,24 @@ int	ft_cd_home(t_env *envv)
 	return (ft_exit_cd(&cwd, EXIT_SUCCESS));
 }
 
+// Acrescentei a contagem do argc para conseguir fazer cd sem nada à frente
+// Sei que o subject não contempla, mas podia dar um leak
+// C/ aquela alternativa na linha 93 (argc > 2) não dá erro de unitialized value
 int	cd(char **argv)
 {
 	t_env	*envv;
+	int		argc;
 
 	envv = get_envv();
-	if (argv == NULL || envv == NULL || argv[2] != NULL)
+	argc = 0;
+	while (argv[++argc])
+		;
+	if (argv == NULL || envv == NULL || (argc > 2 /*&& argv[2] != NULL*/))
 	{
 		g_status_flag = 1;
 		return (EXIT_FAILURE);
 	}
-	if (!ft_strcmp(argv[1], "~"))
+	if (argc == 1 || !ft_strcmp(argv[1], "~"))
 		return (ft_cd_home(envv));
 	else
 		return (ft_cd2(argv, envv));
