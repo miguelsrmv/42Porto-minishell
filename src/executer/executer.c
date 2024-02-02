@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:41:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:42:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int	execute_single_builtin(t_command_table *current,
 	if (!ft_strcmp(current->cmd[0], "exit"))
 		close_exit_fds(original_stdin, original_stdout);
 	g_status_flag = execute_builtin(current, envp, memptr);
- 	dup2(original_stdin, STDIN_FILENO);
-	dup2(original_stdout, STDOUT_FILENO);
-	close(original_stdin);
-	close(original_stdout);
+	close_exit_fds(original_stdin, original_stdout);
 	return (g_status_flag);
 }
 
