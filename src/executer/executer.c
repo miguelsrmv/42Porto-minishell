@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 14:49:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:41:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int	execute_single_builtin(t_command_table *current,
 		close(current->input_fd);
 	if (current->output_fd)
 		close(current->output_fd);
+	if (!ft_strcmp(current->cmd[0], "exit"))
+		close_exit_fds(original_stdin, original_stdout);
 	g_status_flag = execute_builtin(current, envp, memptr);
-	dup2(original_stdin, STDIN_FILENO);
+ 	dup2(original_stdin, STDIN_FILENO);
 	dup2(original_stdout, STDOUT_FILENO);
 	close(original_stdin);
 	close(original_stdout);
@@ -42,13 +44,22 @@ int	execute_single_builtin(t_command_table *current,
 int	execute_builtin(t_command_table *current,
 			char **envp, t_memptr memptr)
 {
-	int		(*function_pointer)(char **, char **, t_command_table *current);
+	int		(*function_pointer)(char **, char **,
+			t_command_table *, t_memptr);
 	int		exit_value;
 
 	function_pointer
 		= (int (*)(char **, char **,
-				t_command_table *))current->builtin_pointer;
-	exit_value = function_pointer(current->cmd, envp, current);
+				t_command_table *, t_memptr))current->builtin_pointer;
+	exit_value = function_pointer(current->cmd, envp, current, memptr);
 	(void)memptr;
 	return (exit_value);
+}
+
+void	close_exit_fds(int original_stdin, int original_stdout)
+{
+	dup2(original_stdin, STDIN_FILENO);
+	dup2(original_stdout, STDOUT_FILENO);
+	close(original_stdin);
+	close(original_stdout);
 }

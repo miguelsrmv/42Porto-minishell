@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 19:33:12 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/01/19 14:42:02 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:34:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(char *command, char **envp, t_command_table *current)
+void	ft_exit(char *command, char **envp, t_command_table *current,
+			t_memptr memptr)
 {
 	(void)command;
-	(void)envp;
 	if (ft_exit_status(current) == 1)
 		return ;
+	clean_memory(memptr);
+	free_envv(get_envv());
+	ft_free_tabs((void **)envp);
 	exit(g_status_flag);
 }
 
