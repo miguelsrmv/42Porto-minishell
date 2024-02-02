@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 20:46:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:06:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	process_child(int **pipe_fd, t_command_table *current,
 	else if (current->command_type == BUILTIN)
 		execute_builtin(current, envp, memptr);
 	clean_memory(memptr);
+	free_envv(get_envv());
+	ft_free_tabs((void **)envp);
 	exit(g_status_flag);
 }
 
