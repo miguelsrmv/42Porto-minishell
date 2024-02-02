@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 14:25:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:55:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ int	main(int argc, char **argv, char **envp)
 	t_memptr		memptr;
 	char			**envp_cpy;
 
-	if (argc > 10) // mudar depois
-		exit_error(USAGE_ERROR, memptr);
+	if (argc > 2)
+	{
+		ft_printf("Usage error.\n");
+		return (1);
+	}
 	lexer_list = NULL;
 	command_table = NULL;
 	envp_cpy = ft_tabdup(envp);

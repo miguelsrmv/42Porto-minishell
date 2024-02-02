@@ -6,14 +6,12 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:00:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 15:01:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:49:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Transformar caso de INVALID_INPUT em non-exit-error!!!!
-// Apagar (null) em caso de Invalid output (criar exit específico ???)
 enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 			t_memptr memptr)
 {

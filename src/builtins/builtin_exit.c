@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 14:48:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:48:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ int	check_arg_exit(t_command_table *current)
 	cpy = ft_strtrim(current->cmd[1], "+");
 	free(current->cmd[1]);
 	current->cmd[1] = cpy;
-	//free(cpy);
 	return (1);
 }

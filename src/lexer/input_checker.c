@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:12:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/13 14:56:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:49:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	check_in_pipe(char *input)
 	return (pipe_status);
 }
 
-/// Check if only valid characters are being used. Add in error exit here.
 char	*check_valid_input(char *input)
 {
 	return (input);

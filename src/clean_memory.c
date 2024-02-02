@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 14:27:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:50:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	clear_lexer_list(t_token **lst)
 	*lst = NULL;
 }
 
-// Comentado porque dava double free
 void	clear_command_table(t_command_table **lst)
 {
 	t_command_table	*temp;
@@ -41,14 +40,10 @@ void	clear_command_table(t_command_table **lst)
 			free((*lst)->cmd_target);
 		if ((*lst)->full_input)
 			ft_free_tabs((void **)(*lst)->full_input);
-/*  	if ((*lst)->input_target)
-			free((*lst)->input_target); */
 		if ((*lst)->heredoc_buffer)
 			free((*lst)->heredoc_buffer);
 		if ((*lst)->full_output)
 			ft_free_tabs((void **)(*lst)->full_output);
-/* 		if ((*lst)->output_target)
-			free((*lst)->output_target); */
 		free(*lst);
 		*lst = temp;
 	}

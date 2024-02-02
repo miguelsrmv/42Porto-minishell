@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 18:37:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:47:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ int	ft_cd_home(t_env *envv)
 	return (ft_exit_cd(&cwd, EXIT_SUCCESS));
 }
 
-// Acrescentei a contagem do argc para conseguir fazer cd sem nada à frente
-// Sei que o subject não contempla, mas podia dar um leak
-// C/ aquela alternativa na linha 93 (argc > 2) não dá erro de unitialized value
 int	cd(char **argv)
 {
 	t_env	*envv;
@@ -90,7 +87,7 @@ int	cd(char **argv)
 	argc = 0;
 	while (argv[++argc])
 		;
-	if (argv == NULL || envv == NULL || (argc > 2 /*&& argv[2] != NULL*/))
+	if (argv == NULL || envv == NULL || (argc > 2))
 	{
 		g_status_flag = 1;
 		return (EXIT_FAILURE);

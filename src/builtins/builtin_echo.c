@@ -6,13 +6,12 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/18 21:17:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:47:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Mudei o g_status_flag para 0 e return EXIT_SUCCESS se não houver args[1]!!!!
 int	echo(char **args)
 {
 	bool	print_newline;

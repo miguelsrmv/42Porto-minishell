@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/22 14:37:07 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:48:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
 		}
 		else
 			return (EXIT_FAILURE);
-			//g_status_flag = 1;
 		exp->j++;
 	}
 	return (EXIT_SUCCESS);
