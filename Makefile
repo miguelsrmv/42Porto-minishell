@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/01/30 15:01:20 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/02/02 18:45:47 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,25 +74,21 @@ re: fclean all
 
 # Estes aqui servem para avaliar leaks ignorando os leaks do readline!
 
-val: readline.supp
-	@ clear
-	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=readline.supp ./minishell
-
 leaks: readline.supp
-	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=output.log --suppressions=readline.supp  ./minishell
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --log-file=output.log ./minishell
 
 readline.supp:
-	@ echo "{" > readline.supp
-	@ echo "    leak readline" >> readline.supp
-	@ echo "    Memcheck:Leak" >> readline.supp
-	@ echo "    ..." >> readline.supp
-	@ echo "    fun:readline" >> readline.supp
-	@ echo "}" >> readline.supp
-	@ echo "{" >> readline.supp
-	@ echo "    leak add_history" >> readline.supp
-	@ echo "    Memcheck:Leak" >> readline.supp
-	@ echo "    ..." >> readline.supp
-	@ echo "    fun:add_history" >> readline.supp
-	@ echo "}" >> readline.supp
+	echo "{" > readline.supp
+	echo "    leak readline" >> readline.supp
+	echo "    Memcheck:Leak" >> readline.supp
+	echo "    ..." >> readline.supp
+	echo "    fun:readline" >> readline.supp
+	echo "}" >> readline.supp
+	echo "{" >> readline.supp
+	echo "    leak add_history" >> readline.supp
+	echo "    Memcheck:Leak" >> readline.supp
+	echo "    ..." >> readline.supp
+	echo "    fun:add_history" >> readline.supp
+	echo "}" >> readline.supp
 
-.PHONY: all clean fclean re libft leaks readline.supp
+.PHONY: all clean fclean re libft

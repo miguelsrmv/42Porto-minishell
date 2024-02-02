@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/23 21:53:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:27:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_input(char *prompt, t_memptr memptr)
 	char							*input;
 
 	input = readline(prompt);
-	if (!input)
+	if (!input || iscommandempty(input))
 		exit_error(EOF_ERROR, memptr);
 	trim_left_whitespace(&input, memptr);
 	if (check_in_quote(input) != OUT_QUOTE)
@@ -75,4 +75,33 @@ char	*get_input(char *prompt, t_memptr memptr)
 	if (input && ft_strlen(input))
 		add_history(input);
 	return (input);
+}
+
+bool	iscommandempty(const char *cmd)
+{
+	bool	insinqlequote;
+	bool	indoublequote;
+
+	insinqlequote = false;
+	indoublequote = false;
+	while (*cmd != '\0')
+	{
+		if (*cmd == '\'' && !indoublequote)
+		{
+			insinqlequote = !insinqlequote;
+			cmd++;
+			continue ;
+		}
+		else if (*cmd == '\"' && !insinqlequote)
+		{
+			indoublequote = !indoublequote;
+			cmd++;
+			continue ;
+		}
+		if (!insinqlequote && !indoublequote
+			&& !ft_isspace((unsigned char)*cmd))
+			return (false);
+		cmd++;
+	}
+	return (true);
 }

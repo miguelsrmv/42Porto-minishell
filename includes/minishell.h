@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 15:01:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:21:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ void				set_g_status_flag(char *error_msg);
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
 char				*get_input(char *prompt, t_memptr memptr);
+bool				iscommandempty(const char *cmd);
 
 /// input_checker.c
 int					check_in_quote(char *input);
@@ -345,8 +346,12 @@ void				check_executables(t_command_table *current,
 						char **path_list, t_memptr memptr);
 void				absolute_check_executables(t_command_table *current,
 						t_memptr memptr);
+void				absolute_check_executables_subfunc(t_command_table *current,
+						char *test_command);
 void				relative_check_executables(t_command_table *current,
 						char **path_list, t_memptr memptr);
+void				relative_check_executables_subfunc(t_command_table *current,
+						char *test_command);
 
 /// executer_get_path.c
 char				**get_path_list(t_memptr *memptr);
@@ -362,6 +367,8 @@ void				process_forks(t_command_table **command_table, char **envp,
 						int process_num, t_memptr memptr);
 void				create_pid_array(int **pid_array, int process_num,
 						t_memptr memptr);
+void				process_fork_subfunc(int *pid_array,
+						t_command_table *current, int i);
 
 /// executer.c
 int					execute_single_builtin(t_command_table *current,

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:39:27 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 14:39:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:05:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,32 @@ void	absolute_check_executables(t_command_table *current, t_memptr memptr)
 		current->cmd_target = test_command;
 		if (access(test_command, X_OK) != 0)
 			current->command_type = PERMISSION;
-		else if (opendir(test_command) != NULL)
-			current->command_type = DIRECTORY;
-		else if (opendir(test_command) == NULL
-			&& (access(test_command, X_OK) == 0))
-			current->command_type = EXECUTABLE;
+		else
+			absolute_check_executables_subfunc(current, test_command);
+	}
+	else
+	{
+		free(test_command);
+		current->command_type = NULL_COMMANDTYPE;
 	}
 }
 
-void	relative_check_executables(t_command_table *current, char **path_list,
-			t_memptr memptr)
+void	absolute_check_executables_subfunc(t_command_table *current,
+			char *test_command)
+{
+	DIR		*dir;
+
+	dir = opendir(test_command);
+	if (dir != NULL)
+		current->command_type = DIRECTORY;
+	else if (dir == NULL
+		&& (access(test_command, X_OK) == 0))
+			current->command_type = EXECUTABLE;
+	closedir(dir);
+}
+
+void	relative_check_executables(t_command_table *current,
+			char **path_list, t_memptr memptr)
 {
 	int		i;
 	char	*test_command;
@@ -46,19 +62,31 @@ void	relative_check_executables(t_command_table *current, char **path_list,
 			exit_error(MALLOC_ERROR, memptr);
 		if (access(test_command, F_OK) == 0)
 		{
-			current->cmd_target = test_command;
-			if (access(test_command, X_OK) != 0
-				&& (current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
-				current->command_type = PERMISSION;
-			else if (opendir(test_command) != NULL
-				&& ((current->cmd[0][0] == '.') && (current->cmd[0][1] == '/')))
-				current->command_type = DIRECTORY;
-			else if (opendir(test_command) == NULL
-				&& (access(test_command, X_OK) == 0))
-				current->command_type = EXECUTABLE;
+			relative_check_executables_subfunc(current, test_command);
 			return ;
 		}
 		free(test_command);
+	}
+}
+
+void	relative_check_executables_subfunc(t_command_table *current,
+			char *test_command)
+{
+	DIR	*dir;
+
+	current->cmd_target = test_command;
+	if (access(test_command, X_OK) != 0
+		&& (current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
+		current->command_type = PERMISSION;
+	else
+	{
+		dir = opendir(test_command);
+		if (dir != NULL && ((current->cmd[0][0] == '.')
+			&& (current->cmd[0][1] == '/')))
+			current->command_type = DIRECTORY;
+		else if (dir == NULL && (access(test_command, X_OK) == 0))
+			current->command_type = EXECUTABLE;
+		closedir(dir);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 14:57:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:46:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,19 @@ void	process_child(int **pipe_fd, t_command_table *current,
 {
 	close_pipes(pipe_fd, current, memptr);
 	if (current->command_type != EXECUTABLE && current->command_type != BUILTIN)
+	{
+		clean_memory(memptr);
+		free_envv(get_envv());
+		ft_free_tabs((void **)envp);
 		exit(g_status_flag);
+	}
 	if (check_redirections(pipe_fd, &current, memptr) != VALID)
+	{
+		clean_memory(memptr);
+		free_envv(get_envv());
+		ft_free_tabs((void **)envp);
 		exit(g_status_flag);
+	}
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)
@@ -73,7 +83,7 @@ void	process_forks(t_command_table **command_table, char **envp,
 			exit_error(FORK_ERROR, memptr);
 		else if (current->pid == 0)
 		{
-			current->command_no = i;
+			process_fork_subfunc(pid_array, current, i);
 			process_child(pipe_fd, current, envp, memptr);
 		}
 		else
@@ -81,4 +91,10 @@ void	process_forks(t_command_table **command_table, char **envp,
 		current = current->next;
 	}
 	process_parent(pipe_fd, process_num, pid_array, &memptr);
+}
+
+void	process_fork_subfunc(int *pid_array, t_command_table *current, int i)
+{
+	free(pid_array);
+	current->command_no = i;
 }
