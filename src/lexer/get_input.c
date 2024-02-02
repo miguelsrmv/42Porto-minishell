@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 19:27:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:50:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ char	*get_input(char *prompt, t_memptr memptr)
 	char							*input;
 
 	input = readline(prompt);
-	if (!input || iscommandempty(input))
+	if (!input)
 		exit_error(EOF_ERROR, memptr);
+	if (iscommandempty(input))
+		return (NULL);
 	trim_left_whitespace(&input, memptr);
 	if (check_in_quote(input) != OUT_QUOTE)
 	{
