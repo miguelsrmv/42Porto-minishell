@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
+#    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/02/02 18:45:47 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/02/03 08:51:41 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,17 +78,17 @@ leaks: readline.supp
 	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --log-file=output.log ./minishell
 
 readline.supp:
-	echo "{" > readline.supp
-	echo "    leak readline" >> readline.supp
-	echo "    Memcheck:Leak" >> readline.supp
-	echo "    ..." >> readline.supp
-	echo "    fun:readline" >> readline.supp
-	echo "}" >> readline.supp
-	echo "{" >> readline.supp
-	echo "    leak add_history" >> readline.supp
-	echo "    Memcheck:Leak" >> readline.supp
-	echo "    ..." >> readline.supp
-	echo "    fun:add_history" >> readline.supp
-	echo "}" >> readline.supp
+	@ echo "{" > readline.supp
+	@ echo "    leak readline" >> readline.supp
+	@ echo "    Memcheck:Leak" >> readline.supp
+	@ echo "    ..." >> readline.supp
+	@ echo "    fun:readline" >> readline.supp
+	@ echo "}" >> readline.supp
+	@ echo "{" >> readline.supp
+	@ echo "    leak add_history" >> readline.supp
+	@ echo "    Memcheck:Leak" >> readline.supp
+	@ echo "    ..." >> readline.supp
+	@ echo "    fun:add_history" >> readline.supp
+	@ echo "}" >> readline.supp
 
 .PHONY: all clean fclean re libft
