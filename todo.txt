@@ -39,6 +39,7 @@ env PATH
 # "> a.txt"
 
 # echo $245HOME
+CUIDADO QUE CORRER SÓ $245HOME DÁ SEGFAULT!!!!!!
 
 # variaveis vazias ou outputs como diretorios... 
 echo hey > $random_var

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_childparent_processes.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 17:25:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:03:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 		g_status_flag = WTERMSIG(g_status_flag) + 128;
 	memptr->return_value = g_status_flag;
 	free(pid_array);
-	ft_free_tabs((void **)memptr->pipe_fd);
-	memptr->pipe_fd = NULL;
+	if (memptr->pipe_fd)
+	{
+		ft_free_tabs((void **)memptr->pipe_fd);
+		memptr->pipe_fd = NULL;
+	}
 	clean_memory(*memptr);
 }
 
