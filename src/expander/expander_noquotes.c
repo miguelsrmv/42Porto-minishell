@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/15 15:03:11 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:21:18 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	exit_value_expand(char **string, int *start, t_memptr memptr)
 		exit_error(MALLOC_ERROR, memptr);
 	(*start) = (*start) + ft_strlen(exit_value_str);
 	free(exit_value_str);
-	g_status_flag = 0;
 }
 
 void	ansi_quoting(char **string, int *start, t_memptr memptr)

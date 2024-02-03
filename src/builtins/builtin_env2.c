@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/12 17:09:43 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:24:36 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	contains_char(const char *str, char target)
 	int		i;
 
 	i = 0;
-	while (str[i] != '\0' && str[i] != target && !ft_isdigit(str[i]))
+	while (str[i] != '\0' && str[i] != target && !ft_isdigit(str[0]))
 		i++;
 	if (str[i] == target)
 		return (EXIT_SUCCESS);
