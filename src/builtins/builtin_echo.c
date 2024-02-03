@@ -27,9 +27,10 @@ int	echo(char **args)
 	if (!args[i])
 	{
 		g_status_flag = 0;
+		ft_printf("\n");
 		return (EXIT_SUCCESS);
 	}
-	while (check_echo_arg(args[i]) == 2)
+	while (args[i] && check_echo_arg(args[i]) == 2)
 	{
 		print_newline = false;
 		i++;

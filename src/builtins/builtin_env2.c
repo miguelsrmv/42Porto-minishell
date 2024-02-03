@@ -33,8 +33,11 @@ int	env(char **argv)
 	envv = get_envv();
 	if (envv == NULL || envv->env_var == NULL)
 		return (EXIT_FAILURE);
-	if (argv != NULL && argv[1] != NULL)
-		return (EXIT_FAILURE);
+	if (argv[0] != NULL && argv[1] != NULL)
+	{
+		ft_printf("%s: %s: No such file or directory\n", argv[0], argv[1]);
+		return (127);
+	}
 	i = 0;
 	while (envv->env_var && envv->env_var[i] != NULL)
 	{
