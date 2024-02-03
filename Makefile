@@ -75,7 +75,7 @@ re: fclean all
 # Estes aqui servem para avaliar leaks ignorando os leaks do readline!
 
 leaks: readline.supp
-	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --log-file=output.log ./minishell
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
 
 readline.supp:
 	@ echo "{" > readline.supp
