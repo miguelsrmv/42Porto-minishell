@@ -1,0 +1,43 @@
+Casos que falharam nas avaliacoes
+
+# Segfault
+echo -n
+
+# Rever aspas com comandos
+"bin/ls"
+"ls -l"
+""ls""
+""ls -l""
+"""ls -l"""
+"echo Hello world"
+echo "Hello world"
+
+# va_start e memcpy
+Funcoes invalidas
+
+# 
+env PATH
+
+# Confirmar que builtins so aceitam numero de comandos certos
+
+# Delimiter de Heredocs com "" ou '' 
+
+# Expandir dentro de Heredocs
+
+# Expansao de input/output redirect ?
+
+# Correr comando absoluto apos dar unset de PATH
+
+# Testar "cd" depois de dar unset a HOME
+
+# "> a.txt"
+
+# echo $245HOME
+
+# variaveis vazias ou outputs como diretorios... 
+echo hey > $random_var
+echo h > src
+
+# Usar printf em vez de write para nao ter mensagens mixed up
+
+# Expandir ~ para home ??
