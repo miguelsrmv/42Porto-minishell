@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_childparent_processes.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:06:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:26:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,14 @@ void	process_child(int **pipe_fd, t_command_table *current,
 {
 	close_pipes(pipe_fd, current, memptr);
 	if (current->command_type != EXECUTABLE && current->command_type != BUILTIN)
-	{
-		clean_memory(memptr);
-		free_envv(get_envv());
-		ft_free_tabs((void **)envp);
-		exit(g_status_flag);
-	}
+		final_clear_and_exit(memptr, envp);
 	if (check_redirections(pipe_fd, &current, memptr) != VALID)
-	{
-		clean_memory(memptr);
-		free_envv(get_envv());
-		ft_free_tabs((void **)envp);
-		exit(g_status_flag);
-	}
+		final_clear_and_exit(memptr, envp);
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)
 		execute_builtin(current, envp, memptr);
-	clean_memory(memptr);
-	free_envv(get_envv());
-	ft_free_tabs((void **)envp);
-	exit(g_status_flag);
+	final_clear_and_exit(memptr, envp);
 }
 
 void	create_pid_array(int **pid_array, int process_num, t_memptr memptr)

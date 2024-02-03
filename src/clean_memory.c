@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:50:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:25:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,12 @@ void	clean_memory(t_memptr memptr)
 		close_pipes_error(memptr.pipe_fd);
 		ft_free_tabs((void **)memptr.pipe_fd);
 	}
+}
+
+void	final_clear_and_exit(t_memptr memptr, char **envp)
+{
+	clean_memory(memptr);
+	free_envv(get_envv());
+	ft_free_tabs((void **)envp);
+	exit(g_status_flag);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 08:48:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:27:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
 void				clean_memory(t_memptr memptr);
 void				close_pipes_error(int **pipe);
-
+void				final_clear_and_exit(t_memptr memptr, char **envp);
 /// exit_error.c
 void				exit_error(char *error_message, t_memptr memptr, ...);
 void				non_exit_error(char *error_msg, t_memptr memptr, ...);
