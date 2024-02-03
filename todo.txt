@@ -1,5 +1,11 @@
 Casos que falharam nas avaliacoes
 
+POR FAZER                                                                                                                                                               FEITO
+
+
+                                                                                                                                                                        # cat | cat | cat | ls
+                                                                                                                                                                        exit
+
 # Segfault
 echo -n
 
