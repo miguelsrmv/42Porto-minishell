@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_executable_checker.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:39:27 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 20:05:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:46:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	absolute_check_executables_subfunc(t_command_table *current,
 		current->command_type = DIRECTORY;
 	else if (dir == NULL
 		&& (access(test_command, X_OK) == 0))
-			current->command_type = EXECUTABLE;
+		current->command_type = EXECUTABLE;
 	closedir(dir);
 }
 

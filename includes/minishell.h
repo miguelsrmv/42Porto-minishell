@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:56:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:48:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include <stdbool.h>
 # include <signal.h>
 
-# define SQUOTE '\''
-# define DQUOTE '\"'
+# define SQUOTE 39
+# define DQUOTE 34
 # define TRUE 1
 # define FALSE 0
 
