@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 10:26:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:37:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 	if (WIFEXITED(g_status_flag))
 		g_status_flag = WEXITSTATUS(g_status_flag);
 	else if (WIFSIGNALED(g_status_flag))
-		g_status_flag = WTERMSIG(g_status_flag + 128);
+		g_status_flag = WTERMSIG(g_status_flag) + 128;
 	memptr->return_value = g_status_flag;
 	free(pid_array);
 	clean_memory(*memptr);
