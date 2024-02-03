@@ -1,1 +1,0 @@
-curl parrot.live -> ctrl+c -> qq coisa 

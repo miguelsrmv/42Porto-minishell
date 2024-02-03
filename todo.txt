@@ -1,3 +1,0 @@
-#1
-Neste momento, um single builtin NÃO ESTÁ A REDIRECIONAR CORRETAMENTE!!!
-Em vez de execute_builtin, criar função com execute_single_builtin que redirectiona antes.
