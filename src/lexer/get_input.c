@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 20:50:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:39:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	*get_input(char *prompt, t_memptr memptr)
 		exit_error(EOF_ERROR, memptr);
 	if (iscommandempty(input))
 		return (NULL);
-	trim_left_whitespace(&input, memptr);
 	if (check_in_quote(input) != OUT_QUOTE)
 	{
 		non_exit_error(QUOTE_ERROR, memptr);
@@ -70,6 +69,7 @@ char	*get_input(char *prompt, t_memptr memptr)
 		non_exit_error(SYNTAX_ERROR, memptr);
 		return (NULL);
 	}
+	trim_left_whitespace(&input, memptr);
 	while (check_in_pipe(input))
 		update_input(&input, memptr);
 	rl_replace_line(input, 0);
