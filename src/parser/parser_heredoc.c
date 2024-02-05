@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 18:10:57 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:24:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 {
-	int	i;
+	int					i;
+	char				*delimiter;
+	enum e_QuoteType	quote_status;
 
 	i = 0;
 	while ((*command_table)->full_input[i])
@@ -27,17 +29,39 @@ void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 				free((*command_table)->heredoc_buffer);
 				(*command_table)->heredoc_buffer = NULL;
 			}
-			create_heredoc_buffer((*command_table)->full_input[i + 1],
-				&(*command_table)->heredoc_buffer, memptr);
+			analyze_delimiter(&delimiter, (*command_table)->full_input[i + 1],
+				&quote_status, memptr);
+			create_heredoc_buffer(delimiter,
+				&(*command_table)->heredoc_buffer, quote_status, memptr);
+			free(delimiter);
 		}
 		i = i + 2;
 	}
 	if ((*command_table)->heredoc_buffer)
-		create_heredoc_file(command_table, (*command_table)->heredoc_buffer,
-			memptr);
+		create_heredoc(command_table, (*command_table)->heredoc_buffer, memptr);
 }
 
-void	create_heredoc_buffer(char *delimiter, char **buffer, t_memptr memptr)
+void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
+			enum e_QuoteType *quote_status, t_memptr memptr)
+{
+	int	i;
+
+	*quote_status = OUT_QUOTE;
+	i = 0;
+	if (*delimiter == SQUOTE)
+		*quote_status = IN_QUOTE;
+	else if (*delimiter == DQUOTE)
+		*quote_status = IN_DQUOTE;
+	if ((*quote_status) != OUT_QUOTE)
+		i++;
+	*unquoted_delimiter = ft_strndup(delimiter + i,
+			ft_strlen(delimiter) - 2 * i);
+	if (!*unquoted_delimiter)
+		exit_error(MALLOC_ERROR, memptr);
+}
+
+void	create_heredoc_buffer(char *delimiter, char **buffer,
+			enum e_QuoteType quote_status, t_memptr memptr)
 {
 	int		bytes_read;
 	char	input[1001];
@@ -61,9 +85,17 @@ void	create_heredoc_buffer(char *delimiter, char **buffer, t_memptr memptr)
 		free(*buffer);
 		*buffer = temp;
 	}
+	if (quote_status != IN_QUOTE)
+		expand_buffer(buffer, memptr);
 }
 
-void	create_heredoc_file(t_command_table **command_table,
+void	expand_buffer(char **buffer, t_memptr memptr)
+{
+	(void)buffer;
+	(void)memptr;
+}
+
+void	create_heredoc(t_command_table **command_table,
 			char *buffer, t_memptr memptr)
 {
 	char	*name;

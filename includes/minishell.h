@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/05 14:53:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:05:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,10 +256,15 @@ void				set_full_redirections(t_token *lexer_sublist,
 /// parser_heredoc.c
 void				check_heredocs(t_command_table **command_table,
 						t_memptr memptr);
+void				analyze_delimiter(char **unquoted_delimiter,
+						char *delimiter, enum e_QuoteType *quote_status,
+						t_memptr memptr);
 void				create_heredoc_buffer(char *delimiter,
-						char **buffer, t_memptr memptr);
-void				create_heredoc_file(t_command_table **command_table,
+						char **buffer, enum e_QuoteType quote_status,
+						t_memptr memptr);
+void				create_heredoc(t_command_table **command_table,
 						char *buffer, t_memptr memptr);
+void				expand_buffer(char **buffer, t_memptr memptr);
 
 /// expander.c
 int					is_valid_env_char(char c);
