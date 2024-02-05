@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:47:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:53:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_echo_arg(char *args)
 		return (1);
 }
 
-char	*get_echo_var(char *str)
+char	*get_echo_var(char *str, t_memptr memptr)
 {
 	t_env		*envv;
 	char		*result;
@@ -65,18 +65,23 @@ char	*get_echo_var(char *str)
 	if (envv == NULL || envv->env_var == NULL)
 		return (NULL);
 	i = 0;
+	result = NULL;
 	while (envv->env_var[i] != NULL)
 	{
 		if (contains_str(envv->env_var[i], str) == EXIT_SUCCESS)
 		{
 			result = ft_strchr2(envv->env_var[i], '=');
-			return (result);
+			break ;
 		}
-		else
-			i++;
+		i++;
 	}
-	(void)result;
-	return (NULL);
+	if (ft_isdigit(*str) && ft_atoi(str) < memptr.argc)
+	{
+		result = ft_strdup(memptr.argv[ft_atoi(str)]);
+		if (!result)
+			exit_error(MALLOC_ERROR, memptr);
+	}
+	return (result);
 }
 
 int	contains_str(const char *str1, char *str2)

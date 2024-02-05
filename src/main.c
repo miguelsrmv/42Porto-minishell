@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:55:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:52:11 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_memptr	initialize_memptr(t_token **lexer_list,
 	memptr.command_table = command_table;
 	memptr.path_list = NULL;
 	memptr.pipe_fd = NULL;
+	memptr.argc = ft_str_arr_len(argv);
 	memptr.argv = argv;
 	memptr.envp = envp;
 	memptr.return_value = 0;

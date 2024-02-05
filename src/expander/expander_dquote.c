@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/05 12:48:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:32:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,19 @@ void	expand_env_quotes(char **string, int *start, int *end, t_memptr memptr)
 	int		limit;
 
 	limit = (*start) + 1;
-	while ((*string)[limit] && (*string)[limit] != '$'
-			&& !ft_isspace((*string)[limit]) && (*string)[limit] != SQUOTE
-				&& limit <= *end)
+	if (ft_isdigit((*string)[limit]))
 		limit++;
+	else
+	{
+		while ((*string)[limit] && (*string)[limit] != '$' && limit <= *end
+				&& !ft_isspace((*string)[limit]) && (*string)[limit] != SQUOTE)
+			limit++;
+	}
 	substring = ft_substr((*string), (*start) + 1,
 			limit - (*start) - 1);
 	if (!substring)
 		exit_error(MALLOC_ERROR, memptr);
-	expanded = get_echo_var(substring);
+	expanded = get_echo_var(substring, memptr);
 	if (!expanded)
 		expanded = "";
 	free(substring);

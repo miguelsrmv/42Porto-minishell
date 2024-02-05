@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_noquotes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 10:21:18 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:38:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,17 @@ void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 
 	expanded = NULL;
 	end = (*start) + 1;
-	while (is_valid_env_char ((*string)[end]))
+	if (ft_isdigit((*string)[end]))
 		end++;
+	else
+	{
+		while (is_valid_env_char((*string)[end]))
+			end++;
+	}
 	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
 	if (!substring)
 		exit_error(MALLOC_ERROR, memptr);
-	expanded = get_echo_var(substring);
+	expanded = get_echo_var(substring, memptr);
 	if (!expanded)
 		expanded = "";
 	free(substring);

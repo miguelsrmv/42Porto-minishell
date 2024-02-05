@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 17:37:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:53:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ typedef struct s_memptr {
 	char			**path_list;
 	int				**pipe_fd;
 	char			**argv;
+	int				argc;
 	char			**envp;
 	int				return_value;
 }	t_memptr;
@@ -431,7 +432,7 @@ int					pwd(void);
 ///echo.c
 int					echo(char **args);
 int					check_echo_arg(char *args);
-char				*get_echo_var(char *str);
+char				*get_echo_var(char *str, t_memptr memptr);
 int					contains_str(const char *str1, char *str2);
 
 ///echo2.c
