@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:39:27 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:25:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:58:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ void	relative_check_executables_subfunc(t_command_table *current,
 	else
 	{
 		dir = opendir(test_command);
-		if (dir != NULL && ((current->cmd[0][0] == '.')
-			&& (current->cmd[0][1] == '/')))
+		if (dir != NULL
+			&& (((current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
+			|| ft_last_char(current->cmd[0]) == '/'))
 			current->command_type = DIRECTORY;
 		else if (dir == NULL && (access(test_command, X_OK) == 0))
 			current->command_type = EXECUTABLE;

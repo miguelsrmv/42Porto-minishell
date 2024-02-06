@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/20 08:49:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:54:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ void	*ft_free(void **p);
 long	ft_atol(const char *str);
 bool	ft_issign(char c);
 char	*ft_strchr2(const char *s, int c);
+char	ft_last_char(const char *string);
 
 #endif
