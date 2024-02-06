@@ -18,8 +18,8 @@ POR FAZER                                                                       
 "echo Hello world"
 echo "Hello world"
 
-# va_start e memcpy
-Funcoes invalidas
+																								# va_start e memcpy
+																								Funcoes invalidas
 
 # 
 env PATH
@@ -45,14 +45,14 @@ env PATH
 echo hey > $random_var
 echo h > src
 
-# Usar printf em vez de write para nao ter mensagens mixed up
+																										# Usar printf em vez de write para nao ter mensagens mixed up
 
-# Expandir ~ para home ??
-	~ não é uma variável de ambiente, e o subject só fala em expandir essas.......
-
-
+																										# Expandir ~ para home ??
+																											~ não é uma variável de ambiente, e o subject só fala em expandir essas.......
 
 
-# Comandos não válidos não funciona bem
-ex: "Wohoo!"
+
+
+																										# Comandos não válidos não funciona bem
+																										ex: "Wohoo!"
 
