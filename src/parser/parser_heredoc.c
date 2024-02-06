@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 10:58:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:28:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
 	*unquoted_delimiter = ft_strndup(delimiter + i,
 			ft_strlen(delimiter) - 2 * i);
 	if (!*unquoted_delimiter)
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 }
 
 void	create_heredoc_buffer(char *delimiter, char **buffer,
@@ -69,7 +69,7 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 
 	*buffer = ft_calloc(1, sizeof(char));
 	if (!(*buffer))
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 	while (TRUE)
 	{
 		ft_printf("> ");
@@ -81,7 +81,7 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 			break ;
 		temp = ft_strjoin(*buffer, input);
 		if (!temp)
-			exit_error(MALLOC_ERROR, memptr);
+			exit_error(MALLOC_ERROR, memptr, NULL);
 		free(*buffer);
 		*buffer = temp;
 	}
@@ -152,9 +152,9 @@ void	create_heredoc(t_command_table **command_table,
 	if (fd == -1)
 		exit_error(OPEN_ERROR, memptr, name);
 	if (write(fd, buffer, ft_strlen(buffer)) == -1)
-		exit_error(WRITE_ERROR, memptr);
+		exit_error(WRITE_ERROR, memptr, NULL);
 	if (close(fd) == -1)
-		exit_error(CLOSE_ERROR, memptr);
+		exit_error(CLOSE_ERROR, memptr, NULL);
 	free(buffer);
 	(*command_table)->heredoc_buffer = name;
 }

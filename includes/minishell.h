@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/05 17:05:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:49:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,10 +200,15 @@ void				clear_command_table(t_command_table **lst);
 void				clean_memory(t_memptr memptr);
 void				close_pipes_error(int **pipe);
 void				final_clear_and_exit(t_memptr memptr, char **envp);
+
 /// exit_error.c
-void				exit_error(char *error_message, t_memptr memptr, ...);
-void				non_exit_error(char *error_msg, t_memptr memptr, ...);
+void				exit_error(char *error_msg, t_memptr memptr,
+						char *extra_error_msg);
+void				non_exit_error(char *error_msg, t_memptr memptr,
+						char *extra_error_msg);
 void				set_g_status_flag(char *error_msg);
+void				print_to_fd(int fd, char *error_msg, char *extra_error_msg,
+						t_memptr memptr);
 
 /// get_input.c
 void				trim_left_whitespace(char **input, t_memptr memptr);

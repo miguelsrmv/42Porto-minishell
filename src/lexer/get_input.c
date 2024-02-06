@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 08:39:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:28:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	trim_left_whitespace(char **input, t_memptr memptr)
 		i++;
 	*input = ft_strdup(&(*input)[i]);
 	if (!(*input))
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 	free(temp);
 }
 
@@ -39,7 +39,7 @@ void	update_input(char **input, t_memptr memptr)
 	{
 		free(*input);
 		free(added_input);
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 	}
 	temp = *input;
 	*input = ft_strjoin(input_nl, added_input);
@@ -47,7 +47,7 @@ void	update_input(char **input, t_memptr memptr)
 	free(input_nl);
 	free(added_input);
 	if (!(*input))
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 }
 
 char	*get_input(char *prompt, t_memptr memptr)
@@ -56,17 +56,17 @@ char	*get_input(char *prompt, t_memptr memptr)
 
 	input = readline(prompt);
 	if (!input)
-		exit_error(EOF_ERROR, memptr);
+		exit_error(EOF_ERROR, memptr, NULL);
 	if (iscommandempty(input))
 		return (NULL);
 	if (check_in_quote(input) != OUT_QUOTE)
 	{
-		non_exit_error(QUOTE_ERROR, memptr);
+		non_exit_error(QUOTE_ERROR, memptr, NULL);
 		return (NULL);
 	}
 	else if (input[0] == '|')
 	{
-		non_exit_error(SYNTAX_ERROR, memptr);
+		non_exit_error(SYNTAX_ERROR, memptr, NULL);
 		return (NULL);
 	}
 	trim_left_whitespace(&input, memptr);

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/29 17:33:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:30:00 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	fill_subarray(char **array, t_token *current, int i, t_memptr memptr)
 	array[i + 1] = ft_strdup(current->next->token);
 	array[i + 2] = NULL;
 	if (!array[i] || !array[i + 1])
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 	current->next->type = REDIRECT_TARGET;
 }
 
@@ -76,7 +76,7 @@ void	initialize_command_table(t_command_table **command_table,
 	(*command_table)->full_output = (char **)malloc(sizeof(char *)
 			* (total_redir * 2 + 1));
 	if (!(*command_table)->full_input || !(*command_table)->full_output)
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 	(*command_table)->cmd = NULL;
 	(*command_table)->cmd_target = NULL;
 	(*command_table)->command_type = NULL_COMMANDTYPE;

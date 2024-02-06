@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 20:17:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:26:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
 		return (NULL);
 	pipe_fd = (int **)malloc(sizeof(int *) * (pipe_num + 1));
 	if (!pipe_fd)
-		exit_error(MALLOC_ERROR, *memptr);
+		exit_error(MALLOC_ERROR, *memptr, NULL);
 	pipe_fd[pipe_num] = NULL;
 	memptr->pipe_fd = pipe_fd;
 	while (pipe_num--)
 	{
 		pipe_fd[pipe_num] = (int *)malloc(sizeof(int) * 2);
 		if (!pipe_fd[pipe_num])
-			exit_error(MALLOC_ERROR, *memptr);
+			exit_error(MALLOC_ERROR, *memptr, NULL);
 		if (pipe(pipe_fd[pipe_num]) == -1)
-			exit_error(PIPE_ERROR, *memptr);
+			exit_error(PIPE_ERROR, *memptr, NULL);
 	}
 	return (pipe_fd);
 }
@@ -44,12 +44,12 @@ void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 		if (i != current->command_no - 2)
 		{
 			if (close(pipe_fd[i][0]) == -1)
-				exit_error(CLOSE_ERROR, memptr);
+				exit_error(CLOSE_ERROR, memptr, NULL);
 		}
 		if (i != current->command_no - 1)
 		{
 			if (close(pipe_fd[i][1]) == -1)
-				exit_error(CLOSE_ERROR, memptr);
+				exit_error(CLOSE_ERROR, memptr, NULL);
 		}
 		i++;
 	}

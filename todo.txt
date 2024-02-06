@@ -1,13 +1,13 @@
 Casos que falharam nas avaliacoes
 
-POR FAZER                                                                                                                                                               FEITO
+POR FAZER                                                                                                 FEITO
 
 
-                                                                                                                                                                        # cat | cat | cat | ls
-                                                                                                                                                                        exit
+																										# cat | cat | cat | ls
+																										exit
 
-# Segfault
-echo -n
+																										# Segfault
+																										echo -n
 
 # Rever aspas com comandos
 "bin/ls"
@@ -26,11 +26,11 @@ env PATH
 
 # Confirmar que builtins so aceitam numero de comandos certos
 
-# Delimiter de Heredocs com "" ou '' 
+																										# Delimiter de Heredocs com "" ou '' 
 
-# Expandir dentro de Heredocs
+																										# Expandir dentro de Heredocs
 
-# Expansao de input/output redirect ?
+																										# Expansao de input/output redirect ?
 
 # Correr comando absoluto apos dar unset de PATH
 
@@ -49,3 +49,4 @@ echo h > src
 # Usar printf em vez de write para nao ter mensagens mixed up
 
 # Expandir ~ para home ??
+	~ não é uma variável de ambiente, e o subject só fala em expandir essas.......

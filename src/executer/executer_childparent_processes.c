@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 18:03:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:25:15 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	create_pid_array(int **pid_array, int process_num, t_memptr memptr)
 {
 	*pid_array = (int *)malloc(sizeof(int) * process_num);
 	if (!(*pid_array))
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 }
 
 void	process_forks(t_command_table **command_table, char **envp,
@@ -74,7 +74,7 @@ void	process_forks(t_command_table **command_table, char **envp,
 	{
 		current->pid = fork();
 		if (current->pid < 0)
-			exit_error(FORK_ERROR, memptr);
+			exit_error(FORK_ERROR, memptr, NULL);
 		else if (current->pid == 0)
 		{
 			process_fork_subfunc(pid_array, current, i);

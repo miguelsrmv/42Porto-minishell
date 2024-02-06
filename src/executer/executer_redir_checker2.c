@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:00:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:49:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:24:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 		return (VALID);
 	}
 	else if (input_status == INVALID_INPUT_REDIR)
-		exit_error(SYNTAX_ERROR, memptr);
+		exit_error(SYNTAX_ERROR, memptr, NULL);
 	else if (input_status == INVALID_INPUT)
 		exit_error(OPEN_ERROR, memptr, (*command)->input_target);
 	else if (output_status == INVALID_OUTPUT)
 		exit_error(OPEN_ERROR, memptr, (*command)->output_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
-		exit_error(SYNTAX_ERROR, memptr);
+		exit_error(SYNTAX_ERROR, memptr, NULL);
 	return (VALID);
 }
 
@@ -54,13 +54,13 @@ enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 		return (VALID);
 	}
 	else if (input_status == INVALID_INPUT_REDIR)
-		non_exit_error(SYNTAX_ERROR, memptr);
+		non_exit_error(SYNTAX_ERROR, memptr, NULL);
 	else if (input_status == INVALID_INPUT)
 		non_exit_error(OPEN_ERROR, memptr, (*command)->input_target);
 	else if (output_status == INVALID_OUTPUT)
 		non_exit_error(OPEN_ERROR, memptr, (*command)->output_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
-		non_exit_error(SYNTAX_ERROR, memptr);
+		non_exit_error(SYNTAX_ERROR, memptr, NULL);
 	if (input_status != VALID)
 		return (input_status);
 	else

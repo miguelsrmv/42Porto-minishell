@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/05 14:53:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:25:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*get_echo_var(char *str, t_memptr memptr)
 	{
 		result = ft_strdup(memptr.argv[ft_atoi(str)]);
 		if (!result)
-			exit_error(MALLOC_ERROR, memptr);
+			exit_error(MALLOC_ERROR, memptr, NULL);
 	}
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:31:44 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/11/26 16:49:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:27:51 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*create_token(char *token, int type, t_memptr memptr)
 
 	node = (t_token *)malloc(sizeof(t_token));
 	if (!node)
-		exit_error(MALLOC_ERROR, memptr);
+		exit_error(MALLOC_ERROR, memptr, NULL);
 	node->token = token;
 	node->type = type;
 	node->next = NULL;
