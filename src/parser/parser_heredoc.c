@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/05 17:24:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:58:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,52 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 		free(*buffer);
 		*buffer = temp;
 	}
-	if (quote_status != IN_QUOTE)
+	if (quote_status == OUT_QUOTE)
 		expand_buffer(buffer, memptr);
 }
 
 void	expand_buffer(char **buffer, t_memptr memptr)
 {
-	(void)buffer;
-	(void)memptr;
+	int	i;
+
+	i = 0;
+	while ((*buffer)[i])
+	{
+		if ((*buffer)[i] == '$')
+		{
+			expand_env_no_quotes(buffer, &i, memptr);
+			i--;
+		}
+		i++;
+	}
 }
+
+// Versão antiga do expand_buffer
+/* void	expand_buffer(char **buffer, t_memptr memptr)
+{
+	int					i;
+	enum e_QuoteType	quote_flag;
+
+	i = 0;
+	quote_flag = OUT_QUOTE;
+	while ((*buffer)[i])
+	{
+		if ((*buffer)[i] == SQUOTE)
+			quote_flag = IN_QUOTE;
+		while (((*buffer)[i]) && quote_flag == IN_QUOTE
+			&& ((*buffer)[i]) != SQUOTE)
+		{
+			if ((*buffer)[i++] == SQUOTE)
+				quote_flag = OUT_QUOTE;
+		}
+		if ((*buffer)[i] == '$')
+		{
+			expand_env_no_quotes(buffer, &i, memptr);
+			i--;
+		}
+		i++;
+	}
+} */
 
 void	create_heredoc(t_command_table **command_table,
 			char *buffer, t_memptr memptr)
