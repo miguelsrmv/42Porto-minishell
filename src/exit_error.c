@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 14:53:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:46:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 	exit(g_status_flag);
 }
 
+// Alterado para utilizar perror em vez de ft_fprintf
+// Directory dá MAL!!!! Mudar.
 void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 {
 	set_g_status_flag(error_msg);
@@ -32,7 +34,7 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 		|| !ft_strcmp(error_msg, PERMISSION_ERROR)
 		|| !ft_strcmp(error_msg, DIRECTORY_ERROR)
 		|| !ft_strcmp(error_msg, COMMAND_ERROR))
-		perror(NULL);
+		perror(extra_error_msg);
 	else if (!ft_strcmp(error_msg, QUOTE_ERROR)
 		|| !ft_strcmp(error_msg, SYNTAX_ERROR)
 		|| !ft_strcmp(error_msg, EOF_ERROR))

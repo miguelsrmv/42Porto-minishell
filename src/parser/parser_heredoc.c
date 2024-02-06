@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:28:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:44:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 		create_heredoc(command_table, (*command_table)->heredoc_buffer, memptr);
 }
 
+// Define se delimitador está ou não sob aspas, e retira as aspas do mesmo
 void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
 			enum e_QuoteType *quote_status, t_memptr memptr)
 {
@@ -89,6 +90,7 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 		expand_buffer(buffer, memptr);
 }
 
+// Expansão de heredoc caso delimitador não esteja com aspas
 void	expand_buffer(char **buffer, t_memptr memptr)
 {
 	int	i;
