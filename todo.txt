@@ -50,3 +50,10 @@ echo h > src
 
 # Expandir ~ para home ??
 	~ não é uma variável de ambiente, e o subject só fala em expandir essas.......
+
+
+
+
+# Comandos não válidos não funciona bem
+ex: "Wohoo!"
+
