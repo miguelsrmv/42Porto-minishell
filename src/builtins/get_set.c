@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:30:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/16 15:53:54 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:26:09 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*get_env_var_value(t_env *envv, char *var)
 			break ;
 		}
 	}
+	if (!value)
+		return (NULL);
 	get_env_var_value_utils(envv, var, &value, i);
 	return (value);
 }
