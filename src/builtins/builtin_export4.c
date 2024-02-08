@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/18 11:30:50 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:50:32 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,22 +101,22 @@ int	ft_export_found(t_env *envv, t_export *exp, char **argv)
 	if (ft_strcmp(envv->env_var[exp->i], exp->var) == 0
 		|| ft_strcmp(envv->env_var[exp->i], exp->var) == 61)
 	{
-		ft_free_str(&envv->env_var[exp->i]);
-		envv->env_var[exp->i] = ft_strdup(argv[exp->j]);
+		if (ft_strncmp(envv->env_var[exp->i], argv[1],
+			(ft_strlen(exp->var) + 1)) == 0)
+		{
+			ft_free_str(&envv->env_var[exp->i]);
+			envv->env_var[exp->i] = ft_strdup(argv[exp->j]);
+			exp->i++;
+		}
 		ft_free_str(&exp->var);
 		if (envv->env_var[exp->i] == NULL)
 			return (EXIT_FAILURE);
-		exp->i++;
 		return (2);
 	}
 	else
 	{
 		exp->i++;
 		check = ft_export_new(envv, exp, argv);
-		if (check == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		else if (check == 2)
-			return (2);
+		return (check);
 	}
-	return (EXIT_SUCCESS);
 }

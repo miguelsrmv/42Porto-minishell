@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 18:15:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:46:18 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 		if (!message)
 			exit_error(MALLOC_ERROR, memptr, NULL);
 		printf(message, NULL);
+		ft_free_str(&message);
 	}
 	else
 		perror(NULL);
