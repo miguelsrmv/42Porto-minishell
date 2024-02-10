@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 14:27:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:17:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ char	*get_string_token(char *input, int *start, int *end)
 	quote_status = '\0';
 	if (ft_isquote(input[*end]))
 	{
-		quote_status = input[*end];
+		quote_status = input[(*end)++];
+		while (input[*end] != quote_status)
+			(*end)++;
 		(*end)++;
 	}
-	advance_until_unquoted_whitespace(input, end, quote_status);
+	else
+		advance_until_unquoted_whitespace(input, end, quote_status);
 	result = ft_strndup(&input[*start], (*end - *start));
 	return (result);
 }

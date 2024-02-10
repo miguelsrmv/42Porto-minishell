@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 18:15:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:42:14 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void				print_to_fd(int fd, char *error_msg, char *extra_error_msg,
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
 char				*get_input(char *prompt, t_memptr memptr);
-bool				iscommandempty(const char *cmd);
+bool				iscommandempty(const char *cmd, t_memptr memptr);
 
 /// input_checker.c
 int					check_in_quote(char *input);

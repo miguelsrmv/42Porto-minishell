@@ -10,7 +10,8 @@ POR FAZER                                                                       
 																										echo -n
 
 # Rever aspas com comandos
-"bin/ls"
+"bin/ls"		// CHECK
+"/bin/ls"
 "ls -l"
 ""ls""
 ""ls -l""
