@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/10 22:40:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/10 23:04:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ enum e_ValidType	check_input(t_command_table **command)
 	while ((*command)->full_input[i])
 	{
 		if (redir_check((*command)->full_input[i]) != INVALID)
-			(*command)->input_type
-				= redir_check((*command)->full_input[i++]);
+			(*command)->input_type = redir_check((*command)->full_input[i++]);
 		else
 			return (INVALID_INPUT_REDIR);
 		(*command)->input_target = (*command)->full_input[i++];
-		if (ft_strlen((*command)->input_target) == 0)
-			return (EMPTY);
-		if ((*command)->input_type == INPUT
+		if (((*command)->input_type == INPUT)
 			&& access((*command)->input_target, F_OK) != 0)
 			return (INVALID_INPUT);
+		else if (((*command)->input_type == INPUT)
+			&& ft_strlen((*command)->input_target) == 0)
+			return (EMPTY);
 	}
 	if ((*command)->input_type == HERE_DOC)
 		(*command)->input_target = (*command)->heredoc_buffer;
