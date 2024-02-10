@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/10 22:42:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/10 22:54:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 {
 	char	*message;
 
-	set_g_status_flag(error_msg);;
+	set_g_status_flag(error_msg);
 	if (!ft_strcmp(error_msg, OPEN_ERROR)
 		|| !ft_strcmp(error_msg, PERMISSION_ERROR))
 		perror(extra_error_msg);
