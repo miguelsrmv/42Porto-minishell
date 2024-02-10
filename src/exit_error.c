@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/08 15:00:35 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/10 22:42:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 {
 	char	*message;
 
-	set_g_status_flag(error_msg);
+	set_g_status_flag(error_msg);;
 	if (!ft_strcmp(error_msg, OPEN_ERROR)
 		|| !ft_strcmp(error_msg, PERMISSION_ERROR))
 		perror(extra_error_msg);
 	else if (!ft_strcmp(error_msg, QUOTE_ERROR)
 		|| !ft_strcmp(error_msg, SYNTAX_ERROR)
-		|| !ft_strcmp(error_msg, EOF_ERROR))
+		|| !ft_strcmp(error_msg, EOF_ERROR)
+		|| !ft_strcmp(error_msg, EMPTY_ERROR))
 		printf(error_msg, NULL);
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR)
 		|| !ft_strcmp(error_msg, COMMAND_ERROR))
@@ -55,7 +56,8 @@ void	set_g_status_flag(char *error_msg)
 {
 	if (!ft_strcmp(error_msg, EOF_ERROR))
 		g_status_flag = 0;
-	else if (!ft_strcmp(error_msg, OPEN_ERROR))
+	else if (!ft_strcmp(error_msg, OPEN_ERROR)
+		|| !ft_strcmp(error_msg, EMPTY_ERROR))
 		g_status_flag = 1;
 	else if (!ft_strcmp(error_msg, SYNTAX_ERROR))
 		g_status_flag = 2;

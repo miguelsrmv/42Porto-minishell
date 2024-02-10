@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/10 17:42:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/10 22:37:55 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define USAGE_ERROR "Usage error: \'./minishell\'.\n"
 # define QUOTE_ERROR "Input error: unclosed quote\n"
 # define SYNTAX_ERROR "Syntax error near unexpected token\n"
+# define EMPTY_ERROR "Ambiguous redirect\n"
 # define COMMAND_ERROR ": command not found\n"
 # define OPEN_ERROR ": No such file or directory\n"
 # define DIRECTORY_ERROR ": Is a directory\n"
@@ -111,6 +112,7 @@ enum e_ValidType {
 	INVALID_OUTPUT_REDIR,
 	INVALID_CMD,
 	INVALID_OUTPUT,
+	EMPTY,
 };
 
 enum e_BuiltinType {
@@ -334,6 +336,8 @@ enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
 enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 						t_command_table **command, t_memptr memptr);
+enum e_ValidType	set_redirs(int **pipe_fd, t_command_table **command,
+						t_memptr memptr);
 
 /// executer_redir_setter.c
 void				set_input_redir(int **pipe_fd, t_command_table **command,

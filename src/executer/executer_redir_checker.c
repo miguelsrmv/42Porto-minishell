@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/30 17:48:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/10 22:40:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ enum e_ValidType	check_input(t_command_table **command)
 		else
 			return (INVALID_INPUT_REDIR);
 		(*command)->input_target = (*command)->full_input[i++];
+		if (ft_strlen((*command)->input_target) == 0)
+			return (EMPTY);
 		if ((*command)->input_type == INPUT
 			&& access((*command)->input_target, F_OK) != 0)
 			return (INVALID_INPUT);
@@ -60,6 +62,8 @@ enum e_ValidType	check_output_directory(char *target)
 
 	path = NULL;
 	len = ft_strlen(target) - 1;
+	if (len == -1)
+		return (EMPTY);
 	if (ft_strchr(target, '/'))
 	{
 		while (target[len] != '/')
@@ -88,7 +92,10 @@ enum e_ValidType	check_output(t_command_table **command)
 		else
 			return (INVALID_OUTPUT_REDIR);
 		(*command)->output_target = (*command)->full_output[i++];
-		if (check_output_directory((*command)->output_target) == INVALID_OUTPUT)
+		if (check_output_directory((*command)->output_target) == EMPTY)
+			return (EMPTY);
+		else if (check_output_directory((*command)->output_target)
+			== INVALID_OUTPUT)
 			return (INVALID_OUTPUT);
 	}
 	if ((*command)->next && (*command)->output_type != OUTPUT

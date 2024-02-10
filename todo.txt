@@ -9,15 +9,15 @@ POR FAZER                                                                       
 																										# Segfault
 																										echo -n
 
-# Rever aspas com comandos
-"bin/ls"		// CHECK
-"/bin/ls"
-"ls -l"
-""ls""
-""ls -l""
-"""ls -l"""
-"echo Hello world"
-echo "Hello world"
+																								# Rever aspas com comandos
+																								"bin/ls"		// CHECK
+																								"/bin/ls"
+																								"ls -l"
+																								""ls""
+																								""ls -l""
+																								"""ls -l"""
+																								"echo Hello world"
+																								echo "Hello world"
 
 																								# va_start e memcpy
 																								Funcoes invalidas

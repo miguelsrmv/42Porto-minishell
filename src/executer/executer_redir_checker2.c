@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:00:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:24:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/10 22:41:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 	input_status = check_input(command);
 	output_status = check_output(command);
 	if (input_status == VALID && output_status == VALID)
-	{
-		set_input_redir(pipe_fd, command, memptr);
-		set_output_redir(pipe_fd, command, memptr);
-		close_redir_pipes(pipe_fd, command, memptr);
-		return (VALID);
-	}
+		return (set_redirs(pipe_fd, command, memptr));
 	else if (input_status == INVALID_INPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr, NULL);
 	else if (input_status == INVALID_INPUT)
@@ -35,6 +30,8 @@ enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 		exit_error(OPEN_ERROR, memptr, (*command)->output_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr, NULL);
+	else if (input_status == EMPTY || output_status == EMPTY)
+		exit_error(EMPTY_ERROR, memptr, NULL);
 	return (VALID);
 }
 
@@ -47,12 +44,7 @@ enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 	input_status = check_input(command);
 	output_status = check_output(command);
 	if (input_status == VALID && output_status == VALID)
-	{
-		set_input_redir(pipe_fd, command, memptr);
-		set_output_redir(pipe_fd, command, memptr);
-		close_redir_pipes(pipe_fd, command, memptr);
-		return (VALID);
-	}
+		return (set_redirs(pipe_fd, command, memptr));
 	else if (input_status == INVALID_INPUT_REDIR)
 		non_exit_error(SYNTAX_ERROR, memptr, NULL);
 	else if (input_status == INVALID_INPUT)
@@ -61,8 +53,19 @@ enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 		non_exit_error(OPEN_ERROR, memptr, (*command)->output_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		non_exit_error(SYNTAX_ERROR, memptr, NULL);
+	else if (input_status == EMPTY || output_status == EMPTY)
+		non_exit_error(EMPTY_ERROR, memptr, NULL);
 	if (input_status != VALID)
 		return (input_status);
 	else
 		return (output_status);
+}
+
+enum e_ValidType	set_redirs(int **pipe_fd, t_command_table **command,
+	t_memptr memptr)
+{
+	set_input_redir(pipe_fd, command, memptr);
+	set_output_redir(pipe_fd, command, memptr);
+	close_redir_pipes(pipe_fd, command, memptr);
+	return (VALID);
 }
