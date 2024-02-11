@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/10 16:47:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:05:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	process_child(int **pipe_fd, t_command_table *current,
 			char **envp, t_memptr memptr)
 {
 	close_pipes(pipe_fd, current, memptr);
-	if (current->command_type != EXECUTABLE && current->command_type != BUILTIN)
-		final_clear_and_exit(memptr, envp);
 	if (check_redirections(pipe_fd, &current, memptr) != VALID)
+		final_clear_and_exit(memptr, envp);
+	if (current->command_type != EXECUTABLE && current->command_type != BUILTIN)
 		final_clear_and_exit(memptr, envp);
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
