@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/10 17:46:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:44:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ bool	iscommandempty(const char *cmd, t_memptr memptr)
 			return (false);
 		i++;
 	}
-	non_exit_error(COMMAND_ERROR, memptr, (char *)cmd);
+	if (ft_strlen(cmd))
+		non_exit_error(COMMAND_ERROR, memptr, (char *)cmd);
 	return (true);
 }

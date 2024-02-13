@@ -37,14 +37,14 @@ env PATH
 
 # Testar "cd" depois de dar unset a HOME
 
-# "> a.txt"
+																										# "> a.txt"
 
 																										# echo $245HOME
 																										Já funciona
 
-# variaveis vazias ou outputs como diretorios... 
-echo hey > $random_var
-echo h > src
+																										# variaveis vazias ou outputs como diretorios... 
+																										echo hey > $random_var
+																										echo h > src
 
 																										# Usar printf em vez de write para nao ter mensagens mixed up
 
@@ -57,3 +57,6 @@ echo h > src
 																										# Comandos não válidos não funciona bem
 																										ex: "Wohoo!"
 
+
+
+"<0 echo"
