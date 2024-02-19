@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/08 14:50:32 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:07:15 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_export_found(t_env *envv, t_export *exp, char **argv)
 		|| ft_strcmp(envv->env_var[exp->i], exp->var) == 61)
 	{
 		if (ft_strncmp(envv->env_var[exp->i], argv[1],
-			(ft_strlen(exp->var) + 1)) == 0)
+				(ft_strlen(exp->var) + 1)) == 0)
 		{
 			ft_free_str(&envv->env_var[exp->i]);
 			envv->env_var[exp->i] = ft_strdup(argv[exp->j]);
