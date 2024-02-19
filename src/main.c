@@ -6,13 +6,11 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/05 14:52:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:24:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	g_status_flag;
 
 t_memptr	initialize_memptr(t_token **lexer_list,
 				t_command_table **command_table,

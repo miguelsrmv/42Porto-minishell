@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/16 16:36:22 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:24:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,29 @@
 
 extern int	g_status_flag;
 
-enum e_QuoteType {
+enum e_QuoteType
+{
 	OUT_QUOTE,
 	IN_QUOTE,
 	IN_DQUOTE
 };
 
-enum e_PipeType {
+enum e_PipeType
+{
 	OUT_PIPE,
 	IN_PIPE
 };
 
-enum e_TokenType {
+enum e_TokenType
+{
 	SEPARATOR,
 	REDIRECT,
 	STRING,
 	REDIRECT_TARGET
 };
 
-enum e_CommandType {
+enum e_CommandType
+{
 	NULL_COMMANDTYPE,
 	NO_NULL_COMMANDTYPE,
 	EXECUTABLE,
@@ -94,7 +98,8 @@ enum e_CommandType {
 	DIRECTORY
 };
 
-enum e_RedirectType {
+enum e_RedirectType
+{
 	NULL_REDIRECT,
 	INPUT,
 	OUTPUT,
@@ -104,7 +109,8 @@ enum e_RedirectType {
 	INVALID
 };
 
-enum e_ValidType {
+enum e_ValidType
+{
 	VALID,
 	INVALID_INPUT,
 	NONEXISTENT_INPUT,
@@ -115,12 +121,14 @@ enum e_ValidType {
 	EMPTY,
 };
 
-enum e_BuiltinType {
+enum e_BuiltinType
+{
 	EXPORT,
 	CD
 };
 
-enum e_ExpandType {
+enum e_ExpandType
+{
 	PID,
 	EXIT_STATUS,
 	NUMBER,
@@ -129,13 +137,15 @@ enum e_ExpandType {
 };
 
 // Structs
-typedef struct s_token {
+typedef struct s_token
+{
 	char			*token;
 	int				type;
 	struct s_token	*next;
 }	t_token;
 
-typedef struct s_command_table {
+typedef struct s_command_table
+{
 	char					**cmd;
 	char					*cmd_target;
 	enum e_CommandType		command_type;
@@ -157,7 +167,8 @@ typedef struct s_command_table {
 	struct s_command_table	*next;
 }	t_command_table;
 
-typedef struct s_memptr {
+typedef struct s_memptr
+{
 	t_token			**lexer_list;
 	t_command_table	**command_table;
 	char			**path_list;
