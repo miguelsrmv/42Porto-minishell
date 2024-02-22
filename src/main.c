@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/19 22:32:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:09:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	t_memptr		memptr;
 	char			**envp_cpy;
 
-	if (argc > 2)
+	if (argc > 1)
 	{
 		ft_printf("Usage error.\n");
 		return (1);
