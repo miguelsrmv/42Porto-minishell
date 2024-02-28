@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:25:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:37:03 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int	contains_str(const char *str1, char *str2)
 	{
 		if (str1[i] == str2[i])
 		{
-			if ((str1[i + 1] == '=') && str2[i + 1] == '\0')
+			if ((str1[i + 1] == '=' || str1[i + 1] == '\0')
+				&& str2[i + 1] == '\0')
 				return (EXIT_SUCCESS);
 		}
 		i++;

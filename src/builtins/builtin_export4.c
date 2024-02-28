@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/14 16:07:15 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:37:19 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,17 @@ int	check_argv_var(char *argv)
 	i = 0;
 	if (!ft_isalpha(argv[0]) && argv[0] != '_' && argv[0] != '|')
 	{
-		ft_printf("minishell: '%s' Not a valid identifier!\n", argv);
+		ft_printf("'%s' Not a valid identifier!\n", argv);
 		return (EXIT_FAILURE);
 	}
 	if ((argv[0] == '_' && (argv[1] == '\0' || argv[1] == '=')))
 		return (EXIT_FAILURE);
 	while (argv[i] != '\0' && argv[i] != '=')
 	{
-		if (argv[i] == '-' || argv[i] == '+')
+		if (argv[i] == '-' || argv[i] == '+' || argv[i] == '.'
+			|| argv[i] == '/' || argv[i] == ' ')
 		{
-			ft_printf("minishell: '%s' Not a valid identifier!\n", argv);
+			ft_printf("'%s' Not a valid identifier!\n", argv);
 			return (EXIT_FAILURE);
 		}
 		i++;
@@ -101,8 +102,8 @@ int	ft_export_found(t_env *envv, t_export *exp, char **argv)
 	if (ft_strcmp(envv->env_var[exp->i], exp->var) == 0
 		|| ft_strcmp(envv->env_var[exp->i], exp->var) == 61)
 	{
-		if (ft_strncmp(envv->env_var[exp->i], argv[1],
-				(ft_strlen(exp->var) + 1)) == 0)
+		if (!ft_strncmp(exp->var, argv[1], ft_strlen(exp->var))
+			&& argv[1][ft_strlen(exp->var)] == '=')
 		{
 			ft_free_str(&envv->env_var[exp->i]);
 			envv->env_var[exp->i] = ft_strdup(argv[exp->j]);
