@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:26 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/12 17:14:14 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:04:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ static int	ft_print_with_value(char **env_var_cpy, int i)
 {
 	int	j;
 
-	ft_printf("declare -x ");
+	printf("declare -x ");
 	j = 0;
 	while (env_var_cpy[i][j])
 	{
 		if (&env_var_cpy[i][j] == ft_strchr(env_var_cpy[i], '='))
 		{
-			if (ft_printf("%c\"", env_var_cpy[i][j++]) != 2)
+			if (printf("%c\"", env_var_cpy[i][j++]) != 2)
 				return (ft_export_exit(&env_var_cpy, EXIT_FAILURE));
 		}
-		else if (ft_printf("%c", env_var_cpy[i][j++]) != 1)
+		else if (printf("%c", env_var_cpy[i][j++]) != 1)
 			return (ft_export_exit(&env_var_cpy, EXIT_FAILURE));
 	}
-	if (ft_printf("\"\n") != 2)
+	if (printf("\"\n") != 2)
 		return (ft_export_exit(&env_var_cpy, EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
@@ -91,7 +91,7 @@ int	export_only(t_env *environment)
 				== EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
-		else if (!ft_printf("declare -x %s\n", env_var_cpy[i]))
+		else if (!printf("declare -x %s\n", env_var_cpy[i]))
 			return (ft_export_exit(&env_var_cpy, EXIT_FAILURE));
 		i++;
 	}

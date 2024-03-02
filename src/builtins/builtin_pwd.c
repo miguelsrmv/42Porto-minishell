@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/12/12 17:16:54 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:03:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	pwd(void)
 		perror("Error");
 		return (EXIT_FAILURE);
 	}
-	else if (!ft_printf("%s\n", cwd))
+	else if (!printf("%s\n", cwd))
 	{
 		ft_free_str(&cwd);
 		perror("\nError: printf failed");

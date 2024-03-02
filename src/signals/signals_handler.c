@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:33:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 20:16:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:55:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sigint_handler(int signum)
 {
 	(void)signum;
-	ft_printf("\n");
+	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

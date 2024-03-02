@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/28 15:14:55 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:07:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*find_home(t_env *envv)
 		return (NULL);
 	path = get_env_var_value(envv, "HOME");
 	if (!path)
-		ft_fprintf(STDERR_FILENO, "cd: HOME not set\n");
+		printf("cd: HOME not set\n");
 	return (path);
 }
 

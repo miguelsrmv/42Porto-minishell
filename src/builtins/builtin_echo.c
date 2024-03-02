@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/28 15:37:03 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:03:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	echo(char **args)
 	if (!args[i])
 	{
 		g_status_flag = 0;
-		ft_printf("\n");
+		printf("\n");
 		return (EXIT_SUCCESS);
 	}
 	while (args[i] && check_echo_arg(args[i]) == 2)

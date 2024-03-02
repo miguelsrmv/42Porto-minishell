@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/22 19:09:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:02:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc > 1)
 	{
-		ft_printf("Usage error.\n");
+		printf("Usage error.\n");
 		return (1);
 	}
 	lexer_list = NULL;

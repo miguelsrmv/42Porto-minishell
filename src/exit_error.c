@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/10 22:54:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:07:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 	exit(g_status_flag);
 }
 
-// Alterado para utilizar perror em vez de ft_fprintf
 void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 {
 	char	*message;

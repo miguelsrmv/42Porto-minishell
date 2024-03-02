@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:54:07 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/02/28 15:36:24 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:04:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_cd(char *str, t_env *envv)
 		cwd = ft_strdup(envv->oldpwd);
 		ft_update_env_var(envv, "OLDPWD", envv->pwd);
 		ft_update_env_var(envv, "PWD", cwd);
-		ft_printf("%s\n", cwd);
+		printf("%s\n", cwd);
 		free(cwd);
 		return (EXIT_SUCCESS);
 	}

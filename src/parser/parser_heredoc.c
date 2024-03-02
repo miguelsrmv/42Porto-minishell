@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 15:44:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:02:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 		exit_error(MALLOC_ERROR, memptr, NULL);
 	while (TRUE)
 	{
-		ft_printf("> ");
+		printf("> ");
 		bytes_read = read(STDIN_FILENO, input, 1000);
 		if (bytes_read == -1 || bytes_read == 0)
 			break ;

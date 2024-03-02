@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 10:24:36 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:04:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	env(char **argv)
 		return (EXIT_FAILURE);
 	if (argv[0] != NULL && argv[1] != NULL)
 	{
-		ft_printf("%s: %s: No such file or directory\n", argv[0], argv[1]);
+		printf("%s: %s: No such file or directory\n", argv[0], argv[1]);
 		return (127);
 	}
 	i = 0;
@@ -43,7 +43,7 @@ int	env(char **argv)
 	{
 		if (contains_char(envv->env_var[i], '=') == EXIT_SUCCESS)
 		{
-			if (ft_printf("%s\n", envv->env_var[i++]) == 0)
+			if (printf("%s\n", envv->env_var[i++]) == 0)
 				return (EXIT_FAILURE);
 		}
 		else
