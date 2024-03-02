@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/16 16:34:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:27:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,22 @@ enum e_ValidType	check_input(t_command_table **command)
 
 enum e_ValidType	check_output_directory(char *target)
 {
-	int		len;
-	char	*path;
+	int			len;
+	char		*path;
+	struct stat	st;
 
 	path = NULL;
-	len = ft_strlen(target) - 1;
-	if (len == -1)
+	len = ft_strlen(target);
+	if (len == 0)
 		return (EMPTY);
-	if (ft_strchr(target, '/'))
+	if (target[len - 1] == '/')
+		len--;
+	path = ft_substr(target, 0, len);
+	if ((stat(path, &st) == 0 && S_ISDIR(st.st_mode))
+		|| (ft_last_char(target) == '/' && open(path, O_RDONLY) == -1))
 	{
-		while (target[len] != '/')
-			len--;
-		path = ft_substr(target, 0, len);
-		if (access(path, F_OK) != 0)
-		{
-			free(path);
-			return (INVALID_OUTPUT);
-		}
+		free(path);
+		return (INVALID_OUTPUT);
 	}
 	free(path);
 	return (VALID);

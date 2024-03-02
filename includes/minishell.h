@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/19 22:24:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:08:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/time.h>
 # include <sys/resource.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <signal.h>
 # include <string.h>
 # include <errno.h>

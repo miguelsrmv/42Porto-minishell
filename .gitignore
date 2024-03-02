@@ -1,3 +1,4 @@
 minishell
 output.log
 readline.supp
+*.o

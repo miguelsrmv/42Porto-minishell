@@ -1,1 +1,0 @@
-/home/bruno/Desktop/42Porto-minishell
