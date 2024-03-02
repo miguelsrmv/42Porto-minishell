@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:00:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/02 17:15:37 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 21:29:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 	else if (input_status == INVALID_INPUT)
 		exit_error(OPEN_ERROR, memptr, (*command)->input_target);
 	else if (output_status == INVALID_OUTPUT)
-		exit_error(DIRECTORY_ERROR, memptr, (*command)->output_target);
+		exit_error(DIRECTORY_OUTPUT_ERROR, memptr, (*command)->output_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		exit_error(SYNTAX_ERROR, memptr, NULL);
 	else if (input_status == EMPTY || output_status == EMPTY)
@@ -50,7 +50,7 @@ enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 	else if (input_status == INVALID_INPUT)
 		non_exit_error(OPEN_ERROR, memptr, (*command)->input_target);
 	else if (output_status == INVALID_OUTPUT)
-		non_exit_error(DIRECTORY_ERROR, memptr, (*command)->output_target);
+		non_exit_error(DIRECTORY_OUTPUT_ERROR, memptr, (*command)->output_target);
 	else if (output_status == INVALID_OUTPUT_REDIR)
 		non_exit_error(SYNTAX_ERROR, memptr, NULL);
 	else if (input_status == EMPTY || output_status == EMPTY)

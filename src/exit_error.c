@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/02 18:07:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 21:32:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 		|| !ft_strcmp(error_msg, EMPTY_ERROR))
 		printf(error_msg, NULL);
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR)
-		|| !ft_strcmp(error_msg, COMMAND_ERROR))
+		|| !ft_strcmp(error_msg, COMMAND_ERROR)
+		|| !ft_strcmp(error_msg, DIRECTORY_OUTPUT_ERROR))
 	{
 		message = ft_strjoin(extra_error_msg, error_msg);
 		if (!message)
@@ -56,7 +57,8 @@ void	set_g_status_flag(char *error_msg)
 	if (!ft_strcmp(error_msg, EOF_ERROR))
 		g_status_flag = 0;
 	else if (!ft_strcmp(error_msg, OPEN_ERROR)
-		|| !ft_strcmp(error_msg, EMPTY_ERROR))
+		|| !ft_strcmp(error_msg, EMPTY_ERROR)
+		|| !ft_strcmp(error_msg, DIRECTORY_OUTPUT_ERROR))
 		g_status_flag = 1;
 	else if (!ft_strcmp(error_msg, SYNTAX_ERROR))
 		g_status_flag = 2;

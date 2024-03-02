@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/02 17:54:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/02 21:30:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define COMMAND_ERROR ": command not found\n"
 # define OPEN_ERROR ": No such file or directory\n"
 # define DIRECTORY_ERROR ": Is a directory\n"
+# define DIRECTORY_OUTPUT_ERROR ": Is a directory \n"
 # define PERMISSION_ERROR ": Permission denied\n"
 
 // Exit code / signal errors
