@@ -1,3 +1,7 @@
+#1 primeiro fazer "touch ls" e depois correr ls
+#2 correr fakedir/ quando fakedir é um ficheiro
+
+
 Casos que falharam nas avaliacoes
 
 POR FAZER                                                                                                 FEITO

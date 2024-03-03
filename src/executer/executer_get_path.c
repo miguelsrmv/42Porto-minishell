@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:30:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/03 09:59:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,25 @@ void	fill_in_result_from_path_list(char **path_list, char **result,
 	char	*temp;
 
 	i = 0;
-	result[0] = ft_strdup("");
-	if (!result[0])
-		exit_error(MALLOC_ERROR, memptr, NULL);
-	temp = getcwd(NULL, 0);
-	result[1] = ft_strjoin(temp, "/");
-	free(temp);
-	if (!result[1])
-		exit_error(MALLOC_ERROR, memptr, NULL);
-	i = 0;
 	while (path_list[i])
 	{
 		temp = ft_strjoin(path_list[i], "/");
 		if (!temp)
 			exit_error(MALLOC_ERROR, memptr, NULL);
-		result[i + 2] = ft_strdup(temp);
+		result[i] = ft_strdup(temp);
 		free(temp);
-		if (!result[i + 2])
+		if (!result[i])
 			exit_error(MALLOC_ERROR, memptr, NULL);
 		i++;
 	}
+	result[i] = ft_strdup("");
+	if (!result[i])
+		exit_error(MALLOC_ERROR, memptr, NULL);
+	temp = getcwd(NULL, 0);
+	result[i + 1] = ft_strjoin(temp, "/");
+	free(temp);
+	if (!result[i + 1])
+		exit_error(MALLOC_ERROR, memptr, NULL);
 	result[i + 2] = NULL;
 }
 
