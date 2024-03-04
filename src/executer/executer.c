@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/05 15:34:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:42:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	execute_builtin(t_command_table *current,
 		= (int (*)(char **, char **,
 				t_command_table *, t_memptr))current->builtin_pointer;
 	exit_value = function_pointer(current->cmd, envp, current, memptr);
-	(void)memptr;
 	return (exit_value);
 }
 

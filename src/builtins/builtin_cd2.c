@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:54:07 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/02 18:04:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:47:55 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_exit_cd(char **cwd, int exit_status)
 	}
 	else
 	{
-		printf("bash: cd: invalid option.\n");
+		ft_putstr_fd("bash: cd: invalid option.\n", STDERR_FILENO);
 		return (g_status_flag);
 	}
 }

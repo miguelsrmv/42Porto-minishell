@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+         #
+#    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/02/03 08:51:41 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/04 17:40:57 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			executer/executer.c \
 			signals/signals.c signals/signals_handler.c \
 			builtins/builtin_cd.c builtins/builtin_cd2.c builtins/builtin_echo.c \
-			builtins/builtin_echo2.c  builtins/builtin_env2.c \
+			builtins/builtin_echo2.c  builtins/builtin_env.c \
 			builtins/builtin_export.c builtins/builtin_export2.c \
 			builtins/builtin_export3.c builtins/builtin_export4.c builtins/builtin_pwd.c \
 			builtins/builtin_unset.c builtins/get_set.c builtins/get_set2.c \

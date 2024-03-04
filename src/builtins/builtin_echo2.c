@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:49:43 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/02 18:05:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:50:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,23 @@ int	print_echo(char **args, bool print_newline, int i)
 	{
 		if (ft_strcmp(args[i], "") == 0)
 			;
-		else if (!printf("%s", args[i]))
+		else if (!args[i])
+		{
+			ft_putstr_fd(args[i], STDERR_FILENO);
 			return (EXIT_FAILURE);
+		}
 		else if (ft_strlen(args[i]) != 0 && args[i + 1] != NULL)
-			if (!printf(" "))
-				return (EXIT_FAILURE);
+		{
+			ft_putstr_fd(" ", STDERR_FILENO);
+			return (EXIT_FAILURE);
+		}
 		i++;
 	}
-	(void)print_newline;
 	if (print_newline)
-		if (!printf("\n"))
-			return (EXIT_FAILURE);
+	{
+		ft_putstr_fd("\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
