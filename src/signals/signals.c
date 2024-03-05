@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/01/11 11:06:14 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:05:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	set_signal_during_processes_child(void)
 {
 	struct sigaction	sa;
 
+	signal(SIGPIPE, sigpipe_handler);
 	sa.sa_handler = sigint_handler_during_processes_child;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
