@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/05 15:06:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:59:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define COMMAND_ERROR ": command not found\n"
 # define OPEN_ERROR ": No such file or directory\n"
 # define DIRECTORY_ERROR ": Is a directory\n"
+# define DIR_OPEN_ERROR ": No such directory \n"
 # define DIRECTORY_OUTPUT_ERROR ": Is a directory \n"
 # define PERMISSION_ERROR ": Permission denied\n"
 
@@ -97,7 +98,8 @@ enum e_CommandType
 	EXECUTABLE,
 	BUILTIN,
 	PERMISSION,
-	DIRECTORY
+	DIRECTORY,
+	NULL_DIRECTORY
 };
 
 enum e_RedirectType
@@ -374,11 +376,11 @@ void				check_executables(t_command_table *current,
 						char **path_list, t_memptr memptr);
 void				absolute_check_executables(t_command_table *current,
 						t_memptr memptr);
-void				absolute_check_executables_subfunc(t_command_table *current,
-						char *test_command);
+void				current_check_executables(t_command_table *current,
+						t_memptr memptr);
 void				relative_check_executables(t_command_table *current,
 						char **path_list, t_memptr memptr);
-void				relative_check_executables_subfunc(t_command_table *current,
+void				check_executables_subfunc(t_command_table *current,
 						char *test_command);
 
 /// executer_get_path.c

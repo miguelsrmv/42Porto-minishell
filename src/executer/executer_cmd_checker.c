@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 20:16:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:27:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	check_commands(t_command_table **command_table, char **path_list,
 				non_exit_error(COMMAND_ERROR, memptr, *current->cmd);
 			else if (current->command_type == DIRECTORY)
 				non_exit_error(DIRECTORY_ERROR, memptr, current->cmd_target);
+			else if (current->command_type == NULL_DIRECTORY)
+				non_exit_error(DIR_OPEN_ERROR, memptr, *current->cmd);
 			else if (current->command_type == PERMISSION)
 				non_exit_error(PERMISSION_ERROR, memptr, current->cmd_target);
 		}

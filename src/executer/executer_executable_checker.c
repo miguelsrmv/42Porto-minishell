@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:39:27 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 17:58:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:55:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,16 @@ void	absolute_check_executables(t_command_table *current, t_memptr memptr)
 		if (access(test_command, X_OK) != 0)
 			current->command_type = PERMISSION;
 		else
-			absolute_check_executables_subfunc(current, test_command);
+			check_executables_subfunc(current, test_command);
 	}
 	else
 	{
 		free(test_command);
-		current->command_type = NULL_COMMANDTYPE;
+		if (ft_last_char(current->cmd[0]) == '/')
+			current->command_type = NULL_DIRECTORY;
+		else
+			current->command_type = NULL_COMMANDTYPE;
 	}
-}
-
-void	absolute_check_executables_subfunc(t_command_table *current,
-			char *test_command)
-{
-	DIR		*dir;
-
-	dir = opendir(test_command);
-	if (dir != NULL)
-		current->command_type = DIRECTORY;
-	else if (dir == NULL
-		&& (access(test_command, X_OK) == 0))
-		current->command_type = EXECUTABLE;
-	closedir(dir);
 }
 
 void	relative_check_executables(t_command_table *current,
@@ -62,33 +51,51 @@ void	relative_check_executables(t_command_table *current,
 			exit_error(MALLOC_ERROR, memptr, NULL);
 		if (access(test_command, F_OK) == 0)
 		{
-			relative_check_executables_subfunc(current, test_command);
+			check_executables_subfunc(current, test_command);
 			return ;
 		}
 		free(test_command);
 	}
+	if (ft_last_char(current->cmd[0]) == '/')
+		current->command_type = NULL_DIRECTORY;
 }
 
-void	relative_check_executables_subfunc(t_command_table *current,
+void	current_check_executables(t_command_table *current, t_memptr memptr)
+{
+	char		*test_command;
+
+	if (ft_strlen(current->cmd[0]) == 2)
+	{
+		current->command_type = DIRECTORY;
+		return ;
+	}
+	test_command = ft_strdup(&(current->cmd[0])[2]);
+	if (!test_command)
+		exit_error(MALLOC_ERROR, memptr, NULL);
+	check_executables_subfunc(current, test_command);
+	free(test_command);
+	current->cmd_target = ft_strdup(current->cmd[0]);
+	if (!current->cmd_target)
+		exit_error(MALLOC_ERROR, memptr, NULL);
+}
+
+void	check_executables_subfunc(t_command_table *current,
 			char *test_command)
 {
-	DIR	*dir;
+	struct stat	st;
 
 	current->cmd_target = test_command;
-	if (access(test_command, X_OK) != 0
-		&& (current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
-		current->command_type = PERMISSION;
-	else
+	if (stat(test_command, &st) == 0)
 	{
-		dir = opendir(test_command);
-		if (dir != NULL
-			&& (((current->cmd[0][0] == '.') && (current->cmd[0][1] == '/'))
-			|| ft_last_char(current->cmd[0]) == '/'))
+		if (S_ISDIR(st.st_mode))
 			current->command_type = DIRECTORY;
-		else if (dir == NULL && (access(test_command, X_OK) == 0))
+		else if (access(test_command, X_OK) == 0)
 			current->command_type = EXECUTABLE;
-		closedir(dir);
+		else
+			current->command_type = PERMISSION;
 	}
+	else
+		current->command_type = PERMISSION;
 }
 
 void	check_executables(t_command_table *current, char **path_list,
@@ -98,6 +105,8 @@ void	check_executables(t_command_table *current, char **path_list,
 		return ;
 	if (current->cmd[0][0] == '/')
 		absolute_check_executables(current, memptr);
+	else if (current->cmd[0][0] == '.' && current->cmd[0][1] == '/')
+		current_check_executables(current, memptr);
 	else
 		relative_check_executables(current, path_list, memptr);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/03 09:59:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:50:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	fill_in_result_from_path_list(char **path_list, char **result,
 			exit_error(MALLOC_ERROR, memptr, NULL);
 		i++;
 	}
-	result[i] = ft_strdup("");
+	result[i] = NULL;
+/* 	result[i] = ft_strdup("");
 	if (!result[i])
 		exit_error(MALLOC_ERROR, memptr, NULL);
 	temp = getcwd(NULL, 0);
@@ -38,7 +39,7 @@ void	fill_in_result_from_path_list(char **path_list, char **result,
 	free(temp);
 	if (!result[i + 1])
 		exit_error(MALLOC_ERROR, memptr, NULL);
-	result[i + 2] = NULL;
+	result[i + 2] = NULL; */
 }
 
 char	**get_path_list(t_memptr *memptr)

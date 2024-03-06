@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/02 21:32:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:21:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 		printf(error_msg, NULL);
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR)
 		|| !ft_strcmp(error_msg, COMMAND_ERROR)
-		|| !ft_strcmp(error_msg, DIRECTORY_OUTPUT_ERROR))
+		|| !ft_strcmp(error_msg, DIRECTORY_OUTPUT_ERROR)
+		|| !ft_strcmp(error_msg, DIR_OPEN_ERROR))
 	{
 		message = ft_strjoin(extra_error_msg, error_msg);
 		if (!message)
