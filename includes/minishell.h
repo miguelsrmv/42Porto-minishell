@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/06 11:59:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:04:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,8 +418,10 @@ void				sigint_handler_during_processes_child(int signum);
 void				sigint_handler_during_processes_parent(int signum);
 void				sigpipe_handler(int signum);
 
-//env2.c
+//env2.
 int					env(char **argv);
+int					contains_char(const char *str, char target);
+void				env_error_msg(char *argv0, char *argv1);
 
 ///export.c
 int					export(char **argv);

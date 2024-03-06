@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/04 17:53:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:05:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int	env(char **argv)
 		return (EXIT_FAILURE);
 	if (argv[0] != NULL && argv[1] != NULL)
 	{
-		ft_putstr_fd(argv[0], STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putstr_fd(argv[1], STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		env_error_msg(argv[0], argv[1]);
 		return (127);
 	}
 	i = 0;
@@ -53,4 +50,12 @@ int	env(char **argv)
 			i++;
 	}
 	return (EXIT_SUCCESS);
+}
+
+void	env_error_msg(char *argv0, char *argv1)
+{
+	ft_putstr_fd(argv0, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(argv1, STDERR_FILENO);
+	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 }
