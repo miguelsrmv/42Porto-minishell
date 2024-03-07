@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 19:59:42 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/02/06 17:55:08 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/07 13:26:48 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,15 +41,15 @@ RM		=	rm -f
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ ar -rcs $(NAME) $(OBJ)
+	ar -rcs $(NAME) $(OBJ)
 
 .c.o:
-	@ $(CC) $(CFLAGS) -c $< -I . -o $@
+	$(CC) $(CFLAGS) -c $< -I . -o $@
 
 clean:
-	@ rm -rf $(OBJ)
+	rm -rf $(OBJ)
 
 fclean: clean
-	@ rm -rf $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/04 17:40:57 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/07 13:28:31 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,21 +53,21 @@ RM      = 	rm -rf
 all: libft $(NAME)
 
 $(NAME): $(OBJS) 
-	@ $(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) 
 
 $(SRCDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
-	@ $(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
 
 libft:
-	@ cd $(LIBFTDIR) && make -s
+	@ cd $(LIBFTDIR) && make
 
 clean:
-	@ $(MAKE) -sC $(LIBFTDIR) clean
-	@ $(RM) $(OBJS)
+	$(MAKE) -C $(LIBFTDIR) clean
+	$(RM) $(OBJS)
 
 fclean: clean
-	@ $(MAKE) -sC $(LIBFTDIR) fclean
-	@ $(RM) $(NAME)
+	$(MAKE) -C $(LIBFTDIR) fclean
+	$(RM) $(NAME)
 
 re: fclean all
 
