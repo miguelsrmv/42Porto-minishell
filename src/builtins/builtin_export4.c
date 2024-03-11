@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/04 17:56:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:41:31 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int	ft_export_found(t_env *envv, t_export *exp, char **argv)
 		{
 			ft_free_str(&envv->env_var[exp->i]);
 			envv->env_var[exp->i] = ft_strdup(argv[exp->j]);
-			exp->i++;
 		}
 		ft_free_str(&exp->var);
 		if (envv->env_var[exp->i] == NULL)

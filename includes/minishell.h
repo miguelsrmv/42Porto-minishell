@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/06 12:04:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:15:07 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,7 +418,7 @@ void				sigint_handler_during_processes_child(int signum);
 void				sigint_handler_during_processes_parent(int signum);
 void				sigpipe_handler(int signum);
 
-//env2.
+//env.c
 int					env(char **argv);
 int					contains_char(const char *str, char target);
 void				env_error_msg(char *argv0, char *argv1);
@@ -446,6 +446,7 @@ int					ft_export_found(t_env *envv, t_export *exp, char **argv);
 
 ///unset.c
 int					unset(char **argv);
+int					unset2(t_env *envv, char **argv, int k);
 
 ///cd.c
 void				ft_update_env_var(t_env *envv, char *var, char *value);
@@ -459,7 +460,7 @@ int					ft_check_cd(char *str, t_env *envv);
 int					ft_exit_cd(char **cwd, int exit_status);
 
 ///pwd.c
-int					pwd(void);
+int					pwd(char **argv);
 
 ///echo.c
 int					echo(char **args);
@@ -496,4 +497,6 @@ static char			*negnum(char *str, long long n, int len);
 static int			int_len(long long n); */
 char				*ft_ltoa(long long n);
 
+///builtin_checker.c
+int					ft_builtin_checker(char **argv);
 #endif

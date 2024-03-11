@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
+#    By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/07 13:28:31 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/11 12:48:36 by bmota-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			builtins/builtin_export.c builtins/builtin_export2.c \
 			builtins/builtin_export3.c builtins/builtin_export4.c builtins/builtin_pwd.c \
 			builtins/builtin_unset.c builtins/get_set.c builtins/get_set2.c \
-			builtins/builtin_exit.c builtins/builtin_exit2.c
+			builtins/builtin_exit.c builtins/builtin_exit2.c builtins/builtin_checker.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

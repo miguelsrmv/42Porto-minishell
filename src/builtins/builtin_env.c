@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/06 12:05:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:42:18 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	env(char **argv)
 	envv = get_envv();
 	if (envv == NULL || envv->env_var == NULL)
 		return (EXIT_FAILURE);
-	if (argv[0] != NULL && argv[1] != NULL)
+	if (ft_builtin_checker(argv) == EXIT_FAILURE)
+		return (g_status_flag);
+	if (argv[0] != NULL && (argv[1] != NULL && argv[1][0] != '-'))
 	{
 		env_error_msg(argv[0], argv[1]);
 		return (127);

@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:42 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/08 15:31:47 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:15:49 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,26 @@ static int	ft_inner_loop(char **argv, t_env *envv, int i, int k)
 
 int	unset(char **argv)
 {
-	int		i;
 	int		k;
-	int		inner_out;
 	t_env	*envv;
 
 	k = 1;
 	envv = get_envv();
 	if (argv[k] == NULL)
 		return (EXIT_SUCCESS);
+	if (ft_builtin_checker(argv) == EXIT_FAILURE)
+		return (g_status_flag);
+	if (unset2(envv, argv, k) == EXIT_SUCCESS)
+		return (EXIT_SUCCESS);
+	else
+		return (EXIT_FAILURE);
+}
+
+int	unset2(t_env *envv, char **argv, int k)
+{
+	int		i;
+	int		inner_out;
+
 	while (argv[k])
 	{
 		i = 0;

@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/02 18:03:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:51:37 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	pwd(void)
+int	pwd(char **argv)
 {
 	char	*cwd;
 
+	if (ft_builtin_checker(argv) != EXIT_SUCCESS)
+		return (g_status_flag);
 	cwd = NULL;
 	cwd = getcwd(cwd, 0);
 	if (cwd == NULL)

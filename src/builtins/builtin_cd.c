@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/04 17:47:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:44:23 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	cd(char **argv)
 	argc = 0;
 	while (argv[++argc])
 		;
+	if (ft_builtin_checker(argv) == EXIT_FAILURE)
+		return (g_status_flag);
 	if (argv == NULL || envv == NULL || (argc > 2))
 	{
 		g_status_flag = 1;

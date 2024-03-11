@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/03 10:26:29 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:26:24 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ int	export(char **argv)
 	t_env		*envv;
 
 	envv = get_envv();
+	g_status_flag = 0;
 	if (envv == NULL || envv->env_var == NULL)
 		return (EXIT_FAILURE);
+	if (ft_builtin_checker(argv) == EXIT_FAILURE)
+		return (g_status_flag);
 	if (argv[1] == NULL)
 		export_only(envv);
 	else
