@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 14:20:35 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:59:27 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	bash_main(char **envp, t_memptr *memptr)
 		bash_run(envp, memptr);
 		update_envp(&envp, memptr, env_vars);
 		env_vars = set_environment_vars(envp, *memptr);
-		printf("exit_status = %i\n", g_status_flag);
 		clean_memory(*memptr);
 	}
 }
