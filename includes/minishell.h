@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 13:15:07 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:41:58 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,8 +332,7 @@ int					free_concatenate(char *left, char *right, char *temp,
 /// executer_prepare_processes.c
 int					**create_pipes(int **pipe_fd, int process_num,
 						t_memptr *memptr);
-t_command_table		*create_processes(t_command_table **current,
-						int process_num, t_memptr memptr);
+int					check_path(char **envp);
 void				close_pipes(int **pipe_fd, t_command_table *current,
 						t_memptr memptr);
 int					count_processes(t_command_table **command_table);
@@ -421,7 +420,7 @@ void				sigpipe_handler(int signum);
 //env.c
 int					env(char **argv);
 int					contains_char(const char *str, char target);
-void				env_error_msg(char *argv0, char *argv1);
+void				env_error_msg(char *argv0);
 
 ///export.c
 int					export(char **argv);

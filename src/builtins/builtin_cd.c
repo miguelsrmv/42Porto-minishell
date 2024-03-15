@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 12:44:23 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:26:52 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int	cd(char **argv)
 			ft_putstr_fd("bash: cd: too many arguments\n", STDERR_FILENO);
 		return (g_status_flag);
 	}
-	if (argc == 1 || !ft_strcmp(argv[1], "~"))
+	if (argc == 1 || (argc == 2 && (!ft_strcmp(argv[1], "--")
+				|| !ft_strcmp(argv[1], "~"))))
 		return (ft_cd_home(envv));
 	else
 		return (ft_cd2(argv, envv));

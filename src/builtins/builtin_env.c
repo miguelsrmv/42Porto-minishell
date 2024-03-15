@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 12:42:18 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:40:53 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ int	env(char **argv)
 		return (EXIT_FAILURE);
 	if (ft_builtin_checker(argv) == EXIT_FAILURE)
 		return (g_status_flag);
-	if (argv[0] != NULL && (argv[1] != NULL && argv[1][0] != '-'))
+	if ((argv[0] != NULL && (argv[1] != NULL && argv[1][0] != '-'))
+			|| check_path(envv->env_var))
 	{
-		env_error_msg(argv[0], argv[1]);
+		env_error_msg(argv[0]);
 		return (127);
 	}
 	i = 0;
@@ -54,10 +55,8 @@ int	env(char **argv)
 	return (EXIT_SUCCESS);
 }
 
-void	env_error_msg(char *argv0, char *argv1)
+void	env_error_msg(char *argv0)
 {
 	ft_putstr_fd(argv0, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(argv1, STDERR_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 }

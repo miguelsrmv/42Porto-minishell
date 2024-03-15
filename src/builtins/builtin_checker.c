@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:12:24 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/11 15:07:48 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:30:59 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_builtin_checker(char **argv)
 {
-	if (!ft_strcmp(argv[0], "cd") || !ft_strcmp(argv[0], "pwd")
-		|| !ft_strcmp(argv[0], "unset") || !ft_strcmp(argv[0], "export"))
+	if (!ft_strcmp(argv[0], "pwd") || !ft_strcmp(argv[0], "unset")
+		|| !ft_strcmp(argv[0], "export"))
 	{
 		if (argv[1] && argv[1][0] == '-' && argv[1][1] != '\0')
 		{

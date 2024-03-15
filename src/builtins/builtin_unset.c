@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:42 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 13:15:49 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:23:54 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static int	ft_inner_loop(char **argv, t_env *envv, int i, int k)
 	char	*var;
 
 	var = NULL;
-	if (contains_str(envv->env_var[i], argv[k]) == EXIT_SUCCESS)
+	if (contains_str(envv->env_var[i], argv[k]) == EXIT_SUCCESS
+			&& contains_char(argv[k], '='))
 	{
 		var = ft_get_var(envv, i);
 		if (var == NULL)

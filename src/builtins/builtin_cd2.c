@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:54:07 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/04 17:47:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:20:36 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_check_cd(char *str, t_env *envv)
 	char	*cwd;
 
 	cwd = NULL;
-	if (ft_strcmp(str, "-") == 0)
+	if (!ft_strcmp(str, "-"))
 	{
 		chdir(envv->oldpwd);
 		cwd = ft_strdup(envv->oldpwd);
