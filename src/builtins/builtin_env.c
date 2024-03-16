@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/15 18:40:53 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/16 00:20:51 by bmota-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ int	contains_char(const char *str, char target)
 		return (EXIT_FAILURE);
 }
 
+int	env2(char **argv, t_env *envv)
+{
+	if (ft_builtin_checker(argv) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if ((argv[0] != NULL && (argv[1] != NULL && argv[1][0] != '-'))
+			|| check_path(envv->env_var))
+	{
+		env_error_msg(argv[0]);
+		g_status_flag = 127;
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	env(char **argv)
 {
 	int		i;
@@ -33,14 +47,8 @@ int	env(char **argv)
 	envv = get_envv();
 	if (envv == NULL || envv->env_var == NULL)
 		return (EXIT_FAILURE);
-	if (ft_builtin_checker(argv) == EXIT_FAILURE)
+	if (env2(argv, envv) == EXIT_FAILURE)
 		return (g_status_flag);
-	if ((argv[0] != NULL && (argv[1] != NULL && argv[1][0] != '-'))
-			|| check_path(envv->env_var))
-	{
-		env_error_msg(argv[0]);
-		return (127);
-	}
 	i = 0;
 	while (envv->env_var && envv->env_var[i] != NULL)
 	{
