@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/17 22:40:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:48:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,25 @@ char	*get_input(char *prompt, t_memptr memptr)
 		free(input);
 		return (NULL);
 	}
-	if (check_in_quote(input) != OUT_QUOTE)
-	{
-		non_exit_error(QUOTE_ERROR, memptr, NULL);
-		free(input);
-		return (NULL);
-	}
 	else if (input[0] == '|')
 	{
 		non_exit_error(SYNTAX_ERROR, memptr, NULL);
 		free(input);
 		return (NULL);
 	}
+	while (check_in_pipe(input))
+		update_input(&input, memptr);
 	return (get_valid_input(input, memptr));
 }
 
 char	*get_valid_input(char *input, t_memptr memptr)
 {
-	while (check_in_pipe(input))
-		update_input(&input, memptr);
+	if (check_in_quote(input) != OUT_QUOTE)
+	{
+		non_exit_error(QUOTE_ERROR, memptr, NULL);
+		free(input);
+		return (NULL);
+	}
 	rl_replace_line(input, 0);
 	rl_redisplay();
 	if (input && ft_strlen(input))
