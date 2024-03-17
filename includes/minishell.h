@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/15 18:41:58 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:23:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ void				print_to_fd(int fd, char *error_msg, char *extra_error_msg,
 void				trim_left_whitespace(char **input, t_memptr memptr);
 void				update_input(char **input, t_memptr memptr);
 char				*get_input(char *prompt, t_memptr memptr);
+char				*get_valid_input(char *prompt, t_memptr memptr);
 bool				iscommandempty(const char *cmd, t_memptr memptr);
 
 /// input_checker.c
