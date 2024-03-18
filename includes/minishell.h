@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 07:33:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 07:35:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,6 @@ bool				iscommandempty(const char *cmd, t_memptr memptr);
 /// input_checker.c
 int					check_in_quote(char *input);
 int					check_in_pipe(char *input);
-char				*check_valid_input(char *input);
 
 /// lexer.c
 void				fill_in_list(char *input, t_token **head, t_memptr memptr);
