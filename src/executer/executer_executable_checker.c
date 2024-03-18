@@ -75,6 +75,8 @@ void	current_check_executables(t_command_table *current, t_memptr memptr)
 	current->cmd_target = ft_strdup(current->cmd[0]);
 	if (!current->cmd_target)
 		exit_error(MALLOC_ERROR, memptr, NULL);
+	if (ft_last_char(current->cmd[0]) == '/')
+		check_directory_subfunc(current, current->cmd[0], memptr);
 }
 
 void	check_executables_subfunc(t_command_table *current,
