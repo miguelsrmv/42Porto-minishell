@@ -1,0 +1,95 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#                                                                              #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#                                                     +:+ +:+         +:+      #
+#                                                 +#+#+#+#+#+   +#+            #
+# **************************************************************************** #
+# **************************************************************************** #
+	$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) 
+	$(MAKE) -C $(LIBFTDIR) clean
+	$(MAKE) -C $(LIBFTDIR) fclean
+$(NAME): $(OBJS) 
+	$(RM) $(NAME)
+	$(RM) $(OBJS)
+$(SRCDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
+all: libft $(NAME)
+			builtins/builtin_cd.c builtins/builtin_cd2.c builtins/builtin_echo.c \
+			builtins/builtin_echo2.c  builtins/builtin_env.c \
+			builtins/builtin_exit.c builtins/builtin_exit2.c builtins/builtin_checker.c
+			builtins/builtin_export3.c builtins/builtin_export4.c builtins/builtin_pwd.c \
+			builtins/builtin_export.c builtins/builtin_export2.c \
+			builtins/builtin_unset.c builtins/get_set.c builtins/get_set2.c \
+#    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
+CC      = 	cc
+	@ cd $(LIBFTDIR) && make
+CFLAGS   =  -Wall -Wextra -Werror -g
+clean:
+#    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
+	@ echo "    fun:add_history" >> readline.supp
+	@ echo "    fun:readline" >> readline.supp
+	@ echo "    leak add_history" >> readline.supp
+	@ echo "    leak readline" >> readline.supp
+	@ echo "    Memcheck:Leak" >> readline.supp
+	@ echo "    Memcheck:Leak" >> readline.supp
+	@ echo "    ..." >> readline.supp
+	@ echo "    ..." >> readline.supp
+	@ echo "{" > readline.supp
+	@ echo "{" >> readline.supp
+	@ echo "}" >> readline.supp
+	@ echo "}" >> readline.supp
+# Estes aqui servem para avaliar leaks ignorando os leaks do readline!
+			executer/executer_childparent_processes.c executer/executer.c \
+			executer/executer_cmd_checker.c executer/executer_executable_checker.c \
+			executer/executer_dir_checker.c executer/executer_get_path.c \
+			executer/executer_prepare_processes.c executer/executer_redir_checker.c \
+			executer/executer_redir_checker2.c executer/executer_redir_setter.c \
+			expander/expander.c expander/expander_noquotes.c expander/expander_squote.c \
+			expander/expander_dquote.c expander/expander_concatenate.c \
+			expander/takeout_nullstrings.c \
+fclean: clean
+INCDIR	=   includes
+INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
+leaks: readline.supp
+			lexer/get_input.c lexer/input_checker.c \
+			lexer/lexer.c lexer/lexer_linked_list.c lexer/lexer_get_tokens.c \
+libft:
+LIBFTDIR =  src/libft
+LIBS	=   -L$(LIBFTDIR) -lft -lreadline
+#    Makefile                                           :+:      :+:    :+:    #
+NAME	=   minishell
+OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
+			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
+.PHONY: all clean fclean re libft
+readline.supp:
+re: fclean all
+RM      = 	rm -rf
+			signals/signals.c signals/signals_handler.c \
+SRCDIR	=	src
+SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
+#    Updated: 2024/03/18 13:59:31 by mde-sa--         ###   ########.fr        #
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell

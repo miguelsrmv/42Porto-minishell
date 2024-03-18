@@ -1,6 +1,6 @@
 #1 primeiro fazer "touch ls" e depois correr ls
 #2 correr fakedir/ quando fakedir é um ficheiro
-
+cat <input1 | echo hi | <sort2 <file2 | echo 1 | echo 2
 
 Casos que falharam nas avaliacoes
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 13:59:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:11:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ enum e_CommandType
 	PERMISSION,
 	DIRECTORY,
 	NULL_DIRECTORY,
-	NOT_A_DIRECTORY
+	NOT_A_DIRECTORY,
+	NO_EXEC_INVALID_INPUT
 };
 
 enum e_RedirectType
@@ -336,6 +337,10 @@ int					concatenate(char **string, char *expanded_string,
 						int *start, int end);
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
+
+/// quick_input_check.c
+void				quick_input_check(t_command_table **command);
+
 
 /// executer_prepare_processes.c
 int					**create_pipes(int **pipe_fd, int process_num,
