@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_cmd_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 11:17:37 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:30:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,24 @@ int	check_commands(t_command_table **command_table, char **path_list,
 			check_builtin(current);
 			if (current->command_type != BUILTIN)
 				check_executables(current, path_list, memptr);
-			if (current->command_type == NULL_COMMANDTYPE
-				|| current->command_type == NO_NULL_COMMANDTYPE)
-				non_exit_error(COMMAND_ERROR, memptr, *current->cmd);
-			else if (current->command_type == DIRECTORY)
-				non_exit_error(DIRECTORY_ERROR, memptr, current->cmd_target);
-			else if (current->command_type == NULL_DIRECTORY)
-				non_exit_error(DIR_OPEN_ERROR, memptr, *current->cmd);
-			else if (current->command_type == PERMISSION)
-				non_exit_error(PERMISSION_ERROR, memptr, current->cmd_target);
+			set_error_message(current, memptr);
 		}
 		current = current->next;
 	}
 	return (1);
+}
+
+void	set_error_message(t_command_table *current, t_memptr memptr)
+{
+	if (current->command_type == NULL_COMMANDTYPE
+		|| current->command_type == NO_NULL_COMMANDTYPE)
+		non_exit_error(COMMAND_ERROR, memptr, *current->cmd);
+	else if (current->command_type == DIRECTORY)
+		non_exit_error(DIRECTORY_ERROR, memptr, *current->cmd);
+	else if (current->command_type == NOT_A_DIRECTORY)
+		non_exit_error(NOT_A_DIR_ERROR, memptr, *current->cmd);
+	else if (current->command_type == NULL_DIRECTORY)
+		non_exit_error(DIR_OPEN_ERROR, memptr, *current->cmd);
+	else if (current->command_type == PERMISSION)
+		non_exit_error(PERMISSION_ERROR, memptr, current->cmd_target);
 }

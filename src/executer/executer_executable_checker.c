@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:39:27 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/06 11:55:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:13:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	relative_check_executables(t_command_table *current,
 		free(test_command);
 	}
 	if (ft_last_char(current->cmd[0]) == '/')
-		current->command_type = NULL_DIRECTORY;
+		check_directory_subfunc(current, current->cmd[0], memptr);
 }
 
 void	current_check_executables(t_command_table *current, t_memptr memptr)

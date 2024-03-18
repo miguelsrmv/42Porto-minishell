@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/15 19:54:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:36:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR)
 		|| !ft_strcmp(error_msg, COMMAND_ERROR)
 		|| !ft_strcmp(error_msg, DIRECTORY_OUTPUT_ERROR)
-		|| !ft_strcmp(error_msg, DIR_OPEN_ERROR))
+		|| !ft_strcmp(error_msg, DIR_OPEN_ERROR)
+		|| !ft_strcmp(error_msg, NOT_A_DIR_ERROR))
 	{
 		message = ft_strjoin(extra_error_msg, error_msg);
 		if (!message)
@@ -65,8 +66,10 @@ void	set_g_status_flag(char *error_msg)
 		|| !ft_strcmp(error_msg, QUOTE_ERROR))
 		g_status_flag = 2;
 	else if (!ft_strcmp(error_msg, PERMISSION_ERROR)
-		|| !ft_strcmp(error_msg, DIRECTORY_ERROR))
+		|| !ft_strcmp(error_msg, DIRECTORY_ERROR)
+		|| !ft_strcmp(error_msg, NOT_A_DIR_ERROR))
 		g_status_flag = 126;
-	else if (!ft_strcmp(error_msg, COMMAND_ERROR))
+	else if (!ft_strcmp(error_msg, COMMAND_ERROR)
+		|| !ft_strcmp(error_msg, DIR_OPEN_ERROR))
 		g_status_flag = 127;
 }
