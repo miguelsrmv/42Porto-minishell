@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 10:30:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 13:59:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,12 @@ int					is_valid_env_char(char c);
 void				define_quote_flag(char c, int *pos, char *quote_flag);
 void				expand_double_vector(char **vector, t_memptr memptr);
 void				expand_command_table(t_command_table **command_table,
+						t_memptr memptr);
+
+/// takeout_nullstrings.c
+void				takeout_nullstrings(t_command_table	*current, char **tab,
+						t_memptr memptr);
+void				copy_non_null_strings(char **newTab, char **tab,
 						t_memptr memptr);
 
 /// expander_noquotes.c

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:45:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/10 17:17:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:46:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,43 +44,16 @@ char	*get_string_token(char *input, int *start, int *end)
 
 	*end = *start;
 	quote_status = '\0';
-	if (ft_isquote(input[*end]))
+	while (!ft_isspace(input[*end]) && is_valid_bash_char(input[*end]))
 	{
-		quote_status = input[(*end)++];
-		while (input[*end] != quote_status)
-			(*end)++;
+		if (ft_isquote(input[*end]))
+		{
+			quote_status = input[(*end)++];
+			while (input[*end] != quote_status)
+				(*end)++;
+		}
 		(*end)++;
 	}
-	else
-		advance_until_unquoted_whitespace(input, end, quote_status);
 	result = ft_strndup(&input[*start], (*end - *start));
 	return (result);
-}
-
-void	advance_until_unquoted_whitespace(char *input, int *end,
-			char quote_status)
-{
-	while ((!ft_isspace(input[*end]) || quote_status) && input[*end])
-	{
-		if (quote_status)
-		{
-			(*end)++;
-			while ((input[*end] != quote_status) && input[*end])
-				(*end)++;
-		}
-		quote_status = '\0';
-		if (!quote_status)
-		{
-			while ((!ft_isspace(input[*end]) && !quote_status
-					&& input[*end]))
-			{
-				(*end)++;
-				if (ft_isquote(input[*end]))
-					quote_status = input[*end];
-				else if (input[*end] == '|'
-					|| input[*end] == '<' || input[*end] == '>')
-					return ;
-			}
-		}
-	}
 }
