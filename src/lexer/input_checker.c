@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:12:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/02 22:49:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 07:29:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,4 @@ int	check_in_pipe(char *input)
 			i++;
 	}
 	return (pipe_status);
-}
-
-char	*check_valid_input(char *input)
-{
-	return (input);
 }
