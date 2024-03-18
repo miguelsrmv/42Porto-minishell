@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/03 09:33:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:35:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	else
 		if (!check_commands(command_table, path_list, *memptr))
 			return ;
-	if ((*command_table)->command_type == EXECUTABLE)
-		g_status_flag = 0;
 	process_num = count_processes(command_table);
 	set_signal_during_processes_child();
 	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
