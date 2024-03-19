@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 09:25:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:38:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	clear_command_table(t_command_table **lst)
 		if ((*lst)->full_input)
 			ft_free_tabs((void **)(*lst)->full_input);
 		if ((*lst)->heredoc_buffer)
+		{
+			unlink((*lst)->heredoc_buffer);
 			free((*lst)->heredoc_buffer);
+		}
 		if ((*lst)->full_output)
 			ft_free_tabs((void **)(*lst)->full_output);
 		free(*lst);

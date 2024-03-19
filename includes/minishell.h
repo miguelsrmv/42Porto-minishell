@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 17:23:37 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:37:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,6 @@ void				create_heredoc_buffer(char *delimiter,
 						t_memptr memptr);
 void				create_heredoc(t_command_table **command_table,
 						char *buffer, t_memptr memptr);
-
 
 /// parser_heredoc_child.c
 void				heredoc_child(char *delimiter, int *pipe_fd, enum e_QuoteType quote_status, t_memptr memptr);
