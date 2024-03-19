@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 18:25:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:26:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ void	heredoc_child(char *delimiter, int *pipe_fd,
 	finish_heredoc_child(memptr);
 }
 
- void	expand_buffer(char **buffer, t_memptr memptr, enum e_QuoteType quote_status)
+void	expand_buffer(char **buffer, t_memptr memptr,
+			enum e_QuoteType quote_status)
 {
 	int	i;
+
 	if (quote_status != OUT_QUOTE)
 		return ;
 	i = 0;
@@ -51,12 +53,11 @@ void	heredoc_child(char *delimiter, int *pipe_fd,
 			exit_value_expand(buffer, &i, memptr);
 			i--;
 		}
- 		else if ((*buffer)[i] == '$')
+		else if ((*buffer)[i] == '$')
 		{
 			expand_env_no_quotes(buffer, &i, memptr);
 			i--;
 		}
-
 		i++;
 	}
 }

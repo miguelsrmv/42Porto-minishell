@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 17:53:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:27:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	set_signal_heredocs_child(void)
 {
 	struct sigaction	sa;
 
-   	sa.sa_handler = sigint_handler_heredocs;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = 0;
-    sigaction(SIGINT, &sa, NULL);
+	sa.sa_handler = sigint_handler_heredocs;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
 }
 
 void	set_signal_heredocs_parent(void)
