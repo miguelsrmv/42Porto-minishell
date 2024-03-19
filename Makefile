@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/19 11:32:11 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/19 14:55:24 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			lexer/get_input.c lexer/input_checker.c \
 			lexer/lexer.c lexer/lexer_linked_list.c lexer/lexer_get_tokens.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
-			parser/clean_heredocs.c \
+			parser/clean_heredocs.c parser/parser_heredoc_parent.c \
+			parser/parser_heredoc_child.c \
 			expander/expander.c expander/expander_noquotes.c expander/expander_squote.c \
 			expander/expander_dquote.c expander/expander_concatenate.c \
 			executer/quick_input_check.c\

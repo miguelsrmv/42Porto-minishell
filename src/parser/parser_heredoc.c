@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 11:33:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:06:11 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 		create_heredoc(command_table, (*command_table)->heredoc_buffer, memptr);
 }
 
-// Define se delimitador está ou não sob aspas, e retira as aspas do mesmo
 void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
 			enum e_QuoteType *quote_status, t_memptr memptr)
 {
 	int	i;
 
-	set_signal_heredocs();
 	*quote_status = OUT_QUOTE;
 	i = 0;
 	if (*delimiter == SQUOTE)
@@ -65,46 +63,26 @@ void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
 void	create_heredoc_buffer(char *delimiter, char **buffer,
 			enum e_QuoteType quote_status, t_memptr memptr)
 {
-	int		bytes_read;
-	char	input[1001];
-	char	*temp;
+	int		pid;
+	int		pipe_fd[2];
 
-	*buffer = ft_calloc(1, sizeof(char));
-	while (TRUE)
+	pipe(pipe_fd);
+	pid = fork();
+	if (pid < 0)
+		exit_error(FORK_ERROR, memptr, NULL);
+	else if (pid == 0)
 	{
-		ft_putstr_fd("> ", STDOUT_FILENO);
-		bytes_read = read(STDIN_FILENO, input, 1000);
-		if (bytes_read == -1 || bytes_read == 0)
-		{
-			printf("\n");
-			break ;
-		}
-		input[bytes_read] = '\0';
-		if (!ft_strcmp_input(input, delimiter))
-			break ;
-		temp = ft_strjoin(*buffer, input);
-		if (!temp)
-			exit_error(MALLOC_ERROR, memptr, NULL);
-		free(*buffer);
-		*buffer = temp;
+		set_signal_heredocs_child();
+		close(pipe_fd[0]);
+		heredoc_child(delimiter, pipe_fd, quote_status, memptr);
 	}
-	if (quote_status == OUT_QUOTE)
-		expand_buffer(buffer, memptr);
-}
-
-void	expand_buffer(char **buffer, t_memptr memptr)
-{
-	int	i;
-
-	i = 0;
-	while ((*buffer)[i])
+	else
 	{
-		if ((*buffer)[i] == '$')
-		{
-			expand_env_no_quotes(buffer, &i, memptr);
-			i--;
-		}
-		i++;
+		set_signal_heredocs_parent();
+		close(pipe_fd[1]);
+		heredoc_parent(buffer, pipe_fd, memptr);
+	//	printf("I'm continuing from now on\n");
+		set_signal();
 	}
 }
 

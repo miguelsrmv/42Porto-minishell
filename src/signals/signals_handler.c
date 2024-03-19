@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:33:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 11:31:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:19:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	sigint_handler_during_processes_child(int signum)
 {
 	(void)signum;
 	g_status_flag = SIGINT_SIGNAL;
+	printf("\n");
 }
 
 void	sigint_handler_during_processes_parent(int signum)

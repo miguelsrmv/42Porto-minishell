@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 11:52:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:00:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,13 @@ void				create_heredoc_buffer(char *delimiter,
 						t_memptr memptr);
 void				create_heredoc(t_command_table **command_table,
 						char *buffer, t_memptr memptr);
-void				expand_buffer(char **buffer, t_memptr memptr);
+
+
+/// parser_heredoc_child.c
+void				heredoc_child(char *delimiter, int *pipe_fd, enum e_QuoteType quote_status, t_memptr memptr);
+void				expand_buffer(char **buffer, t_memptr memptr, enum e_QuoteType quote_status);
+/// parser_heredoc_parent.c
+void				heredoc_parent(char **buffer, int *pipe_fd, t_memptr memptr);
 
 /// clean_heredocs.c
 void				clean_heredoc_buffers(t_command_table **command_table);
@@ -439,6 +445,8 @@ void				sigpipe_handler(int signum);
 void				sigquit_handler(int signum);
 void				sigquit_handler2(int signum);
 void				sigint_handler_heredocs(int signum);
+void	set_signal_heredocs_child(void);
+void	set_signal_heredocs_parent(void);
 
 //env.c
 int					env(char **argv);
