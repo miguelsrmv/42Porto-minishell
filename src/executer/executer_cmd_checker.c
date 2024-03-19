@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 16:47:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:00:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_commands(t_command_table **command_table, char **path_list,
 	{
 		remove_null_strings(current, memptr);
 		if ((current->command_type != NO_EXEC_INVALID_INPUT)
-		 	&& (current->cmd[0]))
+			&& (current->cmd[0]))
 		{
 			check_builtin(current);
 			if (current->command_type != BUILTIN)

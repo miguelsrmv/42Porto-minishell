@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 17:11:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:38:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,9 @@ void				create_heredoc(t_command_table **command_table,
 						char *buffer, t_memptr memptr);
 void				expand_buffer(char **buffer, t_memptr memptr);
 
+/// clean_heredocs.c
+void				clean_heredoc_buffers(t_command_table **command_table);
+
 /// expander.c
 int					is_valid_env_char(char c);
 void				define_quote_flag(char c, int *pos, char *quote_flag);
@@ -429,12 +432,14 @@ void				close_exit_fds(int original_stdin, int original_stdout);
 void				set_signal(void);
 void				set_signal_during_processes_child(void);
 void				set_signal_during_processes_parent(void);
+void				set_signal_heredocs(void);
 
 /// signals_handler.c
 void				sigint_handler(int signum);
 void				sigint_handler_during_processes_child(int signum);
 void				sigint_handler_during_processes_parent(int signum);
 void				sigpipe_handler(int signum);
+void				sigint_handler_heredocs(int signum);
 
 //env.c
 int					env(char **argv);

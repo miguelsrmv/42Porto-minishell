@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:29:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:37:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	create_command_table(t_token *lexer_list,
 	while (current_token)
 	{
 		set_full_redirections(current_token, current_table, memptr);
+		if (g_status_flag == SIGUSR1)
+			return ;
 		set_cmd(current_token, current_table, memptr);
 		while (current_token && current_token->type != SEPARATOR)
 			current_token = current_token->next;
@@ -115,5 +117,12 @@ t_command_table	*parse_list(t_token *lexer_list, t_memptr memptr)
 		exit_error(MALLOC_ERROR, memptr, NULL);
 	command_table->next = NULL;
 	create_command_table(lexer_list, &command_table, memptr);
+	if (g_status_flag == SIGUSR1)
+	{
+		g_status_flag = SIGINT_SIGNAL;
+		clean_heredoc_buffers(&command_table);
+		clear_command_table(&command_table);
+		return (NULL);
+	}
 	return (command_table);
 }

@@ -6,54 +6,55 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:57:21 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 13:58:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:03:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	takeout_nullstrings(t_command_table	*current, char **tab, t_memptr memptr)
+void	takeout_nullstrings(t_command_table	*current, char **tab,
+			t_memptr memptr)
 {
-    int 	nonEmptyCount;
-    int 	i;
-	char **	newTab;
+	int		non_empty_count;
+	int		i;
+	char	**new_tab;
 
-	nonEmptyCount = 0;
-    i = 0;
-    while (tab[i] != NULL)
+	non_empty_count = 0;
+	i = 0;
+	while (tab[i] != NULL)
 	{
-        if (ft_strcmp(tab[i], "") != 0 && ft_strcmp(tab[i], "''") != 0)
-            nonEmptyCount++;
-        i++;
-    }
-    newTab = (char **)malloc((nonEmptyCount + 1) * sizeof(char *));
-    if (newTab == NULL)
+		if (ft_strcmp(tab[i], "") != 0 && ft_strcmp(tab[i], "''") != 0)
+			non_empty_count++;
+		i++;
+	}
+	new_tab = (char **)malloc((non_empty_count + 1) * sizeof(char *));
+	if (new_tab == NULL)
 		exit_error(MALLOC_ERROR, memptr, NULL);
-	copy_non_null_strings(newTab, tab, memptr);
-	current->cmd = newTab;
+	copy_non_null_strings(new_tab, tab, memptr);
+	current->cmd = new_tab;
 }
 
-void	copy_non_null_strings(char **newTab, char **tab, t_memptr memptr)
+void	copy_non_null_strings(char **new_tab, char **tab, t_memptr memptr)
 {
 	int	j;
 	int	i;
-	
+
 	j = 0;
-    i = 0;
-    while (tab[i] != NULL)
+	i = 0;
+	while (tab[i] != NULL)
 	{
-        if (ft_strcmp(tab[i], "") != 0 && ft_strcmp(tab[i], "''") != 0)
+		if (ft_strcmp(tab[i], "") != 0 && ft_strcmp(tab[i], "''") != 0)
 		{
-            newTab[j] = ft_strdup(tab[i]);
-            if (newTab[j] == NULL)
+			new_tab[j] = ft_strdup(tab[i]);
+			if (new_tab[j] == NULL)
 			{
-				ft_free_tabs((void **)newTab);
-                exit_error(MALLOC_ERROR, memptr, NULL);
-            }
-            j++;
-        }
-        i++;
-    }
-    newTab[j] = NULL;
-    ft_free_tabs((void **)tab);
+				ft_free_tabs((void **)new_tab);
+				exit_error(MALLOC_ERROR, memptr, NULL);
+			}
+			j++;
+		}
+		i++;
+	}
+	new_tab[j] = NULL;
+	ft_free_tabs((void **)tab);
 }

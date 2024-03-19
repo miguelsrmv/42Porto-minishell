@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:33:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/05 15:22:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:01:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,13 @@ void	sigint_handler_during_processes_parent(int signum)
 void	sigpipe_handler(int signum)
 {
 	(void)signum;
+	return ;
+}
+
+void	sigint_handler_heredocs(int signum)
+{
+	(void)signum;
+	printf("\n");
+	g_status_flag = SIGUSR1;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:32:44 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 17:23:05 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:02:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	quick_input_check(t_command_table **command)
 {
 	int				i;
-	t_command_table *current;
+	t_command_table	*current;
 
 	current = *command;
 	while (current)

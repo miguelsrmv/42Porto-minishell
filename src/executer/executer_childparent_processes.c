@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 17:19:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:00:26 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 	t_memptr *memptr)
 {
- 	int	i;
+	int	i;
 
 	i = 0;
 	close_parent_pipes(pipe_fd, process_num, *memptr);
- 	while (i < process_num)
+	while (i < process_num)
 		waitpid(pid_array[i++], &g_status_flag, 0);
 	if (WIFEXITED(g_status_flag))
 		g_status_flag = WEXITSTATUS(g_status_flag);

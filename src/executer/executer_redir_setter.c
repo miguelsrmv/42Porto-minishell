@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:46:53 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:26:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:57:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	set_output_redir(int **pipe_fd, t_command_table **command,
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if ((*command)->output_fd == -1)
 			exit_error(OPEN_ERROR, memptr, NULL);
+		g_status_flag = 0;
 	}
 	else if ((*command)->output_type == APPEND)
 	{
@@ -51,6 +52,7 @@ void	set_output_redir(int **pipe_fd, t_command_table **command,
 				O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if ((*command)->output_fd == -1)
 			exit_error(OPEN_ERROR, memptr, NULL);
+		g_status_flag = 0;
 	}
 	else if ((*command)->output_type == PIPE)
 		(*command)->output_fd = pipe_fd[(*command)->command_no - 1][1];
