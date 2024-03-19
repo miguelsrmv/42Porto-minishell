@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 09:51:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:33:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
 {
 	int	i;
 
+	set_signal_heredocs();
 	*quote_status = OUT_QUOTE;
 	i = 0;
 	if (*delimiter == SQUOTE)
@@ -68,16 +69,16 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 	char	input[1001];
 	char	*temp;
 
-	set_signal_heredocs();
 	*buffer = ft_calloc(1, sizeof(char));
-	if (!(*buffer))
-		exit_error(MALLOC_ERROR, memptr, NULL);
 	while (TRUE)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		bytes_read = read(STDIN_FILENO, input, 1000);
 		if (bytes_read == -1 || bytes_read == 0)
+		{
+			printf("\n");
 			break ;
+		}
 		input[bytes_read] = '\0';
 		if (!ft_strcmp_input(input, delimiter))
 			break ;

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 10:52:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:32:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <dirent.h>
 # include <stdbool.h>
 # include <signal.h>
+# include <termios.h>
 
 # define SQUOTE 39
 # define DQUOTE 34
@@ -432,6 +433,10 @@ void				sigint_handler(int signum);
 void				sigint_handler_during_processes_child(int signum);
 void				sigint_handler_during_processes_parent(int signum);
 void				sigpipe_handler(int signum);
+
+/// signals_handler2.c
+void				sigquit_handler(int signum);
+void				sigquit_handler2(int signum);
 void				sigint_handler_heredocs(int signum);
 
 //env.c

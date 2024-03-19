@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 10:26:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:34:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void	set_signal(void)
 {
 	struct sigaction	sa;
+	struct termios		term;
 
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag |= ECHO;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	sa.sa_handler = sigint_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
@@ -31,6 +35,7 @@ void	set_signal_during_processes_child(void)
 	struct sigaction	sa;
 
 	signal(SIGPIPE, sigpipe_handler);
+	signal(SIGQUIT, sigquit_handler);
 	sa.sa_handler = sigint_handler_during_processes_child;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
@@ -50,13 +55,14 @@ void	set_signal_during_processes_parent(void)
 void	set_signal_heredocs(void)
 {
 	struct sigaction	sa;
+	struct termios		term;
 
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~(ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	sa.sa_handler = sigint_handler_heredocs;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = SIG_IGN;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGQUIT, sigquit_handler2);
 }
