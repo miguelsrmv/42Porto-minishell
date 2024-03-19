@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 17:23:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:25:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,22 @@ void	heredoc_child(char *delimiter, int *pipe_fd,
 {
 	int	i;
 	if (quote_status != OUT_QUOTE)
-		return ;;
+		return ;
 	i = 0;
 	while ((*buffer)[i])
 	{
- 		if ((*buffer)[i] == '$')
+		if (((*buffer)[i] == '$' && (*buffer)[i + 1])
+			&& ((*buffer)[i + 1]) == '?')
+		{
+			exit_value_expand(buffer, &i, memptr);
+			i--;
+		}
+ 		else if ((*buffer)[i] == '$')
 		{
 			expand_env_no_quotes(buffer, &i, memptr);
 			i--;
 		}
+
 		i++;
 	}
 }
