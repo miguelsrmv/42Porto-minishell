@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 16:06:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:12:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 			free(delimiter);
 		}
 		i = i + 2;
+		if (g_status_flag == 8)
+			break ;
 	}
-	if ((*command_table)->heredoc_buffer)
-		create_heredoc(command_table, (*command_table)->heredoc_buffer, memptr);
 }
 
 void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
@@ -81,7 +81,6 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 		set_signal_heredocs_parent();
 		close(pipe_fd[1]);
 		heredoc_parent(buffer, pipe_fd, memptr);
-	//	printf("I'm continuing from now on\n");
 		set_signal();
 	}
 }
@@ -93,8 +92,6 @@ void	create_heredoc(t_command_table **command_table,
 	int		i;
 	int		fd;
 
-	if (g_status_flag == SIGUSR1)
-		return ;
 	i = 0;
 	while (TRUE)
 	{

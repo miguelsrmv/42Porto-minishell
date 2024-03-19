@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 09:12:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:08:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	bash_run(char **envp, t_memptr *memptr)
 	*(memptr->command_table) = parse_list(*(memptr->lexer_list), *memptr);
 	if (!(*(memptr->command_table)))
 		return ;
+	if (g_status_flag == 8)
+	{
+		g_status_flag = 130;
+		return ;
+	}
 	expand_command_table(memptr->command_table, *memptr);
 	prepare_processes(memptr->command_table, envp, memptr);
 }

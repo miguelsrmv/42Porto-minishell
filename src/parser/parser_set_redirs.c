@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:30:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:13:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,6 @@ void	set_full_redirections(t_token *lexer_sublist,
 	initialize_command_table(command_table, total_redirects, memptr);
 	fill_full_redir(lexer_sublist, command_table, memptr);
 	check_heredocs(command_table, memptr);
+	if (((*command_table)->heredoc_buffer) && g_status_flag != 8)
+		create_heredoc(command_table, (*command_table)->heredoc_buffer, memptr);
 }
