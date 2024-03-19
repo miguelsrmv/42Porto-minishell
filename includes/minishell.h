@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 09:38:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:21:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,6 +440,7 @@ void				sigint_handler_during_processes_child(int signum);
 void				sigint_handler_during_processes_parent(int signum);
 void				sigpipe_handler(int signum);
 void				sigint_handler_heredocs(int signum);
+void				sigquit_handler_heredocs(int signum);
 
 //env.c
 int					env(char **argv);
