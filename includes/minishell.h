@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 11:32:49 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:52:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define USAGE_ERROR "Usage error: \'./minishell\'.\n"
 # define QUOTE_ERROR "Input error: unclosed quote\n"
 # define SYNTAX_ERROR "Syntax error near unexpected token\n"
+# define S_EOF "Syntax error: unexpected end of file\n"
 # define EMPTY_ERROR "Ambiguous redirect\n"
 # define COMMAND_ERROR ": command not found\n"
 # define OPEN_ERROR ": No such file or directory\n"

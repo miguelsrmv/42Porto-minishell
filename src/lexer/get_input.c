@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 07:33:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:52:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	update_input(char **input, t_memptr memptr)
 	free(input_nl);
 	free(added_input);
 	if (!(*input))
-		exit_error(MALLOC_ERROR, memptr, NULL);
+		exit_error(S_EOF, memptr, NULL);
 }
 
 char	*get_input(char *prompt, t_memptr memptr)
