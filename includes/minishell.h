@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 20:28:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:34:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -438,20 +438,18 @@ void				close_exit_fds(int original_stdin, int original_stdout);
 void				set_signal(void);
 void				set_signal_during_processes_child(void);
 void				set_signal_during_processes_parent(void);
-void				set_signal_heredocs(void);
+void				set_signal_heredocs_child(void);
+void				set_signal_heredocs_parent(void);
 
 /// signals_handler.c
 void				sigint_handler(int signum);
-void				sigint_handler_during_processes_child(int signum);
-void				sigint_handler_during_processes_parent(int signum);
+void				sigquit_handler(int signum);
 void				sigpipe_handler(int signum);
 
 /// signals_handler2.c
-void				sigquit_handler(int signum);
-void				sigquit_handler2(int signum);
+void				sigint_handler_during_processes_child(int signum);
+void				sigint_handler_during_processes_parent(int signum);
 void				sigint_handler_heredocs(int signum);
-void				set_signal_heredocs_child(void);
-void				set_signal_heredocs_parent(void);
 
 //env.c
 int					env(char **argv);

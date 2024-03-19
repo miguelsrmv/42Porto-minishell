@@ -6,23 +6,24 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:31:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 18:02:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:33:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sigquit_handler(int signum)
+void	sigint_handler_during_processes_child(int signum)
 {
 	(void)signum;
-	printf("Quit (Core duped)\n");
-	return ;
+	g_status_flag = SIGINT_SIGNAL;
+	printf("\n");
 }
 
-void	sigquit_handler2(int signum)
+void	sigint_handler_during_processes_parent(int signum)
 {
 	(void)signum;
-	return ;
+	g_status_flag = NO_SIGNAL;
+	printf("\n");
 }
 
 void	sigint_handler_heredocs(int signum)
