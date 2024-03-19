@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 15:41:31 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:50:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	check_argv_var(char *argv)
 	i = 0;
 	if (!ft_isalpha(argv[0]) && argv[0] != '_' && argv[0] != '|')
 	{
+		ft_putstr_fd("export: ", STDERR_FILENO);
 		ft_putstr_fd(argv, STDERR_FILENO);
 		ft_putstr_fd(": Not a valid identifier!\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
@@ -76,6 +77,7 @@ int	check_argv_var(char *argv)
 		if (argv[i] == '-' || argv[i] == '+' || argv[i] == '.'
 			|| argv[i] == '/' || argv[i] == ' ')
 		{
+			ft_putstr_fd("export: ", STDERR_FILENO);
 			ft_putstr_fd(argv, STDERR_FILENO);
 			ft_putstr_fd(": Not a valid identifier!\n", STDERR_FILENO);
 			return (EXIT_FAILURE);

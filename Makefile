@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/19 09:39:09 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/19 10:51:12 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			parser/clean_heredocs.c \
 			expander/expander.c expander/expander_noquotes.c expander/expander_squote.c \
 			expander/expander_dquote.c expander/expander_concatenate.c \
-			expander/takeout_nullstrings.c executer/quick_input_check.c\
+			executer/quick_input_check.c\
 			executer/executer_prepare_processes.c executer/executer_redir_checker.c \
 			executer/executer_redir_checker2.c executer/executer_redir_setter.c \
 			executer/executer_cmd_checker.c executer/executer_executable_checker.c \

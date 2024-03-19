@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 14:00:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:48:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	expand_command_table(t_command_table **command_table, t_memptr memptr)
 		expand_double_vector(current->cmd, memptr);
 		expand_double_vector(current->full_input, memptr);
 		expand_double_vector(current->full_output, memptr);
-		takeout_nullstrings(current, current->cmd, memptr);
 		current = current->next;
 	}
 }
