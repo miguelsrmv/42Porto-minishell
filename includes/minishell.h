@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 10:50:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:52:26 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,7 +337,6 @@ int					free_concatenate(char *left, char *right, char *temp,
 
 /// quick_input_check.c
 void				quick_input_check(t_command_table **command);
-
 
 /// executer_prepare_processes.c
 int					**create_pipes(int **pipe_fd, int process_num,
