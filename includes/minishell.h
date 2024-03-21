@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 20:40:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:46:46 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,6 +373,10 @@ enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
 enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 						t_command_table **command, t_memptr memptr);
 enum e_ValidType	set_redirs(int **pipe_fd, t_command_table **command,
+						t_memptr memptr);
+void				create_all_other_outputs(t_command_table **command,
+						t_memptr memptr);
+void				close_unused_output(t_command_table **command,
 						t_memptr memptr);
 
 /// executer_redir_setter.c
