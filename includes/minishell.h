@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 12:46:46 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:17:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,6 +348,10 @@ int					concatenate(char **string, char *expanded_string,
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
 
+/// remove_nullstrings.c
+//void				remove_nullstrings(char **command, t_memptr memptr);
+//void				copy_nonnullstrings(char **command,
+//						char **trimmed_command, t_memptr memptr);
 /// quick_input_check.c
 void				quick_input_check(t_command_table **command);
 
@@ -437,6 +441,11 @@ int					execute_single_builtin(t_command_table *current,
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
 void				close_exit_fds(int original_stdin, int original_stdout);
+
+/// remove_strings.c
+char				**remove_nullstrings(char **command, t_memptr memptr);
+char				**copy_nonnullstrings(char **command,
+						char **trimmed_command, t_memptr memptr);
 
 /// signals.c
 void				set_signal(void);
