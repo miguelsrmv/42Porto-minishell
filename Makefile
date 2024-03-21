@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/21 18:10:36 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/21 22:51:17 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			lexer/get_input.c lexer/input_checker.c \
 			lexer/lexer.c lexer/lexer_linked_list.c lexer/lexer_get_tokens.c \
+			lexer/fork_input.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
 			parser/clean_heredocs.c parser/parser_heredoc_parent.c \
 			parser/parser_heredoc_child.c \
@@ -80,6 +81,9 @@ re: fclean all
 
 leaks: readline.supp
 	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+
+test:
+	valgrind -q --leak-check=full --trace-children=no --track-fds=yes ./minishell
 
 readline.supp:
 	@ echo "{" > readline.supp

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:31:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 20:39:15 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:42:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	sigint_handler_during_processes_parent(int signum)
 	printf("\n");
 }
 
-void	sigint_handler_heredocs(int signum)
+void	sigint_handler_inputs(int signum)
 {
 	(void)signum;
+	close(g_status_flag);
 	g_status_flag = 8;
 	write(1, "> ^C\n", 5);
 	exit(g_status_flag);
-	return ;
 }

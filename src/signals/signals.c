@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 20:41:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:42:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ void	set_signal_during_processes_parent(void)
 	sigaction(SIGINT, &sa, NULL);
 }
 
-void	set_signal_heredocs_child(void)
+void	set_signal_inputs_child(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = sigint_handler_heredocs;
-	sigemptyset(&sa.sa_mask);
+	sa.sa_handler = sigint_handler_inputs;
 	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 }
 
-void	set_signal_heredocs_parent(void)
+void	set_signal_inputs_parent(void)
 {
 	struct sigaction	sa;
 

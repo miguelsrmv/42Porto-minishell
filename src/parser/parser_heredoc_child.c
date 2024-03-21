@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 20:26:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:30:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,30 @@ void	heredoc_child(char *delimiter, int *pipe_fd,
 			enum e_QuoteType quote_status, t_memptr memptr)
 {
 	char		*input;
-	size_t		*input_size;
+	size_t		input_size;
+	int			old_g_status_flag;
 
-	input_size = (size_t *)malloc(sizeof(size_t));
+	old_g_status_flag = g_status_flag;
+	g_status_flag = pipe_fd[1];
 	while (TRUE)
 	{
 		input = readline("> ");
 		if (!input)
+		{
+			close(pipe_fd[1]);
 			exit_error(S_EOF, memptr, NULL);
+		}
 		if (!ft_strcmp(input, delimiter))
 			break ;
 		expand_buffer(&input, memptr, quote_status);
-		*input_size = ft_strlen(input);
-		write(pipe_fd[1], input_size, sizeof(size_t));
+		input_size = ft_strlen(input);
+		write(pipe_fd[1], &input_size, sizeof(size_t));
 		write(pipe_fd[1], input, ft_strlen(input));
 		write(pipe_fd[1], "\n", 1);
 		free(input);
 	}
 	close(pipe_fd[1]);
-	finish_heredoc_child(memptr);
+	finish_heredoc_child(memptr, old_g_status_flag);
 }
 
 void	expand_buffer(char **buffer, t_memptr memptr,
@@ -62,10 +67,11 @@ void	expand_buffer(char **buffer, t_memptr memptr,
 	}
 }
 
-void	finish_heredoc_child(t_memptr memptr)
+void	finish_heredoc_child(t_memptr memptr, int old_g_status_flag)
 {
 	t_env		*envv;
 
+	g_status_flag = old_g_status_flag;
 	envv = get_envv();
 	free_envv(envv);
 	clean_memory(memptr);

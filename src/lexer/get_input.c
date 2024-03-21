@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 11:52:29 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:41:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,26 @@ void	trim_left_whitespace(char **input, t_memptr memptr)
 
 void	update_input(char **input, t_memptr memptr)
 {
-	char	*added_input;
-	char	*input_nl;
-	char	*temp;
+	int		pid;
+	int		pipe_fd[2];
 
-	added_input = readline("> ");
-	input_nl = ft_strjoin(*input, "\n");
-	if (!input_nl)
+	pipe(pipe_fd);
+	pid = fork();
+	if (pid < 0)
+		exit_error(FORK_ERROR, memptr, NULL);
+	else if (pid == 0)
 	{
-		free(*input);
-		free(added_input);
-		exit_error(MALLOC_ERROR, memptr, NULL);
+		set_signal_inputs_child();
+		close(pipe_fd[0]);
+		pipe_child(pipe_fd, memptr);
 	}
-	temp = *input;
-	*input = ft_strjoin(input_nl, added_input);
-	free(temp);
-	free(input_nl);
-	free(added_input);
-	if (!(*input))
-		exit_error(S_EOF, memptr, NULL);
+	else
+	{
+		set_signal_inputs_parent();
+		close(pipe_fd[1]);
+		pipe_parent(input, pipe_fd, memptr);
+		set_signal();
+	}
 }
 
 char	*get_input(char *prompt, t_memptr memptr)
@@ -70,7 +71,11 @@ char	*get_input(char *prompt, t_memptr memptr)
 		return (NULL);
 	}
 	while (check_in_pipe(input))
+	{
 		update_input(&input, memptr);
+		if (!input)
+			return (NULL);
+	}
 	return (get_input_2(input, memptr));
 }
 

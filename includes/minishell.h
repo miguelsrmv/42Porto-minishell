@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 18:17:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:42:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,13 @@ void				advance_until_unquoted_whitespace(char *input, int *end,
 						char quote_status);
 char				*get_redirect_token(char *input, int *start, int *end);
 
+/// fork_input.c
+void				pipe_child(int *pipe_fd, t_memptr memptr);
+void				pipe_parent(char **input, int *pipe_fd, t_memptr memptr);
+void				read_extra_input(int read_fd, char **input,
+						t_memptr memptr);
+void				finish_pipe_child(t_memptr memptr, int old_g_status_flag);
+
 /// parser.c
 int					check_syntax(t_token *lexer_list);
 int					count_cmds(t_token *current);
@@ -297,7 +304,8 @@ void				heredoc_child(char *delimiter, int *pipe_fd,
 						enum e_QuoteType quote_status, t_memptr memptr);
 void				expand_buffer(char **buffer, t_memptr memptr,
 						enum e_QuoteType quote_status);
-void				finish_heredoc_child(t_memptr memptr);
+void				finish_heredoc_child(t_memptr memptr,
+						int old_g_status_flag);
 
 /// parser_heredoc_parent.c
 void				heredoc_parent(char **buffer, int *pipe_fd,
@@ -451,8 +459,8 @@ char				**copy_nonnullstrings(char **command,
 void				set_signal(void);
 void				set_signal_during_processes_child(void);
 void				set_signal_during_processes_parent(void);
-void				set_signal_heredocs_child(void);
-void				set_signal_heredocs_parent(void);
+void				set_signal_inputs_child(void);
+void				set_signal_inputs_parent(void);
 
 /// signals_handler.c
 void				sigint_handler(int signum);
@@ -462,7 +470,7 @@ void				sigpipe_handler(int signum);
 /// signals_handler2.c
 void				sigint_handler_during_processes_child(int signum);
 void				sigint_handler_during_processes_parent(int signum);
-void				sigint_handler_heredocs(int signum);
+void				sigint_handler_inputs(int pipe_fd);
 
 //env.c
 int					env(char **argv);
