@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/02 18:03:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:35:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,24 @@ int	echo(char **args)
 
 	i = 0;
 	print_newline = true;
-	while (ft_strcmp(args[i], "") == 0)
+	while (args[i])
 		i++;
-	if (ft_strncmp(args[i], "echo", ft_strlen(args[i])) != 0)
+/* 	if (ft_strncmp(args[i], "echo", ft_strlen(args[i])) != 0)
 		return (EXIT_FAILURE);
-	i++;
-	if (!args[i])
+	i++;*/
+	if (i == 1)
 	{
-		g_status_flag = 0;
 		printf("\n");
+		g_status_flag = 0;
 		return (EXIT_SUCCESS);
 	}
+	i = 1;
 	while (args[i] && check_echo_arg(args[i]) == 2)
 	{
 		print_newline = false;
 		i++;
 	}
-	if (print_echo(args, print_newline, i) == EXIT_FAILURE)
+	if (print_echo(&args[--i], print_newline) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -55,49 +56,48 @@ int	check_echo_arg(char *args)
 		return (1);
 }
 
-char	*get_echo_var(char *str, t_memptr memptr)
+int	check_hifen(char *args, int *n, int i)
 {
-	t_env		*envv;
-	char		*result;
-	int			i;
-
-	envv = get_envv();
-	if (envv == NULL || envv->env_var == NULL)
-		return (NULL);
-	i = 0;
-	result = NULL;
-	while (envv->env_var[i] != NULL)
+	if (args[i] == '-')
 	{
-		if (contains_str(envv->env_var[i], str) == EXIT_SUCCESS)
-		{
-			result = ft_strchr2(envv->env_var[i], '=');
-			break ;
-		}
 		i++;
+		while (args[i])
+		{
+			if (args[i] == 'n')
+				*n = 0;
+			else
+				return (-1);
+			i++;
+		}
 	}
-	if (ft_isdigit(*str) && ft_atoi(str) < memptr.argc)
-	{
-		result = ft_strdup(memptr.argv[ft_atoi(str)]);
-		if (!result)
-			exit_error(MALLOC_ERROR, memptr, NULL);
-	}
-	return (result);
+	else
+		return (-1);
+	return (EXIT_SUCCESS);
 }
 
-int	contains_str(const char *str1, char *str2)
+int	print_echo(char **args, bool print_newline)
 {
-	int		i;
+	int	i;
 
-	i = 0;
-	while (str1[i] && str2[i] && str1[i] == str2[i])
+	i = 1;
+	while (args[i])
 	{
-		if (str1[i] == str2[i])
-		{
-			if ((str1[i + 1] == '=' || str1[i + 1] == '\0')
-				&& str2[i + 1] == '\0')
-				return (EXIT_SUCCESS);
-		}
-		i++;
+		printf("%s", args[i++]);
+		if (args[i])
+			printf(" ");
 	}
-	return (EXIT_FAILURE);
+/* 	{
+		if (ft_strcmp(args[i], "") == 0)
+			;
+		else if (!printf("%s", args[i]))
+			return (EXIT_FAILURE);
+		else if (ft_strlen(args[i]) != 0 && args[i + 1] != NULL)
+			if (!printf(" "))
+				return (EXIT_FAILURE);
+		i++;
+	} */
+	if (print_newline)
+		if (!printf("\n"))
+			return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

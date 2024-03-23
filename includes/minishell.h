@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 11:28:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 12:54:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -530,7 +530,7 @@ char				*get_echo_var(char *str, t_memptr memptr);
 int					contains_str(const char *str1, char *str2);
 
 ///echo2.c
-int					print_echo(char **args, bool print_newline, int i);
+int					print_echo(char **args, bool print_newline);
 int					check_hifen(char *args, int *n, int i);
 
 ///get_set.c
