@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:12:24 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/15 18:30:59 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:09:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_builtin_checker(char **argv)
 	{
 		if (argv[1] && argv[1][0] == '-' && argv[1][1] != '\0')
 		{
-			ft_putstr_fd("bash: invalid option\n", STDERR_FILENO);
+			ft_putstr_fd("invalid option\n", STDERR_FILENO);
 			g_status_flag = 2;
 			return (EXIT_FAILURE);
 		}
@@ -29,7 +29,7 @@ int	ft_builtin_checker(char **argv)
 	{
 		if (argv[1] && argv[1][0] == '-' && argv[1][1] != '\0')
 		{
-			ft_putstr_fd("bash: invalid option\n", STDERR_FILENO);
+			ft_putstr_fd("invalid option\n", STDERR_FILENO);
 			g_status_flag = 125;
 			return (EXIT_FAILURE);
 		}

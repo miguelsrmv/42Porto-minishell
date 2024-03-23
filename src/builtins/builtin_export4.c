@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:34 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 15:04:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:09:55 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	export_error_loop(char **var, char **argv)
 	{
 		if (ft_isalnum((*var)[j]) == 0 && (*var)[j] != '_')
 		{
-			printf("minishell: export: '%s': not a valid identifier\n",
+			printf("export: '%s': not a valid identifier\n",
 				argv[1]);
 			ft_free_str(var);
 			return (EXIT_FAILURE);
@@ -66,7 +66,7 @@ int	check_argv_var(char *argv)
 	i = 0;
 	if (!ft_isalpha(argv[0]) && argv[0] != '_' && argv[0] != '|')
 	{
-		ft_putstr_fd("minishell: export: '", STDERR_FILENO);
+		ft_putstr_fd("export: '", STDERR_FILENO);
 		ft_putstr_fd(argv, STDERR_FILENO);
 		ft_putstr_fd("': Not a valid identifier!\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
@@ -78,7 +78,7 @@ int	check_argv_var(char *argv)
 		if (argv[i] == '-' || argv[i] == '+' || argv[i] == '.'
 			|| argv[i] == '/' || argv[i] == ' ')
 		{
-			ft_putstr_fd("minishell: export: '", STDERR_FILENO);
+			ft_putstr_fd("export: '", STDERR_FILENO);
 			ft_putstr_fd(argv, STDERR_FILENO);
 			ft_putstr_fd("': Not a valid identifier!\n", STDERR_FILENO);
 			return (EXIT_FAILURE);

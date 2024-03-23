@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:54:07 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/23 15:05:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:08:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	ft_exit_cd(char **cwd, int exit_status)
 		return (EXIT_SUCCESS);
 	else if (g_status_flag != 2)
 	{
-		perror("bash: cd: ");
+		perror("cd: ");
 		return (EXIT_FAILURE);
 	}
 	else
 	{
-		ft_putstr_fd("minishell: cd: invalid option.\n", STDERR_FILENO);
+		ft_putstr_fd("cd: invalid option.\n", STDERR_FILENO);
 		return (g_status_flag);
 	}
 }
