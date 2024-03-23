@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:00:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 12:46:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:50:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	create_all_other_outputs(t_command_table **command, t_memptr memptr)
 		while (current->full_output[i]
 			&& (i < ft_tablen((void **)current->full_output) - 2))
 		{
-			if ((redir_check((*command)->full_output[i])) == OUTPUT)
-				fd = open((*command)->full_output[i + 1],
+			if ((redir_check(current->full_output[i])) == OUTPUT)
+				fd = open(current->full_output[i + 1],
 						O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			else if ((redir_check((*command)->full_output[i])) == APPEND)
-				fd = open((*command)->full_output[i + 1],
+			else if ((redir_check(current->full_output[i])) == APPEND)
+				fd = open(current->full_output[i + 1],
 						O_WRONLY | O_CREAT | O_APPEND, 0644);
 			i = i + 2;
 			if (fd == -1)
