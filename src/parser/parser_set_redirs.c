@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 18:32:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:09:35 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	initialize_command_table(t_command_table **command_table,
 	if (!(*command_table)->full_input || !(*command_table)->full_output)
 		exit_error(MALLOC_ERROR, memptr, NULL);
 	(*command_table)->cmd = NULL;
+	(*command_table)->cmd_before_expansion = NULL;
 	(*command_table)->cmd_target = NULL;
 	(*command_table)->command_type = NULL_COMMANDTYPE;
 	(*command_table)->builtin_pointer = NULL;
