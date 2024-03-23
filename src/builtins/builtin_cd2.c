@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:54:07 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/23 15:08:30 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:35:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ int	ft_check_cd(char *str, t_env *envv)
 	return (EXIT_FAILURE);
 }
 
-int	ft_exit_cd(char **cwd, int exit_status)
+int	ft_exit_cd(char **cwd, char **argv, int exit_status)
 {
 	ft_free_str(cwd);
 	if (exit_status == EXIT_SUCCESS)
 		return (EXIT_SUCCESS);
 	else if (g_status_flag != 2)
 	{
-		perror("cd: ");
+		ft_putstr_fd("cd: ", STDERR_FILENO);
+		ft_putstr_fd(argv[1], STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		perror(NULL);
 		return (EXIT_FAILURE);
 	}
 	else

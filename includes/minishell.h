@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 12:54:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:21:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -518,7 +518,7 @@ int					ft_cd2(char **argv, t_env *envv);
 
 ///cd2.c
 int					ft_check_cd(char *str, t_env *envv);
-int					ft_exit_cd(char **cwd, int exit_status);
+int					ft_exit_cd(char **cwd, char **argv, int exit_status);
 
 ///pwd.c
 int					pwd(char **argv);
