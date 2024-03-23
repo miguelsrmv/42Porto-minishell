@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 11:52:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:05:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 {
 	t_env	*envv;
 
+	set_g_status_flag(error_msg);
 	non_exit_error(error_msg, memptr, extra_error_msg);
 	envv = get_envv();
 	free_envv(envv);
@@ -29,14 +30,14 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 {
 	char	*message;
 
-	set_g_status_flag(error_msg);
 	if (!ft_strcmp(error_msg, OPEN_ERROR)
 		|| !ft_strcmp(error_msg, PERMISSION_ERROR))
 		perror(extra_error_msg);
-	else if (!ft_strcmp(error_msg, QUOTE_ERROR)
-		|| !ft_strcmp(error_msg, SYNTAX_ERROR)
+	else if (!ft_strcmp(error_msg, EMPTY_INPUT_ERROR)
+		|| !ft_strcmp(error_msg, QUOTE_ERROR)
 		|| !ft_strcmp(error_msg, EOF_ERROR)
-		|| !ft_strcmp(error_msg, EMPTY_ERROR) || !ft_strcmp(error_msg, S_EOF))
+		|| !ft_strcmp(error_msg, SYNTAX_ERROR)
+		|| !ft_strcmp(error_msg, S_EOF) || !ft_strcmp(error_msg, EMPTY_ERROR))
 		printf(error_msg, NULL);
 	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR)
 		|| !ft_strcmp(error_msg, COMMAND_ERROR)

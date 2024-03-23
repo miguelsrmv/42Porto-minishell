@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 15:21:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:06:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 # define DIR_OPEN_ERROR ": No such directory \n"
 # define DIRECTORY_OUTPUT_ERROR ": Is a directory \n"
 # define PERMISSION_ERROR ": Permission denied\n"
+# define EMPTY_INPUT_ERROR ""
 
 // Exit code / signal errors
 # define NO_SIGNAL 0
