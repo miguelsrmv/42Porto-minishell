@@ -6,18 +6,18 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 19:05:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:15:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
+void	exit_error(char *error, t_memptr memptr, char *extra_error)
 {
 	t_env	*envv;
 
-	set_g_status_flag(error_msg);
-	non_exit_error(error_msg, memptr, extra_error_msg);
+	set_g_status_flag(error);
+	non_exit_error(error, memptr, extra_error);
 	envv = get_envv();
 	free_envv(envv);
 	clean_memory(memptr);
@@ -26,26 +26,25 @@ void	exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 	exit(g_status_flag);
 }
 
-void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
+void	non_exit_error(char *error, t_memptr memptr, char *extra_error)
 {
 	char	*message;
 
-	if (!ft_strcmp(error_msg, OPEN_ERROR)
-		|| !ft_strcmp(error_msg, PERMISSION_ERROR))
-		perror(extra_error_msg);
-	else if (!ft_strcmp(error_msg, EMPTY_INPUT_ERROR)
-		|| !ft_strcmp(error_msg, QUOTE_ERROR)
-		|| !ft_strcmp(error_msg, EOF_ERROR)
-		|| !ft_strcmp(error_msg, SYNTAX_ERROR)
-		|| !ft_strcmp(error_msg, S_EOF) || !ft_strcmp(error_msg, EMPTY_ERROR))
-		printf(error_msg, NULL);
-	else if (!ft_strcmp(error_msg, DIRECTORY_ERROR)
-		|| !ft_strcmp(error_msg, COMMAND_ERROR)
-		|| !ft_strcmp(error_msg, DIRECTORY_OUTPUT_ERROR)
-		|| !ft_strcmp(error_msg, DIR_OPEN_ERROR)
-		|| !ft_strcmp(error_msg, NOT_A_DIR_ERROR))
+	set_g_status_flag(error);
+	if (!ft_strcmp(error, OPEN_ERROR) || !ft_strcmp(error, PERMISSION_ERROR))
+		perror(extra_error);
+	else if (!ft_strcmp(error, EMPTY_INPUT_ERROR)
+		|| !ft_strcmp(error, QUOTE_ERROR) || !ft_strcmp(error, EOF_ERROR)
+		|| !ft_strcmp(error, SYNTAX_ERROR)
+		|| !ft_strcmp(error, S_EOF) || !ft_strcmp(error, EMPTY_ERROR))
+		printf(error, NULL);
+	else if (!ft_strcmp(error, DIRECTORY_ERROR)
+		|| !ft_strcmp(error, COMMAND_ERROR)
+		|| !ft_strcmp(error, DIRECTORY_OUTPUT_ERROR)
+		|| !ft_strcmp(error, DIR_OPEN_ERROR)
+		|| !ft_strcmp(error, NOT_A_DIR_ERROR))
 	{
-		message = ft_strjoin(extra_error_msg, error_msg);
+		message = ft_strjoin(extra_error, error);
 		if (!message)
 			exit_error(MALLOC_ERROR, memptr, NULL);
 		printf(message, NULL);
@@ -55,22 +54,22 @@ void	non_exit_error(char *error_msg, t_memptr memptr, char *extra_error_msg)
 		perror(NULL);
 }
 
-void	set_g_status_flag(char *error_msg)
+void	set_g_status_flag(char *error)
 {
-	if (!ft_strcmp(error_msg, EOF_ERROR))
+	if (!ft_strcmp(error, EOF_ERROR))
 		g_status_flag = 0;
-	else if (!ft_strcmp(error_msg, OPEN_ERROR)
-		|| !ft_strcmp(error_msg, EMPTY_ERROR)
-		|| !ft_strcmp(error_msg, DIRECTORY_OUTPUT_ERROR))
+	else if (!ft_strcmp(error, OPEN_ERROR)
+		|| !ft_strcmp(error, EMPTY_ERROR)
+		|| !ft_strcmp(error, DIRECTORY_OUTPUT_ERROR))
 		g_status_flag = 1;
-	else if (!ft_strcmp(error_msg, SYNTAX_ERROR)
-		|| !ft_strcmp(error_msg, QUOTE_ERROR))
+	else if (!ft_strcmp(error, SYNTAX_ERROR)
+		|| !ft_strcmp(error, QUOTE_ERROR))
 		g_status_flag = 2;
-	else if (!ft_strcmp(error_msg, PERMISSION_ERROR)
-		|| !ft_strcmp(error_msg, DIRECTORY_ERROR)
-		|| !ft_strcmp(error_msg, NOT_A_DIR_ERROR))
+	else if (!ft_strcmp(error, PERMISSION_ERROR)
+		|| !ft_strcmp(error, DIRECTORY_ERROR)
+		|| !ft_strcmp(error, NOT_A_DIR_ERROR))
 		g_status_flag = 126;
-	else if (!ft_strcmp(error_msg, COMMAND_ERROR)
-		|| !ft_strcmp(error_msg, DIR_OPEN_ERROR))
+	else if (!ft_strcmp(error, COMMAND_ERROR)
+		|| !ft_strcmp(error, DIR_OPEN_ERROR))
 		g_status_flag = 127;
 }

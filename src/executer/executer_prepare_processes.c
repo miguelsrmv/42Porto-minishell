@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 17:21:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:17:25 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 		check_commands(command_table, path_list, *memptr);
 	process_num = count_processes(command_table);
 	set_signal_during_processes_child();
-	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
+	if (process_num == 1
+		&& ((*command_table)->command_type == NO_EXEC_INVALID_INPUT
+			|| (*command_table)->input_type == INVALID))
+		input_end_process(*command_table, *memptr);
+	else if (process_num == 1 && (*command_table)->command_type == BUILTIN)
 		execute_single_builtin(*command_table, envp, *memptr);
-	else if (process_num == 1
-		&& (*command_table)->command_type == NO_EXEC_INVALID_INPUT)
-		non_exit_error(OPEN_ERROR, *memptr, (*command_table)->input_target);
 	else
 		process_forks(command_table, envp, process_num, *memptr);
 }

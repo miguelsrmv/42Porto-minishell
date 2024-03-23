@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 19:06:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:43:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,15 +223,16 @@ void				clear_lexer_list(t_token **lst);
 void				clear_command_table(t_command_table **lst);
 void				clean_memory(t_memptr memptr);
 void				close_pipes_error(int **pipe);
-void				final_clear_and_exit(t_memptr memptr, char **envp);
+void				final_clear_and_exit(t_memptr memptr, char **envp,
+						int **pipe_fd, t_command_table *current);
 
 /// exit_error.c
-void				exit_error(char *error_msg, t_memptr memptr,
-						char *extra_error_msg);
-void				non_exit_error(char *error_msg, t_memptr memptr,
-						char *extra_error_msg);
-void				set_g_status_flag(char *error_msg);
-void				print_to_fd(int fd, char *error_msg, char *extra_error_msg,
+void				exit_error(char *error, t_memptr memptr,
+						char *extra_error);
+void				non_exit_error(char *error, t_memptr memptr,
+						char *extra_error);
+void				set_g_status_flag(char *error);
+void				print_to_fd(int fd, char *error, char *extra_error,
 						t_memptr memptr);
 
 /// get_input.c
@@ -364,6 +365,8 @@ int					free_concatenate(char *left, char *right, char *temp,
 //						char **trimmed_command, t_memptr memptr);
 /// quick_input_check.c
 void				quick_input_check(t_command_table **command);
+void				input_end_process(t_command_table *command,
+						t_memptr memptr);
 
 /// executer_prepare_processes.c
 int					**create_pipes(int **pipe_fd, int process_num,

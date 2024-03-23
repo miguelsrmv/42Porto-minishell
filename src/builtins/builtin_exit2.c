@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 19:33:12 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/02/03 10:27:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:21:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exit(char *command, char **envp, t_command_table *current,
 	(void)command;
 	if (ft_exit_status(current) == 1)
 		return ;
-	final_clear_and_exit(memptr, envp);
+	final_clear_and_exit(memptr, envp, NULL, NULL);
 }
 
 static char	*posnum(char *str, long long n, int len)
