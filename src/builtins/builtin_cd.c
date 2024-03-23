@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/15 17:26:52 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:05:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*find_home(t_env *envv)
 		return (NULL);
 	path = get_env_var_value(envv, "HOME");
 	if (!path)
-		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 	return (path);
 }
 
@@ -90,7 +90,7 @@ int	cd(char **argv)
 	{
 		g_status_flag = 1;
 		if (argc > 2)
-			ft_putstr_fd("bash: cd: too many arguments\n", STDERR_FILENO);
+			ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
 		return (g_status_flag);
 	}
 	if (argc == 1 || (argc == 2 && (!ft_strcmp(argv[1], "--")
