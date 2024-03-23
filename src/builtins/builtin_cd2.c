@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:54:07 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/15 17:20:36 by bmota-si         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:55:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ int	ft_check_cd(char *str, t_env *envv)
 		free(cwd);
 		return (EXIT_SUCCESS);
 	}
+	else if (ft_strlen(str) == 0)
+	{
+		g_status_flag = 0;
+		return (EXIT_SUCCESS);
+	}
 	else if (str[0] == '-' && str[1] != '\0')
-	{
 		g_status_flag = 2;
-		return (EXIT_FAILURE);
-	}
 	else
-	{
 		g_status_flag = 1;
-		return (EXIT_FAILURE);
-	}
+	return (EXIT_FAILURE);
 }
 
 int	ft_exit_cd(char **cwd, int exit_status)
