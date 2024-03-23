@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 23:42:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:28:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ typedef struct s_command_table
 	char					*cmd_target;
 	enum e_CommandType		command_type;
 	void					*builtin_pointer;
+	char					**cmd_before_expansion;
 
 	char					**full_input;
 	char					*input_target;
@@ -450,10 +451,16 @@ int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
 void				close_exit_fds(int original_stdin, int original_stdout);
 
-/// remove_strings.c
-char				**remove_nullstrings(char **command, t_memptr memptr);
-char				**copy_nonnullstrings(char **command,
-						char **trimmed_command, t_memptr memptr);
+/// final_nullstrings.c
+char				**final_nullstrings(t_command_table *current,
+						t_memptr memptr);
+int					get_final_len(char **cmd_before_expansion,
+						char **cmd);
+void				fill_with_nonnullstrings(char **final_cmd,
+						char **cmd_before_expansion,
+						char **cmd, t_memptr memptr);
+bool				is_string_truly_null(char *string_before_expansion,
+						char *string_after_expansion);
 
 /// signals.c
 void				set_signal(void);

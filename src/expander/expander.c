@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 18:11:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/22 07:41:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	expand_command_table(t_command_table **command_table, t_memptr memptr)
 	current = *command_table;
 	while (current)
 	{
+		current->cmd_before_expansion = ft_tabdup(current->cmd);
+		if (!current->cmd)
+			exit_error(MALLOC_ERROR, memptr, NULL);
 		expand_double_vector(current->cmd, memptr);
 		expand_double_vector(current->full_input, memptr);
 		expand_double_vector(current->full_output, memptr);

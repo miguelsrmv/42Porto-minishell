@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 19:25:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:52:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	process_child(int **pipe_fd, t_command_table *current,
 	}
 	if (current->command_type == EXECUTABLE)
 	{
-		current->cmd = remove_nullstrings(current->cmd, memptr);
+		current->cmd = final_nullstrings(current, memptr);
 		execve(current->cmd_target, current->cmd, envp);
 	}
 	else if (current->command_type == BUILTIN)

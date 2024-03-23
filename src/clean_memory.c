@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 18:38:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/22 07:42:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	clear_command_table(t_command_table **lst)
 		temp = (*lst)->next;
 		if ((*lst)->cmd)
 			ft_free_tabs((void **)(*lst)->cmd);
+		if ((*lst)->cmd_before_expansion)
+			ft_free_tabs((void **)(*lst)->cmd_before_expansion);
 		if ((*lst)->cmd_target)
 			free((*lst)->cmd_target);
 		if ((*lst)->full_input)
