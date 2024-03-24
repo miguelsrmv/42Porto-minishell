@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:00:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 22:33:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/24 00:19:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,27 @@ enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 
 void	create_all_other_outputs(t_command_table **command, t_memptr memptr)
 {
-	t_command_table	*current;
 	int				i;
-	int				fd;
+	static int		fd;
+	t_command_table	*current;
 
-	current = *command;
-	while (current)
+ 	current = *command;
+	i = 0;
+	fd = 0;
+	while (current->full_output[i]
+		&& (i < ft_tablen((void **)current->full_output) - 2))
 	{
-		i = 0;
-		while (current->full_output[i]
-			&& (i < ft_tablen((void **)current->full_output) - 2))
-		{
-			if ((redir_check(current->full_output[i])) == OUTPUT)
-				fd = open(current->full_output[i + 1],
-						O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			else if ((redir_check(current->full_output[i])) == APPEND)
-				fd = open(current->full_output[i + 1],
-						O_WRONLY | O_CREAT | O_APPEND, 0644);
-			i = i + 2;
-			if (fd == -1)
-				exit_error(OPEN_ERROR, memptr, NULL);
-			if (close(fd) == -1)
-				exit_error(CLOSE_ERROR, memptr, NULL);
-		}
-		current = current->next;
+		if ((redir_check(current->full_output[i])) == OUTPUT)
+			fd = open(current->full_output[i + 1],
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if ((redir_check(current->full_output[i])) == APPEND)
+			fd = open(current->full_output[i + 1],
+					O_WRONLY | O_CREAT | O_APPEND, 0644);
+		i = i + 2;
+		if (fd == -1)
+			exit_error(OPEN_ERROR, memptr, NULL);
+		if (close(fd) == -1)
+			exit_error(CLOSE_ERROR, memptr, NULL);
 	}
 }
 
@@ -99,17 +96,13 @@ void	close_unused_output(t_command_table **command, t_memptr memptr)
 	t_command_table	*current;
 
 	current = *command;
-	while (current)
+	if (current->command_type != EXECUTABLE
+		&& current->command_type != BUILTIN
+		&& current->output_fd
+		&& current->output_type != PIPE)
 	{
-		if (current->command_type != EXECUTABLE
-			&& current->command_type != BUILTIN
-			&& current->output_fd
-			&& current->output_type != PIPE)
-		{
-			if (close(current->output_fd) == -1)
-				exit_error(CLOSE_ERROR, memptr, NULL);
-		}
-		current = current->next;
+		if (close(current->output_fd) == -1)
+			exit_error(CLOSE_ERROR, memptr, NULL);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 17:28:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 11:33:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 23:51:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	fill_with_nonnullstrings(char **final_cmd,
 	i = 0;
 	j = 0;
 	tab_len = ft_tablen((void **)cmd_before_expansion);
-	while (j < tab_len)
+	while (j < tab_len && cmd[j])
 	{
 		if (is_string_truly_null(cmd_before_expansion[j], cmd[j]) == FALSE)
 		{
@@ -64,7 +64,7 @@ int	get_final_len(char **cmd_before_expansion, char **cmd)
 	final_len = 0;
 	tab_len = ft_tablen((void **)cmd_before_expansion);
 	i = 0;
-	while (i < tab_len)
+	while (i < tab_len && cmd[i])
 	{
 		final_len++;
 		if (is_string_truly_null(cmd_before_expansion[i], cmd[i]) == TRUE)

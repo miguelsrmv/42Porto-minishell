@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 21:48:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/23 23:58:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ void	final_clear_and_exit(t_memptr memptr, char **envp,
 			close(pipe_fd[current->command_no - 2][0]);
 		if (current->next)
 			close(pipe_fd[current->command_no - 1][1]);
+		if (current->input_fd && current->input_type != PIPE)
+			close(current->input_fd);
+		if (current->output_fd && current->output_type != PIPE)
+			close(current->output_fd);
 	}
 	clean_memory(memptr);
 	free_envv(get_envv());
