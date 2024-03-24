@@ -6,12 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:56 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 14:35:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:43:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// Retirei a parte em secção porque por definição, se entra aqui, ja é "echo"
 int	echo(char **args)
 {
 	bool	print_newline;
@@ -75,6 +76,7 @@ int	check_hifen(char *args, int *n, int i)
 	return (EXIT_SUCCESS);
 }
 
+// Já não precisa desta parte após as trocadas de "" para NULL, acho eu
 int	print_echo(char **args, bool print_newline)
 {
 	int	i;

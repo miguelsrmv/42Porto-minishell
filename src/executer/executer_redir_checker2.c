@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:00:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/24 00:19:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:41:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	create_all_other_outputs(t_command_table **command, t_memptr memptr)
 	static int		fd;
 	t_command_table	*current;
 
- 	current = *command;
+	current = *command;
 	i = 0;
 	fd = 0;
 	while (current->full_output[i]
