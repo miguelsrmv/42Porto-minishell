@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 20:29:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:40:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ int	main(int argc, char **argv, char **envp)
 	envp_cpy = ft_tabdup(envp);
 	memptr = initialize_memptr(&lexer_list, &command_table, argv, envp_cpy);
 	bash_main(envp_cpy, &memptr);
-	ft_free_tabs((void **)envp);
 	return (0);
 }
