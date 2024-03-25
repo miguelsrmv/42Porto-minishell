@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 21:43:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:44:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 # define DIR_OPEN_ERROR ": No such directory \n"
 # define DIRECTORY_OUTPUT_ERROR ": Is a directory \n"
 # define PERMISSION_ERROR ": Permission denied\n"
+# define PERMISSION_IO_ERROR ": Permission denied \n"
 # define EMPTY_INPUT_ERROR ""
 
 // Exit code / signal errors
@@ -116,7 +117,7 @@ enum e_RedirectType
 	APPEND,
 	HERE_DOC,
 	PIPE,
-	INVALID
+	INVALID,
 };
 
 enum e_ValidType
@@ -125,9 +126,11 @@ enum e_ValidType
 	INVALID_INPUT,
 	NONEXISTENT_INPUT,
 	INVALID_INPUT_REDIR,
+	INVALID_INPUT_READ,
 	INVALID_OUTPUT_REDIR,
-	INVALID_CMD,
 	INVALID_OUTPUT,
+	INVALID_OUTPUT_WRITE,
+	INVALID_CMD,
 	EMPTY,
 };
 
@@ -381,8 +384,10 @@ void				prepare_processes(t_command_table **command_table,
 /// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
 enum e_ValidType	check_input(t_command_table **command);
-enum e_ValidType	check_output_directory(char *target);
-enum e_ValidType	check_output(t_command_table **command);
+enum e_ValidType	check_output(t_command_table **command, t_memptr memptr);
+enum e_ValidType	input_target_check(char *target);
+enum e_ValidType	output_target_check(char *target);
+
 
 /// executer_redir_checker2.c
 enum e_ValidType	check_redirections(int **pipe_fd, t_command_table **command,
@@ -391,9 +396,11 @@ enum e_ValidType	non_exit_check_redirections(int **pipe_fd,
 						t_command_table **command, t_memptr memptr);
 enum e_ValidType	set_redirs(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
-void				create_all_other_outputs(t_command_table **command,
-						t_memptr memptr);
+/* void				create_all_other_outputs(t_command_table **command,
+						t_memptr memptr); */
 void				close_unused_output(t_command_table **command,
+						t_memptr memptr);
+void				create_output(enum e_RedirectType input_type, char	*target,
 						t_memptr memptr);
 
 /// executer_redir_setter.c

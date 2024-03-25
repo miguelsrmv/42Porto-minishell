@@ -22,3 +22,18 @@ x: No such file or directory
 ==7660==
 ==7660==
 minishell:
+
+
+1º INPUT
+Checkar todos os inputs, parar no primeiro input inválido de cada pipe (não existente ou não-permissão)
+
+Se erro, stop.
+
+2º OUTPUT
+Checkar todos os outputs, parar no primeiro output inválido de cada pipe (não-permissão ou diretório).
+Sempre que houver um output válido, criar.
+
+Se erro, stop.
+
+3º COMANDO
+3º checkar os comandos de cada pipe

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 05:14:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/02 17:27:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:37:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,9 @@ enum e_ValidType	check_input(t_command_table **command)
 		else
 			return (INVALID_INPUT_REDIR);
 		(*command)->input_target = (*command)->full_input[i++];
-		if (((*command)->input_type == INPUT)
-			&& access((*command)->input_target, F_OK) != 0)
-			return (INVALID_INPUT);
-		else if (((*command)->input_type == INPUT)
-			&& ft_strlen((*command)->input_target) == 0)
-			return (EMPTY);
+		if ((*command)->input_type == INPUT
+			&& input_target_check((*command)->input_target) != VALID)
+			return (input_target_check((*command)->input_target));
 	}
 	if ((*command)->input_type == HERE_DOC)
 		(*command)->input_target = (*command)->heredoc_buffer;
@@ -55,7 +52,7 @@ enum e_ValidType	check_input(t_command_table **command)
 	return (VALID);
 }
 
-enum e_ValidType	check_output_directory(char *target)
+enum e_ValidType	output_target_check(char *target)
 {
 	int			len;
 	char		*path;
@@ -75,10 +72,12 @@ enum e_ValidType	check_output_directory(char *target)
 		return (INVALID_OUTPUT);
 	}
 	free(path);
+	if (access(target, F_OK) != -1 && access(target, W_OK) == -1)
+		return (INVALID_OUTPUT_WRITE);
 	return (VALID);
 }
 
-enum e_ValidType	check_output(t_command_table **command)
+enum e_ValidType	check_output(t_command_table **command, t_memptr memptr)
 {
 	int	i;
 
@@ -91,11 +90,10 @@ enum e_ValidType	check_output(t_command_table **command)
 		else
 			return (INVALID_OUTPUT_REDIR);
 		(*command)->output_target = (*command)->full_output[i++];
-		if (check_output_directory((*command)->output_target) == EMPTY)
-			return (EMPTY);
-		else if (check_output_directory((*command)->output_target)
-			== INVALID_OUTPUT)
-			return (INVALID_OUTPUT);
+		if (output_target_check((*command)->output_target) != VALID)
+			return (output_target_check((*command)->output_target));
+		create_output((*command)->output_type, (*command)->output_target,
+			memptr);
 	}
 	if ((*command)->next && (*command)->output_type != OUTPUT
 		&& (*command)->output_type != APPEND)
@@ -103,4 +101,16 @@ enum e_ValidType	check_output(t_command_table **command)
 	if (!(*command)->output_target && (*command)->output_type != PIPE)
 		(*command)->output_type = NULL_REDIRECT;
 	return (VALID);
+}
+
+enum e_ValidType	input_target_check(char *target)
+{
+	if (access(target, F_OK) != 0)
+		return (INVALID_INPUT);
+	else if (ft_strlen(target) == 0)
+		return (EMPTY);
+	else if (access(target, R_OK) != 0)
+		return (INVALID_INPUT_READ);
+	else
+		return (VALID);
 }

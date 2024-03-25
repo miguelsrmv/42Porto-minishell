@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 21:17:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:28:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ void	prepare_processes(t_command_table **command_table, char **envp,
 	if (check_path(envp) == EXIT_SUCCESS)
 	{
 		path_list = get_path_list(memptr);
-		if (!check_commands(command_table, path_list, *memptr))
-			return ;
+		check_commands(command_table, path_list, *memptr);
 		ft_free_tabs((void **)path_list);
 		memptr->path_list = NULL;
 	}
