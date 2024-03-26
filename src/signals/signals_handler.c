@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:33:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/25 21:57:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:04:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sigint_handler(int signum)
 void	sigquit_handler(int signum)
 {
 	(void)signum;
-	printf("Quit (Core duped)\n");
+	write(STDERR_FILENO, "Quit (Core duped)\n", 19);
 	return ;
 }
 

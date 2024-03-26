@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:27:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:52:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -365,10 +365,6 @@ int					concatenate(char **string, char *expanded_string,
 int					free_concatenate(char *left, char *right, char *temp,
 						char *stringcpy);
 
-/// remove_nullstrings.c
-void				input_end_process(t_command_table *command,
-						t_memptr memptr);
-
 /// executer_prepare_processes.c
 int					**create_pipes(int process_num, t_memptr *memptr);
 void				close_pipes(int **pipe_fd, t_command_table *current,
@@ -382,7 +378,6 @@ void				prepare_processes(t_command_table **command_table,
 /// executer_redir_checker.c
 enum e_RedirectType	redir_check(char *redir_str);
 
-
 /// executer_redir_setter.c
 enum e_ValidType	set_redirs(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
@@ -393,13 +388,6 @@ void				set_output_redir(int **pipe_fd, t_command_table **command,
 void				close_redir_pipes(int **pipe_fd, t_command_table **command,
 						t_memptr memptr);
 void				close_parent_pipes(int **pipe_fd, int process_num,
-						t_memptr memptr);
-
-/// executer_cmd_checker.c
-
-int					check_commands(t_command_table **command_table,
-						char **path_list, t_memptr memptr);
-void				set_error_message(t_command_table *current,
 						t_memptr memptr);
 
 /// executer_executable_checker.c
@@ -441,6 +429,33 @@ int					execute_single_builtin(t_command_table *current,
 int					execute_builtin(t_command_table *current,
 						char **envp, t_memptr memptr);
 void				close_exit_fds(int original_stdin, int original_stdout);
+
+///executer_process_check.c
+void				process_check(t_command_table **command_table,
+						char **envp, t_memptr *memptr);
+char				**get_path(char **envp, t_memptr *memptr);
+int					check_path(char **envp);
+
+///executer_input_check.c
+bool				input_check(t_command_table **command,
+						t_memptr *memptr);
+enum e_ValidType	check_input(t_command_table **command);
+enum e_ValidType	input_target_check(char *target);
+
+///executer_output_check.c
+bool				output_check(t_command_table **command,
+						t_memptr *memptr);
+enum e_ValidType	check_output(t_command_table **command, t_memptr memptr);
+enum e_ValidType	output_target_check(char *target);
+void				create_output(enum e_RedirectType input_type, char	*target,
+						t_memptr memptr);
+
+///executer_command_check.c
+bool				command_check(t_command_table **command,
+						char **path, t_memptr *memptr);
+void				check_builtin(t_command_table *current);
+void				remove_null_strings(t_command_table *current,
+						t_memptr memptr);
 
 /// final_nullstrings.c
 char				**final_nullstrings(t_command_table *current,
@@ -552,32 +567,6 @@ char				*ft_ltoa(long long n);
 ///builtin_checker.c
 int					ft_builtin_checker(char **argv);
 
-///executer_process_check.c
-void				process_check(t_command_table **command_table,
-						char **envp, t_memptr *memptr);
-char				**get_path(char **envp, t_memptr *memptr);
-int					check_path(char **envp);
-
-///executer_input_check.c
-bool				input_check(t_command_table **command,
-						t_memptr *memptr);
-enum e_ValidType	check_input(t_command_table **command);
-enum e_ValidType	input_target_check(char *target);
-
-///executer_output_check.c
-bool				output_check(t_command_table **command,
-						t_memptr *memptr);
-enum e_ValidType	check_output(t_command_table **command, t_memptr memptr);
-enum e_ValidType	output_target_check(char *target);
-void				create_output(enum e_RedirectType input_type, char	*target,
-						t_memptr memptr);
-
-///executer_command_check.c
-bool				command_check(t_command_table **command,
-						char **path, t_memptr *memptr);
-void				check_builtin(t_command_table *current);
-void				remove_null_strings(t_command_table *current,
-						t_memptr memptr);
 #endif
 
 /// int				

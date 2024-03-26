@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:28:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:13:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 	int	i;
 
 	i = 0;
+	set_signal_during_processes_parent();
 	close_parent_pipes(pipe_fd, process_num, *memptr);
 	while (i < process_num)
 		waitpid(pid_array[i++], &g_status_flag, 0);
@@ -32,6 +33,7 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 void	process_child(int **pipe_fd, t_command_table *current,
 			char **envp, t_memptr memptr)
 {
+	set_signal_during_processes_child();
 	close_pipes(pipe_fd, current, memptr);
 	if (current->valid_command == FALSE)
 	{
