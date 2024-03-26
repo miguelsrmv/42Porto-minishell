@@ -6,24 +6,36 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:31:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 13:13:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:17:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sigint_handler_during_processes_child(int signum)
+void	set_signal_inputs_child(void)
 {
-	(void)signum;
-	g_status_flag = SIGINT_SIGNAL;
+	struct sigaction	sa;
+
+	sa.sa_handler = sigint_handler_inputs;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
 }
 
-void	sigint_handler_during_processes_parent(int signum)
+void	set_signal_inputs_parent(void)
 {
-	(void)signum;
-	g_status_flag = SIGINT_SIGNAL;
-	write(STDERR_FILENO, "\n", 1);
+	struct sigaction	sa;
+
+	sa.sa_handler = SIG_IGN;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
+	sa.sa_handler = SIG_IGN;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGQUIT, &sa, NULL);
 }
+
 
 void	sigint_handler_inputs(int signum)
 {
