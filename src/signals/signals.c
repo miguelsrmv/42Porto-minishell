@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 14:19:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:34:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ void	set_signal_during_processes_child(void)
 {
 	struct sigaction	sa;
 
-	signal(SIGPIPE, sigpipe_handler);
-	sigemptyset(&sa.sa_mask);
+	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = sigint_handler_child;
 	sigaction(SIGINT, &sa, NULL);
-	sigemptyset(&sa.sa_mask);
+	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = sigquit_handler_child;
 	sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGPIPE, sigpipe_handler);
 }
 
 void	set_signal_during_processes_parent(void)
 {
 	struct sigaction	sa;
 
-	signal(SIGQUIT, sigquit_handler_parent);
+	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = sigint_handler_during_processes_parent;
-	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, sigquit_handler_parent);
 }
