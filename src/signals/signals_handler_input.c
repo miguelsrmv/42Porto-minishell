@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:31:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 14:17:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:06:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	set_signal_inputs_parent(void)
 	sa.sa_flags = 0;
 	sigaction(SIGQUIT, &sa, NULL);
 }
-
 
 void	sigint_handler_inputs(int signum)
 {
