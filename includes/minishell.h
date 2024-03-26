@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 13:14:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:54:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -476,16 +476,14 @@ void				set_signal_during_processes_parent(void);
 
 /// signals_handler.c
 void				sigint_handler(int signum);
-void				sigquit_handler_child(int signum);
-void				sigquit_handler_parent(int signum);
-void				sigpipe_handler(int signum);
 void				sigint_handler_child(int signum);
+void				sigquit_handler_child(int signum);
+void				sigpipe_handler(int signum);
+void				sigint_handler_during_processes_child(int signum);
 
 /// signals_handler_input.c
 void				set_signal_inputs_child(void);
 void				set_signal_inputs_parent(void);
-void				sigint_handler_during_processes_child(int signum);
-void				sigint_handler_during_processes_parent(int signum);
 void				sigint_handler_inputs(int pipe_fd);
 
 //env.c

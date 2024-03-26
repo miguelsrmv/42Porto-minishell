@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:33:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 14:18:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:55:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,8 @@ void	sigpipe_handler(int signum)
 	return ;
 }
 
-void	sigquit_handler_parent(int signum)
-{
-	(void)signum;
-	write(STDERR_FILENO, "Quit\n", 5);
-	return ;
-}
-
 void	sigint_handler_during_processes_child(int signum)
 {
 	(void)signum;
 	g_status_flag = SIGINT_SIGNAL;
-}
-
-void	sigint_handler_during_processes_parent(int signum)
-{
-	(void)signum;
-	g_status_flag = SIGINT_SIGNAL;
-	write(STDERR_FILENO, "\n", 1);
 }

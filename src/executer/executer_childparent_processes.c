@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 14:07:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:44:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 		g_status_flag = WTERMSIG(g_status_flag) + 128;
 	memptr->return_value = g_status_flag;
 	free(pid_array);
+	if (g_status_flag == SIGINT_SIGNAL)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	else if (g_status_flag == SIGQUIT_SIGNAL)
+		ft_putstr_fd("Quit\n", STDERR_FILENO);
 }
 
 void	process_child(int **pipe_fd, t_command_table *current,
