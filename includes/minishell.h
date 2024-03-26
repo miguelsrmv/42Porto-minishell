@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 10:52:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:10:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,7 +477,8 @@ void				set_signal_inputs_parent(void);
 
 /// signals_handler.c
 void				sigint_handler(int signum);
-void				sigquit_handler(int signum);
+void				sigquit_handler_child(int signum);
+void				sigquit_handler_parent(int signum);
 void				sigpipe_handler(int signum);
 
 /// signals_handler2.c
