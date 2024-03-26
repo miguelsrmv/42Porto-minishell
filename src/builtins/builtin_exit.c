@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/04 17:54:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:37:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	exit_status2(t_command_table *current, int count)
 	if (check_arg_exit(current) == 0)
 	{
 		printf("exit\n");
-		ft_putstr_fd("minishell: numeric argument required\n", STDERR_FILENO);
+		ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
 		g_status_flag = 2;
 		return (0);
 	}
 	if (count > 2)
 	{
 		printf("exit\n");
-		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
 		g_status_flag = 1;
 		return (1);
 	}
@@ -55,7 +55,7 @@ int	exit_status3(t_command_table *current)
 	if (ft_strncmp(str, current->cmd[1], ft_strlen(str)) != 0)
 	{
 		printf("exit\n");
-		ft_putstr_fd("minishell: numeric argument required\n", STDERR_FILENO);
+		ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
 		g_status_flag = 2;
 		free(str);
 		return (0);
