@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:33:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 13:15:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:07:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	sigint_handler(int signum)
 void	sigint_handler_child(int signum)
 {
 	(void)signum;
+	write(STDERR_FILENO, "HI\n", 3);
 	g_status_flag = SIGINT_SIGNAL;
 	exit(g_status_flag);
 }

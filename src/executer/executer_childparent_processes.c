@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 13:12:45 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:07:24 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 void	process_child(int **pipe_fd, t_command_table *current,
 			char **envp, t_memptr memptr)
 {
-	set_signal_during_processes_child();
 	close_pipes(pipe_fd, current, memptr);
 	if (current->valid_command == FALSE)
 	{
@@ -41,6 +40,7 @@ void	process_child(int **pipe_fd, t_command_table *current,
 		final_clear_and_exit(memptr, envp, pipe_fd, current);
 	}
 	set_redirs(pipe_fd, &current, memptr);
+	set_signal_during_processes_child();
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)

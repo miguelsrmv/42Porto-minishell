@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:18:12 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 13:14:03 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:15:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,17 @@ void	set_signal(void)
 
 void	set_signal_during_processes_child(void)
 {
+	struct sigaction	sa;
+
 	signal(SIGPIPE, sigpipe_handler);
-	signal(SIGQUIT, sigquit_handler_child);
-	signal(SIGINT, sigquit_handler_child);
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = sigint_handler_child;
+	sigaction(SIGINT, &sa, NULL);
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = sigquit_handler_child;
+	sigaction(SIGQUIT, &sa, NULL);
 }
 
 void	set_signal_during_processes_parent(void)
