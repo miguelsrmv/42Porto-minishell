@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:14:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:27:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,8 +370,7 @@ void				input_end_process(t_command_table *command,
 						t_memptr memptr);
 
 /// executer_prepare_processes.c
-int					**create_pipes(int **pipe_fd, int process_num,
-						t_memptr *memptr);
+int					**create_pipes(int process_num, t_memptr *memptr);
 void				close_pipes(int **pipe_fd, t_command_table *current,
 						t_memptr memptr);
 void				close_remaining_pipes(int **pipe_fd,

@@ -6,14 +6,16 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:02:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:27:09 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	**create_pipes(int **pipe_fd, int pipe_num, t_memptr *memptr)
+int	**create_pipes(int pipe_num, t_memptr *memptr)
 {
+	int	**pipe_fd;
+
 	if (!pipe_num)
 		return (NULL);
 	pipe_fd = (int **)malloc(sizeof(int *) * (pipe_num + 1));

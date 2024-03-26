@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:24:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:04:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:40:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ enum e_ValidType	check_input(t_command_table **command)
 
 enum e_ValidType	input_target_check(char *target)
 {
-	if (access(target, F_OK) != 0)
-		return (INVALID_INPUT);
-	else if (ft_strlen(target) == 0)
+	if (ft_strlen(target) == 0)
 		return (EMPTY);
+	else if (access(target, F_OK) != 0)
+		return (INVALID_INPUT);
 	else if (access(target, R_OK) != 0)
 		return (INVALID_INPUT_READ);
 	else

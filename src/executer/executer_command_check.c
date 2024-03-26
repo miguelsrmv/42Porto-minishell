@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:45:33 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:06:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:36:58 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	command_check(t_command_table **command,
 			char **path, t_memptr *memptr)
 {
 	remove_null_strings((*command), *memptr);
+	(*command)->cmd = final_nullstrings(*command, *memptr);
 	if ((*command)->cmd[0])
 	{
 		check_builtin((*command));

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/25 23:49:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:28:11 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	process_forks(t_command_table **command_table, char **envp,
 	int				i;
 	t_command_table	*current;
 
-	pipe_fd = NULL;
-	pipe_fd = create_pipes(pipe_fd, process_num - 1, &memptr);
+	pipe_fd = create_pipes(process_num - 1, &memptr);
 	current = *command_table;
 	create_pid_array(&pid_array, process_num, memptr);
 	i = 0;
@@ -73,7 +72,8 @@ void	process_forks(t_command_table **command_table, char **envp,
 			exit_error(FORK_ERROR, memptr, NULL);
 		else if (current->pid == 0)
 		{
-			process_fork_subfunc(pid_array, current, i);
+			free(pid_array);
+			current->command_no = i;
 			process_child(pipe_fd, current, envp, memptr);
 		}
 		else
@@ -81,11 +81,4 @@ void	process_forks(t_command_table **command_table, char **envp,
 		current = current->next;
 	}
 	process_parent(pipe_fd, process_num, pid_array, &memptr);
-}
-
-void	process_fork_subfunc(int *pid_array, t_command_table *current,
-			int i)
-{
-	free(pid_array);
-	current->command_no = i;
 }
