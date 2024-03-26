@@ -1,16 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer_cmd_checker.c                             :+:      :+:    :+:   */
+/*   executer_command_check.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 10:51:48 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/25 15:00:42 by mde-sa--         ###   ########.fr       */
+/*   Created: 2024/03/25 18:45:33 by mde-sa--          #+#    #+#             */
+/*   Updated: 2024/03/26 00:06:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	command_check(t_command_table **command,
+			char **path, t_memptr *memptr)
+{
+	remove_null_strings((*command), *memptr);
+	if ((*command)->cmd[0])
+	{
+		check_builtin((*command));
+		if ((*command)->command_type != BUILTIN)
+			check_executables((*command), path, *memptr);
+		if ((*command)->command_type == NULL_COMMANDTYPE
+			|| (*command)->command_type == NO_NULL_COMMANDTYPE)
+			non_exit_error(COMMAND_ERROR, *memptr, *(*command)->cmd);
+		else if ((*command)->command_type == DIRECTORY)
+			non_exit_error(DIRECTORY_ERROR, *memptr, *(*command)->cmd);
+		else if ((*command)->command_type == NOT_A_DIRECTORY)
+			non_exit_error(NOT_A_DIR_ERROR, *memptr, *(*command)->cmd);
+		else if ((*command)->command_type == NULL_DIRECTORY)
+			non_exit_error(DIR_OPEN_ERROR, *memptr, *(*command)->cmd);
+		else if ((*command)->command_type == PERMISSION)
+			non_exit_error(PERMISSION_ERROR, *memptr, (*command)->cmd_target);
+	}
+	if ((*command)->command_type == BUILTIN
+		|| ((*command)->command_type) == EXECUTABLE)
+		return (TRUE);
+	if (!(*command)->cmd[0])
+		g_status_flag = 0;
+	return (FALSE);
+}
 
 void	check_builtin(t_command_table *current)
 {
@@ -52,42 +81,4 @@ void	remove_null_strings(t_command_table *current, t_memptr memptr)
 			exit_error(MALLOC_ERROR, memptr, NULL);
 		ft_free_tabs((void **)temp);
 	}
-}
-
-// Alterei para também dar erro em caso de No Null Command Type
-int	check_commands(t_command_table **command_table, char **path_list,
-			t_memptr memptr)
-{
-	t_command_table	*current;
-
-	current = (*command_table);
-	while (current)
-	{
-		remove_null_strings(current, memptr);
-		if ((current->command_type != NO_EXEC_INVALID_INPUT)
-			&& (current->cmd[0]))
-		{
-			check_builtin(current);
-			if (current->command_type != BUILTIN)
-				check_executables(current, path_list, memptr);
-			set_error_message(current, memptr);
-		}
-		current = current->next;
-	}
-	return (1);
-}
-
-void	set_error_message(t_command_table *current, t_memptr memptr)
-{
-	if (current->command_type == NULL_COMMANDTYPE
-		|| current->command_type == NO_NULL_COMMANDTYPE)
-		non_exit_error(COMMAND_ERROR, memptr, *current->cmd);
-	else if (current->command_type == DIRECTORY)
-		non_exit_error(DIRECTORY_ERROR, memptr, *current->cmd);
-	else if (current->command_type == NOT_A_DIRECTORY)
-		non_exit_error(NOT_A_DIR_ERROR, memptr, *current->cmd);
-	else if (current->command_type == NULL_DIRECTORY)
-		non_exit_error(DIR_OPEN_ERROR, memptr, *current->cmd);
-	else if (current->command_type == PERMISSION)
-		non_exit_error(PERMISSION_ERROR, memptr, current->cmd_target);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/19 18:33:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:45:17 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	bash_main(char **envp, t_memptr *memptr)
 {
 	t_env		*env_vars;
 
-	g_status_flag = 0;
+	g_status_flag = 130;
 	env_vars = set_environment_vars(envp, *memptr);
 	while (g_status_flag != EOF_SIGNAL)
 	{
@@ -62,6 +62,6 @@ void	bash_main(char **envp, t_memptr *memptr)
 		bash_run(envp, memptr);
 		update_envp(&envp, memptr, env_vars);
 		env_vars = set_environment_vars(envp, *memptr);
-		clean_memory(*memptr);
+		clean_memory(memptr);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 23:58:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:35:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,22 @@ void	close_pipes_error(int **pipe)
 	}
 }
 
-void	clean_memory(t_memptr memptr)
+void	clean_memory(t_memptr *memptr)
 {
-	if (memptr.lexer_list)
-		clear_lexer_list(memptr.lexer_list);
-	if (memptr.command_table)
-		clear_command_table(memptr.command_table);
-	if (memptr.path_list)
-		ft_free_tabs((void **)memptr.path_list);
-	if (memptr.pipe_fd)
+	if (memptr->lexer_list)
+		clear_lexer_list(memptr->lexer_list);
+	if (memptr->command_table)
+		clear_command_table(memptr->command_table);
+	if (memptr->path_list)
 	{
-		close_pipes_error(memptr.pipe_fd);
-		ft_free_tabs((void **)memptr.pipe_fd);
+		ft_free_tabs((void **)memptr->path_list);
+		memptr->path_list = NULL;
+	}
+	if (memptr->pipe_fd)
+	{
+		close_pipes_error(memptr->pipe_fd);
+		ft_free_tabs((void **)memptr->pipe_fd);
+		memptr->pipe_fd = NULL;
 	}
 }
 
@@ -96,7 +100,7 @@ void	final_clear_and_exit(t_memptr memptr, char **envp,
 		if (current->output_fd && current->output_type != PIPE)
 			close(current->output_fd);
 	}
-	clean_memory(memptr);
+	clean_memory(&memptr);
 	free_envv(get_envv());
 	ft_free_tabs((void **)envp);
 	exit(g_status_flag);

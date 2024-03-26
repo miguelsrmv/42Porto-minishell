@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 21:44:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:49:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,36 +27,20 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 		g_status_flag = WTERMSIG(g_status_flag) + 128;
 	memptr->return_value = g_status_flag;
 	free(pid_array);
-	if (memptr->pipe_fd)
-	{
-		ft_free_tabs((void **)memptr->pipe_fd);
-		memptr->pipe_fd = NULL;
-	}
-	clean_memory(*memptr);
 }
 
 void	process_child(int **pipe_fd, t_command_table *current,
 			char **envp, t_memptr memptr)
 {
 	close_pipes(pipe_fd, current, memptr);
-	if (current->command_type == NO_EXEC_INVALID_INPUT)
+	if (current->valid_command == FALSE)
 	{
-		non_exit_error(OPEN_ERROR, memptr, current->input_target);
+		g_status_flag = current->current_g_status;
 		final_clear_and_exit(memptr, envp, pipe_fd, current);
 	}
-	else if (check_redirections(pipe_fd, &current, memptr) != VALID)
-		final_clear_and_exit(memptr, envp, pipe_fd, current);
-	if (current->command_type != EXECUTABLE && current->command_type != BUILTIN)
-	{
-		if (!current->cmd[0])
-			g_status_flag = 0;
-		final_clear_and_exit(memptr, envp, pipe_fd, current);
-	}
+	set_redirs(pipe_fd, &current, memptr);
 	if (current->command_type == EXECUTABLE)
-	{
-		current->cmd = final_nullstrings(current, memptr);
 		execve(current->cmd_target, current->cmd, envp);
-	}
 	else if (current->command_type == BUILTIN)
 		execute_builtin(current, envp, memptr);
 	final_clear_and_exit(memptr, envp, pipe_fd, current);

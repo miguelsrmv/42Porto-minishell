@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 12:06:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:01:00 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@ int	execute_single_builtin(t_command_table *current,
 	int	original_stdout;
 
 	current->command_no = 1;
+	if (current->valid_command == FALSE)
+		return (g_status_flag);
 	original_stdin = dup(STDIN_FILENO);
 	original_stdout = dup(STDOUT_FILENO);
-	if (non_exit_check_redirections(NULL, &current, memptr) != VALID)
-	{
-		close(original_stdin);
-		close(original_stdout);
-		return (g_status_flag);
-	}
+	set_redirs(NULL, &current, memptr);
 	if (current->input_fd)
 		close(current->input_fd);
 	if (current->output_fd)

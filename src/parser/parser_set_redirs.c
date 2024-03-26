@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/23 19:09:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:39:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	initialize_command_table(t_command_table **command_table,
 	(*command_table)->output_fd = 0;
 	(*command_table)->pid = 0;
 	(*command_table)->command_no = 0;
+	(*command_table)->current_g_status = 0;
+	(*command_table)->valid_command = TRUE;
 	(*command_table)->next = NULL;
 }
 

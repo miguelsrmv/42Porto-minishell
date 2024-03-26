@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/22 14:14:02 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/26 00:17:19 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,12 @@ SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			parser/parser_heredoc_child.c \
 			expander/expander.c expander/expander_noquotes.c expander/expander_squote.c \
 			expander/expander_dquote.c expander/expander_concatenate.c \
-			executer/quick_input_check.c\
 			executer/executer_prepare_processes.c executer/executer_redir_checker.c \
-			executer/executer_redir_checker2.c executer/executer_redir_setter.c \
-			executer/executer_cmd_checker.c executer/executer_executable_checker.c \
+			executer/executer_redir_setter.c executer/executer_executable_checker.c \
 			executer/executer_dir_checker.c executer/executer_get_path.c \
-			executer/executer_childparent_processes.c executer/executer.c \
+			executer/executer_childparent_processes.c executer/executer_single_builtin.c \
+			executer/executer_input_check.c executer/executer_process_check.c \
+			executer/executer_output_check.c executer/executer_command_check.c \
 			executer/final_nullstrings.c \
 			signals/signals.c signals/signals_handler.c signals/signals_handler2.c \
 			builtins/builtin_cd.c builtins/builtin_cd2.c builtins/builtin_echo.c \

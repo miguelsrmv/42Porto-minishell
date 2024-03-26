@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 21:19:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 23:38:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:23:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	finish_pipe_child(t_memptr memptr, int old_g_status_flag)
 	g_status_flag = old_g_status_flag;
 	envv = get_envv();
 	free_envv(envv);
-	clean_memory(memptr);
+	clean_memory(&memptr);
 	if (*memptr.envp)
 		ft_free_tabs((void **)memptr.envp);
 	exit(old_g_status_flag);
