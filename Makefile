@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/26 00:17:19 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/26 12:30:49 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRC		=	main.c bash_main.c exit_error.c clean_memory.c \
 			executer/executer_input_check.c executer/executer_process_check.c \
 			executer/executer_output_check.c executer/executer_command_check.c \
 			executer/final_nullstrings.c \
-			signals/signals.c signals/signals_handler.c signals/signals_handler2.c \
+			signals/signals.c signals/signals_handler.c signals/signals_handler_input.c \
 			builtins/builtin_cd.c builtins/builtin_cd2.c builtins/builtin_echo.c \
 			builtins/builtin_echo2.c  builtins/builtin_env.c \
 			builtins/builtin_export.c builtins/builtin_export2.c \

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 12:10:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:14:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@
 // Exit code / signal errors
 # define NO_SIGNAL 0
 # define SIGINT_SIGNAL 130
+# define SIGQUIT_SIGNAL 131
 # define EOF_SIGNAL -1
 
 extern int	g_status_flag;
@@ -472,16 +473,17 @@ bool				is_string_truly_null(char *string_before_expansion,
 void				set_signal(void);
 void				set_signal_during_processes_child(void);
 void				set_signal_during_processes_parent(void);
-void				set_signal_inputs_child(void);
-void				set_signal_inputs_parent(void);
 
 /// signals_handler.c
 void				sigint_handler(int signum);
 void				sigquit_handler_child(int signum);
 void				sigquit_handler_parent(int signum);
 void				sigpipe_handler(int signum);
+void				sigint_handler_child(int signum);
 
-/// signals_handler2.c
+/// signals_handler_input.c
+void				set_signal_inputs_child(void);
+void				set_signal_inputs_parent(void);
 void				sigint_handler_during_processes_child(int signum);
 void				sigint_handler_during_processes_parent(int signum);
 void				sigint_handler_inputs(int pipe_fd);
