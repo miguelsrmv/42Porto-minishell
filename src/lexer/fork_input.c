@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 21:19:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/25 21:23:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:30:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	pipe_child(int *pipe_fd, t_memptr memptr)
 {
 	char		*added_input;
 	size_t		input_size;
-	int			old_g_status_flag;
 
-	old_g_status_flag = g_status_flag;
 	g_status_flag = pipe_fd[1];
 	added_input = readline("> ");
 	if (!added_input)
@@ -27,13 +25,14 @@ void	pipe_child(int *pipe_fd, t_memptr memptr)
 		g_status_flag = 2;
 		exit_error(S_EOF, memptr, NULL);
 	}
+	g_status_flag = 0;
 	input_size = ft_strlen(added_input);
 	write(pipe_fd[1], &input_size, sizeof(size_t));
 	write(pipe_fd[1], added_input, ft_strlen(added_input));
 	write(pipe_fd[1], "\n", 1);
 	free(added_input);
 	close(pipe_fd[1]);
-	finish_pipe_child(memptr, old_g_status_flag);
+	finish_pipe_child(memptr, g_status_flag);
 }
 
 void	pipe_parent(char **input, int *pipe_fd, t_memptr memptr)
