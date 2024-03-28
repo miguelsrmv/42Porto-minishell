@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 23:41:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:09:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 			}
 			analyze_delimiter(&delimiter, (*command_table)->full_input[i + 1],
 				&quote_status, memptr);
-			create_heredoc_buffer(delimiter,
-				&(*command_table)->heredoc_buffer, quote_status, memptr);
+			create_heredoc_buffer(delimiter, command_table, quote_status,
+				memptr);
 			free(delimiter);
 		}
 		i = i + 2;
@@ -60,11 +60,11 @@ void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
 		exit_error(MALLOC_ERROR, memptr, NULL);
 }
 
-void	create_heredoc_buffer(char *delimiter, char **buffer,
+void	create_heredoc_buffer(char *delimiter, t_command_table **command_table,
 			enum e_QuoteType quote_status, t_memptr memptr)
 {
-	int		pid;
-	int		pipe_fd[2];
+	int					pid;
+	int					pipe_fd[2];
 
 	pipe(pipe_fd);
 	pid = fork();
@@ -75,12 +75,13 @@ void	create_heredoc_buffer(char *delimiter, char **buffer,
 		set_signal_inputs_child();
 		close(pipe_fd[0]);
 		heredoc_child(delimiter, pipe_fd, quote_status, memptr);
+		finish_heredoc_child(memptr, command_table, delimiter);
 	}
 	else
 	{
 		set_signal_inputs_parent();
 		close(pipe_fd[1]);
-		heredoc_parent(buffer, pipe_fd, memptr);
+		heredoc_parent(&((*command_table)->heredoc_buffer), pipe_fd, memptr);
 		set_signal();
 	}
 }

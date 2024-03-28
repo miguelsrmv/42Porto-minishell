@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 14:54:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:08:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,8 +304,8 @@ void				analyze_delimiter(char **unquoted_delimiter,
 						char *delimiter, enum e_QuoteType *quote_status,
 						t_memptr memptr);
 void				create_heredoc_buffer(char *delimiter,
-						char **buffer, enum e_QuoteType quote_status,
-						t_memptr memptr);
+						t_command_table **command_table,
+						enum e_QuoteType quote_status, t_memptr memptr);
 void				create_heredoc(t_command_table **command_table,
 						char *buffer, t_memptr memptr);
 
@@ -315,7 +315,7 @@ void				heredoc_child(char *delimiter, int *pipe_fd,
 void				expand_buffer(char **buffer, t_memptr memptr,
 						enum e_QuoteType quote_status);
 void				finish_heredoc_child(t_memptr memptr,
-						int old_g_status_flag);
+						t_command_table **command_table, char *delimiter);
 
 /// parser_heredoc_parent.c
 void				heredoc_parent(char **buffer, int *pipe_fd,

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/25 21:24:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:09:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	heredoc_child(char *delimiter, int *pipe_fd,
 		free(input);
 	}
 	close(pipe_fd[1]);
-	finish_heredoc_child(memptr, old_g_status_flag);
+	g_status_flag = old_g_status_flag;
 }
 
 void	expand_buffer(char **buffer, t_memptr memptr,
@@ -67,11 +67,13 @@ void	expand_buffer(char **buffer, t_memptr memptr,
 	}
 }
 
-void	finish_heredoc_child(t_memptr memptr, int old_g_status_flag)
+void	finish_heredoc_child(t_memptr memptr,
+			t_command_table **command_table, char *delimiter)
 {
 	t_env		*envv;
 
-	g_status_flag = old_g_status_flag;
+	free(delimiter);
+	clear_command_table(command_table);
 	envv = get_envv();
 	free_envv(envv);
 	clean_memory(&memptr);
