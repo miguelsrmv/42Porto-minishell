@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:43:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:05:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:49:00 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	create_output(enum e_RedirectType input_type, char	*target,
 {
 	int	fd;
 
+	fd = 0;
 	if (input_type == OUTPUT)
 		fd = open(target, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (input_type == APPEND)
