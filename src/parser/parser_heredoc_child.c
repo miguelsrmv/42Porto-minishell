@@ -6,14 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 16:09:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:57:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	heredoc_child(char *delimiter, int *pipe_fd,
-			enum e_QuoteType quote_status, t_memptr memptr)
+void	heredoc_child(char *delimiter, int *pipe_fd)
 {
 	char		*input;
 	size_t		input_size;
@@ -27,11 +26,11 @@ void	heredoc_child(char *delimiter, int *pipe_fd,
 		if (!input)
 		{
 			close(pipe_fd[1]);
-			exit_error(S_EOF, memptr, NULL);
+			ft_putstr_fd(S_EOF, STDERR_FILENO);
+			return ;
 		}
 		if (!ft_strcmp(input, delimiter))
 			break ;
-		expand_buffer(&input, memptr, quote_status);
 		input_size = ft_strlen(input);
 		write(pipe_fd[1], &input_size, sizeof(size_t));
 		write(pipe_fd[1], input, ft_strlen(input));
@@ -68,16 +67,14 @@ void	expand_buffer(char **buffer, t_memptr memptr,
 }
 
 void	finish_heredoc_child(t_memptr memptr,
-			t_command_table **command_table, char *delimiter)
+			t_command_table **command_table)
 {
 	t_env		*envv;
 
-	free(delimiter);
-	clear_command_table(command_table);
+	(void)command_table;
 	envv = get_envv();
 	free_envv(envv);
-	clean_memory(&memptr);
+	clean_memory_heredoc(&memptr);
 	if (*memptr.envp)
 		ft_free_tabs((void **)memptr.envp);
-	exit(g_status_flag);
 }

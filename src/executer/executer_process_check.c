@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:26:45 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:04:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:37:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	process_check(t_command_table **command_table,
 	bool			run_flag;
 	int				command_no;
 
+	(void)envp;
 	current = *command_table;
 	memptr->path_list = get_path(envp, memptr);
 	command_no = 1;

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 16:08:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:20:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct s_memptr
 {
 	t_token			**lexer_list;
 	t_command_table	**command_table;
+	t_command_table **first_node;
 	char			**path_list;
 	int				**pipe_fd;
 	char			**argv;
@@ -232,6 +233,10 @@ void				clean_memory(t_memptr *memptr);
 void				close_pipes_error(int **pipe);
 void				final_clear_and_exit(t_memptr memptr, char **envp,
 						int **pipe_fd, t_command_table *current);
+
+/// clean_memory_heredoc.c
+void				clear_command_table_heredoc(t_command_table **lst);
+void				clean_memory_heredoc(t_memptr *memptr);
 
 /// exit_error.c
 void				exit_error(char *error, t_memptr memptr,
@@ -300,7 +305,7 @@ void				set_full_redirections(t_token *lexer_sublist,
 /// parser_heredoc.c
 void				check_heredocs(t_command_table **command_table,
 						t_memptr memptr);
-void				analyze_delimiter(char **unquoted_delimiter,
+void				analyze_delimiter(char *unquoted_delimiter,
 						char *delimiter, enum e_QuoteType *quote_status,
 						t_memptr memptr);
 void				create_heredoc_buffer(char *delimiter,
@@ -310,17 +315,17 @@ void				create_heredoc(t_command_table **command_table,
 						char *buffer, t_memptr memptr);
 
 /// parser_heredoc_child.c
-void				heredoc_child(char *delimiter, int *pipe_fd,
-						enum e_QuoteType quote_status, t_memptr memptr);
+void				heredoc_child(char *delimiter, int *pipe_fd);
 void				expand_buffer(char **buffer, t_memptr memptr,
 						enum e_QuoteType quote_status);
 void				finish_heredoc_child(t_memptr memptr,
-						t_command_table **command_table, char *delimiter);
+						t_command_table **command_table);
 
 /// parser_heredoc_parent.c
 void				heredoc_parent(char **buffer, int *pipe_fd,
-						t_memptr memptr);
-int					read_from_pipe(int read_fd, char **buffer, t_memptr memptr);
+						t_memptr memptr, enum e_QuoteType quote_status);
+int					read_from_pipe(int read_fd, char **buffer, t_memptr memptr,
+						enum e_QuoteType quote_status);
 
 /// clean_heredocs.c
 void				clean_heredoc_buffers(t_command_table **command_table);

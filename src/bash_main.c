@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 15:28:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:53:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ void	update_envp(char ***envp, t_memptr *memptr, t_env *env_vars)
 void	bash_main(char **envp, t_memptr *memptr)
 {
 	t_env			*env_vars;
-
+	
 	g_status_flag = 0;
 	env_vars = set_environment_vars(envp, *memptr);
+	memptr->path_list = ft_split(getenv("PATH"), ':');
+	if (!(memptr->path_list))
+		exit_error(MALLOC_ERROR, *memptr, NULL);
 	while (g_status_flag != EOF_SIGNAL)
 	{
 		set_signal();
@@ -63,5 +66,6 @@ void	bash_main(char **envp, t_memptr *memptr)
 		update_envp(&envp, memptr, env_vars);
 		env_vars = set_environment_vars(envp, *memptr);
 		clean_memory(memptr);
+		memptr->path_list = get_pathlist_fromenvp(envp);
 	}
 }

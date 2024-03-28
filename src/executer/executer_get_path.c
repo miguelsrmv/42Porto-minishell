@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/06 12:01:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:09:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**get_path_list(t_memptr *memptr)
 	int		i;
 	char	**result;
 
-	path_list = ft_split(getenv("PATH"), ':');
+	path_list = memptr->path_list;
 	i = 0;
 	while (path_list[i])
 		i++;

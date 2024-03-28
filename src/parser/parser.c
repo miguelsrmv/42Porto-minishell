@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:13:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 15:59:37 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:42:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	create_command_table(t_token *lexer_list,
 
 	current_token = lexer_list;
 	current_table = command_table;
+	memptr.first_node = command_table;
 	while (current_token)
 	{
 		set_full_redirections(current_token, current_table, memptr);

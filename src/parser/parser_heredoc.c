@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 16:09:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:50:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 {
 	int					i;
-	char				*delimiter;
+	char				delimiter[1024];
 	enum e_QuoteType	quote_status;
 
 	i = 0;
@@ -29,11 +29,10 @@ void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 				free((*command_table)->heredoc_buffer);
 				(*command_table)->heredoc_buffer = NULL;
 			}
-			analyze_delimiter(&delimiter, (*command_table)->full_input[i + 1],
+			analyze_delimiter(delimiter, (*command_table)->full_input[i + 1],
 				&quote_status, memptr);
 			create_heredoc_buffer(delimiter, command_table, quote_status,
 				memptr);
-			free(delimiter);
 		}
 		i = i + 2;
 		if (g_status_flag == 8)
@@ -41,11 +40,13 @@ void	check_heredocs(t_command_table **command_table, t_memptr memptr)
 	}
 }
 
-void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
+void	analyze_delimiter(char *unquoted_delimiter, char *delimiter,
 			enum e_QuoteType *quote_status, t_memptr memptr)
 {
-	int	i;
+	int		i;
+	char	*trimmed_delimiter;
 
+	trimmed_delimiter = NULL;
 	*quote_status = OUT_QUOTE;
 	i = 0;
 	if (*delimiter == SQUOTE)
@@ -54,10 +55,14 @@ void	analyze_delimiter(char **unquoted_delimiter, char *delimiter,
 		*quote_status = IN_DQUOTE;
 	if ((*quote_status) != OUT_QUOTE)
 		i++;
-	*unquoted_delimiter = ft_strndup(delimiter + i,
+	trimmed_delimiter = ft_strndup(delimiter + i,
 			ft_strlen(delimiter) - 2 * i);
-	if (!*unquoted_delimiter)
+	if (!trimmed_delimiter)
 		exit_error(MALLOC_ERROR, memptr, NULL);
+	ft_memcpy(unquoted_delimiter, trimmed_delimiter,
+		ft_strlen(trimmed_delimiter));
+	unquoted_delimiter[ft_strlen(trimmed_delimiter)] = '\0';
+	free(trimmed_delimiter);
 }
 
 void	create_heredoc_buffer(char *delimiter, t_command_table **command_table,
@@ -74,14 +79,15 @@ void	create_heredoc_buffer(char *delimiter, t_command_table **command_table,
 	{
 		set_signal_inputs_child();
 		close(pipe_fd[0]);
-		heredoc_child(delimiter, pipe_fd, quote_status, memptr);
-		finish_heredoc_child(memptr, command_table, delimiter);
+		finish_heredoc_child(memptr, command_table);
+		heredoc_child(delimiter, pipe_fd);
+		exit(g_status_flag);
 	}
 	else
 	{
 		set_signal_inputs_parent();
 		close(pipe_fd[1]);
-		heredoc_parent(&((*command_table)->heredoc_buffer), pipe_fd, memptr);
+		heredoc_parent(&((*command_table)->heredoc_buffer), pipe_fd, memptr, quote_status);
 		set_signal();
 	}
 }
