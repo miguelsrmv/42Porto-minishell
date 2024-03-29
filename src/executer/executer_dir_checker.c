@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:12:06 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 17:09:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:18:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	check_directory_subfunc(t_command_table *current, char *test_command,
 		exit_error(MALLOC_ERROR, memptr, NULL);
 	if (access(stripped_command, F_OK) == 0)
 		current->command_type = NOT_A_DIRECTORY;
-	else 
+	else
 		current->command_type = NULL_DIRECTORY;
 	free(stripped_command);
 }

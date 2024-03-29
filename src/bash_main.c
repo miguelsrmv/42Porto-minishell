@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 15:56:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:18:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,3 @@ void	bash_main(char **envp, t_memptr *memptr)
 		printf("Exit status: %i\n", g_status_flag); // Retirar!!!!!
 	}
 }
-
