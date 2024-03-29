@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 21:19:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 16:08:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:14:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	pipe_child(int *pipe_fd)
 		close(pipe_fd[1]);
 		g_status_flag = 2;
 		ft_putstr_fd(S_EOF, STDERR_FILENO);
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 		exit(g_status_flag);
 	}
 	g_status_flag = 0;
