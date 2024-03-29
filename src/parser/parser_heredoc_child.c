@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 17:57:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:46:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	expand_buffer(char **buffer, t_memptr memptr,
 	}
 }
 
-void	finish_heredoc_child(t_memptr memptr,
+void	clean_heredoc_child(t_memptr memptr,
 			t_command_table **command_table)
 {
 	t_env		*envv;

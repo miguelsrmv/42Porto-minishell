@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 13:50:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:32:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	bash_run(char **envp, t_memptr *memptr)
 
 void	update_envp(char ***envp, t_memptr *memptr, t_env *env_vars)
 {
-	ft_free_tabs((void **)*envp);
+	if (*envp)
+		ft_free_tabs((void **)*envp);
 	*envp = ft_tabdup(env_vars->env_var);
 	if (!*envp)
 		exit_error(MALLOC_ERROR, *memptr, NULL);
@@ -60,6 +61,7 @@ void	bash_main(char **envp, t_memptr *memptr)
 	memptr->path_list = ft_split(getenv("PATH"), ':');
 	if (!(memptr->path_list))
 		exit_error(MALLOC_ERROR, *memptr, NULL);
+	memptr->envp = envp;
 	while (g_status_flag != EOF_SIGNAL)
 	{
 		set_signal();

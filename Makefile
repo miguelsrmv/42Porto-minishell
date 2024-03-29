@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/29 13:49:01 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/29 14:47:44 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ LIBS	=   -L$(LIBFTDIR) -lft -lreadline
 INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 
 SRC		=	main.c bash_main.c exit_error.c clean_memory.c clean_memory_heredoc.c \
+			clean_memory_pipes.c \
 			path_update.c shell_update.c lexer/get_input.c lexer/input_checker.c \
 			lexer/lexer.c lexer/lexer_linked_list.c lexer/lexer_get_tokens.c \
 			lexer/fork_input.c \

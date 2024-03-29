@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:41:23 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 08:35:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:41:05 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ void	update_input(char **input, t_memptr memptr)
 		exit_error(FORK_ERROR, memptr, NULL);
 	else if (pid == 0)
 	{
+		clean_input(*input, memptr);
 		set_signal_inputs_child();
 		close(pipe_fd[0]);
-		pipe_child(pipe_fd, memptr);
+		pipe_child(pipe_fd);
 	}
 	else
 	{

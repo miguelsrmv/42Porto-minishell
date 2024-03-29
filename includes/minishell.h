@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 14:32:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:03:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ typedef struct s_export
 /// main.c
 t_memptr			initialize_memptr(t_token **lexer_list,
 						t_command_table **command_table,
-						char **argv, char **envp);
+						char **argv, int argc);
 
 /// bash_main.c
 void				bash_main(char **envp, t_memptr *memptr);
@@ -247,6 +247,9 @@ void				final_clear_and_exit(t_memptr memptr, char **envp,
 /// clean_memory_heredoc.c
 void				clear_command_table_heredoc(t_command_table **lst);
 void				clean_memory_heredoc(t_memptr *memptr);
+
+/// clean_memory_pipes.c
+void				clean_input(char *input, t_memptr memptr);
 
 /// exit_error.c
 void				exit_error(char *error, t_memptr memptr,
@@ -286,11 +289,10 @@ void				advance_until_unquoted_whitespace(char *input, int *end,
 char				*get_redirect_token(char *input, int *start, int *end);
 
 /// fork_input.c
-void				pipe_child(int *pipe_fd, t_memptr memptr);
+void				pipe_child(int *pipe_fd);
 void				pipe_parent(char **input, int *pipe_fd, t_memptr memptr);
 void				read_extra_input(int read_fd, char **input,
 						t_memptr memptr);
-void				finish_pipe_child(t_memptr memptr, int old_g_status_flag);
 
 /// parser.c
 int					check_syntax(t_token *lexer_list);
@@ -328,7 +330,7 @@ void				create_heredoc(t_command_table **command_table,
 void				heredoc_child(char *delimiter, int *pipe_fd);
 void				expand_buffer(char **buffer, t_memptr memptr,
 						enum e_QuoteType quote_status);
-void				finish_heredoc_child(t_memptr memptr,
+void				clean_heredoc_child(t_memptr memptr,
 						t_command_table **command_table);
 
 /// parser_heredoc_parent.c
