@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:23:19 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 09:30:13 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:32:07 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	update_path(char **envp, t_memptr *memptr)
 	if (!path_list)
 		exit_error(MALLOC_ERROR, *memptr, NULL);
 	free(path);
-	memptr->path_list = path_list;	
+	memptr->path_list = path_list;
 }
 
 char	*return_path_from_envp(char **envp, t_memptr *memptr)

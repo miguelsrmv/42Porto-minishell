@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 17:52:30 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 11:42:13 by mde-sa--         ###   ########.fr       */
+/*   Created: 2024/03/29 12:33:00 by mde-sa--          #+#    #+#             */
+/*   Updated: 2024/03/29 12:40:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(int c)
+#include "libft.h"
+
+int	ft_isnumber(char *string)
 {
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (0);
+	int	return_value;
+	int	i;
+
+	return_value = 1;
+	i = 0;
+	if (string[0] == '+' || string[0] == '-')
+		i++;
+	if (string[0] == '-')
+		return_value = -1;
+	while (string[i])
+	{
+		if (!ft_isdigit((int)string[i]))
+			return (0);
+		i++;
+	}
+	return (return_value);
 }

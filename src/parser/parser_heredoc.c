@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:02:22 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 17:50:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:32:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	create_heredoc_buffer(char *delimiter, t_command_table **command_table,
 	{
 		set_signal_inputs_parent();
 		close(pipe_fd[1]);
-		heredoc_parent(&((*command_table)->heredoc_buffer), pipe_fd, memptr, quote_status);
+		heredoc_parent(&((*command_table)->heredoc_buffer), pipe_fd,
+			memptr, quote_status);
 		set_signal();
 	}
 }

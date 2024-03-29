@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 09:27:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:13:07 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ typedef struct s_memptr
 {
 	t_token			**lexer_list;
 	t_command_table	**command_table;
-	t_command_table **first_node;
+	t_command_table	**first_node;
 	char			**path_list;
 	int				**pipe_fd;
 	char			**argv;
@@ -230,6 +230,14 @@ void				update_path(char **envp, t_memptr *memptr);
 /// path_update.c
 void				update_path(char **envp, t_memptr *memptr);
 char				*return_path_from_envp(char **envp, t_memptr *memptr);
+
+/// shell_update.c
+void				update_shell_level(char ***envp, t_memptr *memptr);
+char				*var_shelllevel(int shell_level, t_memptr *memptr);
+char				*return_shell_level_from_envp(char **envp,
+						t_memptr *memptr);
+void				add_shell_level_to_envp(char ***envp, t_memptr *memptr,
+						char *shell_level);
 
 /// clean_memory.c
 void				clear_lexer_list(t_token **lst);

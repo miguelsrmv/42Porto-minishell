@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:53:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 17:54:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:32:27 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	heredoc_parent(char **buffer, int *pipe_fd,
 	{
 		while (TRUE)
 			if (!read_from_pipe(pipe_fd[0], buffer,
-				memptr, quote_status))
+					memptr, quote_status))
 				break ;
 	}
 	close(pipe_fd[0]);

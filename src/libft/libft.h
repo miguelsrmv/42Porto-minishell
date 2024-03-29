@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/21 11:00:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:39:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ char	**ft_tabdup(char **tab);
 int		ft_getpid(void);
 int		ft_getppid(void);
 int		ft_tablen(void **tab);
+int		ft_isnumber(char *string);
 
 /* Part 7: extra funcions for Builtins */
 char	**ft_str_arr_dup(char **arr);
