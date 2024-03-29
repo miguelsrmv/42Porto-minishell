@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 21:19:32 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 15:46:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:08:11 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	pipe_child(int *pipe_fd)
 	input_size = ft_strlen(added_input);
 	write(pipe_fd[1], &input_size, sizeof(size_t));
 	write(pipe_fd[1], added_input, ft_strlen(added_input));
-	write(pipe_fd[1], "\n", 1);
 	free(added_input);
 	close(pipe_fd[1]);
 	exit(g_status_flag);
@@ -69,11 +68,11 @@ void	read_extra_input(int read_fd, char **input, t_memptr memptr)
 	char	*temp;
 
 	read(read_fd, &sizeoftemp_buffer, sizeof(size_t));
-	temp_buffer = (char *)malloc((sizeoftemp_buffer + 2) * sizeof(char));
+	temp_buffer = (char *)malloc((sizeoftemp_buffer + 1) * sizeof(char));
 	if (!temp_buffer)
 		exit_error(MALLOC_ERROR, memptr, NULL);
 	read(read_fd, temp_buffer, sizeoftemp_buffer + 1);
-	temp_buffer[sizeoftemp_buffer + 1] = '\0';
+	temp_buffer[sizeoftemp_buffer] = '\0';
 	temp = *input;
 	*input = ft_strjoin(*input, temp_buffer);
 	free(temp);
