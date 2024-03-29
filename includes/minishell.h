@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 18:20:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 09:27:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,11 @@ void				bash_run(char **envp, t_memptr *memptr);
 t_env				*set_environment_vars(char **envp, t_memptr memptr);
 void				update_envp(char ***envp, t_memptr *memptr,
 						t_env *env_vars);
+void				update_path(char **envp, t_memptr *memptr);
+
+/// path_update.c
+void				update_path(char **envp, t_memptr *memptr);
+char				*return_path_from_envp(char **envp, t_memptr *memptr);
 
 /// clean_memory.c
 void				clear_lexer_list(t_token **lst);
