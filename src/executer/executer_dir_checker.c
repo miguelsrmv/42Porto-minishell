@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:12:06 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 17:18:20 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:18:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,3 @@ void	check_directory_subfunc(t_command_table *current, char *test_command,
 		current->command_type = NULL_DIRECTORY;
 	free(stripped_command);
 }
-
-/* 	if (stat(test_command, &st) == 0)
-	{
-		if (S_ISDIR(st.st_mode))
-			current->command_type = DIRECTORY;
-		else if (access(test_command, X_OK) == 0)
-			current->command_type = EXECUTABLE;
-		else
-			current->command_type = PERMISSION;
-	} */
