@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 13:13:07 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:32:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,11 +233,8 @@ char				*return_path_from_envp(char **envp, t_memptr *memptr);
 
 /// shell_update.c
 void				update_shell_level(char ***envp, t_memptr *memptr);
-char				*var_shelllevel(int shell_level, t_memptr *memptr);
-char				*return_shell_level_from_envp(char **envp,
-						t_memptr *memptr);
-void				add_shell_level_to_envp(char ***envp, t_memptr *memptr,
-						char *shell_level);
+void				replace_shell_level(char **envp, t_memptr *memptr, long level);
+void				add_shell_level(char ***envp, t_memptr *memptr);
 
 /// clean_memory.c
 void				clear_lexer_list(t_token **lst);

@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/29 12:57:42 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/29 13:49:01 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,8 +79,8 @@ re: fclean all
 
 # Estes aqui servem para avaliar leaks ignorando os leaks do readline!
 
-leaks: all.supp
-	valgrind --suppressions=all.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+leaks: readline.supp
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
 
 readline.supp:
 	@ echo "{" > readline.supp
@@ -95,62 +95,6 @@ readline.supp:
 	@ echo "    ..." >> readline.supp
 	@ echo "    fun:add_history" >> readline.supp
 	@ echo "}" >> readline.supp
-
-all.supp:
-	@ echo "{" > all.supp
-	@ echo "    leak readline" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:readline" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" >> all.supp
-	@ echo "    leak add_history" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:add_history" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" > all.supp
-	@ echo "    leak ls" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:ls" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" >> all.supp
-	@ echo "    leak wc" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:wc" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" >> all.supp
-	@ echo "    leak grep" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:grep" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" >> all.supp
-	@ echo "    leak cat" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:cat" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" >> all.supp
-	@ echo "    leak exit" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:exit" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" >> all.supp
-	@ echo "    leak sort" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:sort" >> all.supp
-	@ echo "}" >> all.supp
-	@ echo "{" >> all.supp
-	@ echo "    leak sed" >> all.supp
-	@ echo "    Memcheck:Leak" >> all.supp
-	@ echo "    ..." >> all.supp
-	@ echo "    fun:sed" >> all.supp
-	@ echo "}" >> all.supp
 		
 test:
 	valgrind -q --leak-check=full --trace-children=yes --track-fds=yes ./minishell
