@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:39:27 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 10:40:33 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:58:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ void	check_executables_subfunc(t_command_table *current,
 		else
 			current->command_type = PERMISSION;
 	}
-	else
-		current->command_type = PERMISSION;
 }
 
 void	check_executables(t_command_table *current, char **path_list,

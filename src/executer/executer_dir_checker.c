@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:12:06 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/18 10:19:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:09:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	check_directory_subfunc(t_command_table *current, char *test_command,
 	struct stat	st;
 	char		*stripped_command;
 
+	free(current->cmd_target);
 	current->cmd_target = ft_strdup(test_command);
 	if (!current->cmd_target)
 		exit_error(MALLOC_ERROR, memptr, NULL);
@@ -32,9 +33,19 @@ void	check_directory_subfunc(t_command_table *current, char *test_command,
 	stripped_command = ft_substr(test_command, 0, ft_strlen(test_command) - 1);
 	if (!stripped_command)
 		exit_error(MALLOC_ERROR, memptr, NULL);
-	if (access(stripped_command, X_OK) == 0)
+	if (access(stripped_command, F_OK) == 0)
 		current->command_type = NOT_A_DIRECTORY;
-	else
+	else 
 		current->command_type = NULL_DIRECTORY;
 	free(stripped_command);
 }
+
+/* 	if (stat(test_command, &st) == 0)
+	{
+		if (S_ISDIR(st.st_mode))
+			current->command_type = DIRECTORY;
+		else if (access(test_command, X_OK) == 0)
+			current->command_type = EXECUTABLE;
+		else
+			current->command_type = PERMISSION;
+	} */

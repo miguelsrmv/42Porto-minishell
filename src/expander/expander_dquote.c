@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 11:30:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:24:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	dquote_expansion(char **string, int *pos, char *quote_flag,
 			&& (*string)[(*pos) + 1] == '?')
 			exit_value_expand_quotes(string, pos, &end_pos, memptr);
 		else if ((*string)[*pos] == '$' && !ft_isquote((*string)[(*pos) + 1])
-				&& !ft_isspace((*string)[(*pos) + 1]))
+				&& !ft_isspace((*string)[(*pos) + 1])
+				&& ((*string)[(*pos) + 1]) != '=')
 			expand_env_quotes(string, pos, &end_pos, memptr);
 		else
 			(*pos)++;

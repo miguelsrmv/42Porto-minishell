@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/02/06 11:27:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:23:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	normal_expansion(char **string, int *pos, char *quote_flag,
 			ansi_quoting(string, pos, memptr);
 		else if ((*string)[*pos] == '$' && ((*string)[(*pos) + 1]) == DQUOTE)
 			localization(string, pos, memptr);
-		else if ((*string)[*pos] == '$')
+		else if ((*string)[*pos] == '$' && ((*string)[(*pos) + 1]) != '=')
 		{
 			expand_env_no_quotes(string, pos, memptr);
 			(*memptr.command_table)->command_type = NO_NULL_COMMANDTYPE;
