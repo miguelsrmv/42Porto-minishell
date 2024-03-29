@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 14:44:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:56:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 	if (g_status_flag == SIGINT_SIGNAL)
 		ft_putstr_fd("\n", STDERR_FILENO);
 	else if (g_status_flag == SIGQUIT_SIGNAL)
-		ft_putstr_fd("Quit\n", STDERR_FILENO);
+		ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
 }
 
 void	process_child(int **pipe_fd, t_command_table *current,

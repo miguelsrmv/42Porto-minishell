@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/29 15:50:03 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/03/29 15:58:07 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 SRC		=	main.c bash_main.c \
 			clean/exit_error.c clean/clean_memory.c clean/clean_memory_heredoc.c \
 			clean/clean_memory_pipes.c \
-			prepare_shell/path_update.c preapre_shell/shell_update.c \
+			prepare_shell/path_update.c prepare_shell/shell_update.c \
 			lexer/get_input.c lexer/input_checker.c lexer/lexer.c \
 			lexer/lexer_linked_list.c lexer/lexer_get_tokens.c lexer/fork_input.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
