@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 15:03:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:51:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,8 @@ char				*return_path_from_envp(char **envp, t_memptr *memptr);
 
 /// shell_update.c
 void				update_shell_level(char ***envp, t_memptr *memptr);
-void				replace_shell_level(char **envp, t_memptr *memptr, long level);
+void				replace_shell_level(char **envp, t_memptr *memptr,
+						long level);
 void				add_shell_level(char ***envp, t_memptr *memptr);
 
 /// clean_memory.c

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:12:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 14:43:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:53:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	add_shell_level(char ***envp, t_memptr *memptr)
 	int		i;
 
 	new_envp = (char **)malloc(sizeof(char *)
-		* (ft_tablen((void **)*envp) + 2));
+			* (ft_tablen((void **)*envp) + 2));
 	if (!new_envp)
 		exit_error(MALLOC_ERROR, *memptr, NULL);
 	i = 0;

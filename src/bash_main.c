@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 15:32:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:50:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void	bash_main(char **envp, t_memptr *memptr)
 		env_vars = set_environment_vars(envp, *memptr);
 		clean_memory(memptr);
 		update_path(envp, memptr);
-		printf("Exit status: %i\n", g_status_flag);
+		printf("Exit status: %i\n", g_status_flag); // Retirar!!!!!
 	}
 }
