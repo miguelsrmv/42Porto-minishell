@@ -1,0 +1,54 @@
+{
+    leak readline
+    Memcheck:Leak
+    ...
+    fun:readline
+}
+{
+    leak add_history
+    Memcheck:Leak
+    ...
+    fun:add_history
+}
+{
+    leak ls
+    Memcheck:Leak
+    ...
+    fun:ls
+}
+{
+    leak wc
+    Memcheck:Leak
+    ...
+    fun:wc
+}
+{
+    leak grep
+    Memcheck:Leak
+    ...
+    fun:grep
+}
+{
+    leak cat
+    Memcheck:Leak
+    ...
+    fun:cat
+}
+{
+    leak exit
+    Memcheck:Leak
+    ...
+    fun:exit
+}
+{
+    leak sort
+    Memcheck:Leak
+    ...
+    fun:sort
+}
+{
+    leak sed
+    Memcheck:Leak
+    ...
+    fun:sed
+}

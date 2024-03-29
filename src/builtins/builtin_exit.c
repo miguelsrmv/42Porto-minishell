@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 10:37:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:15:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	exit_status3(t_command_table *current)
 
 	num = ft_atol(current->cmd[1]);
 	str = ft_ltoa(num);
-	if (ft_strncmp(str, current->cmd[1], ft_strlen(str)) != 0)
+	if (ft_strncmp(str, current->cmd[1], ft_strlen(str)) != 0
+		&& ft_strcmp(current->cmd[1], "-0"))
 	{
 		printf("exit\n");
 		ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
