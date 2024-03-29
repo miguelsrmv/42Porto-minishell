@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:12:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 15:53:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:00:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	replace_shell_level(char **envp, t_memptr *memptr, long level)
 	char	*shell_level;
 	char	*temp;
 
+	if (level < 0)
+		level = 0;
 	shell_level = ft_ltoa(level);
 	temp = *envp;
 	*envp = ft_strjoin("SHLVL=", shell_level);

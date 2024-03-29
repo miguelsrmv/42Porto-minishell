@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 11:15:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:36:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int	exit_status2(t_command_table *current, int count)
 	{
 		printf("exit\n");
 		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
-		g_status_flag = 1;
-		return (1);
+		return (g_status_flag);
 	}
 	else
 		return (exit_status3(current));
