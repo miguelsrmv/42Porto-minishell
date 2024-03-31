@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 10:00:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/03/31 11:23:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	env2(char **argv, t_env *envv)
 	if (ft_builtin_checker(argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if ((argv[0] != NULL && (argv[1] != NULL && argv[1][0] != '-')))
-			//|| check_path(envv->env_var))
 	{
 		env_error_msg(argv[0]);
 		g_status_flag = 127;
