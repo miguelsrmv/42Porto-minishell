@@ -6,19 +6,24 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 19:33:12 by bmota-si          #+#    #+#             */
-/*   Updated: 2024/03/23 21:21:22 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:32:25 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(char *command, char **envp, t_command_table *current,
+int	ft_exit(char *command, char **envp, t_command_table *current,
 			t_memptr memptr)
 {
 	(void)command;
 	if (ft_exit_status(current) == 1)
-		return ;
+	{
+		if (g_status_flag == 0)
+			(g_status_flag = 1);
+		return (g_status_flag);
+	}
 	final_clear_and_exit(memptr, envp, NULL, NULL);
+	return (0);
 }
 
 static char	*posnum(char *str, long long n, int len)

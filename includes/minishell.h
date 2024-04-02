@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 15:51:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:30:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -576,7 +576,7 @@ int					ft_word_count(char **str);
 int					check_arg_exit(t_command_table *current);
 
 ///exit2.c
-void				ft_exit(char *command, char **envp,
+int					ft_exit(char *command, char **envp,
 						t_command_table *current, t_memptr memptr);
 /* static char			*posnum(char *str, long long n, int len);
 static char			*negnum(char *str, long long n, int len);
