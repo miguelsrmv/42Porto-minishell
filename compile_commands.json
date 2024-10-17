@@ -1,0 +1,2570 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memset.o",
+      "ft_memset.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memset.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_bzero.o",
+      "ft_bzero.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_bzero.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_bzero.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memcpy.o",
+      "ft_memcpy.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memcpy.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memmove.o",
+      "ft_memmove.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memmove.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memmove.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memchr.o",
+      "ft_memchr.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memchr.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memcmp.o",
+      "ft_memcmp.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memcmp.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_memcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strlen.o",
+      "ft_strlen.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strlen.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strlen.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strlcpy.o",
+      "ft_strlcpy.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strlcpy.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strlcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strlcat.o",
+      "ft_strlcat.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strlcat.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strlcat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strchr.o",
+      "ft_strchr.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strchr.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strrchr.o",
+      "ft_strrchr.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strrchr.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strrchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strnstr.o",
+      "ft_strnstr.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strnstr.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strnstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strncmp.o",
+      "ft_strncmp.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strncmp.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strncmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_atoi.o",
+      "ft_atoi.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_atoi.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_atoi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isalpha.o",
+      "ft_isalpha.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isalpha.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isalpha.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isspace.o",
+      "ft_isspace.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isspace.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isspace.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isquote.o",
+      "ft_isquote.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isquote.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isquote.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_issquote.o",
+      "ft_issquote.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_issquote.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_issquote.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isdquote.o",
+      "ft_isdquote.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isdquote.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isdquote.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isdigit.o",
+      "ft_isdigit.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isdigit.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isdigit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isalnum.o",
+      "ft_isalnum.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isalnum.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isalnum.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isascii.o",
+      "ft_isascii.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isascii.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isascii.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isprint.o",
+      "ft_isprint.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isprint.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isprint.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_toupper.o",
+      "ft_toupper.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_toupper.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_toupper.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_tolower.o",
+      "ft_tolower.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_tolower.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_tolower.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_calloc.o",
+      "ft_calloc.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_calloc.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_calloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strdup.o",
+      "ft_strdup.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strdup.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_substr.o",
+      "ft_substr.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_substr.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_substr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strjoin.o",
+      "ft_strjoin.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strjoin.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strjoin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strtrim.o",
+      "ft_strtrim.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strtrim.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strtrim.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_split.o",
+      "ft_split.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_split.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_split.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_itoa.o",
+      "ft_itoa.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_itoa.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_itoa.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_striteri.o",
+      "ft_striteri.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_striteri.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_striteri.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strmapi.o",
+      "ft_strmapi.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strmapi.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strmapi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putchar_fd.o",
+      "ft_putchar_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putchar_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putchar_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putstr_fd.o",
+      "ft_putstr_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putstr_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putstr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putendl_fd.o",
+      "ft_putendl_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putendl_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putendl_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putnbr_fd.o",
+      "ft_putnbr_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putnbr_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_putnbr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstnew.o",
+      "ft_lstnew.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstnew.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstnew.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstadd_front.o",
+      "ft_lstadd_front.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstadd_front.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstadd_front.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstsize.o",
+      "ft_lstsize.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstsize.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstsize.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstlast.o",
+      "ft_lstlast.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstlast.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstlast.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstadd_back.o",
+      "ft_lstadd_back.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstadd_back.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstadd_back.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstdelone.o",
+      "ft_lstdelone.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstdelone.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstdelone.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstclear.o",
+      "ft_lstclear.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstclear.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstclear.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstiter.o",
+      "ft_lstiter.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstiter.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstiter.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_lstmap.o",
+      "ft_lstmap.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstmap.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_lstmap.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf.o",
+      "ft_printf.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf_string_fd.o",
+      "ft_printf_string_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_string_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_string_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf_base_fd.o",
+      "ft_printf_base_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_base_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_base_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf_char_fd.o",
+      "ft_printf_char_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_char_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_char_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf_int_fd.o",
+      "ft_printf_int_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_int_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_int_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf_ptr_fd.o",
+      "ft_printf_ptr_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_ptr_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_ptr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf_uns_fd.o",
+      "ft_printf_uns_fd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_uns_fd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_printf_uns_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_fprintf.o",
+      "ft_fprintf.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_fprintf.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_fprintf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "get_next_line.o",
+      "get_next_line.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/get_next_line.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/get_next_line.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "get_next_line_utils.o",
+      "get_next_line_utils.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/get_next_line_utils.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/get_next_line_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strcmp.o",
+      "ft_strcmp.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strcmp.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strcmp_input.o",
+      "ft_strcmp_input.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strcmp_input.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strcmp_input.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_free_tabs.o",
+      "ft_free_tabs.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free_tabs.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free_tabs.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_atoi_base.o",
+      "ft_atoi_base.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_atoi_base.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_atoi_base.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_swap.o",
+      "ft_swap.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_swap.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_swap.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_abs.o",
+      "ft_abs.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_abs.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_abs.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_str_tolower.o",
+      "ft_str_tolower.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_tolower.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_tolower.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_str_toupper.o",
+      "ft_str_toupper.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_toupper.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_toupper.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_checkextension.o",
+      "ft_checkextension.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_checkextension.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_checkextension.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strndup.o",
+      "ft_strndup.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strndup.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strndup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_str_arr_dup.o",
+      "ft_str_arr_dup.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_arr_dup.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_arr_dup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_str_arr_len.o",
+      "ft_str_arr_len.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_arr_len.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_str_arr_len.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_realloc_str_arr.o",
+      "ft_realloc_str_arr.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_realloc_str_arr.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_realloc_str_arr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_free_str_array.o",
+      "ft_free_str_array.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free_str_array.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free_str_array.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_free_str.o",
+      "ft_free_str.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free_str.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free_str.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strstrjoin.o",
+      "ft_strstrjoin.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strstrjoin.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strstrjoin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_append.o",
+      "ft_append.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_append.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_append.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_free.o",
+      "ft_free.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_free.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_atol.o",
+      "ft_atol.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_atol.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_atol.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_issign.o",
+      "ft_issign.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_issign.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_issign.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_tabdup.o",
+      "ft_tabdup.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_tabdup.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_tabdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_getpid.o",
+      "ft_getpid.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_getpid.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_getpid.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_getppid.o",
+      "ft_getppid.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_getppid.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_getppid.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strchr2.o",
+      "ft_strchr2.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strchr2.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_strchr2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_last_char.o",
+      "ft_last_char.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_last_char.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_last_char.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_tablen.o",
+      "ft_tablen.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_tablen.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_tablen.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isnumber.o",
+      "ft_isnumber.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isnumber.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/libft/ft_isnumber.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/main.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/bash_main.o",
+      "src/bash_main.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/bash_main.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/bash_main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/clean/exit_error.o",
+      "src/clean/exit_error.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/exit_error.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/exit_error.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/clean/clean_memory.o",
+      "src/clean/clean_memory.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/clean_memory.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/clean_memory.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/clean/clean_memory_heredoc.o",
+      "src/clean/clean_memory_heredoc.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/clean_memory_heredoc.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/clean_memory_heredoc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/clean/clean_memory_pipes.o",
+      "src/clean/clean_memory_pipes.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/clean_memory_pipes.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/clean/clean_memory_pipes.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/prepare_shell/path_update.o",
+      "src/prepare_shell/path_update.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/prepare_shell/path_update.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/prepare_shell/path_update.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/prepare_shell/shell_update.o",
+      "src/prepare_shell/shell_update.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/prepare_shell/shell_update.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/prepare_shell/shell_update.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/lexer/get_input.o",
+      "src/lexer/get_input.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/get_input.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/get_input.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/lexer/input_checker.o",
+      "src/lexer/input_checker.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/input_checker.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/input_checker.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/lexer/lexer.o",
+      "src/lexer/lexer.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/lexer.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/lexer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/lexer/lexer_linked_list.o",
+      "src/lexer/lexer_linked_list.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/lexer_linked_list.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/lexer_linked_list.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/lexer/lexer_get_tokens.o",
+      "src/lexer/lexer_get_tokens.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/lexer_get_tokens.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/lexer_get_tokens.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/lexer/fork_input.o",
+      "src/lexer/fork_input.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/fork_input.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/lexer/fork_input.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/parser/parser.o",
+      "src/parser/parser.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/parser/parser_set_redirs.o",
+      "src/parser/parser_set_redirs.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_set_redirs.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_set_redirs.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/parser/parser_heredoc.o",
+      "src/parser/parser_heredoc.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_heredoc.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_heredoc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/parser/clean_heredocs.o",
+      "src/parser/clean_heredocs.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/clean_heredocs.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/clean_heredocs.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/parser/parser_heredoc_parent.o",
+      "src/parser/parser_heredoc_parent.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_heredoc_parent.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_heredoc_parent.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/parser/parser_heredoc_child.o",
+      "src/parser/parser_heredoc_child.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_heredoc_child.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/parser/parser_heredoc_child.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/expander/expander.o",
+      "src/expander/expander.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/expander/expander_noquotes.o",
+      "src/expander/expander_noquotes.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_noquotes.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_noquotes.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/expander/expander_squote.o",
+      "src/expander/expander_squote.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_squote.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_squote.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/expander/expander_dquote.o",
+      "src/expander/expander_dquote.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_dquote.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_dquote.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/expander/expander_concatenate.o",
+      "src/expander/expander_concatenate.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_concatenate.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/expander/expander_concatenate.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_prepare_processes.o",
+      "src/executer/executer_prepare_processes.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_prepare_processes.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_prepare_processes.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_redir_checker.o",
+      "src/executer/executer_redir_checker.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_redir_checker.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_redir_checker.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_redir_setter.o",
+      "src/executer/executer_redir_setter.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_redir_setter.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_redir_setter.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_executable_checker.o",
+      "src/executer/executer_executable_checker.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_executable_checker.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_executable_checker.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_dir_checker.o",
+      "src/executer/executer_dir_checker.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_dir_checker.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_dir_checker.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_get_path.o",
+      "src/executer/executer_get_path.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_get_path.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_get_path.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_childparent_processes.o",
+      "src/executer/executer_childparent_processes.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_childparent_processes.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_childparent_processes.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_single_builtin.o",
+      "src/executer/executer_single_builtin.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_single_builtin.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_single_builtin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_input_check.o",
+      "src/executer/executer_input_check.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_input_check.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_input_check.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_process_check.o",
+      "src/executer/executer_process_check.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_process_check.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_process_check.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_output_check.o",
+      "src/executer/executer_output_check.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_output_check.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_output_check.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/executer_command_check.o",
+      "src/executer/executer_command_check.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_command_check.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/executer_command_check.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/executer/final_nullstrings.o",
+      "src/executer/final_nullstrings.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/final_nullstrings.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/executer/final_nullstrings.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/signals/signals.o",
+      "src/signals/signals.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/signals/signals.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/signals/signals.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/signals/signals_handler.o",
+      "src/signals/signals_handler.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/signals/signals_handler.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/signals/signals_handler.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/signals/signals_handler_input.o",
+      "src/signals/signals_handler_input.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/signals/signals_handler_input.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/signals/signals_handler_input.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_cd.o",
+      "src/builtins/builtin_cd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_cd2.o",
+      "src/builtins/builtin_cd2.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd2.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_echo.o",
+      "src/builtins/builtin_echo.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_echo2.o",
+      "src/builtins/builtin_echo2.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo2.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_env.o",
+      "src/builtins/builtin_env.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_env.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_env.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_export.o",
+      "src/builtins/builtin_export.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_export2.o",
+      "src/builtins/builtin_export2.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export2.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_export3.o",
+      "src/builtins/builtin_export3.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export3.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export3.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_export4.o",
+      "src/builtins/builtin_export4.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export4.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export4.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_pwd.o",
+      "src/builtins/builtin_pwd.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_pwd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_pwd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_unset.o",
+      "src/builtins/builtin_unset.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_unset.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_unset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/get_set.o",
+      "src/builtins/get_set.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/get_set2.o",
+      "src/builtins/get_set2.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set2.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_exit.o",
+      "src/builtins/builtin_exit.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_exit2.o",
+      "src/builtins/builtin_exit2.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit2.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_checker.o",
+      "src/builtins/builtin_checker.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_checker.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_checker.o"
+  }
+]

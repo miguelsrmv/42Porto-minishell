@@ -12,11 +12,10 @@
 
 #include "minishell.h"
 
-int	g_status_flag;
+int			g_status_flag;
 
 t_memptr	initialize_memptr(t_token **lexer_list,
-				t_command_table **command_table,
-				char **argv, int argc)
+		t_command_table **command_table, char **argv, int argc)
 {
 	t_memptr	memptr;
 

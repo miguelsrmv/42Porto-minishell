@@ -45,12 +45,12 @@ SRC		=	main.c bash_main.c \
 			executer/executer_output_check.c executer/executer_command_check.c \
 			executer/final_nullstrings.c \
 			signals/signals.c signals/signals_handler.c signals/signals_handler_input.c \
-			builtins/builtin_cd.c builtins/builtin_cd2.c builtins/builtin_echo.c \
-			builtins/builtin_echo2.c  builtins/builtin_env.c \
-			builtins/builtin_export.c builtins/builtin_export2.c \
-			builtins/builtin_export3.c builtins/builtin_export4.c builtins/builtin_pwd.c \
-			builtins/builtin_unset.c builtins/get_set.c builtins/get_set2.c \
-			builtins/builtin_exit.c builtins/builtin_exit2.c builtins/builtin_checker.c
+			builtins_old/builtin_cd_old.c builtins_old/builtin_cd2_old.c builtins_old/builtin_echo_old.c \
+			builtins_old/builtin_echo2_old.c  builtins_old/builtin_env_old.c \
+			builtins_old/builtin_export_old.c builtins_old/builtin_export2_old.c \
+			builtins_old/builtin_export3_old.c builtins_old/builtin_export4_old.c builtins_old/builtin_pwd_old.c \
+			builtins_old/builtin_unset_old.c builtins_old/get_set_old.c builtins_old/get_set2_old.c \
+			builtins_old/builtin_exit_old.c builtins_old/builtin_exit2_old.c builtins_old/builtin_checker_old.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

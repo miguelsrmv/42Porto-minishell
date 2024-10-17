@@ -14,9 +14,9 @@
 
 char	*get_echo_var(char *str, t_memptr memptr)
 {
-	t_env		*envv;
-	char		*result;
-	int			i;
+	t_env	*envv;
+	char	*result;
+	int		i;
 
 	envv = get_envv();
 	if (envv == NULL || envv->env_var == NULL)
@@ -43,15 +43,15 @@ char	*get_echo_var(char *str, t_memptr memptr)
 
 int	contains_str(const char *str1, char *str2)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str1[i] && str2[i] && str1[i] == str2[i])
 	{
 		if (str1[i] == str2[i])
 		{
-			if ((str1[i + 1] == '=' || str1[i + 1] == '\0')
-				&& str2[i + 1] == '\0')
+			if ((str1[i + 1] == '=' || str1[i + 1] == '\0') && str2[i
+				+ 1] == '\0')
 				return (EXIT_SUCCESS);
 		}
 		i++;
