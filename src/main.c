@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/17 19:33:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:44:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			g_status_flag;
 
 t_memptr	initialize_memptr(t_token **lexer_list,
-		t_command_table **command_table, char **argv, int argc)
+		t_command_table **command_table, char **argv, char **envp)
 {
 	t_memptr	memptr;
 
@@ -24,9 +24,9 @@ t_memptr	initialize_memptr(t_token **lexer_list,
 	memptr.first_node = NULL;
 	memptr.path_list = NULL;
 	memptr.pipe_fd = NULL;
-	memptr.argc = argc;
+	memptr.argc = ft_tablen((void **)argv);
 	memptr.argv = argv;
-	memptr.envp = NULL;
+	memptr.envp = envp;
 	memptr.return_value = 0;
 	return (memptr);
 }
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_putstr_fd(MALLOC_ERROR, STDERR_FILENO);
 		return (1);
 	}
-	memptr = initialize_memptr(&lexer_list, &command_table, argv, argc);
-	bash_main(envp_cpy, &memptr);
+	memptr = initialize_memptr(&lexer_list, &command_table, argv, envp_cpy);
+	bash_main(&memptr);
 	return (0);
 }

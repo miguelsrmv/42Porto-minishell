@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/17 22:19:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:44:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,10 +216,10 @@ typedef struct s_export
 /// main.c
 t_memptr					initialize_memptr(t_token **lexer_list,
 								t_command_table **command_table, char **argv,
-								int argc);
+								char **envp);
 
 /// bash_main.c
-void						bash_main(char **envp, t_memptr *memptr);
+void						bash_main(t_memptr *memptr);
 void						bash_run(char **envp, t_memptr *memptr);
 t_env						*set_environment_vars(char **envp, t_memptr memptr);
 void						update_envp(char ***envp, t_memptr *memptr,
