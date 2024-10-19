@@ -2260,12 +2260,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_cd.o",
-      "src/builtins/builtin_cd.c"
+      "src/builtins_old/builtin_cd_old.o",
+      "src/builtins_old/builtin_cd_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_cd_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_cd_old.o"
   },
   {
     "arguments": [
@@ -2280,12 +2280,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_cd2.o",
-      "src/builtins/builtin_cd2.c"
+      "src/builtins_old/builtin_cd2_old.o",
+      "src/builtins_old/builtin_cd2_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd2.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_cd2.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_cd2_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_cd2_old.o"
   },
   {
     "arguments": [
@@ -2300,12 +2300,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_echo.o",
-      "src/builtins/builtin_echo.c"
+      "src/builtins_old/builtin_echo_old.o",
+      "src/builtins_old/builtin_echo_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_echo_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_echo_old.o"
   },
   {
     "arguments": [
@@ -2320,12 +2320,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_echo2.o",
-      "src/builtins/builtin_echo2.c"
+      "src/builtins_old/builtin_echo2_old.o",
+      "src/builtins_old/builtin_echo2_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo2.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_echo2.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_echo2_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_echo2_old.o"
   },
   {
     "arguments": [
@@ -2340,12 +2340,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_env.o",
-      "src/builtins/builtin_env.c"
+      "src/builtins_old/builtin_env_old.o",
+      "src/builtins_old/builtin_env_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_env.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_env.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_env_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_env_old.o"
   },
   {
     "arguments": [
@@ -2360,12 +2360,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_export.o",
-      "src/builtins/builtin_export.c"
+      "src/builtins_old/builtin_export_old.o",
+      "src/builtins_old/builtin_export_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export_old.o"
   },
   {
     "arguments": [
@@ -2380,12 +2380,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_export2.o",
-      "src/builtins/builtin_export2.c"
+      "src/builtins_old/builtin_export2_old.o",
+      "src/builtins_old/builtin_export2_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export2.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export2.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export2_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export2_old.o"
   },
   {
     "arguments": [
@@ -2400,12 +2400,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_export3.o",
-      "src/builtins/builtin_export3.c"
+      "src/builtins_old/builtin_export3_old.o",
+      "src/builtins_old/builtin_export3_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export3.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export3.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export3_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export3_old.o"
   },
   {
     "arguments": [
@@ -2420,12 +2420,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_export4.o",
-      "src/builtins/builtin_export4.c"
+      "src/builtins_old/builtin_export4_old.o",
+      "src/builtins_old/builtin_export4_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export4.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_export4.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export4_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_export4_old.o"
   },
   {
     "arguments": [
@@ -2440,12 +2440,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_pwd.o",
-      "src/builtins/builtin_pwd.c"
+      "src/builtins/pwd.o",
+      "src/builtins/pwd.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_pwd.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_pwd.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/pwd.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/pwd.o"
   },
   {
     "arguments": [
@@ -2460,12 +2460,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_unset.o",
-      "src/builtins/builtin_unset.c"
+      "src/builtins_old/builtin_unset_old.o",
+      "src/builtins_old/builtin_unset_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_unset.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_unset.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_unset_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_unset_old.o"
   },
   {
     "arguments": [
@@ -2480,12 +2480,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/get_set.o",
-      "src/builtins/get_set.c"
+      "src/builtins_old/get_set_old.o",
+      "src/builtins_old/get_set_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/get_set_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/get_set_old.o"
   },
   {
     "arguments": [
@@ -2500,12 +2500,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/get_set2.o",
-      "src/builtins/get_set2.c"
+      "src/builtins_old/get_set2_old.o",
+      "src/builtins_old/get_set2_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set2.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/get_set2.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/get_set2_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/get_set2_old.o"
   },
   {
     "arguments": [
@@ -2520,12 +2520,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_exit.o",
-      "src/builtins/builtin_exit.c"
+      "src/builtins_old/builtin_exit_old.o",
+      "src/builtins_old/builtin_exit_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_exit_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_exit_old.o"
   },
   {
     "arguments": [
@@ -2540,12 +2540,12 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_exit2.o",
-      "src/builtins/builtin_exit2.c"
+      "src/builtins_old/builtin_exit2_old.o",
+      "src/builtins_old/builtin_exit2_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit2.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_exit2.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_exit2_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_exit2_old.o"
   },
   {
     "arguments": [
@@ -2560,11 +2560,31 @@
       "src/libft",
       "-c",
       "-o",
-      "src/builtins/builtin_checker.o",
-      "src/builtins/builtin_checker.c"
+      "src/builtins_old/builtin_checker_old.o",
+      "src/builtins_old/builtin_checker_old.c"
     ],
     "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
-    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_checker.c",
-    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_checker.o"
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_checker_old.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins_old/builtin_checker_old.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-I",
+      "includes",
+      "-I",
+      "src/libft",
+      "-c",
+      "-o",
+      "src/builtins/builtin_helpers.o",
+      "src/builtins/builtin_helpers.c"
+    ],
+    "directory": "/home/miguel/Coding/42Porto/CommonCore/minishell",
+    "file": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_helpers.c",
+    "output": "/home/miguel/Coding/42Porto/CommonCore/minishell/src/builtins/builtin_helpers.o"
   }
 ]

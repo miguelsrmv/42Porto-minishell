@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 17:24:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/11 12:51:37 by bmota-si         ###   ########.fr       */
+/*   Created: 2024/10/17 21:34:41 by mde-sa--          #+#    #+#             */
+/*   Updated: 2024/10/17 21:50:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,15 @@ int	pwd(char **argv)
 {
 	char	*cwd;
 
-	if (ft_builtin_checker(argv) != EXIT_SUCCESS)
+	if (builtin_argument_checker(argv) != EXIT_SUCCESS)
 		return (g_status_flag);
-	cwd = NULL;
-	cwd = getcwd(cwd, 0);
+	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 	{
 		perror("Error");
 		return (EXIT_FAILURE);
 	}
-	else if (!printf("%s\n", cwd))
-	{
-		ft_free_str(&cwd);
-		perror("\nError: printf failed");
-		return (EXIT_FAILURE);
-	}
+	printf("%s\n", cwd);
 	ft_free_str(&cwd);
 	return (EXIT_SUCCESS);
 }

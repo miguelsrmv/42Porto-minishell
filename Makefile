@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/29 16:04:09 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/10/17 22:20:19 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,13 @@ SRC		=	main.c bash_main.c \
 			executer/executer_output_check.c executer/executer_command_check.c \
 			executer/final_nullstrings.c \
 			signals/signals.c signals/signals_handler.c signals/signals_handler_input.c \
-			builtins_old/builtin_cd_old.c builtins_old/builtin_cd2_old.c builtins_old/builtin_echo_old.c \
+			builtins_old/builtin_cd_old.c builtins_old/builtin_cd2_old.c builtins/echo.c \
 			builtins_old/builtin_echo2_old.c  builtins_old/builtin_env_old.c \
 			builtins_old/builtin_export_old.c builtins_old/builtin_export2_old.c \
-			builtins_old/builtin_export3_old.c builtins_old/builtin_export4_old.c builtins_old/builtin_pwd_old.c \
+			builtins_old/builtin_export3_old.c builtins_old/builtin_export4_old.c builtins/pwd.c \
 			builtins_old/builtin_unset_old.c builtins_old/get_set_old.c builtins_old/get_set2_old.c \
-			builtins_old/builtin_exit_old.c builtins_old/builtin_exit2_old.c builtins_old/builtin_checker_old.c
+			builtins_old/builtin_exit_old.c builtins_old/builtin_exit2_old.c builtins_old/builtin_checker_old.c \
+			builtins/builtin_helpers.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
@@ -100,5 +101,15 @@ readline.supp:
 		
 test:
 	valgrind -q --leak-check=full --trace-children=yes --track-fds=yes ./minishell
+
+sync:
+	tmux new-window -n shell_sync
+	tmux split-window -h
+	tmux send-keys 'bash' C-m
+	sleep 0.1
+	tmux select-pane -R
+	sleep 0.1
+	tmux send-keys './minishell' C-m
+	tmux set-window-option synchronize-panes on
 
 .PHONY: all clean fclean re libft
