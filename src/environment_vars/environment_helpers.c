@@ -1,17 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environmental_var_helpers.c                        :+:      :+:    :+:   */
+/*   environment_helpers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 19:40:30 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 11:23:38 by mde-sa--         ###   ########.fr       */
+/*   Created: 2024/10/20 16:59:19 by mde-sa--          #+#    #+#             */
+/*   Updated: 2024/10/20 17:04:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "minishell.h"
+
+char	*new_key_value(char *key, char *value, t_memptr *memptr)
+{
+	char	*left;
+	char	*result;
+
+	left = ft_strjoin(key, "=");
+	if (!left)
+		exit_error(MALLOC_ERROR, *memptr, NULL);
+	result = ft_strjoin(left, value);
+	if (!result)
+	{
+		free(left);
+		exit_error(MALLOC_ERROR, *memptr, NULL);
+	}
+	return (result);
+}
+
+void	cpy_old_vars_skip_position(char **old, char **dest, int index_to_skip)
+{
+	int	i;
+
+	i = 0;
+	while (old[i])
+	{
+		if (i != index_to_skip)
+			dest[i] = old[i];
+		i++;
+	}
+}
 
 int	find_env_var(char **envp, char *key)
 {
@@ -29,19 +58,4 @@ int	find_env_var(char **envp, char *key)
 		i++;
 	}
 	return (-1);
-}
-
-char	*get_env_value(char **envp, char *key, t_memptr *memptr)
-{
-	char	*value;
-	int		position;
-
-	position = find_env_var(envp, key);
-	if (position < 0)
-		return (NULL);
-	// value = ft_strdup(&envp[position][ft_strlen(key) + 1]);
-	value = ft_strchr(envp[position], '=') + 1;
-	if (value == NULL)
-		exit_error(MALLOC_ERROR, *memptr, NULL);
-	return (value);
 }

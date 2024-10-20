@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:36:44 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/17 21:41:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:28:28 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	builtin_argument_checker(char **argv)
 			g_status_flag = 125;
 		else
 			g_status_flag = 2;
-		ft_putstr_fd("invalid option\n", STDERR_FILENO);
+		ft_putstr_fd(argv[0], STDERR_FILENO);
+		ft_putstr_fd(": invalid option\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

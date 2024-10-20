@@ -29,7 +29,8 @@ INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 SRC		=	main.c bash_main.c \
 			clean/exit_error.c clean/clean_memory.c clean/clean_memory_heredoc.c \
 			clean/clean_memory_pipes.c \
-			prepare_shell/path_update.c prepare_shell/shell_update.c prepare_shell/environmental_var_helpers.c \
+			environment_vars/path_update.c environment_vars/shell_update.c \
+			environment_vars/environment_getters_setters.c environment_vars/environment_helpers.c \
 			lexer/get_input.c lexer/input_checker.c lexer/lexer.c \
 			lexer/lexer_linked_list.c lexer/lexer_get_tokens.c lexer/fork_input.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
@@ -45,7 +46,7 @@ SRC		=	main.c bash_main.c \
 			executer/executer_output_check.c executer/executer_command_check.c \
 			executer/final_nullstrings.c \
 			signals/signals.c signals/signals_handler.c signals/signals_handler_input.c \
-			builtins/builtin_cd.c builtins/echo.c builtins/builtin_env.c \
+			builtins/builtin_cd.c builtins/echo.c builtins/env.c \
 			builtins/builtin_export.c builtins/pwd.c builtins/builtin_unset.c \
 			builtins/builtin_helpers.c builtins/builtin_exit.c builtins/others.c
 
