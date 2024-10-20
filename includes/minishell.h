@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 17:26:09 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:16:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -455,9 +455,9 @@ void						process_fork_subfunc(int *pid_array,
 
 /// executer_single_builtin.c
 int							execute_single_builtin(t_command_table *current,
-								char **envp, t_memptr memptr);
+								char **envp, t_memptr *memptr);
 int							execute_builtin(t_command_table *current,
-								char **envp, t_memptr memptr);
+								char **envp, t_memptr *memptr);
 void						close_exit_fds(int original_stdin,
 								int original_stdout);
 
@@ -545,8 +545,8 @@ int							ft_export_found(t_env *envv, t_export *exp,
 								char **argv);
 
 /// unset.c
-int							unset(char **argv);
-int							unset2(t_env *envv, char **argv, int k);
+int							unset(char **argv, char **envp,
+								t_command_table *current, t_memptr *memptr);
 
 /// cd.c
 void						ft_update_env_var(t_env *envv, char *var,

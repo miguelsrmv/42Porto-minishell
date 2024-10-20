@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:01 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 12:41:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:17:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	close_pipes(int **pipe_fd, t_command_table *current, t_memptr memptr)
 }
 
 void	close_remaining_pipes(int **pipe_fd, t_command_table *current,
-			t_memptr memptr)
+		t_memptr memptr)
 {
 	int	i;
 
@@ -98,14 +98,14 @@ int	count_processes(t_command_table **command_table)
 }
 
 void	prepare_processes(t_command_table **command_table, char **envp,
-			t_memptr *memptr)
+		t_memptr *memptr)
 {
-	int				process_num;
+	int	process_num;
 
 	process_check(command_table, envp, memptr);
 	process_num = count_processes(command_table);
 	if (process_num == 1 && (*command_table)->command_type == BUILTIN)
-		execute_single_builtin(*command_table, envp, *memptr);
+		execute_single_builtin(*command_table, envp, memptr);
 	else
 		process_forks(command_table, envp, process_num, *memptr);
 }

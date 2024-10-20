@@ -6,14 +6,14 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:43:18 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 15:56:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:16:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	process_parent(int **pipe_fd, int process_num, int *pid_array,
-	t_memptr *memptr)
+		t_memptr *memptr)
 {
 	int	i;
 
@@ -34,8 +34,8 @@ void	process_parent(int **pipe_fd, int process_num, int *pid_array,
 		ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
 }
 
-void	process_child(int **pipe_fd, t_command_table *current,
-			char **envp, t_memptr memptr)
+void	process_child(int **pipe_fd, t_command_table *current, char **envp,
+		t_memptr memptr)
 {
 	close_pipes(pipe_fd, current, memptr);
 	if (current->valid_command == FALSE)
@@ -48,7 +48,7 @@ void	process_child(int **pipe_fd, t_command_table *current,
 	if (current->command_type == EXECUTABLE)
 		execve(current->cmd_target, current->cmd, envp);
 	else if (current->command_type == BUILTIN)
-		execute_builtin(current, envp, memptr);
+		execute_builtin(current, envp, &memptr);
 	final_clear_and_exit(memptr, envp, pipe_fd, current);
 }
 
@@ -60,7 +60,7 @@ void	create_pid_array(int **pid_array, int process_num, t_memptr memptr)
 }
 
 void	process_forks(t_command_table **command_table, char **envp,
-			int process_num, t_memptr memptr)
+		int process_num, t_memptr memptr)
 {
 	int				**pipe_fd;
 	int				*pid_array;

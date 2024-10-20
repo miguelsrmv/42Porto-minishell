@@ -6,14 +6,14 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:12:05 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/26 00:31:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:18:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute_single_builtin(t_command_table *current,
-			char **envp, t_memptr memptr)
+int	execute_single_builtin(t_command_table *current, char **envp,
+		t_memptr *memptr)
 {
 	int	original_stdin;
 	int	original_stdout;
@@ -23,7 +23,7 @@ int	execute_single_builtin(t_command_table *current,
 		return (g_status_flag);
 	original_stdin = dup(STDIN_FILENO);
 	original_stdout = dup(STDOUT_FILENO);
-	set_redirs(NULL, &current, memptr);
+	set_redirs(NULL, &current, *memptr);
 	if (current->input_fd)
 		close(current->input_fd);
 	if (current->output_fd)
@@ -35,15 +35,12 @@ int	execute_single_builtin(t_command_table *current,
 	return (g_status_flag);
 }
 
-int	execute_builtin(t_command_table *current,
-			char **envp, t_memptr memptr)
+int	execute_builtin(t_command_table *current, char **envp, t_memptr *memptr)
 {
-	int		(*function_pointer)(char **, char **,
-			t_command_table *, t_memptr);
+	int	(*function_pointer)(char **, char **, t_command_table *, t_memptr *);
 
-	function_pointer
-		= (int (*)(char **, char **,
-				t_command_table *, t_memptr))current->builtin_pointer;
+	function_pointer = (int (*)(char **, char **, t_command_table *,
+				t_memptr *))current->builtin_pointer;
 	g_status_flag = function_pointer(current->cmd, envp, current, memptr);
 	return (g_status_flag);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:30 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 17:04:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:02:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	set_env_value(char ***envp, char *key, char *value, t_memptr *memptr)
 		new_envp[ft_tablen((void **)*envp)] = new_key_value(key, value, memptr);
 		new_envp[ft_tablen((void **)*envp) + 1] = NULL;
 		free(*envp);
-		*envp = new_envp;
+		(memptr->envp) = new_envp;
 	}
 	else
 	{
@@ -68,9 +68,8 @@ void	remove_env_value(char ***envp, char *key, t_memptr *memptr)
 		if (!new_envp)
 			exit_error(MALLOC_ERROR, *memptr, NULL);
 		cpy_old_vars_skip_position(*envp, new_envp, position);
-		new_envp[ft_tablen((void **)*envp) + 1] = NULL;
 		free((*envp)[position]);
 		free(*envp);
-		*envp = new_envp;
+		(memptr->envp) = new_envp;
 	}
 }

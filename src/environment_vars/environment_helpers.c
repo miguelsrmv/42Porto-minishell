@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:59:19 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 17:04:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:56:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,20 @@ char	*new_key_value(char *key, char *value, t_memptr *memptr)
 void	cpy_old_vars_skip_position(char **old, char **dest, int index_to_skip)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (old[i])
 	{
 		if (i != index_to_skip)
-			dest[i] = old[i];
+		{
+			dest[j] = old[i];
+			j++;
+		}
 		i++;
 	}
+	dest[j] = NULL;
 }
 
 int	find_env_var(char **envp, char *key)
