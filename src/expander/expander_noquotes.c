@@ -6,14 +6,14 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:30:35 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 16:23:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:40:13 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	normal_expansion(char **string, int *pos, char *quote_flag,
-			t_memptr memptr)
+		t_memptr memptr)
 {
 	while ((*string)[*pos] && (*string)[*pos] != *quote_flag)
 	{
@@ -88,7 +88,7 @@ void	expand_env_no_quotes(char **string, int *start, t_memptr memptr)
 	substring = ft_substr((*string), (*start) + 1, end - (*start) - 1);
 	if (!substring)
 		exit_error(MALLOC_ERROR, memptr, NULL);
-	expanded = get_echo_var(substring, memptr);
+	expanded = get_env_value(memptr.envp, substring, &memptr);
 	if (!expanded)
 		expanded = "";
 	free(substring);

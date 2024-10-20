@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/19 19:59:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:50:26 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	bash_main(t_memptr *memptr)
 		set_signal();
 		bash_run(memptr->envp, memptr);
 		clean_memory(memptr);
+		update_path(memptr);
 	}
 }

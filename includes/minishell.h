@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/19 19:44:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:51:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,12 +224,9 @@ void						bash_run(char **envp, t_memptr *memptr);
 t_env						*set_environment_vars(char **envp, t_memptr memptr);
 void						update_envp(char ***envp, t_memptr *memptr,
 								t_env *env_vars);
-void						update_path(char **envp, t_memptr *memptr);
 
 /// path_update.c
-void						update_path(char **envp, t_memptr *memptr);
-char						*return_path_from_envp(char **envp,
-								t_memptr *memptr);
+void						update_path(t_memptr *memptr);
 
 /// shell_update.c
 void						update_shell_level(char ***envp, t_memptr *memptr);
@@ -605,6 +602,11 @@ char						*ft_ltoa(long long n);
 /// builtin_checker.c
 bool						argument_is_invalid(char *argument);
 int							builtin_argument_checker(char **argv);
+
+// environmental_var_helpers.c
+int							find_env_var(char **envp, char *key);
+char						*get_env_value(char **envp, char *key,
+								t_memptr *memptr);
 
 // OLD FUNCTIONS
 int							ft_builtin_checker(char **argv);

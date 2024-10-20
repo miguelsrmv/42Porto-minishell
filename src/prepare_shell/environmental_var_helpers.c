@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:30 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/19 19:55:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 11:23:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*get_env_value(char **envp, char *key, t_memptr *memptr)
 	position = find_env_var(envp, key);
 	if (position < 0)
 		return (NULL);
-	value = ft_strdup(&envp[position][ft_strlen(key) + 1]);
+	// value = ft_strdup(&envp[position][ft_strlen(key) + 1]);
+	value = ft_strchr(envp[position], '=') + 1;
 	if (value == NULL)
 		exit_error(MALLOC_ERROR, *memptr, NULL);
 	return (value);

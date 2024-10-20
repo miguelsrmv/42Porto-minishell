@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/10/17 22:20:19 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/10/20 10:41:45 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ INCFLAGS =  -I $(INCDIR) -I $(LIBFTDIR)
 SRC		=	main.c bash_main.c \
 			clean/exit_error.c clean/clean_memory.c clean/clean_memory_heredoc.c \
 			clean/clean_memory_pipes.c \
-			prepare_shell/path_update.c prepare_shell/shell_update.c \
+			prepare_shell/path_update.c prepare_shell/shell_update.c prepare_shell/environmental_var_helpers.c \
 			lexer/get_input.c lexer/input_checker.c lexer/lexer.c \
 			lexer/lexer_linked_list.c lexer/lexer_get_tokens.c lexer/fork_input.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
@@ -45,13 +45,9 @@ SRC		=	main.c bash_main.c \
 			executer/executer_output_check.c executer/executer_command_check.c \
 			executer/final_nullstrings.c \
 			signals/signals.c signals/signals_handler.c signals/signals_handler_input.c \
-			builtins_old/builtin_cd_old.c builtins_old/builtin_cd2_old.c builtins/echo.c \
-			builtins_old/builtin_echo2_old.c  builtins_old/builtin_env_old.c \
-			builtins_old/builtin_export_old.c builtins_old/builtin_export2_old.c \
-			builtins_old/builtin_export3_old.c builtins_old/builtin_export4_old.c builtins/pwd.c \
-			builtins_old/builtin_unset_old.c builtins_old/get_set_old.c builtins_old/get_set2_old.c \
-			builtins_old/builtin_exit_old.c builtins_old/builtin_exit2_old.c builtins_old/builtin_checker_old.c \
-			builtins/builtin_helpers.c
+			builtins/builtin_cd.c builtins/echo.c builtins/builtin_env.c \
+			builtins/builtin_export.c builtins/pwd.c builtins/builtin_unset.c \
+			builtins/builtin_helpers.c builtins/builtin_exit.c builtins/others.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

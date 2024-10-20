@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 14:46:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:00:19 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	heredoc_child(char *delimiter, int *pipe_fd)
 {
-	char		*input;
-	size_t		input_size;
-	int			old_g_status_flag;
+	char	*input;
+	size_t	input_size;
+	int		old_g_status_flag;
 
 	old_g_status_flag = g_status_flag;
 	g_status_flag = pipe_fd[1];
@@ -42,7 +42,7 @@ void	heredoc_child(char *delimiter, int *pipe_fd)
 }
 
 void	expand_buffer(char **buffer, t_memptr memptr,
-			enum e_QuoteType quote_status)
+		enum e_QuoteType quote_status)
 {
 	int	i;
 
@@ -51,8 +51,8 @@ void	expand_buffer(char **buffer, t_memptr memptr,
 	i = 0;
 	while ((*buffer)[i])
 	{
-		if (((*buffer)[i] == '$' && (*buffer)[i + 1])
-			&& ((*buffer)[i + 1]) == '?')
+		if (((*buffer)[i] == '$' && (*buffer)[i + 1]) && ((*buffer)[i
+				+ 1]) == '?')
 		{
 			exit_value_expand(buffer, &i, memptr);
 			i--;
@@ -66,14 +66,9 @@ void	expand_buffer(char **buffer, t_memptr memptr,
 	}
 }
 
-void	clean_heredoc_child(t_memptr memptr,
-			t_command_table **command_table)
+void	clean_heredoc_child(t_memptr memptr, t_command_table **command_table)
 {
-	t_env		*envv;
-
 	(void)command_table;
-	envv = get_envv();
-	free_envv(envv);
 	clean_memory_heredoc(&memptr);
 	if (*memptr.envp)
 		ft_free_tabs((void **)memptr.envp);
