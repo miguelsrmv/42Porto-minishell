@@ -18,10 +18,7 @@ void	print_export(char **envp)
 
 	i = 0;
 	while ((envp)[i])
-	{
-		if (ft_strchr(envp[i], '='))
-			printf("declare -x %s\n", (envp)[i++]);
-	}
+		printf("declare -x %s\n", (envp)[i++]);
 }
 
 bool	export_is_invalid(char *argument)
@@ -64,7 +61,7 @@ void	add_to_export_list(char *argument, char **envp, t_memptr *memptr)
 	else
 	{
 		key = ft_strdup(argument);
-		value = "";
+		value = NULL;
 	}
 	set_env_value(envp, key, value, memptr);
 	free(key);
