@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 12:42:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:27:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_export(char **envp)
 	int	i;
 
 	i = 0;
+	bubble_sort(envp);
 	while ((envp)[i])
 		printf("declare -x %s\n", (envp)[i++]);
 }

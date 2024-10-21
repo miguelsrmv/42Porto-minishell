@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:59:19 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 15:46:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:42:42 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,14 @@ void	cpy_old_vars_skip_position(char **old, char **dest, int index_to_skip)
 
 	i = 0;
 	j = 0;
-	while (old[j])
+	while (old[j] != NULL)
 	{
 		if (j == index_to_skip)
+		{
 			j++;
-		dest[i] = old[j];
-		i++;
-		j++;
-	}
-	dest[i] = NULL;
-}
-
-void	cpy_old_vars_add_position_slot(char **old, char **dest,
-		int index_to_skip)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (old[j])
-	{
-		if (i == index_to_skip)
-			i++;
+			if (old[j] == NULL)
+				break ;
+		}
 		dest[i] = old[j];
 		i++;
 		j++;

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 11:52:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:25:22 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -526,6 +526,9 @@ void cpy_old_vars_skip_position(char **old, char **dest, int index_to_skip);
 void cpy_old_vars_add_position_slot(char **old, char **dest, int index_to_skip);
 int find_env_var(char **envp, char *key);
 int find_env_var_insert_position(char **envp, char *key);
+
+void bubble_sort(char **envp);
+void swap(char **a, char **b);
 
 // OLD FUNCTIONS
 int ft_builtin_checker(char **argv);

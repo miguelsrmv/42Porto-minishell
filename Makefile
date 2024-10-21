@@ -31,7 +31,7 @@ SRC		=	main.c bash_main.c \
 			clean/clean_memory_pipes.c \
 			environment_vars/path_update.c environment_vars/shell_update.c \
 			environment_vars/environment_getters_setters.c environment_vars/environment_helpers.c \
-			environment_vars/environment_key_values.c \
+			environment_vars/environment_key_values.c environment_vars/sort_envp.c \
 			lexer/get_input.c lexer/input_checker.c lexer/lexer.c \
 			lexer/lexer_linked_list.c lexer/lexer_get_tokens.c lexer/fork_input.c \
 			parser/parser.c parser/parser_set_redirs.c parser/parser_heredoc.c \
