@@ -48,7 +48,7 @@ SRC		=	main.c bash_main.c \
 			executer/final_nullstrings.c \
 			signals/signals.c signals/signals_handler.c signals/signals_handler_input.c \
 			builtins/builtin_cd.c builtins/echo.c builtins/env.c \
-			builtins/builtin_export.c builtins/pwd.c builtins/unset.c \
+			builtins/export.c builtins/pwd.c builtins/unset.c \
 			builtins/builtin_helpers.c builtins/builtin_exit.c builtins/others.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))

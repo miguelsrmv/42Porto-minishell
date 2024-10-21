@@ -22,8 +22,8 @@ bool	argument_is_invalid(char *argument)
 int	builtin_argument_checker(char **argv)
 {
 	if ((!ft_strcmp(argv[0], "pwd") || !ft_strcmp(argv[0], "unset")
-			|| !ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "env"))
-		&& argument_is_invalid(argv[1]))
+			|| !ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "env")
+			|| !ft_strcmp(argv[0], "cd")) && argument_is_invalid(argv[1]))
 	{
 		if (!ft_strcmp(argv[0], "env"))
 			g_status_flag = 125;

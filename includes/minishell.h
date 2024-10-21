@@ -463,7 +463,7 @@ int unset(char **argv, char **envp, t_command_table *current, t_memptr *memptr);
 
 /// cd.c
 void ft_update_env_var(t_env *envv, char *var, char *value);
-int cd(char **argv);
+int cd(char **argv, char **envp, t_command_table *current, t_memptr *memptr);
 char *find_home(t_env *envv);
 int ft_cd_home(t_env *envv);
 int ft_cd2(char **argv, t_env *envv);
@@ -521,6 +521,10 @@ void set_env_value(char **envp, char *key, char *value, t_memptr *memptr);
 // environment_helpers.c
 char *new_key_value(char *key, char *value, t_memptr *memptr);
 char *new_key(char *key, t_memptr *memptr);
+
+void update_oldpwd_location(char *new_dir, t_memptr *memptr);
+
+void update_pwd_location(char *new_dir, t_memptr *memptr);
 
 void cpy_old_vars_skip_position(char **old, char **dest, int index_to_skip);
 void cpy_old_vars_add_position_slot(char **old, char **dest, int index_to_skip);

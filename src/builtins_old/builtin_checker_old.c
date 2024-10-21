@@ -15,7 +15,7 @@
 int	ft_builtin_checker(char **argv)
 {
 	if (!ft_strcmp(argv[0], "pwd") || !ft_strcmp(argv[0], "unset")
-		|| !ft_strcmp(argv[0], "export"))
+		|| !ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "cd"))
 	{
 		if (argv[1] && argv[1][0] == '-' && argv[1][1] != '\0')
 		{

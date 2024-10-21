@@ -67,3 +67,44 @@ int	find_env_var_insert_position(char **envp, char *key)
 	}
 	return (i);
 }
+
+void	update_oldpwd_location(char *new_dir, t_memptr *memptr)
+{
+	int		oldpwd_position;
+	int		pwd_position;
+	char	*old_pwd;
+
+	oldpwd_position = find_env_var(memptr->envp, "OLDPWD");
+	pwd_position = find_env_var(memptr->envp, "PWD");
+	if (oldpwd_position >= 0)
+	{
+		if (pwd_position >= 0)
+			old_pwd = ft_strjoin("OLDPWD=", get_env_value(memptr->envp, "PWD",
+						memptr));
+		else
+			old_pwd = ft_strdup("OLDPWD=");
+		if (!old_pwd)
+		{
+			free(new_dir);
+			exit_error(MALLOC_ERROR, *memptr, NULL);
+		}
+		free(memptr->envp[oldpwd_position]);
+		memptr->envp[oldpwd_position] = old_pwd;
+	}
+}
+
+void	update_pwd_location(char *new_dir, t_memptr *memptr)
+{
+	int		pwd_position;
+	char	*pwd;
+
+	pwd_position = find_env_var(memptr->envp, "PWD");
+	pwd = ft_strjoin("PWD=", new_dir);
+	if (!pwd)
+	{
+		free(new_dir);
+		exit_error(MALLOC_ERROR, *memptr, NULL);
+	}
+	free(memptr->envp[pwd_position]);
+	memptr->envp[pwd_position] = pwd;
+}
