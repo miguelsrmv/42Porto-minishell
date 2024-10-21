@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 18:16:37 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:52:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -521,7 +521,9 @@ void						sigint_handler_inputs(int pipe_fd);
 int							env(char **argv, char **envp);
 
 /// export.c
-int							export(char **argv);
+void						print_export(char **envp);
+int							export(char **argv, char **envp,
+								t_command_table *current, t_memptr *memptr);
 int							ft_export_loop(t_env *envv, t_export *exp,
 								char **argv);
 int							ft_export_new(t_env *envv, t_export *exp,
@@ -600,14 +602,14 @@ char						*ft_ltoa(long long n);
 /// builtin_checker.c
 bool						argument_is_invalid(char *argument);
 int							builtin_argument_checker(char **argv);
-void						remove_env_value(char ***envp, char *key,
+void						remove_env_value(char **envp, char *key,
 								t_memptr *memptr);
 
 // environment_getters_setters.c
 char						*get_env_value(char **envp, char *key,
 								t_memptr *memptr);
 
-void						set_env_value(char ***envp, char *key, char *value,
+void						set_env_value(char **envp, char *key, char *value,
 								t_memptr *memptr);
 
 // environment_helpers.c
@@ -617,6 +619,8 @@ char						*new_key_value(char *key, char *value,
 void						cpy_old_vars_skip_position(char **old, char **dest,
 								int index_to_skip);
 int							find_env_var(char **envp, char *key);
+int							find_env_var_insert_position(char **envp,
+								char *key);
 
 // OLD FUNCTIONS
 int							ft_builtin_checker(char **argv);

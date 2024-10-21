@@ -6,18 +6,11 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:52:31 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/19 08:15:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:24:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	is_flag(char *flag)
-{
-	if (flag && flag[0] == '-' && ft_strlen(flag) > 1)
-		return (true);
-	return (false);
-}
 
 bool	check_newline_flag(char *flag)
 {

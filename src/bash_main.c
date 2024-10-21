@@ -6,10 +6,11 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:54:29 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 10:50:26 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:50:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 
 void	bash_run(char **envp, t_memptr *memptr)
@@ -43,4 +44,6 @@ void	bash_main(t_memptr *memptr)
 		clean_memory(memptr);
 		update_path(memptr);
 	}
+	clean_memory(memptr);
+	ft_free_tabs((void **)(memptr->envp));
 }

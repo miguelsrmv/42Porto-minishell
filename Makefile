@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/10/20 10:41:45 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/10/20 18:22:43 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC		=	main.c bash_main.c \
 			executer/final_nullstrings.c \
 			signals/signals.c signals/signals_handler.c signals/signals_handler_input.c \
 			builtins/builtin_cd.c builtins/echo.c builtins/env.c \
-			builtins/builtin_export.c builtins/pwd.c builtins/builtin_unset.c \
+			builtins/builtin_export.c builtins/pwd.c builtins/unset.c \
 			builtins/builtin_helpers.c builtins/builtin_exit.c builtins/others.c
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
