@@ -41,8 +41,8 @@ void	update_locations(char *old_dir, char *new_dir, t_memptr *memptr)
 
 int	attempt_to_change_dir(char *path, t_memptr *memptr)
 {
-	char	*new_dir;
 	char	*old_dir;
+	char	*new_dir;
 
 	if (find_env_var(memptr->envp, "PWD") != -1)
 		old_dir = ft_strdup(get_env_value(memptr->envp, "PWD", memptr));
@@ -78,12 +78,43 @@ void	go_home(t_memptr *memptr)
 		return (error_message("cd: HOME not set\n", EXIT_FAILURE));
 	attempt_to_change_dir(home, memptr);
 }
+/*int	attempt_to_change_dir(char *path, t_memptr *memptr)
+{
+	char	*new_dir;
+	char	*old_dir;
 
+	if (find_env_var(memptr->envp, "PWD") != -1)
+		old_dir = ft_strdup(get_env_value(memptr->envp, "PWD", memptr));
+	else
+		old_dir = ft_strdup(memptr->my_pwd);
+	if (!old_dir)
+		exit_error(MALLOC_ERROR, *memptr, NULL);
+	if (chdir(path) != 0)
+	{
+		perror("cd");
+		free(old_dir);
+		g_status_flag = 2;
+		return (g_status_flag);
+	}
+	new_dir = getcwd(NULL, 0);
+	if (!new_dir)
+	{
+		perror("Error");
+		free(old_dir);
+		g_status_flag = 1;
+		return (g_status_flag);
+	}
+	update_locations(old_dir, new_dir, memptr);
+	return (EXIT_SUCCESS);
+}*/
+/*
 void	go_oldpwd(t_memptr *memptr, int oldpwd_position)
 {
 	if (oldpwd_position == -1)
 		return (error_message("cd: OLDPWD not set\n", EXIT_FAILURE));
 	else if (!ft_strcmp(memptr->envp[oldpwd_position], "OLDPWD="))
+	// HACK ???? Era OLDPWD=
+	// else if (ft_strlen(memptr->envp[oldpwd_position]) <= 7)
 	{
 		if (find_env_var(memptr->envp, "PWD") >= 0 || memptr->my_oldpwd)
 		{
@@ -102,6 +133,29 @@ void	go_oldpwd(t_memptr *memptr, int oldpwd_position)
 	}
 	if (attempt_to_change_dir(get_env_value(memptr->envp, "OLDPWD", memptr),
 			memptr) == EXIT_SUCCESS)
+		printf("%s\n", memptr->my_pwd);
+}
+*/
+
+void	go_oldpwd(t_memptr *memptr, int oldpwd_position)
+{
+	char	*oldpwd_value;
+
+	if (oldpwd_position == -1)
+		return (error_message("cd: OLDPWD not set\n", EXIT_FAILURE));
+	oldpwd_value = get_env_value(memptr->envp, "OLDPWD", memptr);
+	if ((oldpwd_value == NULL || !ft_strlen(oldpwd_value)))
+	{
+		if (!memptr->my_oldpwd)
+			return (error_message("cd: OLDPWD not set\n", EXIT_FAILURE));
+		else
+		{
+			free(memptr->my_oldpwd);
+			memptr->my_oldpwd = NULL;
+			return (error_message("\n", EXIT_SUCCESS));
+		}
+	}
+	if (attempt_to_change_dir(oldpwd_value, memptr) == EXIT_SUCCESS)
 		printf("%s\n", memptr->my_pwd);
 }
 
