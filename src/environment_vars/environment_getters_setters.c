@@ -84,8 +84,8 @@ void	remove_env_value(char **envp, char *key, t_memptr *memptr)
 		if (!new_envp)
 			exit_error(MALLOC_ERROR, *memptr, NULL);
 		cpy_old_vars_skip_position(envp, new_envp, position);
-		free((memptr->envp)[position]);
-		free(memptr->envp);
+		// free((memptr->envp)[position]);
+		ft_free_tabs((void **)(memptr->envp));
 		(memptr->envp) = new_envp;
 	}
 }
