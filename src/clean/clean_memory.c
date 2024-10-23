@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 09:58:55 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:28:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,9 @@ void	final_clear_and_exit(t_memptr memptr, char **envp, int **pipe_fd,
 	}
 	clean_memory(&memptr);
 	ft_free_tabs((void **)envp);
+	if (memptr.my_oldpwd)
+		free(memptr.my_oldpwd);
+	if (memptr.my_pwd)
+		free(memptr.my_pwd);
 	exit(g_status_flag);
 }

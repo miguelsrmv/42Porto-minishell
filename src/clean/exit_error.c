@@ -32,7 +32,7 @@ void	non_exit_error(char *error, t_memptr memptr, char *extra_error)
 	else if (!ft_strcmp(error, EMPTY_INPUT_ERROR) || !ft_strcmp(error,
 			QUOTE_ERROR) || !ft_strcmp(error, EOF_ERROR) || !ft_strcmp(error,
 			SYNTAX_ERROR) || !ft_strcmp(error, S_EOF) || !ft_strcmp(error,
-			EMPTY_ERROR))
+			EMPTY_ERROR) || !ft_strcmp(error, ENV_ERROR))
 		printf(error, NULL);
 	else if (!ft_strcmp(error, DIRECTORY_ERROR) || !ft_strcmp(error,
 			COMMAND_ERROR) || !ft_strcmp(error, DIRECTORY_OUTPUT_ERROR)

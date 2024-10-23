@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 16:25:22 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:19:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,20 +164,10 @@ typedef struct s_memptr {
 	int argc;
 	char **envp;
 	int return_value;
+	char *my_pwd;
+	char *my_oldpwd;
+	int unset_pwd_flag;
 } t_memptr;
-
-typedef struct s_env {
-	char **envp;
-	char **env_var;
-	char *pwd;
-	char *oldpwd;
-} t_env;
-
-typedef struct s_export {
-	int i;
-	int j;
-	char *var;
-} t_export;
 
 // Function definitions
 /// main.c
@@ -188,8 +178,8 @@ t_memptr initialize_memptr(t_token **lexer_list,
 /// bash_main.c
 void bash_main(t_memptr *memptr);
 void bash_run(char **envp, t_memptr *memptr);
-t_env *set_environment_vars(char **envp, t_memptr memptr);
-void update_envp(char ***envp, t_memptr *memptr, t_env *env_vars);
+// t_env *set_environment_vars(char **envp, t_memptr memptr);
+// void update_envp(char ***envp, t_memptr *memptr, t_env *env_vars);
 
 /// path_update.c
 void update_path(t_memptr *memptr);
@@ -438,60 +428,100 @@ int env(char **argv, char **envp);
 
 /// export.c
 void print_export(char **envp);
-int export(char **argv, char **envp, t_command_table *current,
-		   t_memptr *memptr);
-int ft_export_loop(t_env *envv, t_export *exp, char **argv);
-int ft_export_new(t_env *envv, t_export *exp, char **argv);
-int ft_export_loop2(t_env *envv, t_export *exp, char **argv, char *str);
-void ft_split_var(t_export *exp, char **argv);
+int export(
+	char **argv, char **envp, t_command_table *current,
+	t_memptr *
+		memptr); /*
+																																																																																  int
+																																																																											  ft_export_loop(t_env
+																																																													  *envv,
+																																																														  t_export *exp,
+																																																														  char
+																																																																											  **argv);
+																																																													  int ft_export_new(t_env *envv,
+																																																														  t_export *exp,
+																																																														  char
+																																																																											  **argv);
+																																																													  int ft_export_loop2(t_env *envv,
+																																																														  t_export *exp,
+																																																														  char
+																																																																											  **argv,
+																																																																												  char *str); void
+																																																																											  ft_split_var(t_export
+																																																													  *exp,
+																																																														  char **argv);
 
-/// export2.c
-int export_only(t_env *environment);
+																																																																																  /// export2.c
+																																																																																  int
+																																																																											  export_only(t_env
+																																																													  *environment);
 
-/// export3.c
-int export_special(t_env *envv, t_export *exp);
-int export_wd(t_env *envv, t_export *exp, char **argv);
+																																																																																  /// export3.c
+																																																																																  int
+																																																																											  export_special(t_env
+																																																													  *envv,
+																																																														  t_export *exp); int export_wd(t_env *envv,
+																																																														  t_export
+																																																													  *exp,
+																																																														  char **argv);
 
-/// export4.c
-int export_input_error(char **argv);
-int check_argv_var(char *argv);
-int export2(char **argv, t_export *exp, t_env *envv);
-int ft_export_found(t_env *envv, t_export *exp, char **argv);
+																																																																																  /// export4.c
+																																																																																  int
+																																																																											  export_input_error(char
+																																																													  **argv); int check_argv_var(char *argv); int export2(char
+																																																													  **argv,
+																																																														  t_export *exp,
+																																																														  t_env *envv); int
+																																																																											  ft_export_found(t_env
+																																																													  *envv,
+																																																														  t_export *exp,
+																																																														  char
+																																																																											  **argv);
 
-/// unset.c
+																																																																																  /// unset.c*/
 int unset(char **argv, char **envp, t_command_table *current, t_memptr *memptr);
-
+/*
 /// cd.c
-void ft_update_env_var(t_env *envv, char *var, char *value);
-int cd(char **argv, char **envp, t_command_table *current, t_memptr *memptr);
-char *find_home(t_env *envv);
-int ft_cd_home(t_env *envv);
-int ft_cd2(char **argv, t_env *envv);
+void	ft_update_env_var(t_env *envv, char *var,
+								char *value);*/
+int cd(char **argv, char **envp, t_command_table *current, t_memptr *memptr); /*
 
-/// cd2.c
-int ft_check_cd(char *str, t_env *envv);
-int ft_exit_cd(char **cwd, char **argv, int exit_status);
+  char						*find_home(t_env *envv);
+  int							ft_cd_home(t_env *envv);
+  int							ft_cd2(char **argv, t_env *envv);
+*/
+void attempt_to_change_dir(char *path, t_memptr *memptr);
+void go_home(t_memptr *memptr);
+void zigzag_directories(t_memptr *memptr);
+/*
+  /// cd2.c
+  int							ft_check_cd(char *str, t_env *envv);
+  int							ft_exit_cd(char **cwd, char **argv,
+									int exit_status);
 
-/// pwd.c
-int pwd(char **argv);
+  /// pwd.c*/
+int pwd(char **argv); /*
 
 /// echo.c
-bool check_echo_flag(char *flag);
-int echo(char **args);
+bool						check_echo_flag(char *flag);
+int							echo(char **args);
 
 /// echo2.c
-char *get_echo_var(char *str, t_memptr memptr);
-int contains_str(const char *str1, char *str2);
+char	*get_echo_var(char *str,
+t_memptr memptr);
+int	contains_str(const char *str1,
+char *str2);
 
 /// get_set.c
-char *get_env_var_value(t_env *envv, char *var);
-void set_envv(t_env *envv);
-t_env *get_envv(void);
+char	*get_env_var_value(t_env *envv,
+char *var);
+void						set_envv(t_env *envv);
+t_env						*get_envv(void);
 
 /// get_set2.c
-t_env *init_envv(char **envp);
-void free_envv(t_env *envv);
-int reinit_env_var(t_env *envv, char **argv);
+t_env						*init_envv(char **envp);
+void						free_envv(t_env *envv);
+int	reinit_env_var(t_env *envv, char **argv);*/
 
 /// exit.c
 int ft_exit_status(t_command_table *current);
@@ -534,6 +564,13 @@ int find_env_var_insert_position(char **envp, char *key);
 void bubble_sort(char **envp);
 void swap(char **a, char **b);
 
+char *get_env_value(char **envp, char *key, t_memptr *memptr);
+void add_env_value_quotes(char **envp, char *key, char *value,
+						  t_memptr *memptr);
+
+void set_env_value(char **envp, char *key, char *value, t_memptr *memptr);
+
+void remove_env_value(char **envp, char *key, t_memptr *memptr);
 // OLD FUNCTIONS
 int ft_builtin_checker(char **argv);
 int echo(char **args);

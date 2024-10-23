@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   cd_minus.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 17:24:03 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/23 10:46:44 by mde-sa--         ###   ########.fr       */
+/*   Created: 2024/10/22 10:17:43 by mde-sa--          #+#    #+#             */
+/*   Updated: 2024/10/23 12:13:37 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	env(char **argv, char **envp)
+void	update_cd_minus_envs(char *new_dir, char *old_dir, t_memptr *memptr)
 {
-	int	i;
+	int		pwd_position;
+	char	*curr_dir;
 
-	if (builtin_argument_checker(argv) == EXIT_FAILURE)
-		return (g_status_flag);
-	else if (argv[0] && (argv[1] && argv[1][0] != '-'))
+	pwd_position = find_env_var(memptr->envp, "PWD");
+	if (pwd_position >= 0)
+		update_pwd_location(new_dir, memptr);
+	update_oldpwd_location(old_dir, memptr);
+	curr_dir = getcwd(NULL, 0);
+	if (!old_dir)
 	{
-		ft_putstr_fd("env: No such file or directory\n", STDERR_FILENO);
-		g_status_flag = 127;
-		return (g_status_flag);
+		g_status_flag = 1;
+		perror("Error");
+		return ;
 	}
-	i = 0;
-	while ((envp)[i])
-	{
-		if (ft_strchr(envp[i], '='))
-			printf("%s\n", (envp)[i]);
-		i++;
-	}
-	return (EXIT_SUCCESS);
+	printf("%s\n", curr_dir);
+	free(curr_dir);
+	free(old_dir);
 }

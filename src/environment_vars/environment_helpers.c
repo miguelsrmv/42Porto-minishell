@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:59:19 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 16:42:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:22:40 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,59 +52,40 @@ int	find_env_var(char **envp, char *key)
 	return (-1);
 }
 
-int	find_env_var_insert_position(char **envp, char *key)
+char	*get_env_value(char **envp, char *key, t_memptr *memptr)
 {
-	int	i;
-	int	key_length;
+	char	*value;
+	int		position;
 
-	i = 0;
-	key_length = ft_strlen(key);
-	while (envp[i])
-	{
-		if (ft_strncmp(key, envp[i], key_length) < 0)
-			break ;
-		i++;
-	}
-	return (i);
+	(void)memptr;
+	position = find_env_var(envp, key);
+	if (position < 0)
+		return (NULL);
+	value = ft_strchr(envp[position], '=');
+	if (value == NULL)
+		return (NULL); // TODO: Check if this is the right behaviour
+	return (value + 1);
 }
 
-void	update_oldpwd_location(char *new_dir, t_memptr *memptr)
+void	update_oldpwd_location(char *old_dir, t_memptr *memptr)
 {
-	int		oldpwd_position;
-	int		pwd_position;
-	char	*old_pwd;
+	int	oldpwd_position;
 
 	oldpwd_position = find_env_var(memptr->envp, "OLDPWD");
-	pwd_position = find_env_var(memptr->envp, "PWD");
 	if (oldpwd_position >= 0)
 	{
-		if (pwd_position >= 0)
-			old_pwd = ft_strjoin("OLDPWD=", get_env_value(memptr->envp, "PWD",
-						memptr));
+		if (memptr->unset_pwd_flag != 1)
+			set_env_value(memptr->envp, "OLDPWD", old_dir, memptr);
 		else
-			old_pwd = ft_strdup("OLDPWD=");
-		if (!old_pwd)
-		{
-			free(new_dir);
-			exit_error(MALLOC_ERROR, *memptr, NULL);
-		}
-		free(memptr->envp[oldpwd_position]);
-		memptr->envp[oldpwd_position] = old_pwd;
+			set_env_value(memptr->envp, "OLDPWD", "", memptr);
 	}
 }
 
 void	update_pwd_location(char *new_dir, t_memptr *memptr)
 {
-	int		pwd_position;
-	char	*pwd;
+	int	pwd_position;
 
 	pwd_position = find_env_var(memptr->envp, "PWD");
-	pwd = ft_strjoin("PWD=", new_dir);
-	if (!pwd)
-	{
-		free(new_dir);
-		exit_error(MALLOC_ERROR, *memptr, NULL);
-	}
-	free(memptr->envp[pwd_position]);
-	memptr->envp[pwd_position] = pwd;
+	if (pwd_position >= 0)
+		set_env_value(memptr->envp, "PWD", new_dir, memptr);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:58:36 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:19:33 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ t_memptr	initialize_memptr(t_token **lexer_list,
 	memptr.argv = argv;
 	memptr.envp = envp;
 	memptr.return_value = 0;
+	memptr.my_pwd = NULL;
+	memptr.my_oldpwd = NULL;
+	memptr.unset_pwd_flag = 0;
 	return (memptr);
 }
 

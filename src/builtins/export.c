@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/23 10:59:36 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 
 void	print_export(char **envp)
 {
-	int	i;
+	int		i;
+	int		key_length;
+	char	*equals_sign;
 
 	i = 0;
 	bubble_sort(envp);
 	while ((envp)[i])
-		printf("declare -x %s\n", (envp)[i++]);
+	{
+		equals_sign = ft_strchr(envp[i], '=');
+		if (equals_sign != NULL)
+		{
+			key_length = equals_sign - envp[i];
+			printf("-declare -x %.*s=\"%s\"\n", key_length, envp[i], equals_sign
+				+ 1);
+		}
+		i++;
+	}
 }
 
 bool	export_is_invalid(char *argument)
