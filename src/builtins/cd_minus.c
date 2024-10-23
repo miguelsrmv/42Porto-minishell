@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 void	update_cd_minus_envs(char *new_dir, char *old_dir, t_memptr *memptr)
 {
 	int		pwd_position;
@@ -32,3 +32,4 @@ void	update_cd_minus_envs(char *new_dir, char *old_dir, t_memptr *memptr)
 	free(curr_dir);
 	free(old_dir);
 }
+*/

@@ -66,7 +66,7 @@ char	*get_env_value(char **envp, char *key, t_memptr *memptr)
 		return (NULL); // TODO: Check if this is the right behaviour
 	return (value + 1);
 }
-
+/*
 void	update_oldpwd_location(char *old_dir, t_memptr *memptr)
 {
 	int	oldpwd_position;
@@ -89,3 +89,4 @@ void	update_pwd_location(char *new_dir, t_memptr *memptr)
 	if (pwd_position >= 0)
 		set_env_value(memptr->envp, "PWD", new_dir, memptr);
 }
+*/

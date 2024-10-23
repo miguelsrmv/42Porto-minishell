@@ -35,3 +35,9 @@ int	builtin_argument_checker(char **argv)
 	}
 	return (EXIT_SUCCESS);
 }
+
+void	error_message(char *message, int new_status_flag)
+{
+	ft_putstr_fd(message, STDERR_FILENO);
+	g_status_flag = new_status_flag;
+}
