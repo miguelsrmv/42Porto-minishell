@@ -24,10 +24,16 @@ void	cpy_old_vars_skip_position(char **old, char **dest, int index_to_skip)
 		if (j == index_to_skip)
 		{
 			j++;
-			if (old[j] == NULL)
-				break ;
+			continue ;
 		}
-		dest[i] = old[j];
+		dest[i] = ft_strdup(old[j]);
+		if (dest[i] == NULL)
+		{
+			while (i > 0)
+				free(dest[--i]);
+			dest[0] = NULL;
+			return ;
+		}
 		i++;
 		j++;
 	}
@@ -66,27 +72,3 @@ char	*get_env_value(char **envp, char *key, t_memptr *memptr)
 		return (NULL); // TODO: Check if this is the right behaviour
 	return (value + 1);
 }
-/*
-void	update_oldpwd_location(char *old_dir, t_memptr *memptr)
-{
-	int	oldpwd_position;
-
-	oldpwd_position = find_env_var(memptr->envp, "OLDPWD");
-	if (oldpwd_position >= 0)
-	{
-		if (memptr->unset_pwd_flag != 1)
-			set_env_value(memptr->envp, "OLDPWD", old_dir, memptr);
-		else
-			set_env_value(memptr->envp, "OLDPWD", "", memptr);
-	}
-}
-
-void	update_pwd_location(char *new_dir, t_memptr *memptr)
-{
-	int	pwd_position;
-
-	pwd_position = find_env_var(memptr->envp, "PWD");
-	if (pwd_position >= 0)
-		set_env_value(memptr->envp, "PWD", new_dir, memptr);
-}
-*/

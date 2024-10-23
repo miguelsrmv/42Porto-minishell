@@ -103,7 +103,8 @@ void	final_clear_and_exit(t_memptr memptr, char **envp, int **pipe_fd,
 			close(current->output_fd);
 	}
 	clean_memory(&memptr);
-	ft_free_tabs((void **)envp);
+	if (envp)
+		ft_free_tabs((void **)memptr.envp);
 	if (memptr.my_oldpwd)
 		free(memptr.my_oldpwd);
 	if (memptr.my_pwd)

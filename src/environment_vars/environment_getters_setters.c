@@ -13,8 +13,23 @@
 #include "libft.h"
 #include "minishell.h"
 
-void	add_env_value_quotes(char **envp, char *key, char *value,
+void	check_pwd_edge_case(char **envp, char *key, char *value,
 		t_memptr *memptr)
+{
+	char	*cwd;
+	int		oldpwd_position;
+
+	oldpwd_position = find_env_var(envp, "OLDPWD");
+	if (oldpwd_position < 0)
+		return ;
+	cwd = getcwd(NULL, 0);
+	if (!ft_strcmp(key, "PWD") && ft_strcmp(cwd, value)
+		&& !ft_strcmp(envp[oldpwd_position], "OLDPWD="))
+		set_env_value(envp, "OLDPWD", NULL, memptr);
+	free(cwd);
+}
+
+void	add_env_value(char **envp, char *key, char *value, t_memptr *memptr)
 {
 	char	**new_envp;
 
@@ -25,13 +40,16 @@ void	add_env_value_quotes(char **envp, char *key, char *value,
 		exit_error(MALLOC_ERROR, *memptr, NULL);
 	}
 	cpy_old_vars_skip_position(envp, new_envp, -1);
+	if (!new_envp)
+		exit_error(MALLOC_ERROR, *memptr, NULL);
 	if (value)
 		new_envp[ft_tablen((void **)envp)] = new_key_value(key, value, memptr);
 	else
 		new_envp[ft_tablen((void **)envp)] = new_key(key, memptr);
 	new_envp[ft_tablen((void **)envp) + 1] = NULL;
-	free(memptr->envp);
+	ft_free_tabs((void **)memptr->envp);
 	(memptr->envp) = new_envp;
+	check_pwd_edge_case(new_envp, key, value, memptr);
 }
 
 void	set_env_value(char **envp, char *key, char *value, t_memptr *memptr)
@@ -40,14 +58,14 @@ void	set_env_value(char **envp, char *key, char *value, t_memptr *memptr)
 
 	position = find_env_var(envp, key);
 	if (position < 0)
-		add_env_value_quotes(envp, key, value, memptr);
+		add_env_value(envp, key, value, memptr);
 	else
 	{
+		free(envp[position]);
 		if (value)
-		{
-			free(envp[position]);
 			envp[position] = new_key_value(key, value, memptr);
-		}
+		else
+			envp[position] = new_key(key, memptr);
 	}
 }
 

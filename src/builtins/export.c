@@ -12,25 +12,32 @@
 
 #include "minishell.h"
 
-void	print_export(char **envp)
+void	print_export(char **envp, t_memptr *memptr)
 {
 	int		i;
 	int		key_length;
 	char	*equals_sign;
+	char	**envp_cpy;
 
+	envp_cpy = ft_tabdup(envp);
+	if (!envp_cpy)
+		exit_error(MALLOC_ERROR, *memptr, NULL);
 	i = 0;
-	bubble_sort(envp);
-	while ((envp)[i])
+	bubble_sort(envp_cpy);
+	while ((envp_cpy)[i])
 	{
-		equals_sign = ft_strchr(envp[i], '=');
-		if (equals_sign != NULL)
+		equals_sign = ft_strchr(envp_cpy[i], '=');
+		if (equals_sign)
 		{
-			key_length = equals_sign - envp[i];
-			printf("-declare -x %.*s=\"%s\"\n", key_length, envp[i], equals_sign
-				+ 1);
+			key_length = equals_sign - envp_cpy[i];
+			printf("-declare -x %.*s=\"%s\"\n", key_length, envp_cpy[i],
+				equals_sign + 1);
 		}
+		else
+			printf("-declare -x %s\n", envp_cpy[i]);
 		i++;
 	}
+	ft_free_tabs((void **)envp_cpy);
 }
 
 bool	export_is_invalid(char *argument)
@@ -56,6 +63,7 @@ void	add_to_export_list(char *argument, char **envp, t_memptr *memptr)
 	char	*value;
 	char	*equal_position;
 
+	(void)envp;
 	if (export_is_invalid(argument))
 	{
 		ft_putstr_fd("export: '", STDERR_FILENO);
@@ -89,11 +97,12 @@ int	export(char **argv, char **envp, t_command_table *current, t_memptr *memptr)
 		return (g_status_flag);
 	else if (!argv[1])
 	{
-		print_export(envp);
+		print_export(envp, memptr);
 		return (EXIT_SUCCESS);
 	}
 	else
 	{
+		g_status_flag = EXIT_SUCCESS;
 		i = 1;
 		while (argv[i])
 		{
