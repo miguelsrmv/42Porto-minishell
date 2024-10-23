@@ -28,7 +28,7 @@ void	update_locations(char *old_dir, char *new_dir, t_memptr *memptr)
 		if (memptr->unset_pwd_flag != 1)
 			set_env_value(memptr->envp, "OLDPWD", old_dir, memptr);
 		else
-			set_env_value(memptr->envp, "OLDPWD", NULL, memptr);
+			set_env_value(memptr->envp, "OLDPWD", "", memptr);
 	}
 	if (pwd_position >= 0)
 		set_env_value(memptr->envp, "PWD", new_dir, memptr);
@@ -66,7 +66,7 @@ int	attempt_to_change_dir(char *path, t_memptr *memptr)
 		return (g_status_flag);
 	}
 	update_locations(old_dir, new_dir, memptr);
-	return (EXIT_SUCCESS);
+	return (g_status_flag);
 }
 
 void	go_home(t_memptr *memptr)
