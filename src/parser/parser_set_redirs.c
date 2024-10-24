@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_set_redirs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:59:55 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 17:00:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:09:11 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,34 @@ void	fill_full_redir(t_token *current, t_command_table **command_table,
 	}
 }
 
-void	initialize_command_table(t_command_table **command_table,
+void	init_command_table(t_command_table **cmd_table,
 			int total_redir, t_memptr memptr)
 {
-	(*command_table)->full_input = (char **)malloc(sizeof(char *)
+	(*cmd_table)->full_input = (char **)malloc(sizeof(char *)
 			* (total_redir * 2 + 1));
-	(*command_table)->full_output = (char **)malloc(sizeof(char *)
+	(*cmd_table)->full_output = (char **)malloc(sizeof(char *)
 			* (total_redir * 2 + 1));
-	if (!(*command_table)->full_input || !(*command_table)->full_output)
+	if (!(*cmd_table)->full_input || !(*cmd_table)->full_output)
 		exit_error(MALLOC_ERROR, memptr, NULL);
-	(*command_table)->cmd = NULL;
-	(*command_table)->cmd_before_expansion = NULL;
-	(*command_table)->cmd_target = NULL;
-	(*command_table)->command_type = NULL_COMMANDTYPE;
-	(*command_table)->builtin_pointer = NULL;
-	(*command_table)->full_input[0] = NULL;
-	(*command_table)->input_target = NULL;
-	(*command_table)->input_type = NULL_REDIRECT;
-	(*command_table)->input_fd = 0;
-	(*command_table)->heredoc_buffer = NULL;
-	(*command_table)->full_output[0] = NULL;
-	(*command_table)->output_target = NULL;
-	(*command_table)->output_type = NULL_REDIRECT;
-	(*command_table)->output_fd = 0;
-	(*command_table)->pid = 0;
-	(*command_table)->command_no = 0;
-	(*command_table)->current_g_status = 0;
-	(*command_table)->valid_command = TRUE;
-	(*command_table)->next = NULL;
+	(*cmd_table)->cmd = NULL;
+	(*cmd_table)->cmd_before_expansion = NULL;
+	(*cmd_table)->cmd_target = NULL;
+	(*cmd_table)->command_type = NULL_COMMANDTYPE;
+	(*cmd_table)->builtin_pointer = NULL;
+	(*cmd_table)->full_input[0] = NULL;
+	(*cmd_table)->input_target = NULL;
+	(*cmd_table)->input_type = NULL_REDIRECT;
+	(*cmd_table)->input_fd = 0;
+	(*cmd_table)->heredoc_buffer = NULL;
+	(*cmd_table)->full_output[0] = NULL;
+	(*cmd_table)->output_target = NULL;
+	(*cmd_table)->output_type = NULL_REDIRECT;
+	(*cmd_table)->output_fd = 0;
+	(*cmd_table)->pid = 0;
+	(*cmd_table)->command_no = 0;
+	(*cmd_table)->current_g_status = 0;
+	(*cmd_table)->valid_command = TRUE;
+	(*cmd_table)->next = NULL;
 }
 
 void	set_full_redirections(t_token *lexer_sublist,
@@ -104,7 +104,7 @@ void	set_full_redirections(t_token *lexer_sublist,
 	int		total_redirects;
 
 	total_redirects = count_redirect_targets(lexer_sublist);
-	initialize_command_table(command_table, total_redirects, memptr);
+	init_command_table(command_table, total_redirects, memptr);
 	fill_full_redir(lexer_sublist, command_table, memptr);
 	check_heredocs(command_table, memptr);
 	if (((*command_table)->heredoc_buffer) && g_status_flag != 8)

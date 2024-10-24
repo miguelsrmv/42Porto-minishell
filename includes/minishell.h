@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 12:00:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:08:54 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,7 +305,7 @@ int							count_redirect_targets(t_token *lexer_sublist);
 void						fill_full_redir(t_token *current,
 								t_command_table **command_table,
 								t_memptr memptr);
-void						initialize_command_table(t_command_table **command_table,
+void						init_command_table(t_command_table **cmd_table,
 								int total_redir, t_memptr memptr);
 void						set_full_redirections(t_token *lexer_sublist,
 								t_command_table **command_table,
@@ -337,7 +337,7 @@ int							read_from_pipe(int read_fd, char **buffer,
 								t_memptr memptr, enum e_QuoteType quote_status);
 
 /// clean_heredocs.c
-void						clean_heredoc_buffers(t_command_table **command_table);
+void						clean_heredoc_buffers(t_command_table **cmd_table);
 
 /// expander.c
 int							is_valid_env_char(char c);
@@ -345,7 +345,7 @@ void						define_quote_flag(char c, int *pos,
 								char *quote_flag);
 void						expand_double_vector(char **vector,
 								t_memptr memptr);
-void						expand_command_table(t_command_table **command_table,
+void						expand_command_table(t_command_table **cmd_table,
 								t_memptr memptr);
 
 /// expander_noquotes.c

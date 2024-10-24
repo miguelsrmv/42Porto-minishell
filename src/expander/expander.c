@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/28 16:27:11 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:05:42 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	expand_double_vector(char **vector, t_memptr memptr)
 	}
 }
 
-void	expand_command_table(t_command_table **command_table, t_memptr memptr)
+void	expand_command_table(t_command_table **cmd_table, t_memptr memptr)
 {
 	t_command_table	*current;
 
-	current = *command_table;
+	current = *cmd_table;
 	while (current)
 	{
 		current->cmd_before_expansion = ft_tabdup(current->cmd);

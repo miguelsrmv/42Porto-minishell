@@ -76,7 +76,7 @@ void	remove_env_value(char **envp, char *key, t_memptr *memptr)
 
 	position = find_env_var(envp, key);
 	if (position < 0)
-		return ; // TODO: UNSET IF KEY IS INVALID??
+		return ;
 	else
 	{
 		new_envp = (char **)malloc(sizeof(char *) * (ft_tablen((void **)envp)
