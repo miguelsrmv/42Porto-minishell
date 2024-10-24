@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 22:50:52 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:57:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	modulo_value(long value)
 	return (exit_value);
 }
 
-char	*trim_arg(char *string, t_memptr *memptr)
+static char	*trim_arg(char *string, t_memptr *memptr)
 {
 	int		left;
 	int		right;
@@ -51,6 +51,15 @@ char	*trim_arg(char *string, t_memptr *memptr)
 	return (trimmed_string);
 }
 
+static bool	is_a_long(char *string)
+{
+	if (!ft_isnumber(string) || ft_strlen(string) > 19
+		|| ft_atoll(string) < LONG_MIN || ft_atoll(string) > LONG_MAX
+		|| (ft_strlen(string) == 1 && ft_issign(string[0])))
+		return (false);
+	return (true);
+}
+
 int	ft_exit(char **args, char **envp, t_command_table *current,
 		t_memptr *memptr)
 {
@@ -61,15 +70,8 @@ int	ft_exit(char **args, char **envp, t_command_table *current,
 	printf("exit\n");
 	if (ft_tablen((void **)args) == 1)
 		exit(g_status_flag);
-	else if (ft_tablen((void **)args) != 2)
-	{
-		printf("exit: too many arguments\n");
-		g_status_flag = 1;
-		return (1);
-	}
 	trimmed_arg = trim_arg(args[1], memptr);
-	if (!ft_isnumber(trimmed_arg) || ft_strlen(trimmed_arg) > 19
-		|| ft_atoll(trimmed_arg) < LONG_MIN || ft_atoll(trimmed_arg) > LONG_MAX)
+	if (!is_a_long(trimmed_arg))
 	{
 		free(trimmed_arg);
 		printf("exit: %s: a numeric argument is required\n", args[1]);
@@ -77,5 +79,11 @@ int	ft_exit(char **args, char **envp, t_command_table *current,
 	}
 	g_status_flag = modulo_value(ft_atol(trimmed_arg));
 	free(trimmed_arg);
+	if (ft_tablen((void **)args) != 2)
+	{
+		printf("exit: too many arguments\n");
+		g_status_flag = 1;
+		return (1);
+	}
 	exit(g_status_flag);
 }
