@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/23 14:23:58 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:36:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,12 @@ void	go_oldpwd(t_memptr *memptr, int oldpwd_position)
 		else
 		{
 			free(memptr->my_oldpwd);
-			memptr->my_oldpwd = NULL;
+			// memptr->my_oldpwd = NULL; TODO: Remove??? Remove lines below up to return (not inclusive ) ?
+			memptr->my_oldpwd = ft_strdup(memptr->my_pwd);
+			if (!memptr->my_oldpwd)
+				exit_error(MALLOC_ERROR, *memptr, NULL);
+			set_env_value(memptr->envp, "OLDPWD", get_env_value(memptr->envp,
+					"PWD", memptr), memptr);
 			return (error_message("\n", EXIT_SUCCESS));
 		}
 	}
