@@ -24,11 +24,11 @@ int	update_locations(char *old_dir, char *new_dir, t_memptr *memptr)
 	else
 		memptr->unset_pwd_flag = 0;
 	if (oldpwd_position >= 0)
-	{
-		if (memptr->unset_pwd_flag != 1)
+	{ // NOTE: Changed this for bash linux vs WSL
+		if (memptr->unset_pwd_flag != 1 || pwd_position >= 0)
 			set_env_value(memptr->envp, "OLDPWD", old_dir, memptr);
 		else
-			set_env_value(memptr->envp, "OLDPWD", "", memptr);
+			set_env_value(memptr->envp, "OLDPWD", NULL, memptr);
 	}
 	if (pwd_position >= 0)
 		set_env_value(memptr->envp, "PWD", new_dir, memptr);
