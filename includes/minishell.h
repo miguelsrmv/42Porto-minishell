@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 12:08:54 by miguel           ###   ########.fr       */
+/*   Updated: 2024/10/24 22:30:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -541,16 +541,8 @@ bool						check_newline_flag(char *flag);
 int							echo(char **args);
 
 /// exit.c
-int							ft_exit_status(t_command_table *current);
-int							exit_status2(t_command_table *current, int count);
-int							exit_status3(t_command_table *current);
-int							ft_word_count(char **str);
-int							check_arg_exit(t_command_table *current);
-
-/// exit2.c
-int							ft_exit(char *command, char **envp,
-								t_command_table *current, t_memptr memptr);
-char						*ft_ltoa(long long n);
+int							ft_exit(char **args, char **envp,
+								t_command_table *current, t_memptr *memptr);
 
 /// builtin_helpers.c
 bool						argument_is_invalid(char *argument);

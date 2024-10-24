@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 19:59:42 by mde-sa--          #+#    #+#              #
-#    Updated: 2024/03/29 12:41:28 by mde-sa--         ###   ########.fr        #
+#    Updated: 2024/10/24 21:35:24 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 			ft_str_arr_dup.c ft_str_arr_len.c ft_realloc_str_arr.c ft_free_str_array.c \
 			ft_free_str.c ft_strstrjoin.c ft_append.c ft_free.c ft_atol.c ft_issign.c \
 			ft_tabdup.c ft_getpid.c ft_getppid.c ft_strchr2.c ft_last_char.c ft_tablen.c \
-			ft_isnumber.c
+			ft_isnumber.c ft_ltoa.c ft_atoll.c
 
 OBJ		=	$(SRC:.c=.o)
 
