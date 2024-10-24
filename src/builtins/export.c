@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/23 10:59:36 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:59:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	add_to_export_list(char *argument, char **envp, t_memptr *memptr)
 	char	*value;
 	char	*equal_position;
 
-	(void)envp;
 	if (export_is_invalid(argument))
 	{
 		ft_putstr_fd("export: '", STDERR_FILENO);
@@ -113,7 +112,8 @@ int	export(char **argv, char **envp, t_command_table *current, t_memptr *memptr)
 	return (g_status_flag);
 }
 
-// TODO: Check what happens if there is an invalid export in the middle of valid exports!
+// TODO: Check what happens if there is
+// an invalid export in the middle of valid exports!
 // example: export a=1 b=3 w      = 3    z=5
 // including status signals!
 // also, exporting does not requrie a =

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:30 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/23 10:47:37 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:56:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	remove_env_value(char **envp, char *key, t_memptr *memptr)
 		if (!new_envp)
 			exit_error(MALLOC_ERROR, *memptr, NULL);
 		cpy_old_vars_skip_position(envp, new_envp, position);
-		// free((memptr->envp)[position]);
 		ft_free_tabs((void **)(memptr->envp));
 		(memptr->envp) = new_envp;
 	}

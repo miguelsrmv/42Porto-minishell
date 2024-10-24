@@ -6,13 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 11:36:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:58:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	update_locations(char *old_dir, char *new_dir, t_memptr *memptr)
+int	update_locations(char *old_dir, char *new_dir, t_memptr *memptr)
 {
 	int	oldpwd_position;
 	int	pwd_position;
@@ -37,6 +37,7 @@ void	update_locations(char *old_dir, char *new_dir, t_memptr *memptr)
 	memptr->my_pwd = new_dir;
 	memptr->my_oldpwd = old_dir;
 	g_status_flag = EXIT_SUCCESS;
+	return (g_status_flag);
 }
 
 int	attempt_to_change_dir(char *path, t_memptr *memptr)
@@ -65,8 +66,7 @@ int	attempt_to_change_dir(char *path, t_memptr *memptr)
 		g_status_flag = 1;
 		return (g_status_flag);
 	}
-	update_locations(old_dir, new_dir, memptr);
-	return (g_status_flag);
+	return (update_locations(old_dir, new_dir, memptr));
 }
 
 void	go_home(t_memptr *memptr)
@@ -151,7 +151,8 @@ void	go_oldpwd(t_memptr *memptr, int oldpwd_position)
 		else
 		{
 			free(memptr->my_oldpwd);
-			// memptr->my_oldpwd = NULL; TODO: Remove??? Remove lines below up to return (not inclusive ) ?
+			// memptr->my_oldpwd = NULL;
+			// TODO: Remove??? Remove lines down to return (not inclusive ) ?
 			memptr->my_oldpwd = ft_strdup(memptr->my_pwd);
 			if (!memptr->my_oldpwd)
 				exit_error(MALLOC_ERROR, *memptr, NULL);
