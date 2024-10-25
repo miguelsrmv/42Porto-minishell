@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 22:57:50 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:42:41 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,16 @@ int	ft_exit(char **args, char **envp, t_command_table *current,
 {
 	char	*trimmed_arg;
 
-	(void)envp;
-	(void)current;
 	printf("exit\n");
 	if (ft_tablen((void **)args) == 1)
-		exit(g_status_flag);
+		final_clear_and_exit(*memptr, envp, memptr->pipe_fd, current);
 	trimmed_arg = trim_arg(args[1], memptr);
 	if (!is_a_long(trimmed_arg))
 	{
 		free(trimmed_arg);
 		printf("exit: %s: a numeric argument is required\n", args[1]);
-		exit(2);
+		g_status_flag = 2;
+		final_clear_and_exit(*memptr, envp, memptr->pipe_fd, current);
 	}
 	g_status_flag = modulo_value(ft_atol(trimmed_arg));
 	free(trimmed_arg);
@@ -85,5 +84,6 @@ int	ft_exit(char **args, char **envp, t_command_table *current,
 		g_status_flag = 1;
 		return (1);
 	}
-	exit(g_status_flag);
+	final_clear_and_exit(*memptr, envp, memptr->pipe_fd, current);
+	return (g_status_flag);
 }
