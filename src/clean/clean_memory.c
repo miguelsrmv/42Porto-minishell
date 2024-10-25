@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:04:47 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/23 11:28:37 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/25 15:05:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ void	close_pipes_error(int **pipe)
 	int	i;
 
 	i = 0;
+	while (pipe[i])
 	{
 		close(pipe[i][0]);
-		close(pipe[i][i]);
+		close(pipe[i][1]);
 		i++;
 	}
 }

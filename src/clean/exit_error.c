@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:35:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 09:59:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:57:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ void	exit_error(char *error, t_memptr memptr, char *extra_error)
 	set_g_status_flag(error);
 	non_exit_error(error, memptr, extra_error);
 	clean_memory(&memptr);
-	if (memptr.envp)
-		ft_free_tabs((void **)memptr.envp);
-	exit(g_status_flag);
+	final_clear_and_exit(memptr, memptr.envp, memptr.pipe_fd,
+		*(memptr.command_table));
 }
 
 void	non_exit_error(char *error, t_memptr memptr, char *extra_error)

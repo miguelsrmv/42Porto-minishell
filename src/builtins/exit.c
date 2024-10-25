@@ -6,11 +6,12 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/25 10:42:41 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/25 15:41:50 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <fcntl.h>
 
 static int	modulo_value(long value)
 {
@@ -78,12 +79,9 @@ int	ft_exit(char **args, char **envp, t_command_table *current,
 	}
 	g_status_flag = modulo_value(ft_atol(trimmed_arg));
 	free(trimmed_arg);
-	if (ft_tablen((void **)args) != 2)
-	{
-		printf("exit: too many arguments\n");
-		g_status_flag = 1;
-		return (1);
-	}
-	final_clear_and_exit(*memptr, envp, memptr->pipe_fd, current);
+	if (ft_tablen((void **)(args)) == 2)
+		final_clear_and_exit(*memptr, envp, memptr->pipe_fd, current);
+	printf("exit: too many arguments\n");
+	g_status_flag = 1;
 	return (g_status_flag);
 }
