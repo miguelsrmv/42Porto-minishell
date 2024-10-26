@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:40:30 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 11:56:04 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 20:14:52 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	set_env_value(char **envp, char *key, char *value, t_memptr *memptr)
 		add_env_value(envp, key, value, memptr);
 	else
 	{
-		free(envp[position]);
 		if (value)
+		{
+			free(envp[position]);
 			envp[position] = new_key_value(key, value, memptr);
-		else
-			envp[position] = new_key(key, memptr);
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 11:59:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:48:20 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,21 @@ bool	export_is_invalid(char *argument)
 	return (false);
 }
 
+void	print_export_error_message(char *argument)
+{
+	ft_putstr_fd("export: '", STDERR_FILENO);
+	ft_putstr_fd(argument, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	g_status_flag = 1;
+	return ;
+}
+
 void	add_to_export_list(char *argument, char **envp, t_memptr *memptr)
 {
 	char	*key;
 	char	*value;
 	char	*equal_position;
 
-	if (export_is_invalid(argument))
-	{
-		ft_putstr_fd("export: '", STDERR_FILENO);
-		ft_putstr_fd(argument, STDERR_FILENO);
-		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-		g_status_flag = 1;
-		return ;
-	}
 	equal_position = ft_strchr(argument, '=');
 	if (equal_position)
 	{
@@ -82,6 +83,8 @@ void	add_to_export_list(char *argument, char **envp, t_memptr *memptr)
 		key = ft_strdup(argument);
 		value = NULL;
 	}
+	if (!key)
+		exit_error(MALLOC_ERROR, *memptr, NULL);
 	set_env_value(envp, key, value, memptr);
 	free(key);
 }
@@ -105,7 +108,10 @@ int	export(char **argv, char **envp, t_command_table *current, t_memptr *memptr)
 		i = 1;
 		while (argv[i])
 		{
-			add_to_export_list(argv[i], memptr->envp, memptr);
+			if (export_is_invalid(argv[i]))
+				print_export_error_message(argv[i]);
+			else
+				add_to_export_list(argv[i], memptr->envp, memptr);
 			i++;
 		}
 	}

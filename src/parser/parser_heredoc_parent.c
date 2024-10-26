@@ -6,18 +6,18 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:53:49 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/03/29 11:32:27 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 22:11:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	heredoc_parent(char **buffer, int *pipe_fd,
-			t_memptr memptr, enum e_QuoteType quote_status)
+void	heredoc_parent(char **buffer, int *pipe_fd, t_memptr memptr,
+		enum e_QuoteType quote_status)
 {
 	if (*buffer)
 		free(*buffer);
-	*buffer = calloc(1, sizeof(char));
+	*buffer = ft_calloc(1, sizeof(char));
 	while (waitpid(0, &g_status_flag, 0) > 0)
 		continue ;
 	if (WIFEXITED(g_status_flag))
@@ -25,15 +25,14 @@ void	heredoc_parent(char **buffer, int *pipe_fd,
 	if (g_status_flag != 8)
 	{
 		while (TRUE)
-			if (!read_from_pipe(pipe_fd[0], buffer,
-					memptr, quote_status))
+			if (!read_from_pipe(pipe_fd[0], buffer, memptr, quote_status))
 				break ;
 	}
 	close(pipe_fd[0]);
 }
 
-int	read_from_pipe(int read_fd, char **buffer,
-			t_memptr memptr, enum e_QuoteType quote_status)
+int	read_from_pipe(int read_fd, char **buffer, t_memptr memptr,
+		enum e_QuoteType quote_status)
 {
 	size_t	sizeoftemp_buffer;
 	char	*temp_buffer;

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 16:59:19 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 23:03:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 20:16:11 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	find_env_var(char **envp, char *key)
 	int	i;
 
 	if (!key || ft_strlen(key) == 0)
-		return (-1); // TODO: Check if this is needed?
+		return (-1);
 	i = 0;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], key, ft_strlen(key)) == 0
 			&& (envp[i][ft_strlen(key)] == '='
-				|| envp[i][ft_strlen(key)] == '\0'))
+			|| envp[i][ft_strlen(key)] == '\0'))
 			return (i);
 		i++;
 	}
@@ -69,6 +69,6 @@ char	*get_env_value(char **envp, char *key, t_memptr *memptr)
 		return (NULL);
 	value = ft_strchr(envp[position], '=');
 	if (value == NULL)
-		return (NULL); // TODO: Check if this is the right behaviour
+		return (NULL);
 	return (value + 1);
 }

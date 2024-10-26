@@ -6,7 +6,7 @@
 /*   By: bmota-si <bmota-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:24:42 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 11:43:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:51:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	unset(char **argv, char **envp, t_command_table *current, t_memptr *memptr)
 	i = 1;
 	while (argv[i])
 	{
-		remove_env_value(memptr->envp, argv[i], memptr);
+		if (!ft_strchr(argv[i], '='))
+			remove_env_value(memptr->envp, argv[i], memptr);
 		i++;
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:23:09 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/21 16:23:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 22:09:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	bubble_sort(char **envp)
 		i = 0;
 		while (i < n - 1)
 		{
-			if (strcmp(envp[i], envp[i + 1]) > 0)
+			if (ft_strcmp(envp[i], envp[i + 1]) > 0)
 			{
 				swap(&envp[i], &envp[i + 1]);
 				swapped = 1;

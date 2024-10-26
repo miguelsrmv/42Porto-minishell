@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:59:16 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/24 22:30:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 20:08:08 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,10 +213,8 @@ void						bash_run(char **envp, t_memptr *memptr);
 
 /// path_update.c
 
-void						update_oldpwd(t_memptr *memptr);
-void						update_pwd(t_memptr *memptr);
 void						update_path(t_memptr *memptr);
-void						update_environment(t_memptr *memptr);
+void						clean_memory_but_path(t_memptr *memptr);
 
 /// shell_update.c
 void						update_shell_level(char ***envp, t_memptr *memptr);
