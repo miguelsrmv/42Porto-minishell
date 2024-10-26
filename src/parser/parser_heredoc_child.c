@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:56:11 by mde-sa--          #+#    #+#             */
-/*   Updated: 2024/10/20 10:00:19 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:57:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	heredoc_child(char *delimiter, int *pipe_fd)
 		input = readline("> ");
 		if (!input)
 		{
-			close(pipe_fd[1]);
 			ft_putstr_fd(S_EOF, STDERR_FILENO);
 			return ;
 		}
@@ -37,7 +36,7 @@ void	heredoc_child(char *delimiter, int *pipe_fd)
 		write(pipe_fd[1], "\n", 1);
 		free(input);
 	}
-	close(pipe_fd[1]);
+	free(input);
 	g_status_flag = old_g_status_flag;
 }
 
