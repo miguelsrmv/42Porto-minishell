@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 	t_memptr		memptr;
 	char			**envp_cpy;
 
-	if (argc > 1)
+	if (argc > 1 || envp == NULL || envp[0] == NULL)
 	{
 		printf("Usage error.\n");
 		return (1);

@@ -117,10 +117,3 @@ int	export(char **argv, char **envp, t_command_table *current, t_memptr *memptr)
 	}
 	return (g_status_flag);
 }
-
-// TODO: Check what happens if there is
-// an invalid export in the middle of valid exports!
-// example: export a=1 b=3 w      = 3    z=5
-// including status signals!
-// also, exporting does not requrie a =
-// however, it does require stuff in the beggining to not be a digit

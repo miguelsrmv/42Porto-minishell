@@ -33,17 +33,22 @@ void	bash_run(char **envp, t_memptr *memptr)
 void	populate_from_environment(t_memptr *memptr)
 {
 	char	*path;
+	char	*pwd;
+	char	*oldpwd;
 
-	memptr->my_pwd = ft_strdup(getenv("PWD"));
+	pwd = getenv("PWD");
+	oldpwd = getenv("OLDPWD");
+	path = getenv("PATH");
+	if (!pwd || !oldpwd || !path)
+		exit_error(ENV_ERROR, *memptr, NULL);
+	memptr->my_pwd = ft_strdup(pwd);
 	if (!memptr->my_pwd)
 		exit_error(MALLOC_ERROR, *memptr, NULL);
-	memptr->my_oldpwd = ft_strdup(getenv("OLDPWD"));
+	memptr->my_oldpwd = ft_strdup(oldpwd);
 	if (!memptr->my_oldpwd)
 		exit_error(MALLOC_ERROR, *memptr, NULL);
 	path = getenv("PATH");
-	if (!memptr->my_pwd || !memptr->my_oldpwd || !path)
-		exit_error(ENV_ERROR, *memptr, NULL);
-	memptr->path_list = ft_split(getenv("PATH"), ':');
+	memptr->path_list = ft_split(path, ':');
 	if (!(memptr->path_list))
 		exit_error(MALLOC_ERROR, *memptr, NULL);
 }
