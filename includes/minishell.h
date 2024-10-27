@@ -555,6 +555,8 @@ void						add_env_value(char **envp, char *key, char *value,
 								t_memptr *memptr);
 void						set_env_value(char **envp, char *key, char *value,
 								t_memptr *memptr);
+void						set_env_value_cd(char **envp, char *key,
+								char *value, t_memptr *memptr);
 void						remove_env_value(char **envp, char *key,
 								t_memptr *memptr);
 

@@ -107,7 +107,7 @@ sync:
 	sleep 0.1
 	tmux select-pane -R
 	sleep 0.1
-	tmux send-keys './minishell' C-m
+	tmux send-keys 'valgrind --leak-check=full --track-fds=yes --quiet ./minishell' C-m
 	tmux set-window-option synchronize-panes on
 
 .PHONY: all clean fclean re libft

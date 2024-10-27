@@ -69,6 +69,23 @@ void	set_env_value(char **envp, char *key, char *value, t_memptr *memptr)
 	}
 }
 
+void	set_env_value_cd(char **envp, char *key, char *value, t_memptr *memptr)
+{
+	int	position;
+
+	position = find_env_var(envp, key);
+	if (position < 0)
+		add_env_value(envp, key, value, memptr);
+	else
+	{
+		free(envp[position]);
+		if (value)
+			envp[position] = new_key_value(key, value, memptr);
+		else
+			envp[position] = new_key(key, memptr);
+	}
+}
+
 void	remove_env_value(char **envp, char *key, t_memptr *memptr)
 {
 	int		position;
